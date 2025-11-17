@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     // --- 2. Apply Inter font class to the <body> tag ---
     <html lang="en">
-      <body className={inter.className}>
+  <body className={inter.className}>
         {/* Render the Navbar component above the page content */}
         <Navbar />
         <main>

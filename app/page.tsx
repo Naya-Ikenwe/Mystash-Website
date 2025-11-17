@@ -78,7 +78,40 @@ const HorizontalMarquee = () => {
 const VerticalTextCarousel = () => {
   const TEXTS = ["Future", "You and", "Everyone"];
   const [index, setIndex] = useState(0);
-  const wordHeight = 85;
+  const [isMobile, setIsMobile] = useState(false);
+  const itemRef = React.useRef<HTMLDivElement | null>(null);
+  const [measuredHeight, setMeasuredHeight] = useState<number | null>(null);
+
+  // detect mobile (Tailwind md breakpoint ~768px)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(max-width: 767px)");
+    const handler = () => setIsMobile(mq.matches);
+    handler();
+    if (mq.addEventListener) mq.addEventListener("change", handler);
+    else mq.addListener(handler);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", handler);
+      else mq.removeListener(handler);
+    };
+  }, []);
+
+  // measure first item on mobile so the wrapper exactly fits one item
+  useEffect(() => {
+    if (!isMobile) {
+      setMeasuredHeight(null);
+      return;
+    }
+    const measure = () => {
+      if (itemRef.current) {
+        const h = Math.ceil(itemRef.current.getBoundingClientRect().height);
+        setMeasuredHeight(h || 72);
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [isMobile]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -87,13 +120,45 @@ const VerticalTextCarousel = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+  // Mobile variant: flow layout (block items) measured height used to show a single item
+  if (isMobile) {
+    const h = measuredHeight ?? 72;
+    return (
+      <div
+        className="inline-block overflow-hidden align-bottom ml-3 relative"
+        style={{ height: `${h}px`, width: "auto", paddingTop: "4px" }}
+      >
+        <motion.div
+          animate={{ y: -index * h }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
+          className="relative"
+        >
+          {TEXTS.map((text, i) => (
+            <div
+              key={i}
+              ref={i === 0 ? itemRef : null}
+              className="block font-extrabold text-2xl leading-tight flex items-center"
+              style={{ padding: "6px 0" }}
+            >
+              <span className={text === "Everyone" ? PURPLE_COLOR : "text-gray-900"}>
+                {text}
+              </span>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    );
+  }
+
+  // Desktop: keep original stacked absolute layout (unchanged UX), slight nudge for alignment
+  const desktopHeight = 85;
   return (
     <div
       className="inline-block overflow-hidden align-bottom ml-3 relative"
-      style={{ height: `${wordHeight}px`, width: "300px", paddingTop: "8px" }}
+      style={{ height: `${desktopHeight}px`, width: "300px", paddingTop: "8px" }}
     >
       <motion.div
-        animate={{ y: -index * wordHeight }}
+        animate={{ y: -index * desktopHeight }}
         transition={{ duration: 0.7, ease: "easeInOut" }}
         className="relative h-full"
       >
@@ -101,11 +166,9 @@ const VerticalTextCarousel = () => {
           <div
             key={i}
             className="absolute inset-x-0 font-extrabold px-3 text-4xl sm:text-5xl lg:text-6xl leading-none flex items-center"
-            style={{ top: `${i * wordHeight}px`, height: `${wordHeight}px` }}
+            style={{ top: `${i * desktopHeight}px`, height: `${desktopHeight}px` }}
           >
-            <span
-              className={text === "Everyone" ? PURPLE_COLOR : "text-gray-900"}
-            >
+            <span className={text === "Everyone" ? PURPLE_COLOR : "text-gray-900"}>
               {text}
             </span>
           </div>
@@ -369,7 +432,7 @@ const FeatureIconCard = ({
 
 const SectionFour = () => {
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200 relative">
+  <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white border-t border-gray-200 relative">
       {/* Header Content */}
       <div className="text-center max-w-3xl mx-auto mb-20">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
@@ -499,34 +562,36 @@ const SectionFive = () => {
   }, []);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200">
-      {/* Header - No vertical spacing between lines */}
-      <div className="text-center mb-16">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 leading-tight">
-          Hear from the people who trust and
-        </h2>
-        <p className="text-2xl sm:text-3xl font-semibold text-gray-900 leading-tight mt-0">
-          grow with myStash
-        </p>
+    // Section is full-bleed; header constrained inside
+    <section className="w-full bg-white border-t border-gray-200 py-12 md:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header - constrained */}
+        <div className="text-center mb-16">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 leading-tight">
+            Hear from the people who trust and
+          </h2>
+          <p className="text-2xl sm:text-3xl font-semibold text-gray-900 leading-tight mt-0">
+            grow with myStash
+          </p>
+        </div>
       </div>
 
-      {/* Testimonials Carousel */}
-      <div className="relative">
-        <div className="overflow-hidden">
+      {/* Full-bleed Testimonials Carousel */}
+      <div className="w-full overflow-hidden">
+        <div className="relative">
           <motion.div
-            key={key} // Force re-render when direction changes
-            className="flex space-x-6"
+            key={key}
+            className="flex space-x-6 px-4 sm:px-6 lg:px-8"
             animate={{
               x: isReversing ? [0, -totalWidth] : [-totalWidth, 0],
             }}
             transition={{
               x: {
-                duration: 15, // 15 seconds per direction
+                duration: 15,
                 ease: "linear",
               },
             }}
           >
-            {/* Double the array for seamless looping */}
             {[...testimonials, ...testimonials].map((testimonial, index) => (
               <div
                 key={`${testimonial.id}-${index}`}
@@ -536,11 +601,11 @@ const SectionFive = () => {
               </div>
             ))}
           </motion.div>
-        </div>
 
-        {/* Gradient overlays for smooth edges */}
-        <div className="absolute inset-y-0 left-0 w-20 bg-linear-to-r from-white to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute inset-y-0 right-0 w-20 bg-linear-to-l from-white to-transparent z-10 pointer-events-none"></div>
+          {/* Gradient overlays for smooth edges */}
+          <div className="absolute inset-y-0 left-0 w-20 bg-linear-to-r from-white to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-20 bg-linear-to-l from-white to-transparent z-10 pointer-events-none"></div>
+        </div>
       </div>
     </section>
   );
@@ -554,7 +619,7 @@ const SectionSix = () => {
   const DUMMY_SUBMIT_ICON = "/icons/Frame6.svg";
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200">
+  <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white border-t border-gray-200">
       {/* Header */}
       <div className="text-center max-w-4xl mx-auto mb-16">
         {" "}
@@ -573,9 +638,9 @@ const SectionSix = () => {
           about our services?
         </h2>
         {/* Description */}
-        <p className="text-lg text-gray-600 whitespace-nowrap truncate">
-          Let's chat; kindly fill out the form and we will respond in{" "}
-          <p className="font-bold inline"> less than 72 hours.</p>
+        <p className="text-lg text-gray-600">
+          Let's chat; kindly fill out the form and we will respond in
+          <span className="font-bold"> less than 72 hours.</span>
         </p>
       </div>
 
@@ -735,7 +800,7 @@ const SectionSeven = () => {
   const DUMMY_BACKGROUND_IMAGE = "/images/purplebackground.jpg"; // Your portrait background image
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200">
+  <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white border-t border-gray-200">
       {/* Centered Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
@@ -786,24 +851,24 @@ const SectionSeven = () => {
         ></div>
 
         {/* Content */}
-        <div className="relative z-10 flex w-full">
+        <div className="relative z-10 flex flex-col md:flex-row w-full">
           {/* Left Div - Has its own padding */}
-          <div className="w-1/2 flex items-center justify-center p-8 sm:p-12">
+          <div className="w-full md:w-1/2 flex items-center justify-center p-8 sm:p-12">
             <div className="text-center">
               {/* Two-line Sentence */}
-              <div className="text-white text-1xl sm:text-2xl text-start ml-15 lg:text-3xl font-semibold mb-8 leading-tight">
-                <div>Join thousands already saving,</div>
-                <div className="whitespace-nowrap">investing and growing with myStash</div>
-              </div>
+                <div className="text-white text-xl sm:text-2xl text-start lg:text-3xl font-semibold mb-8 leading-tight">
+                  <div>Join thousands already saving,</div>
+                  <div className="md:whitespace-nowrap">investing and growing with myStash</div>
+                </div>
 
-              {/* Two Small Transparent Buttons with subtle RGBA background */}
-              <div className="flex flex-col sm:flex-row gap-4 item-start ml-15">
+                {/* Two Small Transparent Buttons with subtle RGBA background */}
+                <div className="flex flex-col sm:flex-row gap-4 items-start">
                 {/* Google Play Store Link */}
                 <Link
                   href="https://play.google.com/store/apps/details?id=com.yourapp"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border border-white text-white px-5 py-3 rounded-lg transition-colors flex items-center justify-center min-w-[130px]"
+                  className="border border-white text-white px-5 py-3 rounded-lg transition-colors flex items-center justify-center w-full sm:w-auto md:min-w-[130px]"
                   style={{ backgroundColor: "rgba(255, 255, 255, 0.08)" }}
                 >
                   <img
@@ -829,7 +894,7 @@ const SectionSeven = () => {
                   href="https://apps.apple.com/app/your-app-id"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border border-white text-white px-5 py-3 rounded-lg hover:bg-white hover:bg-opacity-10 transition-colors flex items-center justify-center min-w-[130px]"
+                  className="border border-white text-white px-5 py-3 rounded-lg hover:bg-white hover:bg-opacity-10 transition-colors flex items-center justify-center w-full sm:w-auto md:min-w-[130px]"
                   style={{ backgroundColor: "rgba(255, 255, 255, 0.08)" }}
                 >
                   <img
@@ -854,7 +919,7 @@ const SectionSeven = () => {
           </div>
 
           {/* Right Div - NO PADDING, image touches bottom */}
-          <div className="w-1/2 flex items-end justify-center">
+          <div className="w-full md:w-1/2 flex items-end justify-center">
             <img
               src={DUMMY_APP_IMAGE}
               alt="App Preview"
@@ -1048,8 +1113,8 @@ const SectionEight = () => {
                 />
                 <div className="text-gray-600 text-xs">
                   <p className="font-medium">NG</p>
-                  <p className="whitespace-nowrap">Lagos Office; Pentagon Plaza, 2nd floor</p>
-                  <p className="whitespace-nowrap">23, Opebi-Rd, Ikeja, Lagos, Nigeria</p>
+                  <p className="md:whitespace-nowrap">Lagos Office; Pentagon Plaza, 2nd floor</p>
+                  <p className="md:whitespace-nowrap">23, Opebi-Rd, Ikeja, Lagos, Nigeria</p>
                 </div>
               </div>
 
@@ -1067,8 +1132,8 @@ const SectionEight = () => {
                 />
                 <div className="text-gray-600 text-xs">
                   <p className="font-medium">USA</p>
-                  <p className="whitespace-nowrap">4255 Limestone Rd STE 200C, 200C,</p>
-                  <p className="whitespace-nowrap">Wilmington, DE 19808</p>
+                  <p className="md:whitespace-nowrap">4255 Limestone Rd STE 200C, 200C,</p>
+                  <p className="md:whitespace-nowrap">Wilmington, DE 19808</p>
                 </div>
               </div>
             </div>
@@ -1092,18 +1157,32 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       {/* Section 1: Hero Section */}
       <section className="relative w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
           <div className="flex flex-col md:flex-row items-center">
             <div className="w-full md:w-1/2 order-2 md:order-1 text-center md:text-left z-10">
               <HorizontalMarquee />
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4">
-                <span className="block whitespace-nowrap">
-                  Smarter finance for a
-                </span>
-                <span className="block whitespace-nowrap">
-                  smarter <VerticalTextCarousel />
-                </span>
-              </h1>
+              {/* Mobile stacked heading: visible only on small screens */}
+              <div className="md:hidden text-center mb-4">
+                <h1 className="text-3xl font-extrabold text-gray-900 leading-tight">
+                  <div>Smarter finance</div>
+                  <div>for smarter</div>
+                </h1>
+                <div className="mt-2 flex justify-center">
+                  <VerticalTextCarousel />
+                </div>
+              </div>
+
+              {/* Desktop heading (unchanged) */}
+              <div className="hidden md:block">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4">
+                  <span className="block">
+                    Smarter finance for a
+                  </span>
+                  <span className="block">
+                    smarter <VerticalTextCarousel />
+                  </span>
+                </h1>
+              </div>
               <p className="mt-4 text-lg text-gray-600 max-w-lg mx-auto md:mx-0">
                 A financial tool that makes your money work for you. Save
                 effortlessly, grow your wealth intelligently, and spend with
@@ -1164,7 +1243,7 @@ export default function HomePage() {
       </section>
 
       {/* Section 3: Additional Features */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200">
+  <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white border-t border-gray-200">
         <SectionThreePartOne />
         <SectionThreePartTwo />
       </section>
