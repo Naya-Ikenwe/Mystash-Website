@@ -22,13 +22,8 @@ interface DropdownItem {
   tag?: string; 
 }
 
+// REORDERED as requested: Savings, Investments, Loan, Payment, Budget
 const DROPDOWN_ITEMS: DropdownItem[] = [
-  { 
-    iconPath: DUMMY_DROPDOWN_ICON_1, 
-    title: 'Payments', 
-    subtitle: 'Seamless Payments',
-    href: '/payments' 
-  },
   { 
     iconPath: DUMMY_DROPDOWN_ICON_2, 
     title: 'Savings', 
@@ -36,24 +31,29 @@ const DROPDOWN_ITEMS: DropdownItem[] = [
     href: '/savings' 
   },
   { 
-    iconPath: DUMMY_DROPDOWN_ICON_3, 
-    title: 'Budget', 
-    subtitle: 'Simplify your spending',
-    href: '/budget' 
+    iconPath: DUMMY_DROPDOWN_ICON_5, 
+    title: 'Investments', 
+    subtitle: 'Build smarter wealth', 
+    href: '/investments'
   },
   { 
     iconPath: DUMMY_DROPDOWN_ICON_4, 
     title: 'Loan', 
     subtitle: 'Grow your health with us', 
-    href: '/loans',
-    tag: 'Newly updated' 
+    href: '/loans'
   },
   { 
-    iconPath: DUMMY_DROPDOWN_ICON_5, 
-    title: 'Investments', 
-    subtitle: 'Build smarter wealth', 
-    href: '/investments',
-    tag: 'Newly updated' 
+    iconPath: DUMMY_DROPDOWN_ICON_1, 
+    title: 'Payments', 
+    subtitle: 'Seamless Payments',
+    href: '/payments' 
+  },
+  { 
+    iconPath: DUMMY_DROPDOWN_ICON_3, 
+    title: 'Budget', 
+    subtitle: 'Simplify your spending',
+    href: '/budget',
+    tag: 'Coming soon' // Only Budget has the yellow pill
   },
 ];
 
@@ -139,9 +139,10 @@ const DropdownMenu = ({ mobile = false, onItemClick }: { mobile?: boolean; onIte
   );
 };
 
-// 3. Dropdown Link Wrapper (Desktop)
+// 3. Dropdown Link Wrapper (Desktop) - IMPROVED HOVER BEHAVIOR
 const DropdownLink = ({ text, hasPlus = false }: { text: string; hasPlus?: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMouseInDropdown, setIsMouseInDropdown] = useState(false);
   
   const linkClasses = `
     text-gray-700 font-medium text-sm p-2 transition-colors duration-150 
@@ -150,19 +151,52 @@ const DropdownLink = ({ text, hasPlus = false }: { text: string; hasPlus?: boole
     ${isOpen ? 'bg-purple-100 text-purple-700' : ''}
   `;
 
+  const handleMouseEnterLink = () => {
+    setIsOpen(true);
+  };
+
+  const handleMouseLeaveLink = () => {
+    // Only close if mouse is not in dropdown
+    setTimeout(() => {
+      if (!isMouseInDropdown) {
+        setIsOpen(false);
+      }
+    }, 100);
+  };
+
+  const handleMouseEnterDropdown = () => {
+    setIsMouseInDropdown(true);
+  };
+
+  const handleMouseLeaveDropdown = () => {
+    setIsMouseInDropdown(false);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 100);
+  };
+
+  const handleItemClick = () => {
+    setIsOpen(false);
+    setIsMouseInDropdown(false);
+  };
+
   return (
     <div 
       className="relative"
-      onMouseEnter={() => setIsOpen(true)} 
-      onMouseLeave={() => setIsOpen(false)}
+      onMouseEnter={handleMouseEnterLink}
+      onMouseLeave={handleMouseLeaveLink}
     >
       <div className={linkClasses}>
         {text}
         {hasPlus && <span className="ml-1 font-bold">+</span>}
       </div>
       {isOpen && (
-        <div className="absolute top-full left-1/2 -translate-x-1/2 w-full pt-2 z-40">
-          <DropdownMenu />
+        <div 
+          className="absolute top-full left-1/2 -translate-x-1/2 w-full pt-2 z-40"
+          onMouseEnter={handleMouseEnterDropdown}
+          onMouseLeave={handleMouseLeaveDropdown}
+        >
+          <DropdownMenu onItemClick={handleItemClick} />
         </div>
       )}
     </div>
