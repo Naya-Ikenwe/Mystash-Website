@@ -2,11 +2,10 @@
 
 import Link from 'next/link';
 import React, { useState } from 'react';
+import NavButtons from './NavButtons';
 
 // --- CONFIGURATION & DUMMY PATHS ---
 const DUMMY_LOGO_PATH = '/logo/mystashlogo.svg'; 
-const DUMMY_ICON_PATH_1 = '/icons/Frame6.svg'; 
-const DUMMY_ICON_PATH_2 = '/icons/Frame5.svg'; 
 
 const DUMMY_DROPDOWN_ICON_1 = '/icons/navdropdown1.svg';
 const DUMMY_DROPDOWN_ICON_2 = '/icons/navdropdown2.svg';
@@ -19,47 +18,76 @@ interface DropdownItem {
   iconPath: string;
   title: string;
   subtitle: string;
+  href: string;
   tag?: string; 
 }
 
 const DROPDOWN_ITEMS: DropdownItem[] = [
-  { iconPath: DUMMY_DROPDOWN_ICON_1, title: 'Payments', subtitle: 'Seamless Payments' },
-  { iconPath: DUMMY_DROPDOWN_ICON_2, title: 'Savings', subtitle: 'Save in USD or NGN' },
-  { iconPath: DUMMY_DROPDOWN_ICON_3, title: 'Budget', subtitle: 'Simplify your spending' },
-  { iconPath: DUMMY_DROPDOWN_ICON_4, title: 'Loan', subtitle: 'Grow your health with us', tag: 'Newly updated' },
-  { iconPath: DUMMY_DROPDOWN_ICON_5, title: 'Investments', subtitle: 'Build smarter wealth', tag: 'Newly updated' },
+  { 
+    iconPath: DUMMY_DROPDOWN_ICON_1, 
+    title: 'Payments', 
+    subtitle: 'Seamless Payments',
+    href: '/payments' 
+  },
+  { 
+    iconPath: DUMMY_DROPDOWN_ICON_2, 
+    title: 'Savings', 
+    subtitle: 'Save in USD or NGN',
+    href: '/savings' 
+  },
+  { 
+    iconPath: DUMMY_DROPDOWN_ICON_3, 
+    title: 'Budget', 
+    subtitle: 'Simplify your spending',
+    href: '/budget' 
+  },
+  { 
+    iconPath: DUMMY_DROPDOWN_ICON_4, 
+    title: 'Loan', 
+    subtitle: 'Grow your health with us', 
+    href: '/loans',
+    tag: 'Newly updated' 
+  },
+  { 
+    iconPath: DUMMY_DROPDOWN_ICON_5, 
+    title: 'Investments', 
+    subtitle: 'Build smarter wealth', 
+    href: '/investments',
+    tag: 'Newly updated' 
+  },
 ];
 
 // --- REUSABLE COMPONENTS ---
 
 // 1. Regular Nav Link with PILL HOVER Effect
-const NavLink = ({ text, hasPlus = false, mobile = false, onClick }: { text: string; hasPlus?: boolean; mobile?: boolean; onClick?: () => void }) => {
+const NavLink = ({ text, hasPlus = false, mobile = false, onClick, href = "#" }: { text: string; hasPlus?: boolean; mobile?: boolean; onClick?: () => void; href?: string }) => {
   const baseClasses = mobile 
     ? "block text-gray-700 font-medium text-base p-3 transition-colors duration-150 hover:text-purple-700 hover:bg-purple-100 rounded-lg cursor-pointer"
     : "text-gray-700 font-medium text-sm p-2 transition-colors duration-150 hover:text-purple-700 hover:bg-purple-100 rounded-full cursor-pointer";
 
   return (
-    <a
-      href="#"
+    <Link
+      href={href}
       className={baseClasses}
       onClick={onClick}
     >
       {text}
       {hasPlus && <span className="ml-1 font-bold">+</span>}
-    </a>
+    </Link>
   );
 };
 
 // 2. Dropdown Content Menu
-const DropdownMenu = ({ mobile = false }: { mobile?: boolean }) => {
+const DropdownMenu = ({ mobile = false, onItemClick }: { mobile?: boolean; onItemClick?: () => void }) => {
   if (mobile) {
     return (
       <div className="mt-2 ml-4 space-y-1 border-l-2 border-gray-100 pl-4">
         {DROPDOWN_ITEMS.map((item) => (
-          <a 
+          <Link 
             key={item.title}
-            href="#" 
+            href={item.href}
             className="flex items-center space-x-3 p-3 rounded-lg transition-colors duration-150 hover:bg-gray-50 cursor-pointer"
+            onClick={onItemClick}
           >
             <img src={item.iconPath} alt="" className="w-5 h-5 shrink-0" />
             <div className="flex grow justify-start items-center">
@@ -73,7 +101,7 @@ const DropdownMenu = ({ mobile = false }: { mobile?: boolean }) => {
                 </span>
               )}
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     );
@@ -84,9 +112,10 @@ const DropdownMenu = ({ mobile = false }: { mobile?: boolean }) => {
       <ul className="space-y-2">
         {DROPDOWN_ITEMS.map((item) => (
           <li key={item.title}>
-            <a 
-              href="#" 
+            <Link 
+              href={item.href}
               className="block p-3 rounded-lg transition-colors duration-150 hover:bg-gray-50 cursor-pointer"
+              onClick={onItemClick}
             >
               <div className="flex items-center space-x-3">
                 <img src={item.iconPath} alt="" className="w-5 h-5 shrink-0" />
@@ -102,7 +131,7 @@ const DropdownMenu = ({ mobile = false }: { mobile?: boolean }) => {
                   )}
                 </div>
               </div>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
@@ -127,10 +156,10 @@ const DropdownLink = ({ text, hasPlus = false }: { text: string; hasPlus?: boole
       onMouseEnter={() => setIsOpen(true)} 
       onMouseLeave={() => setIsOpen(false)}
     >
-      <a href="#" className={linkClasses}>
+      <div className={linkClasses}>
         {text}
         {hasPlus && <span className="ml-1 font-bold">+</span>}
-      </a>
+      </div>
       {isOpen && (
         <div className="absolute top-full left-1/2 -translate-x-1/2 w-full pt-2 z-40">
           <DropdownMenu />
@@ -163,50 +192,12 @@ const MobileDropdownLink = ({ text, hasPlus = false }: { text: string; hasPlus?:
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      {isOpen && <DropdownMenu mobile />}
+      {isOpen && <DropdownMenu mobile onItemClick={() => setIsOpen(false)} />}
     </div>
   );
 };
 
-// 5. Pill Buttons
-const IconButton = ({
-  iconPath,
-  text,
-  buttonStyle = 'primary',
-  mobile = false,
-  onClick,
-}: {
-  iconPath: string;
-  text: string;
-  buttonStyle?: 'primary' | 'secondary';
-  mobile?: boolean;
-  onClick?: () => void;
-}) => {
-  let buttonClasses = 'flex items-center space-x-2 px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 border-transparent';
-
-  if (buttonStyle === 'primary') {
-    buttonClasses += ' bg-purple-100 text-purple-700 hover:bg-purple-200';
-  } else if (buttonStyle === 'secondary') {
-    buttonClasses += ' bg-purple-700 text-white hover:bg-purple-800';
-  }
-
-  if (mobile) {
-    buttonClasses += ' w-full justify-center';
-  }
-
-  return (
-    <button className={buttonClasses} onClick={onClick}>
-      <img
-        src={iconPath}
-        alt={`${text} icon`}
-        className="w-4 h-4" 
-      />
-      <span>{text}</span>
-    </button>
-  );
-};
-
-// 6. Hamburger Menu Button
+// 5. Hamburger Menu Button
 const HamburgerButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) => (
   <button
     onClick={onClick}
@@ -253,16 +244,7 @@ export default function Navbar() {
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center space-x-3">
-            <IconButton 
-              iconPath={DUMMY_ICON_PATH_1} 
-              text="Contact Us" 
-              buttonStyle="primary" 
-            />
-            <IconButton 
-              iconPath={DUMMY_ICON_PATH_2} 
-              text="Download app" 
-              buttonStyle="secondary" 
-            />
+            <NavButtons />
           </div>
 
           {/* Mobile Menu Button */}
@@ -284,21 +266,8 @@ export default function Navbar() {
               <NavLink text="About Us" mobile onClick={closeMobileMenu} />
               
               {/* Mobile Buttons */}
-              <div className="pt-4 space-y-3 border-t border-gray-100">
-                <IconButton 
-                  iconPath={DUMMY_ICON_PATH_1} 
-                  text="Contact Us" 
-                  buttonStyle="primary"
-                  mobile
-                  onClick={closeMobileMenu}
-                />
-                <IconButton 
-                  iconPath={DUMMY_ICON_PATH_2} 
-                  text="Download app" 
-                  buttonStyle="secondary"
-                  mobile
-                  onClick={closeMobileMenu}
-                />
+              <div className="pt-4 space-y-3 border-t border-gray-100 md:hidden">
+                <NavButtons mobile onButtonClick={closeMobileMenu} />
               </div>
             </div>
           </div>

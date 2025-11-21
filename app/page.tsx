@@ -5,6 +5,9 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 // Update the import at the top of your main file
 import { testimonials } from "./components/testimonials";
+import FeaturesSection from "./components/FeaturesSection";
+import ContactFormSection from "./components/ContactFormSection";
+import NavButtons from "./components/NavButtons";
 
 // Dummy Image Path Constants
 const DUMMY_HERO_IMAGE = "/images/heroimage.svg";
@@ -19,7 +22,7 @@ const DUMMY_SECTION_4_ICON_2 = "/icons/rocket.svg";
 const DUMMY_SECTION_4_ICON_3 = "/icons/planet.svg";
 
 const TEXT_COLOR = "text-gray-700";
-const PURPLE_COLOR = "text-purple-700";
+const PURPLE_COLOR = "text-purple-400";
 
 // --- Dynamic Components (Section 1) ---
 
@@ -137,10 +140,12 @@ const VerticalTextCarousel = () => {
             <div
               key={i}
               ref={i === 0 ? itemRef : null}
-              className="block font-extrabold text-2xl leading-tight flex items-center"
+              className="block font-semibold text-2xl leading-tight  items-center"
               style={{ padding: "6px 0" }}
             >
-              <span className={text === "Everyone" ? PURPLE_COLOR : "text-gray-900"}>
+              <span
+                className={text === "Everyone" ? PURPLE_COLOR : "text-gray-900"}
+              >
                 {text}
               </span>
             </div>
@@ -154,8 +159,12 @@ const VerticalTextCarousel = () => {
   const desktopHeight = 85;
   return (
     <div
-      className="inline-block overflow-hidden align-bottom ml-3 relative"
-      style={{ height: `${desktopHeight}px`, width: "300px", paddingTop: "8px" }}
+      className="inline-block overflow-hidden align-bottom  relative"
+      style={{
+        height: `${desktopHeight}px`,
+        width: "300px",
+        paddingTop: "8px",
+      }}
     >
       <motion.div
         animate={{ y: -index * desktopHeight }}
@@ -165,10 +174,15 @@ const VerticalTextCarousel = () => {
         {TEXTS.map((text, i) => (
           <div
             key={i}
-            className="absolute inset-x-0 font-extrabold px-3 text-4xl sm:text-5xl lg:text-6xl leading-none flex items-center"
-            style={{ top: `${i * desktopHeight}px`, height: `${desktopHeight}px` }}
+            className="absolute inset-x-0 font-semibold px-3 text-4xl sm:text-5xl lg:text-6xl leading-none flex items-center"
+            style={{
+              top: `${i * desktopHeight}px`,
+              height: `${desktopHeight}px`,
+            }}
           >
-            <span className={text === "Everyone" ? PURPLE_COLOR : "text-gray-900"}>
+            <span
+              className={text === "Everyone" ? PURPLE_COLOR : "text-gray-900"}
+            >
               {text}
             </span>
           </div>
@@ -359,6 +373,7 @@ const SectionThreePartOne = () => {
     </div>
   );
 };
+
 const SectionThreePartTwo = () => {
   return (
     <div className="flex flex-col md:flex-row items-center gap-8">
@@ -430,83 +445,6 @@ const FeatureIconCard = ({
   );
 };
 
-const SectionFour = () => {
-  return (
-  <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white border-t border-gray-200 relative">
-      {/* Header Content */}
-      <div className="text-center max-w-3xl mx-auto mb-20">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-          With myStash you get
-        </h2>
-        <p className="text-lg text-gray-600">
-          Our core values as an organization reflects in our business ethics
-        </p>
-      </div>
-
-      {/* Decorative Lines and Circles Container */}
-      <div className="relative">
-        {/* Upper Horizontal Line */}
-        <div className="absolute top-0 left-8 right-8 h-px bg-gray-200 -mt-4"></div>
-
-        {/* Lower Horizontal Line */}
-        <div className="absolute bottom-0 left-8 right-8 h-px bg-gray-200 -mb-4"></div>
-
-        {/* Left Vertical Line */}
-        <div className="absolute left-8 top-0 bottom-0 w-px bg-gray-200"></div>
-
-        {/* Right Vertical Line */}
-        <div className="absolute right-8 top-0 bottom-0 w-px bg-gray-200"></div>
-
-        {/* Rings - Upper Line - moved further up */}
-        <div className="absolute top-0 left-8 right-8 flex justify-between -mt-5">
-          {" "}
-          {/* Changed from -mt-2 to -mt-6 */}
-          {/* Thick rings (purple-600) */}
-          <div className="w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm"></div>
-          <div className="w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm"></div>{" "}
-          {/* Faint ring */}
-          <div className="w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm"></div>
-          <div className="w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm"></div>{" "}
-          {/* Faint ring */}
-        </div>
-
-        {/* Rings - Lower Line - moved further down */}
-        <div className="absolute bottom-0 left-8 right-8 flex justify-between -mb-5">
-          {" "}
-          {/* Changed from -mb-2 to -mb-6 */}
-          {/* Reverse pattern */}
-          <div className="w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm"></div>{" "}
-          {/* Faint ring */}
-          <div className="w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm"></div>
-          <div className="w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm"></div>{" "}
-          {/* Faint ring */}
-          <div className="w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm"></div>
-        </div>
-
-        {/* Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-8 relative z-10 px-8">
-          <FeatureIconCard
-            iconPath={DUMMY_SECTION_4_ICON_1}
-            title="Secure Funds"
-            description="Your fund is protected with advanced encryption and trusted
-            systems-giving you total peace of mind."
-          />
-          <FeatureIconCard
-            iconPath={DUMMY_SECTION_4_ICON_2}
-            title="Quick, Seamless Payout"
-            description="We are committed to keeping your finances simple and swift-from
-            instant payments to smart budgeting and timely savings within a tick."
-          />
-          <FeatureIconCard
-            iconPath={DUMMY_SECTION_4_ICON_3}
-            title="Diverse Options"
-            description="From flexible loans to investing, we provide solutions that fit every individual's financial journey."
-          />
-        </div>
-      </div>
-    </section>
-  );
-};
 // --- Section 5: Testimonials Carousel ---
 interface TestimonialCardProps {
   testimonial: {
@@ -611,553 +549,13 @@ const SectionFive = () => {
   );
 };
 
-// --- Section 6: Contact Form ---
-const SectionSix = () => {
-  // Dummy icon paths
-  const DUMMY_MESSAGE_ICON = "/icons/arrowdown.svg";
-  const DUMMY_PHONE_ICON = "/icons/naija.svg";
-  const DUMMY_SUBMIT_ICON = "/icons/Frame6.svg";
-
-  return (
-  <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white border-t border-gray-200">
-      {/* Header */}
-      <div className="text-center max-w-4xl mx-auto mb-16">
-        {" "}
-        {/* Increased max-width */}
-        {/* Pill Header */}
-        <div className="inline-flex items-center justify-center mb-6">
-          <span className="text-sm font-semibold text-black border border-gray-200 px-4 py-2 rounded-full">
-            • Get In Touch •
-          </span>
-        </div>
-        {/* Two-line Header */}
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-4">
-          Have an enquiry or want to learn more
-        </h2>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-6">
-          about our services?
-        </h2>
-        {/* Description */}
-        <p className="text-lg text-gray-600">
-          Let's chat; kindly fill out the form and we will respond in
-          <span className="font-bold"> less than 72 hours.</span>
-        </p>
-      </div>
-
-      {/* Form - Increased width */}
-      <div className="max-w-4xl mx-auto">
-        {" "}
-        {/* Changed from max-w-2xl to max-w-4xl */}
-        <form className="space-y-6">
-          {/* First Row: First Name & Last Name */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* First Name */}
-            <div>
-              <input
-                type="text"
-                placeholder="First Name"
-                className="w-full bg-purple-100 border border-purple-100 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors" // Changed placeholder-gray-500 to placeholder-gray-400
-              />
-            </div>
-
-            {/* Last Name */}
-            <div>
-              <input
-                type="text"
-                placeholder="Last Name"
-                className="w-full bg-purple-100 border border-purple-100 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors" // Changed placeholder-gray-500 to placeholder-gray-400
-              />
-            </div>
-          </div>
-
-          {/* Second Row: Email & Phone Number */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Email */}
-            <div>
-              <input
-                type="email"
-                placeholder="Your email"
-                className="w-full bg-purple-100 border border-purple-100 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors" // Changed placeholder-gray-500 to placeholder-gray-400
-              />
-            </div>
-
-            {/* Phone Number */}
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <img
-                  src={DUMMY_PHONE_ICON}
-                  alt="Phone"
-                  className="w-5 h-5 text-gray-400"
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src =
-                      "https://placehold.co/20x20/9CA3AF/FFFFFF?text=📱";
-                  }}
-                />
-              </div>
-              <input
-                type="tel"
-                placeholder="+234"
-                className="w-full bg-purple-100 border border-purple-100 rounded-lg pl-10 pr-4 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors" // Changed placeholder-gray-500 to placeholder-gray-400
-              />
-            </div>
-          </div>
-
-          {/* Third Row: Message & Budget */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Message with icon (icon moved to the right end of the field) */}
-            <div className="relative">
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                <img
-                  src={DUMMY_MESSAGE_ICON}
-                  alt="Message"
-                  className="w-5 h-5 text-gray-400"
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src =
-                      "https://placehold.co/20x20/9CA3AF/FFFFFF?text=💬";
-                  }}
-                />
-              </div>
-              <input
-                type="text"
-                placeholder="I am interested in your loan offerings"
-                className="w-full bg-purple-100 border border-purple-100 rounded-lg pl-4 pr-10 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors" // Changed padding so icon fits on the right
-              />
-            </div>
-
-            {/* Budget without icon */}
-            <div>
-              <input
-                type="text"
-                placeholder="Write briefly about your enquiry here"
-                className="w-full bg-purple-100 border border-purple-100 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors" // Changed placeholder-gray-500 to placeholder-gray-400
-              />
-            </div>
-          </div>
-
-          {/* Terms and Conditions Checkbox - Centered */}
-          <div className="flex justify-center pt-4">
-            <label className="flex items-center space-x-3 cursor-pointer">
-              <input
-                type="checkbox"
-                className="w-4 h-4 text-purple-600 bg-purple-50 border-purple-300 rounded focus:ring-purple-500 focus:ring-2"
-              />
-              <span className="text-gray-600 text-sm">
-                I accept the{" "}
-                <a
-                  href="#"
-                  className="text-purple-600 hover:text-purple-700 underline"
-                >
-                  Terms and Conditions
-                </a>{" "}
-                and{" "}
-                <a
-                  href="#"
-                  className="text-purple-600 hover:text-purple-700 underline"
-                >
-                  Privacy Policy
-                </a>
-              </span>
-            </label>
-          </div>
-
-          {/* Submit Button with Icon */}
-          <div className="text-center pt-6">
-            <button
-              type="submit"
-              className="inline-flex items-center pr-15 justify-center bg-purple-100 text-purple-500 px-8 py-3 rounded-full hover:bg-purple-400 hover:text-white transition-colors font-medium text-base"
-            >
-              <img
-                src={DUMMY_SUBMIT_ICON}
-                alt="Send"
-                className="w-5 h-5 mr-10 object-contain"
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src =
-                    "https://placehold.co/20x20/FFFFFF/7C3AED?text=➡";
-                }}
-              />
-              Submit enquiry
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
-  );
-};
-
-// --- Section 7: App Download ---
-const SectionSeven = () => {
-  // Dummy paths for logos and images
-  const DUMMY_LOGO_1 = "/logo/org1.svg";
-  const DUMMY_LOGO_2 = "/logo/org2.svg";
-  const DUMMY_LOGO_3 = "/logo/org3.svg";
-  const DUMMY_LOGO_4 = "/logo/org4.svg";
-  const DUMMY_GOOGLE_PLAY_ICON = "/logo/google.svg";
-  const DUMMY_APPLE_STORE_ICON = "/icons/apple.svg";
-  const DUMMY_APP_IMAGE = "/images/iphonetop.svg";
-  const DUMMY_BACKGROUND_IMAGE = "/images/purplebackground.jpg"; // Your portrait background image
-
-  return (
-  <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white border-t border-gray-200">
-      {/* Centered Header */}
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-          Trusted by Leading Organizations
-        </h2>
-      </div>
-
-      {/* Four Logo Icons with Equal Spacing */}
-      <div className="flex justify-between items-center mb-20 px-8">
-        {[DUMMY_LOGO_1, DUMMY_LOGO_2, DUMMY_LOGO_3, DUMMY_LOGO_4].map(
-          (logo, index) => (
-            <div key={index} className="flex-1 flex justify-center">
-              <img
-                src={logo}
-                alt={`Partner logo ${index + 1}`}
-                className="h-12 sm:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity"
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src = `https://placehold.co/120x64/7C3AED/FFFFFF?text=Logo+${
-                    index + 1
-                  }`;
-                }}
-              />
-            </div>
-          )
-        )}
-      </div>
-
-      {/* Big Container with Background Image */}
-      <div
-        className="rounded-2xl min-h-[400px] flex relative overflow-hidden"
-        style={{
-          backgroundImage: `url(${DUMMY_BACKGROUND_IMAGE})`,
-          backgroundSize: "cover", // Makes portrait fill landscape
-          backgroundPosition: "center", // Centers the image
-          backgroundRepeat: "no-repeat",
-        }}
-        // onError={(e) => {
-        //   e.currentTarget.onerror = null;
-        //   e.currentTarget.style.backgroundImage = 'none';
-        //   e.currentTarget.classList.add('bg-purple-700'); // Fallback color
-        // }}
-      >
-        {/* More pronounced purple tint */}
-        <div
-          className="absolute inset-0"
-          style={{ backgroundColor: "rgba(162, 67, 220, 0.8)" }}
-        ></div>
-
-        {/* Content */}
-        <div className="relative z-10 flex flex-col md:flex-row w-full">
-          {/* Left Div - Has its own padding */}
-          <div className="w-full md:w-1/2 flex items-center justify-center p-8 sm:p-12">
-            <div className="text-center">
-              {/* Two-line Sentence */}
-                <div className="text-white text-xl sm:text-2xl text-start lg:text-3xl font-semibold mb-8 leading-tight">
-                  <div>Join thousands already saving,</div>
-                  <div className="md:whitespace-nowrap">investing and growing with myStash</div>
-                </div>
-
-                {/* Two Small Transparent Buttons with subtle RGBA background */}
-                <div className="flex flex-col sm:flex-row gap-4 items-start">
-                {/* Google Play Store Link */}
-                <Link
-                  href="https://play.google.com/store/apps/details?id=com.yourapp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border border-white text-white px-5 py-3 rounded-lg transition-colors flex items-center justify-center w-full sm:w-auto md:min-w-[130px]"
-                  style={{ backgroundColor: "rgba(255, 255, 255, 0.08)" }}
-                >
-                  <img
-                    src={DUMMY_GOOGLE_PLAY_ICON}
-                    alt="Google Play"
-                    className="w-7 h-7 mr-1 object-contain"
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src =
-                        "https://placehold.co/20x20/FFFFFF/7C3AED?text=G";
-                    }}
-                  />
-                  <div className="text-left">
-                    <div className="text-xs text-white text-opacity-90">
-                      Get App on
-                    </div>
-                    <div className="text-sm font-semibold">Google Play</div>
-                  </div>
-                </Link>
-
-                {/* Apple App Store Link */}
-                <Link
-                  href="https://apps.apple.com/app/your-app-id"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border border-white text-white px-5 py-3 rounded-lg hover:bg-white hover:bg-opacity-10 transition-colors flex items-center justify-center w-full sm:w-auto md:min-w-[130px]"
-                  style={{ backgroundColor: "rgba(255, 255, 255, 0.08)" }}
-                >
-                  <img
-                    src={DUMMY_APPLE_STORE_ICON}
-                    alt="App Store"
-                    className="w-9 h-9 mr-1 object-contain"
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src =
-                        "https://placehold.co/20x20/FFFFFF/7C3AED?text=A";
-                    }}
-                  />
-                  <div className="text-left">
-                    <div className="text-xs text-white text-opacity-90">
-                      Get App on
-                    </div>
-                    <div className="text-sm font-semibold">Apple Store</div>
-                  </div>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Div - NO PADDING, image touches bottom */}
-          <div className="w-full md:w-1/2 flex items-end justify-center">
-            <img
-              src={DUMMY_APP_IMAGE}
-              alt="App Preview"
-              className="max-w-full object-contain"
-              style={{
-                maxHeight: "320px",
-                width: "auto",
-              }}
-              onError={(e) => {
-                e.currentTarget.onerror = null;
-                e.currentTarget.src =
-                  "https://placehold.co/400x320/FFFFFF/7C3AED?text=App+Preview";
-              }}
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-// --- Section 8: Footer ---
-const SectionEight = () => {
-  // Dummy paths
-  const DUMMY_LOGO = "/logo/mystashlogo.svg";
-  const DUMMY_LOCATION_ICON = "/icons/location.svg";
-  const DUMMY_LOCATION_ICON_2 = "/icons/u.slogo.svg";
-  const DUMMY_SOCIAL_ICON_1 = "/icons/instagram.svg";
-  const DUMMY_SOCIAL_ICON_2 = "/icons/linkedin.svg";
-  const DUMMY_SOCIAL_ICON_3 = "/icons/facebook.svg";
-  const DUMMY_SOCIAL_ICON_4 = "/icons/twitter.svg";
-
-  return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-white border-t border-gray-200">
-      <div className="flex flex-col lg:flex-row justify-between">
-        {/* Left Section */}
-        <div className="lg:w-2/5 mb-8 lg:mb-0">
-          {/* Logo */}
-          <div className="mb-6">
-            <img
-              src={DUMMY_LOGO}
-              alt="Company Logo"
-              className="h-8 object-contain"
-              onError={(e) => {
-                e.currentTarget.onerror = null;
-                e.currentTarget.src =
-                  "https://placehold.co/160x32/7C3AED/FFFFFF?text=Your+Logo";
-              }}
-            />
-          </div>
-
-          {/* Three-line Sentence */}
-          <div className="text-gray-600 mb-8">
-            <p className="mb-1">Transforming financial experiences</p>
-            <p className="mb-1">through innovative technology and</p>
-            <p>customer-centric solutions.</p>
-          </div>
-
-          {/* Four Social Icons with Spacing */}
-          <div className="flex space-x-4">
-            {[
-              DUMMY_SOCIAL_ICON_1,
-              DUMMY_SOCIAL_ICON_2,
-              DUMMY_SOCIAL_ICON_3,
-              DUMMY_SOCIAL_ICON_4,
-            ].map((icon, index) => (
-              <Link
-                key={index}
-                href="#"
-                className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-purple-200 transition-colors"
-              >
-                <img
-                  src={icon}
-                  alt={`Social icon ${index + 1}`}
-                  className="w-8 h-8 object-contain"
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = `https://placehold.co/20x20/7C3AED/FFFFFF?text=${
-                      index + 1
-                    }`;
-                  }}
-                />
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Right Section - Four Columns */}
-        <div className="lg:w-3/5 grid grid-cols-2 md:grid-cols-4 gap-2">
-          {/* Column 1 */}
-          <div>
-            <h4 className="font-semibold text-gray-400 mb-4">Products</h4>
-            <div className="space-y-2 text-sm">
-              <Link
-                href="#"
-                className="block text-gray-800 hover:text-purple-700 transition-colors"
-              >
-                About Us
-              </Link>
-              <Link
-                href="#"
-                className="block text-gray-800 hover:text-purple-700 transition-colors"
-              >
-                Careers
-              </Link>
-              <Link
-                href="#"
-                className="block text-gray-800 hover:text-purple-700 transition-colors"
-              >
-                Blog
-              </Link>
-              <Link
-                href="#"
-                className="block text-gray-800 hover:text-purple-700 transition-colors"
-              >
-                Contact Us
-              </Link>
-            </div>
-          </div>
-
-          {/* Column 2 */}
-          <div>
-            <h4 className="font-semibold text-gray-400 mb-4">Company</h4>
-            <div className="space-y-2 text-sm text-gray-800">
-              <Link
-                href="#"
-                className="block text-gray-600 hover:text-purple-700 transition-colors"
-              >
-                Payment
-              </Link>
-              <Link
-                href="#"
-                className="block  hover:text-purple-700 transition-colors"
-              >
-                Savings
-              </Link>
-              <Link
-                href="#"
-                className="block  hover:text-purple-700 transition-colors"
-              >
-                Budget
-              </Link>
-              <Link
-                href="#"
-                className="block  hover:text-purple-700 transition-colors"
-              >
-                Loans
-              </Link>
-              <Link
-                href="#"
-                className="block  hover:text-purple-700 transition-colors"
-              >
-                Partner Funds
-              </Link>
-            </div>
-          </div>
-
-          {/* Column 3 */}
-          <div>
-            <h4 className="font-semibold text-gray-400 mb-4">Support</h4>
-            <div className="space-y-2">
-              <Link
-                href="#"
-                className="block text-gray-600 hover:text-purple-700 text-sm transition-colors"
-              >
-                Terms & Conditions
-              </Link>
-              <Link
-                href="#"
-                className="block text-gray-600 hover:text-purple-700 text-sm transition-colors"
-              >
-                Privacy Policy
-              </Link>
-            </div>
-          </div>
-
-          {/* Column 4 - Addresses */}
-          <div>
-            <h4 className="font-semibold text-gray-400 mb-4">Contact</h4>
-            <div className="space-y-4">
-              {/* Nigeria Address */}
-              <div className="flex items-start space-x-2">
-                <img
-                  src={DUMMY_LOCATION_ICON}
-                  alt="Location"
-                  className="w-4 h-4 mt-1 object-contain shrink-0"
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src =
-                      "https://placehold.co/16x16/7C3AED/FFFFFF?text=📍";
-                  }}
-                />
-                <div className="text-gray-600 text-xs">
-                  <p className="font-medium">NG</p>
-                  <p className="md:whitespace-nowrap">Lagos Office; Pentagon Plaza, 2nd floor</p>
-                  <p className="md:whitespace-nowrap">23, Opebi-Rd, Ikeja, Lagos, Nigeria</p>
-                </div>
-              </div>
-
-              {/* USA Address */}
-              <div className="flex items-start space-x-2">
-                <img
-                  src={DUMMY_LOCATION_ICON_2}
-                  alt="Location"
-                  className="w-6 h-6 mt-1 object-contain shrink-0"
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src =
-                      "https://placehold.co/16x16/7C3AED/FFFFFF?text=📍";
-                  }}
-                />
-                <div className="text-gray-600 text-xs">
-                  <p className="font-medium">USA</p>
-                  <p className="md:whitespace-nowrap">4255 Limestone Rd STE 200C, 200C,</p>
-                  <p className="md:whitespace-nowrap">Wilmington, DE 19808</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Copyright Bar */}
-      <div className="border-t border-gray-200 mt-12 pt-6 text-center">
-        <p className="text-gray-500 text-sm">
-          © {new Date().getFullYear()} muStash. All rights reserved.
-        </p>
-      </div>
-    </section>
-  );
-};
-
 // --- Main Page Component ---
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Section 1: Hero Section */}
-      <section className="relative w-full">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      <section className="relative w-full min-h-[100vh]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
           <div className="flex flex-col md:flex-row items-center">
             <div className="w-full md:w-1/2 order-2 md:order-1 text-center md:text-left z-10">
               <HorizontalMarquee />
@@ -1174,34 +572,36 @@ export default function HomePage() {
 
               {/* Desktop heading (unchanged) */}
               <div className="hidden md:block">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4">
-                  <span className="block">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 mb-4">
+                  <span className="block whitespace-nowrap">
                     Smarter finance for a
                   </span>
-                  <span className="block">
+                  <span className="block font-semibold whitespace-nowrap">
                     smarter <VerticalTextCarousel />
                   </span>
                 </h1>
               </div>
-              <p className="mt-4 text-lg text-gray-600 max-w-lg mx-auto md:mx-0">
+              <p className="mt-4 text-xl text-gray-600 max-w-lg mx-auto md:mx-0">
                 A financial tool that makes your money work for you. Save
-                effortlessly, grow your wealth intelligently, and spend with
-                confidence.
+                effortlessly, grow your wealth intelligently, and make you spend
+                with confidence.
               </p>
               <div className="mt-8 flex justify-center md:justify-start space-x-4">
-                <CTAButton text="Contact us" styleType="secondary" />
-                <CTAButton text="Download app" styleType="primary" />
+                <NavButtons />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="absolute top-0 right-0 w-1/2 h-full order-1 md:order-2 flex items-center justify-start pl-8">
+        {/* Updated Image Section - Wider and Closer to Left */}
+        <div className="absolute top-0 right-0 w-3/5 h-full order-1 md:order-2 flex items-center justify-start pl-20">
+          {" "}
+          {/* Changed from w-1/2 to w-3/5 and pl-8 to pl-4 */}
           <div className="w-full h-full max-w-none rounded-l-xl flex items-center justify-center overflow-hidden">
             <img
               src={DUMMY_HERO_IMAGE}
               alt="Hero Visual"
-              className="w-full h-full object-contain pt-10"
+              className="w-full h-full object-contain  scale-100" // scale-110 makes it larger
             />
           </div>
         </div>
@@ -1243,21 +643,44 @@ export default function HomePage() {
       </section>
 
       {/* Section 3: Additional Features */}
-  <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white border-t border-gray-200">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white border-t border-gray-200">
         <SectionThreePartOne />
         <SectionThreePartTwo />
       </section>
 
       {/* Section 4: Icon Features */}
-      <SectionFour />
+      <FeaturesSection
+        title="With myStash you get"
+        description="Our core values as an organization reflects in our business ethics"
+        features={[
+          {
+            iconPath: DUMMY_SECTION_4_ICON_1,
+            title: "Secure Funds",
+            description:
+              "Your fund is protected with advanced encryption and trusted systems-giving you total peace of mind.",
+          },
+          {
+            iconPath: DUMMY_SECTION_4_ICON_2,
+            title: "Quick, Seamless Payout",
+            description:
+              "We are committed to keeping your finances simple and swift-from instant payments to smart budgeting and timely savings within a tick.",
+          },
+          {
+            iconPath: DUMMY_SECTION_4_ICON_3,
+            title: "Diverse Options",
+            description:
+              "From flexible loans to investing, we provide solutions that fit every individual's financial journey.",
+          },
+        ]}
+      />
+
       {/* Section 5: Testimonials Carousel */}
       <SectionFive />
+
       {/* Section 6: Contact Form */}
-      <SectionSix />
-      {/* Section 7: App Download */}
-      <SectionSeven />
-      {/* Section 8: Footer */}
-      <SectionEight />
+      <ContactFormSection />
+
+      {/* Sections 7 & 8 are now in the layout */}
     </div>
   );
 }
