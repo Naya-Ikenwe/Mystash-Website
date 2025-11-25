@@ -1,13 +1,13 @@
 "use client";
 
 // app/investments/page.tsx
-import FeaturesSection from "../components/FeaturesSection";
-import ContactFormSection from "../components/ContactFormSection";
-import dynamic from 'next/dynamic';
+import FeaturesSection from "../../components/FeaturesSection";
+import ContactFormSection from "../../components/ContactFormSection";
+import dynamic from "next/dynamic";
 
 // Dynamically import the LoanCalculatorSection with no SSR
 const LoanCalculatorSection = dynamic(
-  () => import("../components/LoanCalculatorSection"),
+  () => import("../../components/LoanCalculatorSection"),
   { ssr: false }
 );
 
@@ -59,7 +59,7 @@ export default function InvestmentsPage() {
           </button>
         </div>
       </section>
-      
+
       {/* Section 2 - Features Section */}
       <div className="bg-white">
         <FeaturesSection
@@ -68,7 +68,7 @@ export default function InvestmentsPage() {
           features={investmentFeatures}
         />
       </div>
-      
+
       {/* Section 3 - Investment Guidance */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
@@ -114,9 +114,10 @@ export default function InvestmentsPage() {
           </div>
         </div>
       </section>
-      
+
       {/* Section 4 - Investment Calculator */}
       <LoanCalculatorSection
+        mode="investment"
         // Header Section - Investment themed
         pillHeader="Calculate Your Investment"
         titleLine1="Plan Your Investment"
@@ -133,14 +134,14 @@ export default function InvestmentsPage() {
         calculateButtonIcon="/icons/Frame6.svg"
         resultBoxTitle="Estimated Returns"
         // Optional callbacks
-        onCalculate={(amount, tenure) => {
-          console.log("Calculating investment:", { amount, tenure });
+        onCalculate={(amount, tenure, result) => {
+          console.log("Calculating investment:", { amount, tenure, result });
         }}
         onGetStarted={() => {
           console.log("Start investing clicked");
         }}
       />
-      
+
       {/* Section 5 - Contact Form */}
       <ContactFormSection />
     </div>

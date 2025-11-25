@@ -4,10 +4,10 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 // Update the import at the top of your main file
-import { testimonials } from "./components/testimonials";
-import FeaturesSection from "./components/FeaturesSection";
-import ContactFormSection from "./components/ContactFormSection";
-import NavButtons from "./components/NavButtons";
+import { testimonials } from "../components/testimonials";
+import FeaturesSection from "../components/FeaturesSection";
+import ContactFormSection from "../components/ContactFormSection";
+import NavButtons from "../components/NavButtons";
 
 // Dummy Image Path Constants
 const DUMMY_HERO_IMAGE = "/images/heroimage.svg";

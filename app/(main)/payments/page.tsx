@@ -3,9 +3,9 @@
 
 import Link from "next/link";
 import React from "react";
-import NavButtons from "../components/NavButtons";
-import FeaturesSection from "../components/FeaturesSection";
-import ContactFormSection from "../components/ContactFormSection";
+import NavButtons from "../../components/NavButtons";
+import FeaturesSection from "../../components/FeaturesSection";
+import ContactFormSection from "../../components/ContactFormSection";
 
 // Dummy Image Path for Payments Page
 const DUMMY_PAYMENTS_HERO_IMAGE = "/images/paymentcards.svg";

@@ -3,9 +3,9 @@
 
 import Link from "next/link";
 import React from "react";
-import FeaturesSection from "../components/FeaturesSection";
-import ContactFormSection from "../components/ContactFormSection";
-import LoanCalculatorSection from "../components/LoanCalculatorSection";
+import FeaturesSection from "../../components/FeaturesSection";
+import ContactFormSection from "../../components/ContactFormSection";
+import LoanCalculatorSection from "../../components/LoanCalculatorSection";
 
 // Dummy icon paths - update these with your actual icons
 const DUMMY_BUTTON_ICON_1 = "/icons/Frame6.svg";
@@ -34,10 +34,12 @@ const CTAButton = ({
   text,
   styleType,
   iconPath,
+  href = "#" // ADD DEFAULT HREF
 }: {
   text: string;
   styleType: "primary" | "secondary";
   iconPath: string;
+  href?: string; // ADD THIS
 }) => {
   const primaryClasses = "bg-purple-700 text-white hover:bg-purple-800";
   const secondaryClasses = "bg-purple-100 text-purple-700 hover:bg-purple-200";
@@ -45,7 +47,7 @@ const CTAButton = ({
 
   return (
     <Link
-      href="#"
+      href={href} // USE THE HREF PROP
       className={`inline-flex items-center px-8 py-3 text-base font-medium rounded-full transition-colors duration-200 ${classes}`}
     >
       <PillIcon iconPath={iconPath} />
@@ -90,6 +92,7 @@ export default function LoansPage() {
               text="Apply for Loan"
               styleType="primary"
               iconPath={DUMMY_BUTTON_ICON_1}
+              href="/loans/apply"
             />
             <CTAButton
               text="Learn More"
@@ -323,9 +326,6 @@ export default function LoansPage() {
           </div>
         </div>
       </section>
-      {/* ==================== */}
-      {/* ADD SECTION 5 HERE */}
-      {/* ==================== */}
       {/* Section 5: Loan Calculator */}
       <LoanCalculatorSection
         // Customize any text you want, or use defaults
@@ -334,15 +334,12 @@ export default function LoansPage() {
         titleLine2="Loan Solution"
         description="Use our calculator to estimate your monthly payments and find the ideal loan terms for your needs."
         buttonText="Apply Now"
+        buttonHref = "/loans/apply" 
         amountQuestion="What's your loan amount?"
         tenureQuestion="Choose repayment period"
         calculateButtonText="Calculate Monthly Payment"
         resultBoxTitle="Your Monthly Payment"
       />
-      {/* ==================== */}
-      {/* ADD SECTION 6 HERE */}
-      {/* ==================== */}
-      // ==================== // SECTION 6: FAQ // ====================
       {/* Section 6: Frequently Asked Questions */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200">
         <div className="mb-16">
