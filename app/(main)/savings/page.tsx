@@ -191,50 +191,50 @@ export default function SavingsPage() {
       />
 
       {/* Section 4: Savings Guidance */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            {/* Left Div - Image */}
-            <div className="lg:w-1/2">
-              <img
-                src="/images/savingslast.svg"
-                alt="Savings Growth"
-                className="w-full h-auto rounded-lg"
-              />
-            </div>
+<section className="bg-purple-100"> {/* Remove py-16 here */}
+  <div className="max-w-7xl mx-auto px-4 "> {/* Add py-16 to inner container instead */}
+    <div className="flex flex-col lg:flex-row items-center gap-12">
+      {/* Left Div - Image - Full height */}
+      <div className="lg:w-1/2 flex items-center h-full">
+        <img
+          src="/images/savingslast.svg"
+          alt="Savings Growth"
+          className="w-full h-[400px] object-cover rounded-lg"
+        />
+      </div>
 
-            {/* Right Div - Content */}
-            <div className="lg:w-1/2 flex flex-col justify-center ml-4 items-start">
-              {/* Pill Header with dot inside */}
-              <div className="mb-6">
-                <span className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 tracking-wide bg-purple-100 border border-purple-200 rounded-full px-4 py-2">
-                  <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                  Smart Saving
-                </span>
-              </div>
-
-              {/* Three-line Header */}
-              <h2 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
-                Start Building Your
-                <br />
-                Financial Security
-                <br />
-                Today
-              </h2>
-
-              {/* Button with same icon as Section 1 */}
-              <button className="bg-purple-800 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200">
-                <img
-                  src="/icons/Frame6.svg"
-                  alt="arrow"
-                  className="w-5 h-5 mr-2"
-                />
-                Start Saving Now
-              </button>
-            </div>
-          </div>
+      {/* Right Div - Content */}
+      <div className="lg:w-1/2 flex flex-col justify-center ml-4 items-start">
+        {/* Pill Header with dot inside */}
+        <div className="mb-6">
+          <span className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 tracking-wide bg-purple-100 border border-purple-200 rounded-full px-4 py-2">
+            <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
+            Smart Saving
+          </span>
         </div>
-      </section>
+
+        {/* Three-line Header */}
+        <h2 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
+          Start Building Your
+          <br />
+          Financial Security
+          <br />
+          Today
+        </h2>
+
+        {/* Button with same icon as Section 1 */}
+        <button className="bg-purple-800 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200">
+          <img
+            src="/icons/Frame6.svg"
+            alt="arrow"
+            className="w-5 h-5 mr-2"
+          />
+          Start Saving Now
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Section 5 - Contact Form */}
       <ContactFormSection />

@@ -115,7 +115,7 @@ const LoanCalculatorSection = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           {/* Left: Content - Vertically Centered */}
-          <div className="w-full lg:w-1/2 flex items-center">
+          <div className="w-full lg:w-1/2 flex items-center ml-5">
             <div className="w-full">
               {/* Pill-shaped Header with Dot Thingies INSIDE */}
               <div className="inline-flex items-center justify-center mb-8">

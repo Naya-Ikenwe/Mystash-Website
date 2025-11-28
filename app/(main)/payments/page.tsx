@@ -177,7 +177,7 @@ export default function PaymentsPage() {
       />
 
       {/* Section 4: Payment Benefits */}
-      <section className="py-16 bg-white">
+      <section className=" bg-purple-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Left Div - Image */}

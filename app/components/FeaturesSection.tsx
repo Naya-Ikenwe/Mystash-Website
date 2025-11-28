@@ -21,7 +21,7 @@ const FeatureIconCard = ({
   description,
 }: FeatureIconCardProps) => {
   return (
-    <div className="bg-purple-100 rounded-xl p-6 sm:p-8 border border-purple-100 transition-all duration-300 hover:shadow-lg">
+    <div className="bg-purple-100 rounded-xl p-6 sm:p-8 border border-purple-100 transition-all duration-300 ">
       <div className="flex flex-col items-start text-left">
         <img
           src={iconPath}
@@ -40,9 +40,13 @@ const FeatureIconCard = ({
   );
 };
 
-const FeaturesSection = ({ title, description, features }: FeaturesSectionProps) => {
+const FeaturesSection = ({
+  title,
+  description,
+  features,
+}: FeaturesSectionProps) => {
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white border-t border-gray-200 relative">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white  relative">
       {/* Header Content */}
       <div className="text-center max-w-3xl mx-auto mb-20">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
@@ -53,37 +57,31 @@ const FeaturesSection = ({ title, description, features }: FeaturesSectionProps)
 
       {/* Decorative Lines and Circles Container */}
       <div className="relative">
-        {/* Upper Horizontal Line */}
-        <div className="absolute top-0 left-8 right-8 h-px bg-gray-200 -mt-4"></div>
+        {/* Upper Horizontal Line - shortened */}
+        <div className="absolute top-0 left-12 right-12 h-px bg-gray-200 -mt-4"></div>
 
-        {/* Lower Horizontal Line */}
-        <div className="absolute bottom-0 left-8 right-8 h-px bg-gray-200 -mb-4"></div>
+        {/* Lower Horizontal Line - shortened */}
+        <div className="absolute bottom-0 left-12 right-12 h-px bg-gray-200 -mb-4"></div>
 
-        {/* Left Vertical Line */}
-        <div className="absolute left-8 top-0 bottom-0 w-px bg-gray-200"></div>
+        {/* Left Vertical Line - shortened */}
+        <div className="absolute left-12 top-8 bottom-8 w-px bg-gray-200"></div>
 
-        {/* Right Vertical Line */}
-        <div className="absolute right-8 top-0 bottom-0 w-px bg-gray-200"></div>
+        {/* Right Vertical Line - shortened */}
+        <div className="absolute right-12 top-8 bottom-8 w-px bg-gray-200"></div>
 
-        {/* Rings - Upper Line - moved further up */}
+        {/* Rings - Upper Line */}
         <div className="absolute top-0 left-8 right-8 flex justify-between -mt-5">
-          {/* Thick rings (purple-600) */}
           <div className="w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm"></div>
           <div className="w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm"></div>
-          {/* Faint ring */}
           <div className="w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm"></div>
           <div className="w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm"></div>
-          {/* Faint ring */}
         </div>
 
-        {/* Rings - Lower Line - moved further down */}
+        {/* Rings - Lower Line */}
         <div className="absolute bottom-0 left-8 right-8 flex justify-between -mb-5">
-          {/* Reverse pattern */}
           <div className="w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm"></div>
-          {/* Faint ring */}
           <div className="w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm"></div>
           <div className="w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm"></div>
-          {/* Faint ring */}
           <div className="w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm"></div>
         </div>
 

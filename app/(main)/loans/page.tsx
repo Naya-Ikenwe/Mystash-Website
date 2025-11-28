@@ -184,9 +184,7 @@ export default function LoansPage() {
           </div>
         </div>
       </section>
-      {/* ==================== */}
       {/* ADD SECTION 3 HERE */}
-      {/* ==================== */}
       <FeaturesSection
         title="With our loans you get"
         description="Our loan services are designed to provide maximum value and convenience"
@@ -211,11 +209,8 @@ export default function LoansPage() {
           },
         ]}
       />
-      {/* ==================== */}
-      {/* ADD SECTION 4 HERE */}
-      {/* ==================== */}
       {/* Section 4: Loan Process */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200 ">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           {/* Left: Image */}
           <div className="w-full lg:w-1/2 flex justify-center">
@@ -341,10 +336,10 @@ export default function LoansPage() {
         resultBoxTitle="Your Monthly Payment"
       />
       {/* Section 6: Frequently Asked Questions */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white ">
         <div className="mb-16">
           {/* Mini Header - Left Aligned */}
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-left">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-left ml-5">
             Frequently Asked Questions
           </h2>
         </div>

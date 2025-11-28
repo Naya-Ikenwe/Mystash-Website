@@ -323,7 +323,7 @@ const PaymentFeatureCard = () => {
 // --- Section 3 Components ---
 const SectionThreePartOne = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center gap-8 mb-16">
+    <div className="flex flex-col md:flex-row items-center gap-8 mb-16 md:ml-8 lg:ml-12">
       {/* 1a: Left Content */}
       <div className="w-full md:w-1/2">
         <div className="flex justify-between items-start mb-4">
@@ -362,7 +362,7 @@ const SectionThreePartOne = () => {
         <img
           src={DUMMY_SECTION_3_IMAGE_1}
           alt="Smart banking features"
-          className="w-full max-w-md object-contain"
+          className="w-full max-w-md  ml-15 object-contain"
           onError={(e) => {
             e.currentTarget.onerror = null;
             e.currentTarget.src =
@@ -376,7 +376,7 @@ const SectionThreePartOne = () => {
 
 const SectionThreePartTwo = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center gap-8">
+    <div className="flex flex-col md:flex-row items-center gap-8 md:-ml-8 lg:-ml-12">
       {/* 2a: Left Image */}
       <div className="w-full md:w-1/2 flex justify-center">
         <img
@@ -501,10 +501,10 @@ const SectionFive = () => {
 
   return (
     // Section is full-bleed; header constrained inside
-    <section className="w-full bg-white border-t border-gray-200 py-12 md:py-20">
+    <section className="w-full bg-white py-8 md:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - constrained */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 leading-tight">
             Hear from the people who trust and
           </h2>
@@ -554,7 +554,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Section 1: Hero Section */}
-      <section className="relative w-full min-h-[100vh]">
+      <section className="relative w-full min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
           <div className="flex flex-col md:flex-row items-center">
             <div className="w-full md:w-1/2 order-2 md:order-1 text-center md:text-left z-10">
@@ -608,8 +608,8 @@ export default function HomePage() {
       </section>
 
       {/* Section 2: Features Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-20 md:pb-32 bg-white border-t border-gray-200">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-12 md:pb-20 bg-white">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <p className="text-sm font-semibold text-purple-600 mb-2">
             • Our Products •
           </p>
@@ -643,7 +643,7 @@ export default function HomePage() {
       </section>
 
       {/* Section 3: Additional Features */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-white border-t border-gray-200">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 bg-white">
         <SectionThreePartOne />
         <SectionThreePartTwo />
       </section>

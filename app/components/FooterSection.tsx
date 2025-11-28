@@ -31,8 +31,8 @@ const FooterSection = () => {
   };
 
   return (
-    <section className="w-full bg-white"> {/* Added w-full bg-white */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-gray-200">
+    <section className="w-full bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="flex flex-col lg:flex-row justify-between">
           {/* Left Section */}
           <div className="lg:w-2/5 mb-8 lg:mb-0">
@@ -180,8 +180,8 @@ const FooterSection = () => {
                   />
                   <div className="text-gray-600 text-xs">
                     <p className="font-medium">NG</p>
-                    <p className="md:whitespace-nowrap">Lagos Office; Pentagon Plaza, 2nd floor</p>
-                    <p className="md:whitespace-nowrap">23, Opebi-Rd, Ikeja, Lagos, Nigeria</p>
+                    <p>Lagos Office; Pentagon Plaza, 2nd floor</p>
+                    <p>23, Opebi-Rd, Ikeja, Lagos, Nigeria</p>
                   </div>
                 </div>
 
@@ -195,8 +195,8 @@ const FooterSection = () => {
                   />
                   <div className="text-gray-600 text-xs">
                     <p className="font-medium">USA</p>
-                    <p className="md:whitespace-nowrap">4255 Limestone Rd STE 200C, 200C,</p>
-                    <p className="md:whitespace-nowrap">Wilmington, DE 19808</p>
+                    <p>4255 Limestone Rd STE 200C, 200C,</p>
+                    <p>Wilmington, DE 19808</p>
                   </div>
                 </div>
               </div>
@@ -205,7 +205,7 @@ const FooterSection = () => {
         </div>
 
         {/* Bottom Copyright Bar */}
-        <div className="border-t border-gray-200 mt-12 pt-6 text-center">
+        <div className="mt-12 pt-6 text-center">
           <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} muStash. All rights reserved.
           </p>

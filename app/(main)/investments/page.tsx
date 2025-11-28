@@ -70,7 +70,7 @@ export default function InvestmentsPage() {
       </div>
 
       {/* Section 3 - Investment Guidance */}
-      <section className="py-16 bg-white">
+      <section className=" bg-purple-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Left Div - Image */}

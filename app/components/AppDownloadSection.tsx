@@ -32,8 +32,8 @@ const AppDownloadSection = () => {
   };
 
   return (
-    <section className="w-full bg-white"> {/* Added w-full bg-white */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 border-t border-gray-200">
+    <section className="w-full bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-12">
         {/* Centered Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">

@@ -312,7 +312,7 @@ export default function BudgetPage() {
       />
 
       {/* Section 4: Budget Benefits */}
-      <section className="py-16 bg-white">
+      <section className=" bg-purple-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Left Div - Image */}
@@ -350,10 +350,10 @@ export default function BudgetPage() {
       </section>
 
       {/* Section 5: Budget FAQ */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200">
         <div className="mb-16">
           {/* Mini Header - Left Aligned */}
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-left">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-left ml-5">
             Frequently Asked Questions
           </h2>
         </div>
