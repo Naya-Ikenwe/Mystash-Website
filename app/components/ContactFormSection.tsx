@@ -13,7 +13,7 @@ const ContactFormSection = () => {
   const DUMMY_SECTION6_BOTTOM_RIGHT = "/images/Vector2.svg";
 
   return (
-    <section className="w-full bg-white border-t border-gray-200 py-12 md:py-20 relative overflow-hidden">
+    <section className="w-full bg-white  py-12 md:py-20 relative overflow-hidden">
       {/* Decorative images (behind content) */}
       <img
         src={DUMMY_SECTION6_TOP_LEFT}

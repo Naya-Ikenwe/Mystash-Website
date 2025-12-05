@@ -13,6 +13,11 @@ const DUMMY_DROPDOWN_ICON_3 = '/icons/navdropdown3.svg';
 const DUMMY_DROPDOWN_ICON_4 = '/icons/navdropdown4.svg';
 const DUMMY_DROPDOWN_ICON_5 = '/icons/navdropdown5.svg';
 
+// Business dropdown icons
+const DUMMY_BUSINESS_ICON_1 = '/icons/business1.svg';
+const DUMMY_BUSINESS_ICON_2 = '/icons/business2.svg';
+const DUMMY_BUSINESS_ICON_3 = '/icons/business3.svg';
+
 // --- DATA STRUCTURES for the 5-Item Dropdown Menu ---
 interface DropdownItem {
   iconPath: string;
@@ -23,7 +28,7 @@ interface DropdownItem {
 }
 
 // REORDERED as requested: Savings, Investments, Loan, Payment, Budget
-const DROPDOWN_ITEMS: DropdownItem[] = [
+const PERSONAL_DROPDOWN_ITEMS: DropdownItem[] = [
   { 
     iconPath: DUMMY_DROPDOWN_ICON_2, 
     title: 'Savings', 
@@ -57,6 +62,28 @@ const DROPDOWN_ITEMS: DropdownItem[] = [
   },
 ];
 
+// Business dropdown items (3 items as requested)
+const BUSINESS_DROPDOWN_ITEMS: DropdownItem[] = [
+  { 
+    iconPath: DUMMY_BUSINESS_ICON_1, 
+    title: 'Business Banking', 
+    subtitle: 'Tailored banking solutions',
+    href: '/business/banking' 
+  },
+  { 
+    iconPath: DUMMY_BUSINESS_ICON_2, 
+    title: 'Merchant Services', 
+    subtitle: 'Payment processing tools', 
+    href: '/business/merchant'
+  },
+  { 
+    iconPath: DUMMY_BUSINESS_ICON_3, 
+    title: 'Corporate Tools', 
+    subtitle: 'Financial management suite',
+    href: '/business/tools' 
+  },
+];
+
 // --- REUSABLE COMPONENTS ---
 
 // 1. Regular Nav Link with PILL HOVER Effect
@@ -77,12 +104,12 @@ const NavLink = ({ text, hasPlus = false, mobile = false, onClick, href = "#" }:
   );
 };
 
-// 2. Dropdown Content Menu
-const DropdownMenu = ({ mobile = false, onItemClick }: { mobile?: boolean; onItemClick?: () => void }) => {
+// 2. Dropdown Content Menu (Generic)
+const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownItem[]; mobile?: boolean; onItemClick?: () => void }) => {
   if (mobile) {
     return (
       <div className="mt-2 ml-4 space-y-1 border-l-2 border-gray-100 pl-4">
-        {DROPDOWN_ITEMS.map((item) => (
+        {items.map((item) => (
           <Link 
             key={item.title}
             href={item.href}
@@ -110,7 +137,7 @@ const DropdownMenu = ({ mobile = false, onItemClick }: { mobile?: boolean; onIte
   return (
     <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-82 md:w-130 bg-white shadow-2xl rounded-xl border border-gray-100 p-4 z-40">
       <ul className="space-y-2">
-        {DROPDOWN_ITEMS.map((item) => (
+        {items.map((item) => (
           <li key={item.title}>
             <Link 
               href={item.href}
@@ -140,7 +167,7 @@ const DropdownMenu = ({ mobile = false, onItemClick }: { mobile?: boolean; onIte
 };
 
 // 3. Dropdown Link Wrapper (Desktop) - IMPROVED HOVER BEHAVIOR
-const DropdownLink = ({ text, hasPlus = false }: { text: string; hasPlus?: boolean }) => {
+const DropdownLink = ({ text, hasPlus = false, items }: { text: string; hasPlus?: boolean; items: DropdownItem[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMouseInDropdown, setIsMouseInDropdown] = useState(false);
   
@@ -196,7 +223,7 @@ const DropdownLink = ({ text, hasPlus = false }: { text: string; hasPlus?: boole
           onMouseEnter={handleMouseEnterDropdown}
           onMouseLeave={handleMouseLeaveDropdown}
         >
-          <DropdownMenu onItemClick={handleItemClick} />
+          <DropdownMenu items={items} onItemClick={handleItemClick} />
         </div>
       )}
     </div>
@@ -204,7 +231,7 @@ const DropdownLink = ({ text, hasPlus = false }: { text: string; hasPlus?: boole
 };
 
 // 4. Mobile Dropdown Link
-const MobileDropdownLink = ({ text, hasPlus = false }: { text: string; hasPlus?: boolean }) => {
+const MobileDropdownLink = ({ text, hasPlus = false, items }: { text: string; hasPlus?: boolean; items: DropdownItem[] }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -226,7 +253,7 @@ const MobileDropdownLink = ({ text, hasPlus = false }: { text: string; hasPlus?:
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      {isOpen && <DropdownMenu mobile onItemClick={() => setIsOpen(false)} />}
+      {isOpen && <DropdownMenu items={items} mobile onItemClick={() => setIsOpen(false)} />}
     </div>
   );
 };
@@ -271,9 +298,9 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-6 items-center">
-            <DropdownLink text="Personal" hasPlus /> 
-            <NavLink text="Business" hasPlus />
-            <NavLink text="About Us" />
+            <DropdownLink text="Personal" hasPlus items={PERSONAL_DROPDOWN_ITEMS} /> 
+            <DropdownLink text="Business" hasPlus items={BUSINESS_DROPDOWN_ITEMS} />
+            <NavLink text="About Us" href="/about" />
           </div>
 
           {/* Desktop Buttons */}
@@ -295,9 +322,9 @@ export default function Navbar() {
           <div className="md:hidden absolute top-16 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
             <div className="px-4 py-6 space-y-4">
               {/* Mobile Navigation Links */}
-              <MobileDropdownLink text="Personal" hasPlus />
-              <NavLink text="Business" hasPlus mobile onClick={closeMobileMenu} />
-              <NavLink text="About Us" mobile onClick={closeMobileMenu} />
+              <MobileDropdownLink text="Personal" hasPlus items={PERSONAL_DROPDOWN_ITEMS} />
+              <MobileDropdownLink text="Business" hasPlus items={BUSINESS_DROPDOWN_ITEMS} />
+              <NavLink text="About Us" href="/about" mobile onClick={closeMobileMenu} />
               
               {/* Mobile Buttons */}
               <div className="pt-4 space-y-3 border-t border-gray-100 md:hidden">

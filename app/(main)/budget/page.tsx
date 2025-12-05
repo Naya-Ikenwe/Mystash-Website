@@ -15,7 +15,7 @@ export default function BudgetPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Section 1: Hero Section */}
-      <section className="relative w-full min-h-[100vh]">
+      <section className="relative w-full min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
           <div className="flex flex-col md:flex-row items-center">
             <div className="w-full md:w-1/2 order-2 md:order-1 text-center md:text-left z-10 ">
@@ -79,17 +79,17 @@ export default function BudgetPage() {
             <div className="space-y-20">
               {/* Number 1 - Image Left, Text Right */}
               <div className="flex items-start">
-                {/* Left - Image (Pushed to the right using flex justify-end) */}
+                {/* Left - Image: Move the entire container RIGHT */}
                 <div className="w-1/2 flex justify-end">
                   {" "}
-                  {/* Added flex justify-end */}
-                  <div className="pr-16">
+                  {/* CHANGED: Added flex justify-end */}
+                  <div className="pr-8">
                     {" "}
-                    {/* Use pr to create space from right edge */}
+                    {/* CHANGED: Container with padding to control distance */}
                     <img
                       src="/images/budgetcard.svg"
                       alt="Step 1"
-                      className="w-80 h-auto rounded-lg -mt-8"
+                      className="w-72 h-auto rounded-lg -mt-12"
                     />
                   </div>
                 </div>
@@ -101,8 +101,8 @@ export default function BudgetPage() {
                   </div>
                 </div>
 
-                {/* Right - Text */}
-                <div className="w-1/2 pl-16">
+                {/* Right - Text: More space from center line */}
+                <div className="w-1/2 pl-12">
                   <h3 className="text-xl font-semibold text-gray-900 mb-4 mt-2">
                     Track Your Spending
                   </h3>
@@ -120,13 +120,13 @@ export default function BudgetPage() {
 
               {/* Number 2 - Image Right, Text Left */}
               <div className="flex items-start">
-                {/* Left - Text (Pushed to the right using flex justify-end) */}
+                {/* Left - Text: Move the entire container RIGHT */}
                 <div className="w-1/2 flex justify-end">
                   {" "}
-                  {/* Added flex justify-end */}
-                  <div className="pr-16 text-right">
+                  {/* CHANGED: Added flex justify-end */}
+                  <div className="pr-12 text-left">
                     {" "}
-                    {/* Use pr and text-right */}
+                    {/* CHANGED: Container with padding, text-left for alignment */}
                     <h3 className="text-xl font-semibold text-gray-900 mb-4 mt-2">
                       Set Your Budget
                     </h3>
@@ -149,27 +149,29 @@ export default function BudgetPage() {
                   </div>
                 </div>
 
-                {/* Right - Image */}
-                <div className="w-1/2 pl-8">
+                {/* Right - Image: Keep spacing */}
+                <div className="w-1/2 pl-4">
                   <img
                     src="/images/budgetimg2.svg"
                     alt="Step 2"
-                    className="w-80 h-auto rounded-lg -mt-8"
+                    className="w-72 h-auto rounded-lg -mt-8"
                   />
                 </div>
               </div>
 
               {/* Number 3 - Image Left, Text Right */}
               <div className="flex items-start">
-                {/* Left - Image (Pushed to the right using flex justify-end) */}
+                {/* Left - Image: Move the entire container RIGHT */}
                 <div className="w-1/2 flex justify-end">
                   {" "}
-                  {/* Added flex justify-end */}
-                  <div className="pr-16">
+                  {/* CHANGED: Added flex justify-end */}
+                  <div className="pr-12">
+                    {" "}
+                    {/* CHANGED: Container with padding to control distance */}
                     <img
                       src="/images/budgetimg3.svg"
                       alt="Step 3"
-                      className="w-80 h-auto rounded-lg"
+                      className="w-72 h-auto rounded-lg"
                     />
                   </div>
                 </div>
@@ -181,8 +183,8 @@ export default function BudgetPage() {
                   </div>
                 </div>
 
-                {/* Right - Text */}
-                <div className="w-1/2 pl-16">
+                {/* Right - Text: More space from center line */}
+                <div className="w-1/2 pl-12">
                   <h3 className="text-xl font-semibold text-gray-900 mb-4 mt-2">
                     Monitor & Adjust
                   </h3>
@@ -200,13 +202,13 @@ export default function BudgetPage() {
 
               {/* Number 4 - Image Right, Text Left */}
               <div className="flex items-start">
-                {/* Left - Text (Pushed to the right using flex justify-end) */}
+                {/* Left - Text: Move the entire container RIGHT */}
                 <div className="w-1/2 flex justify-end">
                   {" "}
-                  {/* Added flex justify-end */}
-                  <div className="pr-16 text-right">
+                  {/* CHANGED: Added flex justify-end */}
+                  <div className="pr-12 text-left">
                     {" "}
-                    {/* Use pr and text-right */}
+                    {/* CHANGED: Container with padding, text-left for alignment */}
                     <h3 className="text-xl font-semibold text-gray-900 mb-4 mt-2">
                       Analyze Patterns
                     </h3>
@@ -232,27 +234,29 @@ export default function BudgetPage() {
                   </div>
                 </div>
 
-                {/* Right - Image */}
-                <div className="w-1/2 pl-8">
+                {/* Right - Image: Keep spacing */}
+                <div className="w-1/2 pl-4">
                   <img
                     src="/images/budgetimg4.svg"
                     alt="Step 4"
-                    className="w-80 h-auto rounded-lg"
+                    className="w-72 h-auto rounded-lg"
                   />
                 </div>
               </div>
 
               {/* Number 5 - Image Left, Text Right */}
               <div className="flex items-start">
-                {/* Left - Image (Pushed to the right using flex justify-end) */}
+                {/* Left - Image: Move the entire container RIGHT */}
                 <div className="w-1/2 flex justify-end">
                   {" "}
-                  {/* Added flex justify-end */}
-                  <div className="pr-16">
+                  {/* CHANGED: Added flex justify-end */}
+                  <div className="pr-12">
+                    {" "}
+                    {/* CHANGED: Container with padding to control distance */}
                     <img
                       src="/images/budgetimg5.svg"
                       alt="Step 5"
-                      className="w-80 h-auto rounded-lg"
+                      className="w-72 h-auto rounded-lg"
                     />
                   </div>
                 </div>
@@ -264,8 +268,8 @@ export default function BudgetPage() {
                   </div>
                 </div>
 
-                {/* Right - Text */}
-                <div className="w-1/2 pl-16">
+                {/* Right - Text: More space from center line */}
+                <div className="w-1/2 pl-12">
                   <h3 className="text-xl font-semibold text-gray-900 mb-4 mt-2">
                     Achieve Goals
                   </h3>
@@ -364,7 +368,7 @@ export default function BudgetPage() {
           <div className="border-b border-gray-100 py-6">
             <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
               <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 flex items-center justify-center shrink-0">
                   <span className="text-black font-bold text-lg">+</span>
                 </div>
                 <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
@@ -378,7 +382,7 @@ export default function BudgetPage() {
           <div className="border-b border-gray-100 py-6">
             <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
               <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 flex items-center justify-center shrink-0">
                   <span className="text-black font-bold text-lg">+</span>
                 </div>
                 <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
@@ -392,7 +396,7 @@ export default function BudgetPage() {
           <div className="border-b border-gray-100 py-6">
             <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
               <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 flex items-center justify-center shrink-0">
                   <span className="text-black font-bold text-lg">+</span>
                 </div>
                 <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
@@ -406,7 +410,7 @@ export default function BudgetPage() {
           <div className="border-b border-gray-100 py-6">
             <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
               <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 flex items-center justify-center shrink-0">
                   <span className="text-black font-bold text-lg">+</span>
                 </div>
                 <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
@@ -420,7 +424,7 @@ export default function BudgetPage() {
           <div className="border-b border-gray-100 py-6">
             <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
               <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 flex items-center justify-center shrink-0">
                   <span className="text-black font-bold text-lg">+</span>
                 </div>
                 <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
@@ -434,7 +438,7 @@ export default function BudgetPage() {
           <div className="border-b border-gray-100 py-6">
             <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
               <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 flex items-center justify-center shrink-0">
                   <span className="text-black font-bold text-lg">+</span>
                 </div>
                 <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">

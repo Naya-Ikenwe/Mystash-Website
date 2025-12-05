@@ -315,7 +315,9 @@ export default function LoanApplyPage() {
               <button
                 onClick={() => {
                   setShowModal(false);
-                  router.push("/loans/apply/details"); // Use router navigation
+                  router.push(
+                    `/loans/apply/details?employmentType=${employmentType}`
+                  );
                 }}
                 className="w-full bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-800 transition-colors duration-200"
               >
