@@ -1,7 +1,7 @@
 // app/(application)/loans/apply/details/page.tsx
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 // Define the form data type
@@ -706,7 +706,8 @@ const SuccessModal = ({
   );
 };
 
-export default function LoanDetailsPage() {
+// The main content component that uses useSearchParams
+function LoanDetailsContent() {
   const [currentStep, setCurrentStep] = useState(1);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -1363,5 +1364,23 @@ export default function LoanDetailsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Main export with Suspense boundary
+export default function LoanDetailsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-white flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading application form...</p>
+          </div>
+        </div>
+      }
+    >
+      <LoanDetailsContent />
+    </Suspense>
   );
 }
