@@ -222,13 +222,26 @@ export default function LoanApplyPage() {
             clipPath: "polygon(69% 0, 100% 0, 100% 100%, 57% 100%)",
           }}
         >
-         <div className="h-full w-full flex items-center justify-end pr-6 overflow-hidden">
-  <img
-    src="/images/loansapply.svg"
-    alt="Loan Application"
-    className="h-[110%] w-[110%] -mr-100 -mt-8"
-  />
-</div>
+          {/* Show image on medium screens and larger, hide on small screens */}
+          <div className="h-full w-full hidden md:flex items-center justify-end pr-6 overflow-hidden">
+            <img
+              src="/images/loansapply.svg"
+              alt="Loan Application"
+              className="h-[110%] w-[110%] -mr-100 -mt-8
+                lg:h-[110%] lg:w-[110%] lg:-mr-100 lg:-mt-8
+                md:h-[105%] md:w-[105%] md:-mr-80 md:-mt-6"
+            />
+          </div>
+
+          {/* Optional: Show a simplified/mobile-optimized version on small screens if needed */}
+          {/* 
+            <div className="md:hidden h-full w-full flex items-center justify-center">
+              <div className="text-center p-4">
+                <div className="text-purple-600 text-4xl mb-2">💰</div>
+                <p className="text-purple-700 font-medium">Loan Application</p>
+              </div>
+            </div>
+         */}
         </div>
       </div>
 
