@@ -49,7 +49,7 @@ export default function LoanApplyPage() {
 
   return (
     <>
-      <div className="min-h-[130vh] bg-white relative overflow-hidden">
+      <div className="min-h-screen bg-white relative overflow-hidden">
         {/* Back Arrow */}
         <button
           onClick={handleBack}
@@ -70,47 +70,45 @@ export default function LoanApplyPage() {
           </svg>
         </button>
 
-        {/* Left Section */}
+        {/* Left Section - Compact design */}
         <div
-          className="absolute inset-0 bg-white min-h-[130vh] mt-10"
+          className="absolute inset-0 bg-white min-h-screen"
           style={{
             clipPath: "polygon(0 0, 60% 0, 45% 100%, 0 100%)",
           }}
         >
           <div className="h-full">
-            <div className="max-w-2xl px-8 pt-12 pb-32 ml-8">
-              {/* Logo */}
-              <div className="mb-15">
+            {/* Reduced padding and margins */}
+            <div className="max-w-xl px-8 pt-8 pb-8 ml-8">
+              {/* Logo - Smaller margin */}
+              <div className="mb-8">
                 <img
                   src="/logo/mystashlogo.svg"
                   alt="MyStash"
-                  className="h-8 w-auto "
+                  className="h-8 w-auto"
                 />
               </div>
 
-              {/* Mini Header */}
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              {/* Compact headers */}
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">
                 Start Your Loan Application
               </h1>
-
-              {/* Sub Text */}
-              <p className="text-lg text-gray-600 mb-12">
-                Tell us a bit about your needs and we'll match you with the
-                perfect loan option.
+              <p className="text-gray-600 mb-8 text-base">
+                Tell us about your needs for the perfect loan option.
               </p>
 
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-8">
-                {/* Employment Type - Updated Options */}
+              {/* Compact form */}
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Employment Type */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Employment Type
                   </label>
                   <div className="relative">
                     <select
                       value={employmentType}
                       onChange={(e) => setEmploymentType(e.target.value)}
-                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none"
+                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none"
                       required
                     >
                       <option value="">Select employment type</option>
@@ -136,9 +134,9 @@ export default function LoanApplyPage() {
                   </div>
                 </div>
 
-                {/* Loan Amount with auto-formatting */}
+                {/* Loan Amount */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Loan Amount
                   </label>
                   <div className="relative">
@@ -150,22 +148,22 @@ export default function LoanApplyPage() {
                       value={loanAmount}
                       onChange={handleAmountChange}
                       placeholder="Enter desired amount"
-                      className="w-full bg-white border border-gray-300 rounded-lg pl-8 pr-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full bg-white border border-gray-300 rounded-lg pl-8 pr-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       required
                     />
                   </div>
                 </div>
 
-                {/* Loan Tenure - Updated Options */}
+                {/* Loan Tenure */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Loan Tenure
                   </label>
                   <div className="relative">
                     <select
                       value={loanTenure}
                       onChange={(e) => setLoanTenure(e.target.value)}
-                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none"
+                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none"
                       required
                     >
                       <option value="">Select repayment period</option>
@@ -191,24 +189,20 @@ export default function LoanApplyPage() {
                   </div>
                 </div>
 
-                {/* Disclaimer */}
-                <div className="bg-gray-50 rounded-lg p-6 mt-12">
-                  <p className="text-sm text-gray-600 leading-relaxed max-w-prose">
+                {/* Compact Disclaimer */}
+                <div className="bg-gray-50 rounded-lg p-4 mt-6">
+                  <p className="text-xs text-gray-600 leading-relaxed">
                     By clicking "Apply Now", you understand that this initiates
                     a formal loan application process. We will perform a credit
-                    check and verify the information provided. Your application
-                    will be reviewed within 24 hours, and you may be contacted
-                    for additional documentation. Approval is subject to our
-                    lending criteria and regulatory requirements. All loan
-                    agreements are governed by our terms and conditions.
+                    check and verify the information provided.
                   </p>
                 </div>
 
-                {/* Button */}
+                {/* Button - Normal size */}
                 <button
                   type="submit"
                   disabled={!isFormValid}
-                  className={`w-full font-semibold py-4 px-8 rounded-lg transition-colors duration-200 text-lg ${
+                  className={`w-full font-semibold py-3 px-6 rounded-lg transition-colors duration-200 mt-6 ${
                     isFormValid
                       ? "bg-purple-700 text-white hover:bg-purple-800 cursor-pointer"
                       : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -223,18 +217,18 @@ export default function LoanApplyPage() {
 
         {/* Right Section */}
         <div
-          className="absolute inset-0 bg-purple-50 min-h-[130vh]"
+          className="absolute inset-0 bg-purple-50 min-h-screen"
           style={{
-            clipPath: "polygon(65% 0, 100% 0, 100% 100%, 50% 100%)",
+            clipPath: "polygon(69% 0, 100% 0, 100% 100%, 57% 100%)",
           }}
         >
-          <div className="h-full w-full flex items-center justify-end">
-            <img
-              src="/images/loansapply.svg"
-              alt="Loan Application"
-              className="object-contain max-w-none scale-98"
-            />
-          </div>
+         <div className="h-full w-full flex items-center justify-end pr-6 overflow-hidden">
+  <img
+    src="/images/loansapply.svg"
+    alt="Loan Application"
+    className="h-[110%] w-[110%] -mr-100 -mt-8"
+  />
+</div>
         </div>
       </div>
 
@@ -268,7 +262,7 @@ export default function LoanApplyPage() {
             </div>
 
             {/* 2x2 Grid - Centered with top padding */}
-            <div className="p-6 grid grid-cols-2 gap-4 pt-8 mx-auto max-w-lg ">
+            <div className="p-6 grid grid-cols-2 gap-4 pt-8 mx-auto max-w-lg">
               {/* Upper Left - Loan Amount */}
               <div className="bg-gray-50 rounded-lg p-4">
                 <h3 className="text-sm font-medium text-gray-500 mb-1">
@@ -280,7 +274,7 @@ export default function LoanApplyPage() {
               </div>
 
               {/* Upper Right - Loan Tenure */}
-              <div className="bg-gray-50 rounded-lg  ml-15 p-4">
+              <div className="bg-gray-50 rounded-lg p-4">
                 <h3 className="text-sm font-medium text-gray-500 mb-1">
                   Loan Tenure
                 </h3>
@@ -300,7 +294,7 @@ export default function LoanApplyPage() {
               </div>
 
               {/* Lower Right - Interest */}
-              <div className="bg-gray-50 rounded-lg ml-15 p-4">
+              <div className="bg-gray-50 rounded-lg p-4">
                 <h3 className="text-sm font-medium text-gray-500 mb-1">
                   Interest Rate
                 </h3>
@@ -311,7 +305,7 @@ export default function LoanApplyPage() {
             </div>
 
             {/* Modal Footer */}
-            <div className="p-6 border-t border-gray-200 ">
+            <div className="p-6 border-t border-gray-200">
               <button
                 onClick={() => {
                   setShowModal(false);

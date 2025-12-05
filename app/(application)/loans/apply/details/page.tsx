@@ -39,6 +39,7 @@ interface FileUploadProps {
   value: File | null;
   onChange: (file: File | null) => void;
   accept?: string;
+  allowWebcam?: boolean; // New prop to control webcam access
 }
 
 // Helper function to get file type display
@@ -165,6 +166,7 @@ const FileUploadArea = ({
   value,
   onChange,
   accept = "image/*",
+  allowWebcam = true,
 }: FileUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -203,7 +205,30 @@ const FileUploadArea = ({
     }
   };
 
-  const handleCameraClick = () => {
+  // Check camera permissions before opening webcam
+  const checkCameraPermissions = async () => {
+    try {
+      // Check if mediaDevices is supported
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error("Camera API not supported in this browser");
+      }
+
+      // Check permissions if supported
+      if (navigator.permissions && navigator.permissions.query) {
+        const permission = await navigator.permissions.query({ name: "camera" as any });
+        if (permission.state === "denied") {
+          throw new Error("Camera permissions denied");
+        }
+      }
+      
+      return true;
+    } catch (error) {
+      console.error("Permission check failed:", error);
+      throw error;
+    }
+  };
+
+  const handleCameraClick = async () => {
     if (isMobile) {
       if (fileInputRef.current) {
         fileInputRef.current.setAttribute("capture", "environment");
@@ -215,7 +240,12 @@ const FileUploadArea = ({
         }, 100);
       }
     } else {
-      openWebcam();
+      try {
+        await checkCameraPermissions();
+        openWebcam();
+      } catch (error: any) {
+        alert(error.message || "Cannot access camera. Please check permissions.");
+      }
     }
   };
 
@@ -225,55 +255,105 @@ const FileUploadArea = ({
       setIsWebcamReady(false);
       setShowWebcam(true);
 
+      // Give time for modal to render
       await new Promise((resolve) => setTimeout(resolve, 100));
 
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
+      // Try different camera constraints
+      const constraints = {
         video: {
           facingMode: "user",
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
+          width: { ideal: 1280, max: 1920 },
+          height: { ideal: 720, max: 1080 },
         },
-      });
+        audio: false,
+      };
+
+      // Fallback constraints
+      const fallbackConstraints = {
+        video: true,
+        audio: false,
+      };
+
+      let mediaStream;
+      
+      try {
+        mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+      } catch (err) {
+        console.warn("Primary constraints failed, trying fallback:", err);
+        mediaStream = await navigator.mediaDevices.getUserMedia(fallbackConstraints);
+      }
 
       setStream(mediaStream);
 
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
 
-        videoRef.current.onloadedmetadata = () => {
-          videoRef.current
-            ?.play()
+        // Add event listeners for better error handling
+        const video = videoRef.current;
+        
+        const onLoadedMetadata = () => {
+          video
+            .play()
             .then(() => {
               setIsWebcamReady(true);
+              console.log("Webcam ready");
             })
             .catch((error) => {
               console.error("Error playing video:", error);
-              setIsWebcamReady(true);
+              // Try to play with different approach
+              video.muted = true;
+              video.play().then(() => {
+                setIsWebcamReady(true);
+              }).catch(e => {
+                console.error("Second play attempt failed:", e);
+                setWebcamError("Failed to start video playback. Please refresh and try again.");
+              });
             });
         };
 
-        videoRef.current.onerror = (error) => {
+        const onError = (error: any) => {
           console.error("Video element error:", error);
-          setWebcamError("Failed to initialize video stream");
+          setWebcamError("Video stream error. Please check camera permissions.");
           setIsWebcamReady(false);
         };
 
-        setTimeout(() => {
-          if (!isWebcamReady && videoRef.current) {
-            videoRef.current
-              .play()
-              .then(() => {
-                setIsWebcamReady(true);
-              })
-              .catch(console.error);
+        video.onloadedmetadata = onLoadedMetadata;
+        video.onerror = onError;
+
+        // Add timeout for video to start
+        const timeoutId = setTimeout(() => {
+          if (!isWebcamReady) {
+            console.log("Webcam timeout, trying to force play");
+            if (video.readyState >= 2) {
+              video.play().catch(console.error);
+            }
           }
-        }, 1000);
+        }, 3000);
+
+        // Cleanup
+        return () => clearTimeout(timeoutId);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error accessing webcam:", error);
-      setWebcamError(
-        "Unable to access webcam. Please check your permissions and make sure your camera is not being used by another application."
-      );
+      
+      // User-friendly error messages
+      let errorMessage = "Unable to access webcam.";
+      
+      if (error.name === "NotAllowedError" || error.name === "PermissionDeniedError") {
+        errorMessage = "Camera access was denied. Please allow camera permissions in your browser settings.";
+      } else if (error.name === "NotFoundError" || error.name === "DevicesNotFoundError") {
+        errorMessage = "No camera found. Please connect a camera and try again.";
+      } else if (error.name === "NotReadableError" || error.name === "TrackStartError") {
+        errorMessage = "Camera is already in use by another application.";
+      } else if (error.name === "OverconstrainedError" || error.name === "ConstraintNotSatisfiedError") {
+        errorMessage = "Camera doesn't support requested settings. Please try a different camera.";
+      } else if (error.name === "SecurityError") {
+        errorMessage = "Camera access is blocked for security reasons. Try accessing via HTTPS.";
+      } else if (error.name === "AbortError") {
+        errorMessage = "Camera access was aborted. Please try again.";
+      }
+
+      setWebcamError(errorMessage);
       setShowWebcam(false);
     }
   };
@@ -379,15 +459,24 @@ const FileUploadArea = ({
           {/* Camera View */}
           <div className="flex-1 bg-black relative flex items-center justify-center overflow-hidden">
             {webcamError ? (
-              <div className="text-white text-center p-8">
-                <div className="text-red-400 text-lg mb-4">⚠️</div>
-                <p className="mb-4">{webcamError}</p>
-                <button
-                  onClick={retryWebcam}
-                  className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
-                >
-                  Retry
-                </button>
+              <div className="text-white text-center p-8 max-w-md">
+                <div className="text-red-400 text-4xl mb-4">📷</div>
+                <h4 className="text-xl font-semibold mb-3">Camera Error</h4>
+                <p className="mb-6 text-gray-300">{webcamError}</p>
+                <div className="space-y-3">
+                  <button
+                    onClick={retryWebcam}
+                    className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 w-full"
+                  >
+                    Try Again
+                  </button>
+                  <button
+                    onClick={closeWebcam}
+                    className="px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 w-full"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             ) : (
               <>
@@ -396,7 +485,7 @@ const FileUploadArea = ({
                   autoPlay
                   playsInline
                   muted
-                  className="w-full h-full object-cover"
+                  className={`w-full h-full object-cover ${!isWebcamReady ? 'opacity-0' : 'opacity-100'}`}
                   onCanPlay={() => {
                     setIsWebcamReady(true);
                   }}
@@ -406,53 +495,60 @@ const FileUploadArea = ({
                   }}
                 />
 
-                {/* Passport Guide */}
-                <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                  <div className="relative">
-                    <div className="w-96 h-112 border-4 border-white border-dashed rounded-lg opacity-70"></div>
-                    <div className="absolute top-1/3 left-0 right-0 h-px bg-white opacity-50"></div>
-                    <div className="absolute top-2/3 left-0 right-0 h-px bg-white opacity-50"></div>
-                    <div className="absolute left-1/3 top-0 bottom-0 w-px bg-white opacity-50"></div>
-                    <div className="absolute right-1/3 top-0 bottom-0 w-px bg-white opacity-50"></div>
-
-                    <div className="absolute -bottom-20 left-0 right-0 text-center">
-                      <p className="text-white text-lg font-semibold bg-black bg-opacity-70 px-6 py-3 rounded-lg">
-                        📸 Position your face within the frame
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
                 {!isWebcamReady && !webcamError && (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-white text-center">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-2"></div>
-                      <p>Initializing camera...</p>
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+                      <p className="text-lg">Initializing camera...</p>
+                      <p className="text-sm text-gray-400 mt-2">
+                        Please allow camera permissions if prompted
+                      </p>
                     </div>
                   </div>
                 )}
+
+                {/* Only show passport guide when webcam is ready */}
+                {isWebcamReady && (
+                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                    <div className="relative">
+                      <div className="w-96 h-112 border-4 border-white border-dashed rounded-lg opacity-70"></div>
+                      <div className="absolute top-1/3 left-0 right-0 h-px bg-white opacity-50"></div>
+                      <div className="absolute top-2/3 left-0 right-0 h-px bg-white opacity-50"></div>
+                      <div className="absolute left-1/3 top-0 bottom-0 w-px bg-white opacity-50"></div>
+                      <div className="absolute right-1/3 top-0 bottom-0 w-px bg-white opacity-50"></div>
+
+                      <div className="absolute -bottom-20 left-0 right-0 text-center">
+                        <p className="text-white text-lg font-semibold bg-black bg-opacity-70 px-6 py-3 rounded-lg">
+                          📸 Position your face within the frame
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <canvas ref={canvasRef} className="hidden" />
               </>
             )}
-
-            <canvas ref={canvasRef} className="hidden" />
           </div>
 
-          {/* Capture Button */}
-          <div className="p-6 bg-black bg-opacity-90 flex flex-col items-center space-y-4 shrink-0 border-t border-gray-600">
-            <button
-              onClick={capturePhoto}
-              disabled={!isWebcamReady || !!webcamError}
-              className="w-20 h-20 rounded-full border-4 border-white bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shadow-2xl transform hover:scale-105 active:scale-95"
-            >
-              <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
-                <div className="w-12 h-12 rounded-full bg-red-500 border-2 border-white"></div>
-              </div>
-            </button>
+          {/* Capture Button - Only show when ready */}
+          {isWebcamReady && !webcamError && (
+            <div className="p-6 bg-black bg-opacity-90 flex flex-col items-center space-y-4 shrink-0 border-t border-gray-600">
+              <button
+                onClick={capturePhoto}
+                disabled={!isWebcamReady || !!webcamError}
+                className="w-20 h-20 rounded-full border-4 border-white bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shadow-2xl transform hover:scale-105 active:scale-95"
+              >
+                <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-red-500 border-2 border-white"></div>
+                </div>
+              </button>
 
-            <p className="text-white text-lg font-bold text-center">
-              📷 CLICK TO CAPTURE PHOTO
-            </p>
-          </div>
+              <p className="text-white text-lg font-bold text-center">
+                📷 CLICK TO CAPTURE PHOTO
+              </p>
+            </div>
+          )}
         </div>
       )}
 
@@ -597,33 +693,36 @@ const FileUploadArea = ({
               >
                 Browse Files
               </button>
-              <button
-                type="button"
-                onClick={handleCameraClick}
-                className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium hover:bg-purple-200 transition-colors"
-              >
-                {/* Camera icon SVG */}
-                <svg
-                  className="w-4 h-4 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              
+              {/* Conditionally show camera button */}
+              {allowWebcam && (
+                <button
+                  type="button"
+                  onClick={handleCameraClick}
+                  className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium hover:bg-purple-200 transition-colors"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                {isMobile ? "Take Photo" : "Open Webcam"}
-              </button>
+                  <svg
+                    className="w-4 h-4 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  {isMobile ? "Take Photo" : "Open Webcam"}
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -1172,18 +1271,24 @@ function LoanDetailsContent() {
                 </div>
 
                 <div className="space-y-8">
+                  {/* Selfie Photo - Allow webcam */}
                   <FileUploadArea
                     title="Selfie Photo"
                     description="Take a clear selfie showing your face"
                     value={formData.selfieImage}
                     onChange={(file) => handleFileUpload("selfieImage", file)}
+                    accept="image/*"
+                    allowWebcam={true}
                   />
 
+                  {/* ID Card - Disable webcam */}
                   <FileUploadArea
                     title="ID Card"
                     description="Upload a clear photo of your government issued ID"
                     value={formData.idCardImage}
                     onChange={(file) => handleFileUpload("idCardImage", file)}
+                    accept="image/*,.pdf,.doc,.docx,.xls,.xlsx"
+                    allowWebcam={false}
                   />
                 </div>
 
