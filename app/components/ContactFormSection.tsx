@@ -13,7 +13,7 @@ const ContactFormSection = () => {
   const DUMMY_SECTION6_BOTTOM_RIGHT = "/images/Vector2.svg";
 
   return (
-    <section className="w-full bg-white  py-12 md:py-20 relative overflow-hidden">
+    <section className="w-full bg-white  py-12 md:py-15 relative overflow-hidden">
       {/* Decorative images (behind content) */}
       <img
         src={DUMMY_SECTION6_TOP_LEFT}
@@ -40,19 +40,19 @@ const ContactFormSection = () => {
           <div className="text-center max-w-4xl mx-auto mb-16">
             {/* Pill Header */}
             <div className="inline-flex items-center justify-center mb-6">
-              <span className="text-sm font-semibold text-black border border-gray-200 px-4 py-2 rounded-full">
+              <span className="text-sm font-semibold text-black border border-gray-200 px-5 py-2 rounded-full">
                 • Get In Touch •
               </span>
             </div>
             {/* Two-line Header */}
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight ">
               Have an enquiry or want to learn more
             </h2>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-6">
               about our services?
             </h2>
             {/* Description */}
-            <p className="text-lg text-gray-600">
+            <p className="text-sm text-gray-600">
               Let's chat; kindly fill out the form and we will respond in
               <span className="font-bold"> less than 72 hours.</span>
             </p>

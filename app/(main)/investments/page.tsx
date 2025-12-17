@@ -5,7 +5,6 @@ import FeaturesSection from "../../components/FeaturesSection";
 import ContactFormSection from "../../components/ContactFormSection";
 import dynamic from "next/dynamic";
 
-// Dynamically import the LoanCalculatorSection with no SSR
 const LoanCalculatorSection = dynamic(
   () => import("../../components/LoanCalculatorSection"),
   { ssr: false }
@@ -15,26 +14,26 @@ export default function InvestmentsPage() {
   const investmentFeatures = [
     {
       iconPath: "/icons/padlock.svg",
-      title: "Diversified Portfolio",
+      title: "Secure Funds",
       description:
-        "Spread your investments across multiple asset classes for better risk management and optimized returns.",
+        "Your fund is protected with advanced encryption and trusted systems- giving you total peace of mind",
     },
     {
       iconPath: "/icons/rocket.svg",
-      title: "Secure & Regulated",
+      title: "Smart Investing",
       description:
-        "Your investments are protected with industry-leading security measures and regulatory compliance.",
+        "Invest Smartly with minimum of ₦1,000,000. It's simple, accessible, rewarding and designed to grow your wealth effortlessly.",
     },
     {
       iconPath: "/icons/planet.svg",
-      title: "Expert Insights",
+      title: "Quick, Seasmless Payouts",
       description:
-        "Get access to professional market analysis and data-driven investment recommendations.",
+        "We are committed to keeping your finances simple and swift-from instant payouts to smart porfolio tracking and timely returns",
     },
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen ">
       {/* Section 1 - Hero Section */}
       <section
         className="h-[90vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
@@ -42,35 +41,40 @@ export default function InvestmentsPage() {
           backgroundImage: "url('/images/investmentbackground.svg')",
         }}
       >
-        <div className="text-center max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl font-bold text-black mb-6 leading-tight">
-            Grow Your Wealth
+        <div className="text-center max-w-4xl mx-auto px-4 -mt-40">
+          <div className="inline-flex items-center justify-center mb-4 md:justify-start">
+            <span className="text-sm font-semibold text-purple-500 bg-purple-100 border border-gray-200 px-6 py-2 mt-10 rounded-full">
+              • Investment •
+            </span>
+          </div>
+          <h1 className="text-6xl font-semibold text-black mb-2  leading-tight">
+            Grow your Wealth with
             <br />
-            Smart Investments
+            ease and purpose
           </h1>
           <p className="text-xl text-black mb-8 leading-relaxed">
-            Start your investment journey today
+            Effortlessly grow and diversify your portfolio, no idle funds, just
             <br />
-            Secure your financial future
+            progress with smarter and automated investing
           </p>
-          <button className="bg-purple-800 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center mx-auto transition-colors duration-200">
-            <img src="/icons/Frame6.svg" alt="arrow" className="w-5 h-5 mr-2" />
-            Start Investing
+          <button className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-3 px-8 rounded-4xl flex items-center justify-center mx-auto transition-colors duration-200">
+            <img src="/icons/Frame6.svg" alt="arrow" className="w-6 h-6 mr-20" />
+            <p className="mr-20"> Start Investing</p>
           </button>
         </div>
       </section>
 
       {/* Section 2 - Features Section */}
-      <div className="bg-white">
+      <div className="bg-white pb-3 ">
         <FeaturesSection
-          title="Why Choose Our Investment Platform"
-          description="Experience the future of investing with our comprehensive suite of tools and features designed for both beginners and experienced investors."
+          title="Here's Why Investing With us Just Feels Right"
+          description="We've made it easier for anyone to get started."
           features={investmentFeatures}
         />
       </div>
 
       {/* Section 3 - Investment Guidance */}
-      <section className=" bg-purple-100">
+      <section className=" bg-purple-100  ">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Left Div - Image */}
@@ -86,29 +90,29 @@ export default function InvestmentsPage() {
             <div className="lg:w-1/2 flex flex-col justify-center ml-4 items-start">
               {/* Pill Header with dot inside */}
               <div className="mb-6">
-                <span className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 tracking-wide bg-purple-100 border border-purple-200 rounded-full px-4 py-2">
+                <span className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 tracking-wide bg-purple-200 border border-purple-200 rounded-full px-4 py-2">
                   <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                  Smart investing
+                  Why you should invest with us
                 </span>
               </div>
 
               {/* Three-line Header */}
               <h2 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
-                Build Your Financial
+                Get up to 20% ROI in just 12
                 <br />
-                Future With Our
+                months, with flexible interest
                 <br />
-                Expert Guidance
+                payments on your own terms
               </h2>
 
               {/* Button with same icon as Section 1 */}
-              <button className="bg-purple-800 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200">
+              <button className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200">
                 <img
                   src="/icons/Frame6.svg"
                   alt="arrow"
-                  className="w-5 h-5 mr-2"
+                  className="w-6 h-6 mr-2"
                 />
-                Learn More
+                Start Investing
               </button>
             </div>
           </div>
@@ -119,20 +123,20 @@ export default function InvestmentsPage() {
       <LoanCalculatorSection
         mode="investment"
         // Header Section - Investment themed
-        pillHeader="Calculate Your Investment"
-        titleLine1="Plan Your Investment"
-        titleLine2="Growth Strategy"
-        description="Calculate your potential returns and discover the best investment options for your financial goals."
+        pillHeader="Investment Calculator"
+        titleLine1="ROI Calculator"
+        titleLine2=""
+        description="Sit back and watch the numbers add up-Partner Funds does the magic. because smart wealthgrowth should be effortless."
         buttonText="Start Investing"
         buttonIcon="/icons/Frame6.svg"
         // Calculator Section - Investment themed
-        amountQuestion="How much do you want to invest?"
-        amountPlaceholder="Enter investment amount"
-        tenureQuestion="Investment period?"
+        amountQuestion="Investment amount"
+        amountPlaceholder="Minimum ₦1,000,000.00 naira"
+        tenureQuestion="Investment duration?"
         tenurePlaceholder="Select duration"
         calculateButtonText="Calculate Returns"
         calculateButtonIcon="/icons/Frame6.svg"
-        resultBoxTitle="Estimated Returns"
+        resultBoxTitle="Interest"
         // Optional callbacks
         onCalculate={(amount, tenure, result) => {
           console.log("Calculating investment:", { amount, tenure, result });

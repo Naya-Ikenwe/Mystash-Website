@@ -29,7 +29,7 @@ interface FormData {
 }
 
 // Dummy icon paths
-const DUMMY_BACK_ICON = "/icons/back-arrow.svg";
+const DUMMY_BACK_ICON = "/icons/formback.svg";
 const DUMMY_PHONE_ICON = "/icons/phone-icon.svg";
 
 // File Upload Component with Webcam Support
@@ -39,126 +39,8 @@ interface FileUploadProps {
   value: File | null;
   onChange: (file: File | null) => void;
   accept?: string;
-  allowWebcam?: boolean; // New prop to control webcam access
+  allowWebcam?: boolean;
 }
-
-// Helper function to get file type display
-const getFileDisplay = (file: File) => {
-  const fileType = file.type;
-  const fileName = file.name.toLowerCase();
-
-  if (fileType.startsWith("image/")) {
-    return {
-      content: (
-        <div className="flex flex-col items-center space-y-2">
-          <img
-            src={URL.createObjectURL(file)}
-            alt="Preview"
-            className="w-32 h-32 object-contain rounded-lg border border-gray-300 bg-white"
-          />
-          <div className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-200">
-            Image
-          </div>
-        </div>
-      ),
-      typeLabel: "Image",
-    };
-  } else if (fileType === "application/pdf" || fileName.endsWith(".pdf")) {
-    return {
-      content: (
-        <div className="flex flex-col items-center space-y-4">
-          {/* PDF Icon using SVG since Font Awesome might not be loaded */}
-          <div className="w-20 h-20 flex items-center justify-center bg-red-50 rounded-lg">
-            <svg
-              className="w-12 h-12 text-red-500"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z M14 9h-1V4l5 5h-4z M8 9h8v2H8V9z M8 13h8v2H8v-2z M8 17h5v2H8v-2z" />
-            </svg>
-          </div>
-          <div className="px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-200">
-            PDF
-          </div>
-        </div>
-      ),
-      typeLabel: "PDF",
-    };
-  } else if (
-    fileType.includes("word") ||
-    fileType.includes("document") ||
-    fileName.endsWith(".doc") ||
-    fileName.endsWith(".docx")
-  ) {
-    return {
-      content: (
-        <div className="flex flex-col items-center space-y-4">
-          {/* Word Icon using SVG */}
-          <div className="w-20 h-20 flex items-center justify-center bg-blue-50 rounded-lg">
-            <svg
-              className="w-12 h-12 text-blue-600"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z M14 9h-1V4l5 5h-4z M8 9h3v2H8V9z M12 9h3v2h-3V9z M8 13h8v2H8v-2z M8 17h8v2H8v-2z" />
-            </svg>
-          </div>
-          <div className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-200">
-            Word
-          </div>
-        </div>
-      ),
-      typeLabel: "Word",
-    };
-  } else if (
-    fileType.includes("excel") ||
-    fileType.includes("spreadsheet") ||
-    fileName.endsWith(".xls") ||
-    fileName.endsWith(".xlsx")
-  ) {
-    return {
-      content: (
-        <div className="flex flex-col items-center space-y-4">
-          {/* Excel Icon using SVG */}
-          <div className="w-20 h-20 flex items-center justify-center bg-green-50 rounded-lg">
-            <svg
-              className="w-12 h-12 text-green-600"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z M14 9h-1V4l5 5h-4z M8 9h8v2H8V9z M8 13h3v2H8v-2z M12 13h3v2h-3v-2z M8 17h8v2H8v-2z" />
-            </svg>
-          </div>
-          <div className="px-3 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-600 border border-green-200">
-            Excel
-          </div>
-        </div>
-      ),
-      typeLabel: "Excel",
-    };
-  } else {
-    return {
-      content: (
-        <div className="flex flex-col items-center space-y-4">
-          {/* Generic File Icon using SVG */}
-          <div className="w-20 h-20 flex items-center justify-center bg-gray-50 rounded-lg">
-            <svg
-              className="w-12 h-12 text-gray-600"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z M14 9h-1V4l5 5h-4z" />
-            </svg>
-          </div>
-          <div className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-50 text-gray-600 border border-gray-200">
-            Document
-          </div>
-        </div>
-      ),
-      typeLabel: "Document",
-    };
-  }
-};
 
 const FileUploadArea = ({
   title,
@@ -192,6 +74,11 @@ const FileUploadArea = ({
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      // Validate file size (10MB limit)
+      if (file.size > 10 * 1024 * 1024) {
+        alert("File size exceeds 10MB limit");
+        return;
+      }
       onChange(file);
     }
     if (fileInputRef.current) {
@@ -205,15 +92,12 @@ const FileUploadArea = ({
     }
   };
 
-  // Check camera permissions before opening webcam
   const checkCameraPermissions = async () => {
     try {
-      // Check if mediaDevices is supported
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         throw new Error("Camera API not supported in this browser");
       }
 
-      // Check permissions if supported
       if (navigator.permissions && navigator.permissions.query) {
         const permission = await navigator.permissions.query({ name: "camera" as any });
         if (permission.state === "denied") {
@@ -255,10 +139,8 @@ const FileUploadArea = ({
       setIsWebcamReady(false);
       setShowWebcam(true);
 
-      // Give time for modal to render
       await new Promise((resolve) => setTimeout(resolve, 100));
 
-      // Try different camera constraints
       const constraints = {
         video: {
           facingMode: "user",
@@ -268,7 +150,6 @@ const FileUploadArea = ({
         audio: false,
       };
 
-      // Fallback constraints
       const fallbackConstraints = {
         video: true,
         audio: false,
@@ -288,7 +169,6 @@ const FileUploadArea = ({
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
 
-        // Add event listeners for better error handling
         const video = videoRef.current;
         
         const onLoadedMetadata = () => {
@@ -296,11 +176,9 @@ const FileUploadArea = ({
             .play()
             .then(() => {
               setIsWebcamReady(true);
-              console.log("Webcam ready");
             })
             .catch((error) => {
               console.error("Error playing video:", error);
-              // Try to play with different approach
               video.muted = true;
               video.play().then(() => {
                 setIsWebcamReady(true);
@@ -320,23 +198,19 @@ const FileUploadArea = ({
         video.onloadedmetadata = onLoadedMetadata;
         video.onerror = onError;
 
-        // Add timeout for video to start
         const timeoutId = setTimeout(() => {
           if (!isWebcamReady) {
-            console.log("Webcam timeout, trying to force play");
             if (video.readyState >= 2) {
               video.play().catch(console.error);
             }
           }
         }, 3000);
 
-        // Cleanup
         return () => clearTimeout(timeoutId);
       }
     } catch (error: any) {
       console.error("Error accessing webcam:", error);
       
-      // User-friendly error messages
       let errorMessage = "Unable to access webcam.";
       
       if (error.name === "NotAllowedError" || error.name === "PermissionDeniedError") {
@@ -429,8 +303,8 @@ const FileUploadArea = ({
   return (
     <div className="space-y-4">
       <div>
-        <h3 className="text-sm font-medium text-gray-700 mb-1">{title}</h3>
-        <p className="text-xs text-gray-500">{description}</p>
+        <h3 className="text-lg font-medium text-gray-700 mb-1">{title}</h3>
+        <p className="text-sm text-gray-500">{description}</p>
       </div>
       <input
         type="file"
@@ -569,7 +443,6 @@ const FileUploadArea = ({
                 </div>
               ) : (
                 <div className="w-32 h-32 bg-gray-100 rounded-lg border border-gray-300 flex items-center justify-center">
-                  {/* Use our new file type icons here if needed */}
                   <div className="text-center">
                     <div className="text-3xl mb-2">
                       {value.type === "application/pdf"
@@ -676,10 +549,10 @@ const FileUploadArea = ({
                 />
               </svg>
               <div className="text-left">
-                <p className="text-sm text-gray-600 font-medium">
+                <p className="text-base text-gray-700 font-medium">
                   Click to upload or drag and drop
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-sm text-gray-500">
                   PNG, JPG, PDF, DOC, XLS up to 10MB
                 </p>
               </div>
@@ -689,7 +562,7 @@ const FileUploadArea = ({
               <button
                 type="button"
                 onClick={handleBrowseFiles}
-                className="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors"
+                className="px-4 py-2 bg-purple-600 text-white rounded-lg text-base font-medium hover:bg-purple-700 transition-colors"
               >
                 Browse Files
               </button>
@@ -699,7 +572,7 @@ const FileUploadArea = ({
                 <button
                   type="button"
                   onClick={handleCameraClick}
-                  className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium hover:bg-purple-200 transition-colors"
+                  className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-700 rounded-lg text-base font-medium hover:bg-purple-200 transition-colors"
                 >
                   <svg
                     className="w-4 h-4 mr-2"
@@ -731,7 +604,7 @@ const FileUploadArea = ({
   );
 };
 
-// Success Modal Component - Larger version
+// Success Modal Component
 const SuccessModal = ({
   isOpen,
   onClose,
@@ -743,17 +616,14 @@ const SuccessModal = ({
 
   return (
     <>
-      {/* Overlay */}
       <div
         className="fixed inset-0 bg-black/20 z-40"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Modal Content - Now Larger */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
         <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-auto p-10 text-center pointer-events-auto">
-          {/* Success Icon - Slightly larger */}
           <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-8">
             <svg
               className="w-10 h-10 text-purple-600"
@@ -770,18 +640,15 @@ const SuccessModal = ({
             </svg>
           </div>
 
-          {/* Header Text - Slightly larger */}
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Application Submitted!
           </h2>
 
-          {/* Success Message - More spacing */}
           <p className="text-gray-600 mb-8 text-lg">
             Your loan application has been successfully submitted. We will
             review your application and get back to you within 24 hours.
           </p>
 
-          {/* Enquiries Text */}
           <p className="text-sm text-gray-500 mb-8">
             For enquiries, contact us at{" "}
             <a
@@ -792,7 +659,6 @@ const SuccessModal = ({
             </a>
           </p>
 
-          {/* Close Button - Larger */}
           <button
             onClick={onClose}
             className="w-full bg-purple-600 text-white font-semibold py-4 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-200 text-lg"
@@ -832,7 +698,6 @@ function LoanDetailsContent() {
 
   const searchParams = useSearchParams();
 
-  // Get employment type from URL parameters
   useEffect(() => {
     const employmentType = searchParams.get("employmentType");
     if (employmentType) {
@@ -864,7 +729,6 @@ function LoanDetailsContent() {
     },
   ];
 
-  // Check if all required fields are filled for each step
   const isStep1Complete = () => {
     const requiredFields: (keyof FormData)[] = [
       "firstName",
@@ -875,8 +739,8 @@ function LoanDetailsContent() {
       "phoneNumber",
       "gender",
       "dateOfBirth",
-      "nin", // Added NIN as required
-      "ippis", // Added IPPIS as required
+      "nin",
+      "ippis",
     ];
     return requiredFields.every((field) => {
       const value = formData[field];
@@ -935,39 +799,32 @@ function LoanDetailsContent() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Success Modal */}
       <SuccessModal
         isOpen={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}
       />
 
-      {/* Header with Logo */}
-      <div className="py-6 px-8">
-        <img
-          src="/logo/mystashlogo.svg"
-          alt="MyStash"
-          className="h-8 w-auto mt-4"
-        />
-      </div>
+      {/* Page-specific full-width background so the logo has the full header on this page */}
+      <div className="fixed top-0 left-0 right-0 z-0 bg-white h-24 pointer-events-none" />
 
-      {/* Main Content */}
-      <div className="flex min-h-[calc(100vh-120px)]">
+      {/* Main Content - Removed logo from header since it's in layout */}
+      <div className="flex min-h-[calc(100vh-120px)] pt-16">
         {/* Left Sidebar */}
         <div className="w-1/3 bg-gray-50 pl-16 pr-8 py-8">
           <div className="max-w-sm">
-            <h1 className="text-3xl font-bold text-gray-900 mb-3">
+            <h1 className="text-4xl font-bold text-gray-900 mb-3">
               Complete Your Application
             </h1>
-            <p className="text-gray-600 mb-10 text-base">
+            <p className="text-gray-600 mb-10 text-lg">
               Follow these simple steps to finalize your loan request
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-10">
               {steps.map((step, index) => (
-                <div key={step.number} className="flex items-start space-x-3">
-                  <div className="flex flex-col items-center">
+                <div key={step.number} className="flex items-center space-x-6">
+                  <div className="flex flex-col items-center relative">
                     <div
-                      className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold transition-all duration-300 ${
+                      className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold transition-all duration-300 ${
                         currentStep === step.number
                           ? "bg-purple-600 text-white shadow-lg shadow-purple-500/50"
                           : currentStep > step.number
@@ -978,13 +835,13 @@ function LoanDetailsContent() {
                       {step.number}
                     </div>
                     {index < steps.length - 1 && (
-                      <div className="w-0.5 h-8 bg-gray-300 mt-1"></div>
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0.5 h-14 bg-gray-300"></div>
                     )}
                   </div>
 
-                  <div className="flex-1 pt-0.5">
+                  <div className="flex-1 pt-1">
                     <h3
-                      className={`font-semibold text-sm ${
+                      className={`font-semibold text-2xl ${
                         currentStep === step.number
                           ? "text-gray-900"
                           : "text-gray-600"
@@ -992,7 +849,7 @@ function LoanDetailsContent() {
                     >
                       {step.title}
                     </h3>
-                    <p className="text-gray-500 text-xs mt-0.5 leading-tight">
+                    <p className="text-gray-500 text-base mt-1 leading-tight">
                       {step.description}
                     </p>
                   </div>
@@ -1011,12 +868,12 @@ function LoanDetailsContent() {
                 <div className="flex items-center justify-between mb-10">
                   <button
                     onClick={handleBack}
-                    className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    className=""
                   >
                     <img
                       src={DUMMY_BACK_ICON}
                       alt="Back"
-                      className="w-6 h-6"
+                      className="w-20 h-20"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.src =
@@ -1062,7 +919,9 @@ function LoanDetailsContent() {
                         onChange={(e) =>
                           handleInputChange("firstName", e.target.value)
                         }
+                        maxLength={50}
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        required
                       />
                     </div>
                     <div>
@@ -1076,7 +935,9 @@ function LoanDetailsContent() {
                         onChange={(e) =>
                           handleInputChange("lastName", e.target.value)
                         }
+                        maxLength={50}
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        required
                       />
                     </div>
                   </div>
@@ -1092,7 +953,9 @@ function LoanDetailsContent() {
                       onChange={(e) =>
                         handleInputChange("email", e.target.value)
                       }
+                      maxLength={100}
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      required
                     />
                   </div>
 
@@ -1107,7 +970,9 @@ function LoanDetailsContent() {
                       onChange={(e) =>
                         handleInputChange("placeOfWork", e.target.value)
                       }
+                      maxLength={100}
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      required
                     />
                   </div>
 
@@ -1120,11 +985,20 @@ function LoanDetailsContent() {
                         type="text"
                         placeholder="12345678901"
                         value={formData.bvn}
-                        onChange={(e) =>
-                          handleInputChange("bvn", e.target.value)
-                        }
+                        onChange={(e) => {
+                          // Allow only numbers
+                          const value = e.target.value.replace(/\D/g, '');
+                          if (value.length <= 11) {
+                            handleInputChange("bvn", value);
+                          }
+                        }}
+                        maxLength={11}
+                        pattern="[0-9]{11}"
+                        inputMode="numeric"
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        required
                       />
+                      <p className="text-xs text-gray-500 mt-1">11 digits required</p>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1134,11 +1008,20 @@ function LoanDetailsContent() {
                         type="text"
                         placeholder="12345678901"
                         value={formData.nin}
-                        onChange={(e) =>
-                          handleInputChange("nin", e.target.value)
-                        }
+                        onChange={(e) => {
+                          // Allow only numbers
+                          const value = e.target.value.replace(/\D/g, '');
+                          if (value.length <= 11) {
+                            handleInputChange("nin", value);
+                          }
+                        }}
+                        maxLength={11}
+                        pattern="[0-9]{11}"
+                        inputMode="numeric"
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        required
                       />
+                      <p className="text-xs text-gray-500 mt-1">11 digits required</p>
                     </div>
                   </div>
 
@@ -1165,12 +1048,21 @@ function LoanDetailsContent() {
                           type="tel"
                           placeholder="08012345678"
                           value={formData.phoneNumber}
-                          onChange={(e) =>
-                            handleInputChange("phoneNumber", e.target.value)
-                          }
+                          onChange={(e) => {
+                            // Allow only numbers
+                            const value = e.target.value.replace(/\D/g, '');
+                            if (value.length <= 11) {
+                              handleInputChange("phoneNumber", value);
+                            }
+                          }}
+                          maxLength={11}
+                          pattern="[0-9]{11}"
+                          inputMode="numeric"
                           className="w-full border border-gray-300 rounded-lg pl-12 pr-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                          required
                         />
                       </div>
+                      <p className="text-xs text-gray-500 mt-1">11 digits required</p>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1183,7 +1075,9 @@ function LoanDetailsContent() {
                         onChange={(e) =>
                           handleInputChange("ippis", e.target.value)
                         }
+                        maxLength={20}
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        required
                       />
                     </div>
                   </div>
@@ -1216,6 +1110,7 @@ function LoanDetailsContent() {
                         onChange={(e) =>
                           handleInputChange("dateOfBirth", e.target.value)
                         }
+                        max={new Date().toISOString().split('T')[0]}
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       />
                     </div>
@@ -1259,10 +1154,10 @@ function LoanDetailsContent() {
                   </button>
 
                   <div className="text-center flex-1">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-3">
+                    <h2 className="text-4xl font-bold text-gray-900 mb-3">
                       {steps[1].title}
                     </h2>
-                    <p className="text-gray-600 text-lg">
+                    <p className="text-gray-600 text-xl">
                       {steps[1].description}
                     </p>
                   </div>
@@ -1296,7 +1191,7 @@ function LoanDetailsContent() {
                   <button
                     onClick={handleContinue}
                     disabled={!isStep2Complete()}
-                    className={`px-8 py-3 rounded-lg font-semibold ${
+                    className={`px-8 py-3 rounded-lg font-semibold text-lg ${
                       isStep2Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -1342,7 +1237,7 @@ function LoanDetailsContent() {
 
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-base font-medium text-gray-700 mb-2">
                       Select Bank Name <span className="text-red-500">*</span>
                     </label>
                     <select
@@ -1351,6 +1246,7 @@ function LoanDetailsContent() {
                         handleInputChange("bankName", e.target.value)
                       }
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      required
                     >
                       <option value="">Select your bank</option>
                       <option value="access">Access Bank</option>
@@ -1364,7 +1260,7 @@ function LoanDetailsContent() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-base font-medium text-gray-700 mb-2">
                         Salary Account Number{" "}
                         <span className="text-red-500">*</span>
                       </label>
@@ -1372,11 +1268,20 @@ function LoanDetailsContent() {
                         type="text"
                         placeholder="0123456789"
                         value={formData.accountNumber}
-                        onChange={(e) =>
-                          handleInputChange("accountNumber", e.target.value)
-                        }
+                        onChange={(e) => {
+                          // Allow only numbers
+                          const value = e.target.value.replace(/\D/g, '');
+                          if (value.length <= 10) {
+                            handleInputChange("accountNumber", value);
+                          }
+                        }}
+                        maxLength={10}
+                        pattern="[0-9]{10}"
+                        inputMode="numeric"
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        required
                       />
+                      <p className="text-xs text-gray-500 mt-1">10 digits required</p>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1389,6 +1294,7 @@ function LoanDetailsContent() {
                         onChange={(e) =>
                           handleInputChange("referralCode", e.target.value)
                         }
+                        maxLength={20}
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       />
                     </div>
@@ -1405,29 +1311,31 @@ function LoanDetailsContent() {
                         handleInputChange("hearAboutUs", e.target.value)
                       }
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      required
                     >
                       <option value="">Select an option</option>
-                      <option value="friend">Friend or Family</option>
-                      <option value="social">Social Media</option>
-                      <option value="search">Search Engine</option>
-                      <option value="ad">Advertisement</option>
-                      <option value="other">Other</option>
+                      <option value="google">Google</option>
+                      <option value="imstagram">Instagram</option>
+                      <option value="facebook">Facebook</option>
+                      <option value="twitter">Twitter</option>
+                      <option value="email_letter">Email letter</option>
+                      <option value="referrak">Referral</option>
+                      <option value="others">Others</option>
                     </select>
                   </div>
 
                   <div className="bg-gray-50 rounded-lg p-6 mt-6">
                     <p className="text-sm text-gray-600 leading-relaxed">
-                      By submitting this application, you agree to allow MyStash
-                      Financial Services to perform credit checks, verify your
-                      employment, and access your financial information for the
-                      purpose of processing your loan application. You
-                      understand that providing false information may result in
-                      application rejection or legal action. You consent to
-                      receive communications regarding your application via
-                      email, SMS, or phone. MyStash reserves the right to
-                      approve or decline your application based on our lending
-                      criteria. All loan agreements are subject to our terms and
-                      conditions and regulatory requirements.
+                      By clicking "SUBMIT", I consent to myStash obtaining information from
+                      relevant third parties as may be neccessary, on my employment details,
+                      salary payment, loans, and other related data, to decide on my loan
+                      application. Additionally, you confirm your acknowledgement and acceptance
+                      of our <a href="/company/privacy" className="underline decoration-black text-black hover:opacity-80">Privacy Policy</a>
+                      {' '}and{' '}
+                      <a href="/company/loan-terms" className="underline decoration-black text-black hover:opacity-80">Loan Terms and Conditions</a>.
+                      You also consent to the repayment amount being deducted from your salary at source,
+                      before credit to your account and any outstanding payments being recovered automatically
+                      from any other account linked to you in case of default.
                     </p>
                   </div>
 
@@ -1440,12 +1348,14 @@ function LoanDetailsContent() {
                         handleInputChange("agreeToTerms", e.target.checked)
                       }
                       className="mt-1 w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                      required
                     />
                     <label
                       htmlFor="agreeToTerms"
                       className="text-sm text-gray-700"
                     >
-                      I have read and agree to the terms and conditions above
+                      I agree to receive updates, offers and markerting communication frm myStash{" "}
+                      <span className="text-red-500">*</span>
                     </label>
                   </div>
                 </div>

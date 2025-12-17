@@ -2,7 +2,8 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 
 export default function LoanApplyPage() {
@@ -15,11 +16,9 @@ export default function LoanApplyPage() {
 
   const isFormValid = employmentType && loanAmount && loanTenure;
 
-  // Format amount with commas
+  // Format amount with commas and validate numbers only
   const formatAmount = (value: string) => {
-    // Remove non-digit characters
     const digits = value.replace(/\D/g, "");
-    // Format with commas
     return digits.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
@@ -32,7 +31,7 @@ export default function LoanApplyPage() {
   const calculateRepayableAmount = () => {
     const amount = parseInt(loanAmount.replace(/,/g, "")) || 0;
     const tenure = parseInt(loanTenure) || 0;
-    const monthlyInterestRate = 0.06; // 6%
+    const monthlyInterestRate = 0.06;
     const totalInterest = amount * monthlyInterestRate * tenure;
     return (amount + totalInterest).toLocaleString();
   };
@@ -49,66 +48,57 @@ export default function LoanApplyPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-white relative overflow-hidden">
-        {/* Back Arrow */}
-        <button
-          onClick={handleBack}
-          className="absolute top-8 left-8 z-20 p-2 rounded-lg hover:bg-gray-100 transition-colors"
-        >
-          <svg
-            className="w-6 h-6 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-        </button>
-
-        {/* Left Section - Compact design */}
-        <div
-          className="absolute inset-0 bg-white min-h-screen"
-          style={{
-            clipPath: "polygon(0 0, 60% 0, 45% 100%, 0 100%)",
-          }}
-        >
-          <div className="h-full">
-            {/* Reduced padding and margins */}
-            <div className="max-w-xl px-8 pt-8 pb-8 ml-8">
-              {/* Logo - Smaller margin */}
-              <div className="mb-8">
-                <img
-                  src="/logo/mystashlogo.svg"
-                  alt="MyStash"
-                  className="h-8 w-auto"
-                />
+      <div className="min-h-screen bg-white relative">
+        {/* Main content grid */}
+        <div className="flex min-h-screen">
+          {/* Left: Form Section */}
+          <div className="flex-1 flex items-center justify-center px-8 lg:px-16 xl:px-24 py-12">
+            <div className="w-full max-w-md">
+              {/* Breadcrumb Navigation */}
+              <div className="mb-6">
+                <button
+                  onClick={handleBack}
+                  className="inline-flex items-center text-sm text-gray-600 hover:text-purple-600 transition-colors group"
+                >
+                  <svg
+                    className="w-4 h-4 mr-1.5 group-hover:translate-x-[-2px] transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                  <span className="font-medium">Back to Loans</span>
+                </button>
               </div>
 
-              {/* Compact headers */}
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                Start Your Loan Application
-              </h1>
-              <p className="text-gray-600 mb-8 text-base">
-                Tell us about your needs for the perfect loan option.
-              </p>
+              {/* Heading */}
+              <div className="mb-8">
+                <h1 className="text-4xl font-bold text-gray-900 mb-3 leading-tight whitespace-nowrap">
+                  We've Got a Payday Loan for <span className="text-purple-600 whitespace-nowrap">You!</span>
+                </h1>
+                <p className="text-gray-600 text-base">
+                  Apply now—loan approved in 5 minutes
+                </p>
+              </div>
 
-              {/* Compact form */}
-              <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Employment Type */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-base font-medium text-gray-700 mb-2">
                     Employment Type
                   </label>
                   <div className="relative">
                     <select
                       value={employmentType}
                       onChange={(e) => setEmploymentType(e.target.value)}
-                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none"
+                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-700 text-base focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none"
                       required
                     >
                       <option value="">Select employment type</option>
@@ -116,7 +106,7 @@ export default function LoanApplyPage() {
                       <option value="state">State</option>
                       <option value="local">Local</option>
                     </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                    <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
                       <svg
                         className="w-4 h-4 text-gray-400"
                         fill="none"
@@ -136,42 +126,45 @@ export default function LoanApplyPage() {
 
                 {/* Loan Amount */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-base font-medium text-gray-700 mb-2">
                     Loan Amount
                   </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <span className="text-gray-500">₦</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={loanAmount}
-                      onChange={handleAmountChange}
-                      placeholder="Enter desired amount"
-                      className="w-full bg-white border border-gray-300 rounded-lg pl-8 pr-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                      required
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    value={loanAmount}
+                    onChange={handleAmountChange}
+                    placeholder="Input loan amount"
+                    maxLength={15}
+                    pattern="[0-9,]*"
+                    inputMode="numeric"
+                    onKeyPress={(e) => {
+                      if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'Tab') {
+                        e.preventDefault();
+                      }
+                    }}
+                    className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-700 text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    required
+                  />
                 </div>
 
                 {/* Loan Tenure */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-base font-medium text-gray-700 mb-2">
                     Loan Tenure
                   </label>
                   <div className="relative">
                     <select
                       value={loanTenure}
                       onChange={(e) => setLoanTenure(e.target.value)}
-                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none"
+                      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-700 text-base focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none"
                       required
                     >
-                      <option value="">Select repayment period</option>
+                      <option value="">Select loan tenure</option>
                       <option value="3">3 months</option>
                       <option value="6">6 months</option>
                       <option value="12">12 months</option>
                     </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                    <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
                       <svg
                         className="w-4 h-4 text-gray-400"
                         fill="none"
@@ -189,22 +182,22 @@ export default function LoanApplyPage() {
                   </div>
                 </div>
 
-                {/* Compact Disclaimer */}
-                <div className="bg-gray-50 rounded-lg p-4 mt-6">
-                  <p className="text-xs text-gray-600 leading-relaxed">
-                    By clicking "Apply Now", you understand that this initiates
-                    a formal loan application process. We will perform a credit
-                    check and verify the information provided.
+                {/* Disclaimer */}
+                <div className="bg-gray-50 rounded-lg p-3 mt-4">
+                  <p className="text-[10px] text-gray-600 leading-relaxed">
+                    By clicking "APPLY NOW", I consent to myStash obtaining information from relevant third parties as may be necessary, on my loan request, and hereby authorise myStash to share related data, to decide on my loan application. Additionally, you confirm your acknowledgement and acceptance of myStash's{" "}
+                    <span className="text-purple-600 underline cursor-pointer">privacy policy</span> and{" "}
+                    <span className="text-purple-600 underline cursor-pointer">terms of use</span>, consent to the repayment amount being deducted from your salary at source, before credit to your account and any outstanding payments being recovered automatically from any other accounts linked to you in the case of default.
                   </p>
                 </div>
 
-                {/* Button - Normal size */}
+                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={!isFormValid}
                   className={`w-full font-semibold py-3 px-6 rounded-lg transition-colors duration-200 mt-6 ${
                     isFormValid
-                      ? "bg-purple-700 text-white hover:bg-purple-800 cursor-pointer"
+                      ? "bg-purple-600 text-white hover:bg-purple-700 cursor-pointer"
                       : "bg-gray-300 text-gray-500 cursor-not-allowed"
                   }`}
                 >
@@ -213,127 +206,97 @@ export default function LoanApplyPage() {
               </form>
             </div>
           </div>
-        </div>
 
-        {/* Right Section */}
-        <div
-          className="absolute inset-0 bg-purple-50 min-h-screen"
-          style={{
-            clipPath: "polygon(69% 0, 100% 0, 100% 100%, 57% 100%)",
-          }}
-        >
-          {/* Show image on medium screens and larger, hide on small screens */}
-          <div className="h-full w-full hidden md:flex items-center justify-end pr-6 overflow-hidden">
-            <img
-              src="/images/loansapply.svg"
-              alt="Loan Application"
-              className="h-[110%] w-[110%] -mr-100 -mt-8
-                lg:h-[110%] lg:w-[110%] lg:-mr-100 lg:-mt-8
-                md:h-[105%] md:w-[105%] md:-mr-80 md:-mt-6"
-            />
-          </div>
-
-          {/* Optional: Show a simplified/mobile-optimized version on small screens if needed */}
-          {/* 
-            <div className="md:hidden h-full w-full flex items-center justify-center">
-              <div className="text-center p-4">
-                <div className="text-purple-600 text-4xl mb-2">💰</div>
-                <p className="text-purple-700 font-medium">Loan Application</p>
-              </div>
+          {/* Right: Image Section */}
+          <div className="hidden lg:block lg:w-1/2 xl:w-[45%]">
+            <div className="sticky top-0 h-screen">
+              <img
+                src="/images/loansapply.svg"
+                alt="Loan Application"
+                className="w-full h-full object-cover object-top"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = "https://placehold.co/800x1200/7C3AED/FFFFFF?text=Professional+Woman";
+                }}
+              />
             </div>
-         */}
+          </div>
         </div>
       </div>
 
-      {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full mx-auto">
-            {/* Modal Header - Icon top-left, text centered */}
-            <div className="relative pt-8 px-6">
-              {/* Icon at top-left */}
-              <div
-                onClick={() => setShowModal(false)}
-                className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center cursor-pointer hover:bg-purple-200 transition-colors absolute left-6 top-8"
-              >
-                <img
-                  src="/icons/summary-icon.svg"
-                  alt="Summary"
-                  className="w-6 h-6"
-                />
-              </div>
+      {/* Modal rendered in a portal to avoid ancestor stacking contexts */}
+      {showModal && <Modal>
+        <div className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full mx-auto">
+          <div className="relative pt-10 px-12">
+            <button
+              onClick={() => setShowModal(false)}
+              className="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center cursor-pointer hover:bg-purple-200 transition-colors absolute left-12 top-10"
+            >
+              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
 
-              {/* Centered header and subtext */}
-              <div className="text-center pt-10">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Application Summary
-                </h2>
-                <p className="text-sm text-gray-600 mt-2">
-                  Review your loan details
-                </p>
-              </div>
-            </div>
-
-            {/* 2x2 Grid - Centered with top padding */}
-            <div className="p-6 grid grid-cols-2 gap-4 pt-8 mx-auto max-w-lg">
-              {/* Upper Left - Loan Amount */}
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h3 className="text-sm font-medium text-gray-500 mb-1">
-                  Loan Amount
-                </h3>
-                <p className="text-lg font-semibold text-gray-900">
-                  ₦{loanAmount}
-                </p>
-              </div>
-
-              {/* Upper Right - Loan Tenure */}
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h3 className="text-sm font-medium text-gray-500 mb-1">
-                  Loan Tenure
-                </h3>
-                <p className="text-lg font-semibold text-gray-900">
-                  {loanTenure} months
-                </p>
-              </div>
-
-              {/* Lower Left - Repayable Amount */}
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h3 className="text-sm font-medium text-gray-500 mb-1">
-                  Repayable Amount
-                </h3>
-                <p className="text-lg font-semibold text-gray-900">
-                  ₦{calculateRepayableAmount()}
-                </p>
-              </div>
-
-              {/* Lower Right - Interest */}
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h3 className="text-sm font-medium text-gray-500 mb-1">
-                  Interest Rate
-                </h3>
-                <p className="text-lg font-semibold text-gray-900">
-                  6% per month
-                </p>
-              </div>
-            </div>
-
-            {/* Modal Footer */}
-            <div className="p-6 border-t border-gray-200">
-              <button
-                onClick={() => {
-                  setShowModal(false);
-                  router.push(
-                    `/loans/apply/details?employmentType=${employmentType}`
-                  );
-                }}
-                className="w-full bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-800 transition-colors duration-200"
-              >
-                Proceed
-              </button>
+            <div className="text-center pt-16 pb-8">
+              <h2 className="text-4xl font-bold text-purple-600 mb-3">Loan Breakdown</h2>
+              <p className="text-base text-gray-600">View your loan breakdown</p>
             </div>
           </div>
+
+          <div className="px-12 pb-10">
+            <div className="grid grid-cols-2 gap-10">
+              <div className="text-center">
+                <h3 className="text-lg font-medium text-gray-600 mb-3">Loan Amount</h3>
+                <p className="text-3xl font-bold text-gray-900">₦{loanAmount}</p>
+              </div>
+
+              <div className="text-center">
+                <h3 className="text-lg font-medium text-gray-600 mb-3">Loan Tenor</h3>
+                <p className="text-3xl font-bold text-gray-900">{loanTenure} Months</p>
+              </div>
+
+              <div className="text-center">
+                <h3 className="text-lg font-medium text-gray-600 mb-3">Repayment Amount</h3>
+                <p className="text-3xl font-bold text-gray-900">₦{calculateRepayableAmount()}</p>
+              </div>
+
+              <div className="text-center">
+                <h3 className="text-lg font-medium text-gray-600 mb-3">Interest</h3>
+                <p className="text-3xl font-bold text-gray-900">6% per-month</p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                setShowModal(false);
+                router.push(`/loans/apply/details?employmentType=${employmentType}`);
+              }}
+              className="w-full bg-purple-600 text-white font-semibold text-lg py-4 px-6 rounded-xl hover:bg-purple-700 transition-colors duration-200 mt-10"
+            >
+              Proceed
+            </button>
+          </div>
         </div>
-      )}
+      </Modal>}
     </>
+  );
+}
+
+// Simple portal Modal to ensure overlay sits above all stacking contexts
+function Modal({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  if (!mounted) return null;
+
+  return createPortal(
+    <div className="fixed inset-0 bg-black/40 z-[99999] flex items-center justify-center p-4 ">
+      {children}
+    </div>,
+    document.body
   );
 }

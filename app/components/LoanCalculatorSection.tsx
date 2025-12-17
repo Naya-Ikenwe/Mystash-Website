@@ -111,7 +111,7 @@ const LoanCalculatorSection = ({
   };
 
   return (
-    <section className="w-full bg-white border-t border-gray-200 py-20 md:py-32">
+    <section className="w-full bg-white border-t border-gray-200 py-20 md:py-15">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           {/* Left: Content - Vertically Centered */}
@@ -140,13 +140,13 @@ const LoanCalculatorSection = ({
               {/* Button */}
               <Link
                 href={buttonHref}
-                className="inline-flex items-center bg-purple-700 text-white px-8 py-3 rounded-full hover:bg-purple-800 transition-colors duration-200 font-medium text-base"
+                className="inline-flex items-center bg-purple-500 text-white px-8 py-3 rounded-full hover:bg-purple-800 transition-colors duration-200 font-medium text-base"
                 onClick={handleGetStarted}
               >
                 <img
                   src={buttonIcon}
                   alt="Calculator icon"
-                  className="w-4 h-4 mr-2 object-contain"
+                  className="w-6 h-6 mr-2 object-contain"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src =
@@ -183,7 +183,7 @@ const LoanCalculatorSection = ({
                 </div>
               </div>
               {/* Mini Header Question */}
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              <h3 className="text-sm font-semibold text-gray-900 mb-4">
                 {tenureQuestion}
               </h3>
 
@@ -198,7 +198,7 @@ const LoanCalculatorSection = ({
                   <option value="3">3 months</option>
                   <option value="6">6 months</option>
                   <option value="12">12 months</option>
-                  <option value="24">24 months</option>
+                  
                 </select>
               </div>
 

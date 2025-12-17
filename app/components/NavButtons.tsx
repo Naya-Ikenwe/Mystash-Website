@@ -32,7 +32,7 @@ const NavButtons = ({
       <img
         src={contactIcon}
         alt="Contact Us icon"
-        className="w-4 h-4"
+        className="w-6 h-6"
         onError={(e) => {
           e.currentTarget.onerror = null;
           e.currentTarget.src = "https://placehold.co/16x16/7C3AED/FFFFFF?text=C";
@@ -45,13 +45,13 @@ const NavButtons = ({
   const DownloadButton = () => (
     <Link 
       href={downloadHref} 
-      className={`${buttonClasses} bg-purple-700 text-white hover:bg-purple-800`}
+      className={`${buttonClasses} bg-purple-500 text-white hover:bg-purple-800`}
       onClick={onButtonClick}
     >
       <img
         src={downloadIcon}
         alt="Download app icon"
-        className="w-4 h-4"
+        className="w-6 h-6"
         onError={(e) => {
           e.currentTarget.onerror = null;
           e.currentTarget.src = "https://placehold.co/16x16/FFFFFF/7C3AED?text=D";

@@ -16,25 +16,26 @@ export default function SavingsPage() {
     <div className="min-h-screen bg-white">
       {/* Section 1: Hero Section */}
       <section className="relative w-full min-h-[100vh]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-25 ">
           <div className="flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2 order-2 md:order-1 text-center md:text-left z-10">
+            <div className="w-full md:w-1/2 order-2 md:order-1 -ml-15 text-center md:text-left z-10">
               {/* Simple Pill Header (no marquee) */}
               <div className="inline-flex items-center justify-center mb-8 md:justify-start">
-                <span className="text-sm font-semibold text-black bg-white border border-gray-200 px-6 py-2 rounded-full">
-                  • Smart Savings •
+                <span className="text-sm font-semibold text-purple-400 bg-purple-100 border border-gray-200 px-2 py-1 rounded-full">
+                  • Savings •
                 </span>
               </div>
 
               {/* Simple Header Text (no vertical carousel) */}
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 mb-4">
-                <span className="block">Build Your Savings</span>
-                <span className="block font-semibold">Grow Your Future</span>
+                <span className="block whitespace-nowrap">A Smarter way to Grow</span>
+                <span className="block font-semibold">Your Savings</span>
               </h1>
 
               <p className="mt-4 text-xl text-gray-600 max-w-lg mx-auto md:mx-0">
-                Start your savings journey with smart tools that help you reach
-                your financial goals faster and safer than ever before.
+                Saving money isn't always easy, we get it. But with <br />
+                myStash, it's simpler, smarter, and built just for you <br />
+                All it takes is a quick download to get started.
               </p>
 
               <div className="mt-8 flex justify-center md:justify-start space-x-4">
@@ -45,12 +46,12 @@ export default function SavingsPage() {
         </div>
 
         {/* Hero Image Section */}
-        <div className="absolute top-0 right-0 w-3/5 h-full order-1 md:order-2 flex items-center justify-start pl-20">
+        <div className="absolute top-0 right-0 w-3/5 h-full order-1 md:order-2  mt-4 flex items-center justify-start pl-20">
           <div className="w-full h-full max-w-none rounded-l-xl flex mr-5 items-center justify-center overflow-hidden">
             <img
               src={DUMMY_SAVINGS_HERO_IMAGE}
               alt="Savings Hero Visual"
-              className="w-full h-full object-contain scale-100"
+              className="w-full h-full object-contain scale-90"
             />
           </div>
         </div>
@@ -62,21 +63,21 @@ export default function SavingsPage() {
         <div className="max-w-7xl mx-auto px-4">
           {/* Centered Header (2 lines) */}
           <div className="text-center mb-6">
-            <h2 className="text-3xl font-bold text-gray-900 leading-tight">
-              Choose Your Savings
+            <h2 className="text-3xl font-semibold text-gray-900 leading-tight">
+              Stash your money, grow your goals. Watch your savings
             </h2>
-            <h2 className="text-3xl font-bold text-gray-900 leading-tight">
-              Journey
+            <h2 className="text-3xl font-semibold text-gray-900 leading-tight">
+              multiply effortlessly with myStash.
             </h2>
           </div>
 
           {/* Centered Subtext (2 lines) */}
           <div className="text-center mb-12">
             <p className="text-lg text-gray-600 leading-relaxed">
-              Flexible savings plans designed to fit
+             Experience seamless automated savings, quick manual top-ups, and
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              your lifestyle and financial goals
+              attractive interest rates.
             </p>
           </div>
 
@@ -86,16 +87,16 @@ export default function SavingsPage() {
             <div className="bg-white border border-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-none rounded-br-none shadow-sm hover:shadow-md transition-shadow">
               <div className="pt-4 text-center">
                 {/* Mini Header */}
-                <h3 className="text-xl font-semibold text-gray-900 mb-2 mt-8">
-                  Daily Savings
+                <h3 className="text-2xl font-semibold text-purple-500 mb-2 mt-8">
+                  Lifestyle savings 
                 </h3>
 
                 {/* 2-line Subtext */}
-                <p className="text-gray-600 mt-4 leading-relaxed">
-                  Build consistent saving habits
+                <p className="text-gray-600 mt-5 leading-relaxed text-sm">
+                 From small daily goals to big dreams, save smarter
                 </p>
-                <p className="text-gray-600 leading-relaxed">
-                  with daily contributions
+                <p className="text-gray-600 leading-relaxed text-sm">
+                 and reach them faster.
                 </p>
 
                 {/* Image at bottom */}
@@ -113,16 +114,16 @@ export default function SavingsPage() {
             <div className="bg-white border border-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-none rounded-br-none shadow-sm hover:shadow-md transition-shadow">
               <div className="pt-4 text-center">
                 {/* Mini Header */}
-                <h3 className="text-xl font-semibold text-gray-900 mb-2 mt-8">
-                  Goal Savings
+                <h3 className="text-2xl font-semibold text-purple-500 mb-2 mt-8">
+                  Regular Savings
                 </h3>
 
                 {/* 2-line Subtext */}
-                <p className="text-gray-600 mt-4 leading-relaxed">
-                  Save towards specific targets
+                <p className="text-gray-600 mt-5 leading-relaxed text-sm">
+                  Seamless automated savings, quick manual top-
                 </p>
-                <p className="text-gray-600 leading-relaxed">
-                  and track your progress
+                <p className="text-gray-600 leading-relaxed text-sm">
+                  ups, and rewarding interest rates.
                 </p>
 
                 {/* Image at bottom */}
@@ -140,16 +141,17 @@ export default function SavingsPage() {
             <div className="bg-white border border-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-none rounded-br-none shadow-sm hover:shadow-md transition-shadow">
               <div className="pt-4 text-center">
                 {/* Mini Header */}
-                <h3 className="text-xl font-semibold text-gray-900 mb-2 mt-8">
-                  Fixed Savings
+                <h3 className="text-2xl font-semibold text-purple-500 mb-2 mt-8">
+                  Save-check Plan
                 </h3>
 
                 {/* 2-line Subtext */}
-                <p className="text-gray-600 mt-4 leading-relaxed">
-                  Lock funds and earn higher
+                <p className="text-gray-600 mt-5 leading-relaxed text-sm">
+                  Save directly from your paycheck. You don't have
                 </p>
-                <p className="text-gray-600 leading-relaxed">interest rates</p>
-
+                <p className="text-gray-600 leading-relaxed text-sm">
+                  to wait until your salary hits your bank account
+                </p>
                 {/* Image at bottom */}
                 <div className="mt-4 flex justify-center">
                   <img
@@ -166,26 +168,26 @@ export default function SavingsPage() {
 
       {/* Section 3: Savings Features */}
       <FeaturesSection
-        title="Why Save With Us"
-        description="Experience smarter savings with features designed to help you build wealth securely and efficiently."
+        title="Why Save With myStash?"
+        description="Built to help you save better, not harder."
         features={[
           {
             iconPath: "/icons/padlock.svg",
-            title: "Competitive Interest Rates",
+            title: "Secure & Confidential",
             description:
-              "Earn higher returns on your savings with our competitive interest rates that help your money grow faster.",
+              "Your account information is protected with advanced encryption and trusted systems- giving you total peace of mind.",
           },
           {
             iconPath: "/icons/rocket.svg",
-            title: "Bank-Grade Security",
+            title: "Financial Freedom",
             description:
-              "Your funds are protected with advanced encryption and regulatory compliance, ensuring complete peace of mind.",
+              "Go beyond borders, maximize your savings locally and intentionally, with flexible accounts and instant access. Your savings are not limited to only your local currency",
           },
           {
             iconPath: "/icons/planet.svg",
-            title: "Complete Flexibility",
+            title: "Personalized",
             description:
-              "Save on your own terms with flexible withdrawal options and no hidden fees or penalties.",
+              "Tailor your savings plan to your unique goals and lifestyle-set targets, and watch your balance grow effortlessly.",
           },
         ]}
       />
@@ -207,27 +209,27 @@ export default function SavingsPage() {
       <div className="lg:w-1/2 flex flex-col justify-center ml-4 items-start">
         {/* Pill Header with dot inside */}
         <div className="mb-6">
-          <span className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 tracking-wide bg-purple-100 border border-purple-200 rounded-full px-4 py-2">
+          <span className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 tracking-wide bg-purple-200 border border-purple-200 rounded-full px-4 py-2">
             <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-            Smart Saving
+           Why you should save with us
           </span>
         </div>
 
         {/* Three-line Header */}
-        <h2 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
-          Start Building Your
+        <h2 className="text-3xl font-bold text-gray-900 mb-6 leading-tight">
+          You sit back, relax and watch
           <br />
-          Financial Security
+          your savings grow with myStash
           <br />
-          Today
+          effortlessly
         </h2>
 
         {/* Button with same icon as Section 1 */}
-        <button className="bg-purple-800 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200">
+        <button className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200">
           <img
             src="/icons/Frame6.svg"
             alt="arrow"
-            className="w-5 h-5 mr-2"
+            className="w-6 h-6 mr-2"
           />
           Start Saving Now
         </button>

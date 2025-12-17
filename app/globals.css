@@ -24,3 +24,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Apply Freizeit font (loaded as --font-freizeit) to header tags inside the main app scope
+   This keeps the rest of the site using the Euclid font (applied via the layout class). */
+.main-scope h1,
+.main-scope h2,
+.main-scope h3,
+.main-scope h4,
+.main-scope h5,
+.main-scope h6 {
+  font-family: var(--font-freizeit) !important;
+}

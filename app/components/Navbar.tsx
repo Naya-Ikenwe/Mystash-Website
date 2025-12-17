@@ -14,9 +14,15 @@ const DUMMY_DROPDOWN_ICON_4 = '/icons/navdropdown4.svg';
 const DUMMY_DROPDOWN_ICON_5 = '/icons/navdropdown5.svg';
 
 // Business dropdown icons
-const DUMMY_BUSINESS_ICON_1 = '/icons/business1.svg';
-const DUMMY_BUSINESS_ICON_2 = '/icons/business2.svg';
-const DUMMY_BUSINESS_ICON_3 = '/icons/business3.svg';
+const DUMMY_BUSINESS_ICON_1 = '/icons/businesshome.svg';
+const DUMMY_BUSINESS_ICON_2 = '/icons/navdropdown2.svg';
+const DUMMY_BUSINESS_ICON_3 = '/icons/navdropdown1.svg';
+const DUMMY_BUSINESS_ICON_4 = '/icons/navdropdown3.svg';
+
+// Company dropdown icons (new)
+const DUMMY_COMPANY_ICON_1 = '/icons/company/about.svg'; // For About Us
+const DUMMY_COMPANY_ICON_2 = '/icons/company/blog.svg';   // For Blog
+const DUMMY_COMPANY_ICON_3 = '/icons/company/faq.svg';    // For FAQ
 
 // --- DATA STRUCTURES for the 5-Item Dropdown Menu ---
 interface DropdownItem {
@@ -66,21 +72,50 @@ const PERSONAL_DROPDOWN_ITEMS: DropdownItem[] = [
 const BUSINESS_DROPDOWN_ITEMS: DropdownItem[] = [
   { 
     iconPath: DUMMY_BUSINESS_ICON_1, 
-    title: 'Business Banking', 
-    subtitle: 'Tailored banking solutions',
-    href: '/business/banking' 
+    title: 'Explore Business', 
+    subtitle: '',
+    href: '/business/home' 
   },
   { 
     iconPath: DUMMY_BUSINESS_ICON_2, 
-    title: 'Merchant Services', 
-    subtitle: 'Payment processing tools', 
-    href: '/business/merchant'
+    title: 'Savings', 
+    subtitle: 'Save in USD or NGN', 
+    href: '/business/savings'
   },
   { 
     iconPath: DUMMY_BUSINESS_ICON_3, 
-    title: 'Corporate Tools', 
-    subtitle: 'Financial management suite',
-    href: '/business/tools' 
+    title: 'Payments', 
+    subtitle: 'Seamless Payment',
+    href: '/business/payments' 
+  },
+  { 
+    iconPath: DUMMY_BUSINESS_ICON_4, 
+    title: 'Budget', 
+    subtitle: 'Simplify your Spending',
+    href: '/business/budget' ,
+    tag: 'Coming soon'
+  },
+];
+
+// Company dropdown items (new - 3 items as requested)
+const COMPANY_DROPDOWN_ITEMS: DropdownItem[] = [
+  { 
+    iconPath: DUMMY_COMPANY_ICON_1, 
+    title: 'About Us', 
+    subtitle: 'Learn more about our mission',
+    href: '/company/about' 
+  },
+  { 
+    iconPath: DUMMY_COMPANY_ICON_2, 
+    title: 'Blog', 
+    subtitle: 'Latest news and insights', 
+    href: '/company/blog'
+  },
+  { 
+    iconPath: DUMMY_COMPANY_ICON_3, 
+    title: 'FAQ', 
+    subtitle: 'Frequently asked questions',
+    href: '/company/faq' 
   },
 ];
 
@@ -119,7 +154,7 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
             <img src={item.iconPath} alt="" className="w-5 h-5 shrink-0" />
             <div className="flex grow justify-start items-center">
               <div className="leading-snug mr-3">
-                <p className="font-bold text-gray-800 text-sm">{item.title}</p>
+                <p className="font-semibold text-gray-800 text-sm">{item.title}</p>
                 <p className="text-xs text-gray-500 mt-0.5">{item.subtitle}</p>
               </div>
               {item.tag && (
@@ -145,10 +180,10 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
               onClick={onItemClick}
             >
               <div className="flex items-center space-x-3">
-                <img src={item.iconPath} alt="" className="w-5 h-5 shrink-0" />
+                <img src={item.iconPath} alt="" className="w-6 h-6 shrink-0" />
                 <div className="flex grow justify-start items-center">
                   <div className="leading-snug mr-3">
-                    <p className="font-bold text-gray-800 text-sm">{item.title}</p>
+                    <p className="font-semibold text-gray-800 text-sm hover:text-purple-500">{item.title}</p>
                     <p className="text-xs text-gray-500 mt-0.5">{item.subtitle}</p>
                   </div>
                   {item.tag && (
@@ -172,7 +207,7 @@ const DropdownLink = ({ text, hasPlus = false, items }: { text: string; hasPlus?
   const [isMouseInDropdown, setIsMouseInDropdown] = useState(false);
   
   const linkClasses = `
-    text-gray-700 font-medium text-sm p-2 transition-colors duration-150 
+    text-gray-700 font-medium text-base p-2 transition-colors duration-150 
     hover:text-purple-700 hover:bg-purple-100
     rounded-full cursor-pointer 
     ${isOpen ? 'bg-purple-100 text-purple-700' : ''}
@@ -283,7 +318,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="shrink-0">
@@ -291,16 +326,16 @@ export default function Navbar() {
               <img 
                 src={DUMMY_LOGO_PATH} 
                 alt="Site Logo" 
-                className="w-34 h-10 object-contain" 
+                className="w-45 h-18 object-contain" 
               />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-6 items-center">
+          <div className="hidden md:flex space-x-6 items-center ">
             <DropdownLink text="Personal" hasPlus items={PERSONAL_DROPDOWN_ITEMS} /> 
             <DropdownLink text="Business" hasPlus items={BUSINESS_DROPDOWN_ITEMS} />
-            <NavLink text="About Us" href="/about" />
+            <DropdownLink text="Company" hasPlus items={COMPANY_DROPDOWN_ITEMS} /> {/* Changed from NavLink to DropdownLink */}
           </div>
 
           {/* Desktop Buttons */}
@@ -324,7 +359,7 @@ export default function Navbar() {
               {/* Mobile Navigation Links */}
               <MobileDropdownLink text="Personal" hasPlus items={PERSONAL_DROPDOWN_ITEMS} />
               <MobileDropdownLink text="Business" hasPlus items={BUSINESS_DROPDOWN_ITEMS} />
-              <NavLink text="About Us" href="/about" mobile onClick={closeMobileMenu} />
+              <MobileDropdownLink text="Company" hasPlus items={COMPANY_DROPDOWN_ITEMS} /> {/* Changed from NavLink to MobileDropdownLink */}
               
               {/* Mobile Buttons */}
               <div className="pt-4 space-y-3 border-t border-gray-100 md:hidden">

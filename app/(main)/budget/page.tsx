@@ -16,25 +16,24 @@ export default function BudgetPage() {
     <div className="min-h-screen bg-white">
       {/* Section 1: Hero Section */}
       <section className="relative w-full min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div className="max-w-7xl ml-25 px-4 sm:px-6 lg:px-8 py-12 md:py-20">
           <div className="flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2 order-2 md:order-1 text-center md:text-left z-10 ">
-              {" "}
-              {/* Added md:-ml-8 */}
+            <div className="w-full md:w-1/2 order-2 md:order-1 text-center md:text-left z-10  ">
               {/* Simple Pill Header */}
               <div className="inline-flex items-center justify-center mb-8 md:justify-start">
-                <span className="text-sm font-semibold text-black bg-white border border-gray-200 px-6 py-2 rounded-full">
+                <span className="text-sm font-semibold text-purple-500 bg-purple-100 border border-gray-200 px-6 py-2 mt-10 rounded-full">
                   • Smart Budgeting •
                 </span>
               </div>
               {/* Simple Header Text */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 mb-4">
-                <span className="block">Take Control of</span>
-                <span className="block font-semibold">Your Finances</span>
+              <h1 className="text-4xl sm:text-4xl lg:text-6xl font-semibold text-gray-900 mb-4 mt-5">
+                <span className="block">Smarter spending</span>
+                <span className="block font-semibold">starts with you</span>
               </h1>
               <p className="mt-4 text-xl text-gray-600 max-w-lg mx-auto md:mx-0">
-                Track expenses, set budgets, and achieve your financial goals
-                with our intelligent budgeting tools.
+                Transform the way you spend with intelligent <br />
+                features that simplify budgeting, enhance <br />
+                clarity, and give total control. <br />
               </p>
               <div className="mt-8 flex justify-center md:justify-start space-x-4">
                 <NavButtons />
@@ -42,200 +41,166 @@ export default function BudgetPage() {
             </div>
           </div>
         </div>
-
         {/* Hero Image Section */}
         <div className="absolute top-0 right-0 w-3/5 h-full order-1 md:order-2 flex items-center justify-start pl-20">
           <div className="w-full h-full max-w-none rounded-l-xl flex items-center justify-center overflow-hidden">
             <img
               src={DUMMY_BUDGET_HERO_IMAGE}
               alt="Budget Hero Visual"
-              className="w-full h-full object-contain scale-95 mr-10"
+              className="w-full h-full object-contain scale-95 mr-20"
             />
           </div>
         </div>
       </section>
-
-      {/* We'll add Sections 2-6 here later */}
-
       {/* Section 2: Budget Process */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           {/* Header and Subtext */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              How Our Budget System Works
+            <h2 className="text-3xl font-bold text-gray-900 mb-1">
+              Using Budget is effortless
             </h2>
             <p className="text-lg text-gray-600">
-              Follow these simple steps to take control of your finances
+              Enjoy an easier, smarter Budgeting experience
             </p>
           </div>
-
           {/* Timeline Container */}
           <div className="relative">
             {/* Vertical Line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gray-300"></div>
-
             {/* Timeline Items */}
             <div className="space-y-20">
               {/* Number 1 - Image Left, Text Right */}
               <div className="flex items-start">
-                {/* Left - Image: Move the entire container RIGHT */}
                 <div className="w-1/2 flex justify-end">
-                  {" "}
-                  {/* CHANGED: Added flex justify-end */}
                   <div className="pr-8">
-                    {" "}
                     {/* CHANGED: Container with padding to control distance */}
                     <img
                       src="/images/budgetcard.svg"
                       alt="Step 1"
-                      className="w-72 h-auto rounded-lg -mt-12"
+                      className="w-72 h-auto rounded-lg -mt-12 mr-7"
                     />
                   </div>
                 </div>
-
                 {/* Center - Number */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
                     <span className="text-purple-600 font-bold">1</span>
                   </div>
                 </div>
-
                 {/* Right - Text: More space from center line */}
-                <div className="w-1/2 pl-12">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 mt-2">
-                    Track Your Spending
+                <div className="w-1/2 pl-12 ml-17">
+                  <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2 ">
+                    Create Your Virtual Account
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Connect your accounts and automatically
+                  <p className="text-gray-800 leading-relaxed text-sm">
+                    Create a myStash virtual account to receive your funds into.
                   </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    track all your transactions in one place
-                  </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    with real-time updates
+                  <p className="text-gray-800 leading-relaxed text-sm">
+                    Your virtual account is personalized for you and your
+                    business
                   </p>
                 </div>
               </div>
-
               {/* Number 2 - Image Right, Text Left */}
               <div className="flex items-start">
                 {/* Left - Text: Move the entire container RIGHT */}
                 <div className="w-1/2 flex justify-end">
-                  {" "}
-                  {/* CHANGED: Added flex justify-end */}
                   <div className="pr-12 text-left">
-                    {" "}
                     {/* CHANGED: Container with padding, text-left for alignment */}
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4 mt-2">
-                      Set Your Budget
+                    <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2">
+                      Create Pockets
                     </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      Create custom budget categories
+                    <p className="text-gray-800 leading-relaxed text-sm">
+                      Create pockets for your spendings and assign a
                     </p>
-                    <p className="text-gray-600 leading-relaxed">
-                      and set spending limits that work
+                    <p className="text-gray-800 leading-relaxed text-sm">
+                      percentage to them. This is the percentage of the total
                     </p>
-                    <p className="text-gray-600 leading-relaxed">
-                      for your lifestyle and goals
+                    <p className="text-gray-800 leading-relaxed text-sm">
+                      money entering a particular myStash Virtual Account
                     </p>
                   </div>
                 </div>
-
                 {/* Center - Number */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
                     <span className="text-purple-600 font-bold">2</span>
                   </div>
                 </div>
-
                 {/* Right - Image: Keep spacing */}
                 <div className="w-1/2 pl-4">
                   <img
                     src="/images/budgetimg2.svg"
                     alt="Step 2"
-                    className="w-72 h-auto rounded-lg -mt-8"
+                    className="w-72 h-auto rounded-lg -mt-8 ml-10 "
                   />
                 </div>
               </div>
-
               {/* Number 3 - Image Left, Text Right */}
               <div className="flex items-start">
-                {/* Left - Image: Move the entire container RIGHT */}
                 <div className="w-1/2 flex justify-end">
-                  {" "}
-                  {/* CHANGED: Added flex justify-end */}
                   <div className="pr-12">
-                    {" "}
-                    {/* CHANGED: Container with padding to control distance */}
                     <img
                       src="/images/budgetimg3.svg"
                       alt="Step 3"
-                      className="w-72 h-auto rounded-lg"
+                      className="w-72 h-auto rounded-lg mr-12"
                     />
                   </div>
                 </div>
-
                 {/* Center - Number */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
                     <span className="text-purple-600 font-bold">3</span>
                   </div>
                 </div>
-
-                {/* Right - Text: More space from center line */}
-                <div className="w-1/2 pl-12">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 mt-2">
-                    Monitor & Adjust
+                {/* Right - Text */}
+                <div className="w-1/2 pl-12 ml-17">
+                  <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2">
+                    Add Settlement Account
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Get real-time alerts when you're
+                  <p className="text-gray-800 leading-relaxed text-sm">
+                    Funds that are not budgeted are conveniently settled <br />
                   </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    approaching your budget limits
+                  <p className="text-gray-800 leading-relaxed text-sm">
+                    into your settlement account or myStash wallet <br />
                   </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    and easily adjust as needed
+                  <p className="text-gray-800 leading-relaxed text-sm">
+                    ready for future use.
                   </p>
                 </div>
               </div>
-
               {/* Number 4 - Image Right, Text Left */}
               <div className="flex items-start">
-                {/* Left - Text: Move the entire container RIGHT */}
                 <div className="w-1/2 flex justify-end">
-                  {" "}
-                  {/* CHANGED: Added flex justify-end */}
-                  <div className="pr-12 text-left">
-                    {" "}
+                  <div className="pr-7 text-left">
                     {/* CHANGED: Container with padding, text-left for alignment */}
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4 mt-2">
-                      Analyze Patterns
+                    <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2 ">
+                      Deposit Fund
                     </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      View detailed reports and insights
+                    <p className="text-gray-800 leading-relaxed text-sm">
+                      Allocate your budget to Pockets. Once you've set your{" "}
+                      <br />
                     </p>
-                    <p className="text-gray-600 leading-relaxed">
-                      into your spending habits to identify
+                    <p className="text-gray-800 leading-relaxed text-sm">
+                      budget percentages, move funds into your myStash <br />
                     </p>
-                    <p className="text-gray-600 leading-relaxed">
-                      areas for improvement and savings
+                    <p className="text-gray-800 leading-relaxed text-sm">
+                      Virtual accounts, to have them divided into the <br />
                     </p>
-                    <p className="text-gray-600 leading-relaxed">
-                      opportunities
+                    <p className="text-gray-800 leading-relaxed text-sm">
+                      appropriate pockets
                     </p>
                   </div>
                 </div>
-
                 {/* Center - Number */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
                     <span className="text-purple-600 font-bold">4</span>
                   </div>
                 </div>
-
                 {/* Right - Image: Keep spacing */}
-                <div className="w-1/2 pl-4">
+                <div className="w-1/2 pl-4 ml-14">
                   <img
                     src="/images/budgetimg4.svg"
                     alt="Step 4"
@@ -243,24 +208,18 @@ export default function BudgetPage() {
                   />
                 </div>
               </div>
-
               {/* Number 5 - Image Left, Text Right */}
               <div className="flex items-start">
                 {/* Left - Image: Move the entire container RIGHT */}
                 <div className="w-1/2 flex justify-end">
-                  {" "}
-                  {/* CHANGED: Added flex justify-end */}
                   <div className="pr-12">
-                    {" "}
-                    {/* CHANGED: Container with padding to control distance */}
                     <img
                       src="/images/budgetimg5.svg"
                       alt="Step 5"
-                      className="w-72 h-auto rounded-lg"
+                      className="w-72 h-auto rounded-lg mr-18"
                     />
                   </div>
                 </div>
-
                 {/* Center - Number */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
@@ -269,18 +228,18 @@ export default function BudgetPage() {
                 </div>
 
                 {/* Right - Text: More space from center line */}
-                <div className="w-1/2 pl-12">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 mt-2">
-                    Achieve Goals
+                <div className="w-1/2 pl-20">
+                  <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2">
+                    Spend from Pocket
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Reach your financial targets faster
+                  <p className="text-gray-800 leading-relaxed text-sm">
+                    Spend from your designated pocket. For example, <br />
                   </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    with guided savings and smart
+                  <p className="text-gray-800 leading-relaxed text-sm">
+                    pay for your transport from your "Transportation" <br />
                   </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    recommendations
+                  <p className="text-gray-800 leading-relaxed text-sm">
+                    pocket.
                   </p>
                 </div>
               </div>
@@ -288,35 +247,34 @@ export default function BudgetPage() {
           </div>
         </div>
       </section>
-
       {/* Section 3: Budget Features */}
       <FeaturesSection
-        title="Why Choose Our Budget Tools"
-        description="Take control of your finances with intelligent budgeting features designed for real results."
+        title="Budget Feature you will love"
+        description="Build better budgets daily and spend smarter everytime, with insights that keep you in
+        control of your money."
         features={[
           {
-            iconPath: "/icons/padlock.svg",
-            title: "Automatic Tracking",
-            description:
-              "Connect your accounts and let our system automatically categorize and track all your expenses in real-time.",
-          },
-          {
-            iconPath: "/icons/rocket.svg",
-            title: "Smart Alerts",
-            description:
-              "Get notified when you're approaching budget limits or when unusual spending patterns are detected.",
-          },
-          {
             iconPath: "/icons/planet.svg",
-            title: "Goal Planning",
+            title: "Active Budgeting",
             description:
-              "Set financial goals and get personalized recommendations to help you achieve them faster.",
+              "Automatically manage your monthly budgets without worrying or overspending. Tailor every budget plan to your unique needs.",
+          },
+          {
+            iconPath: "/icons/house.svg",
+            title: "Virtual Bank Accounts",
+            description:
+              "With myStash, you can manage your virtual accounts, make payments, and track your finances seamlessly from anywhere- all with secure, real time access too your money.",
+          },
+          {
+            iconPath: "/icons/padlock.svg",
+            title: "Secure & Confidential",
+            description:
+              "Your account information is protected with advanced encryption and trusted systems- giving you total peace of mind.",
           },
         ]}
       />
-
       {/* Section 4: Budget Benefits */}
-      <section className=" bg-purple-100">
+      <section className=" bg-purple-100 ">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Left Div - Image */}
@@ -327,34 +285,37 @@ export default function BudgetPage() {
                 className="w-full h-auto rounded-lg"
               />
             </div>
-
             {/* Right Div - Content */}
             <div className="lg:w-1/2 flex flex-col justify-center ml-4 items-start">
               {/* Three-line Header (no pill header) */}
-              <h2 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
-                Transform Your
+              <span className=" mb-5 text-sm font-semibold text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
+                • Budgeting made crydtal clear
+              </span>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 leading-tight">
+                Create better budgets everyday,
                 <br />
-                Financial Habits
+                so you can plan smarter and
                 <br />
-                Starting Today
+                spend wisely
               </h2>
-
               {/* Button with same icon as Section 1 */}
-              <button className="bg-purple-800 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200">
+              <Link
+                href="/download"
+                className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200"
+              >
                 <img
-                  src="/icons/Frame6.svg"
-                  alt="arrow"
-                  className="w-5 h-5 mr-2"
+                  src="/icons/Frame5.svg"
+                  alt="download"
+                  className="w-6 h-6 mr-2"
                 />
-                Start Budgeting Now
-              </button>
+                Download App
+              </Link>
             </div>
           </div>
         </div>
       </section>
-
       {/* Section 5: Budget FAQ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 bg-white border-t border-gray-200">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24 bg-white border-t border-gray-200">
         <div className="mb-16">
           {/* Mini Header - Left Aligned */}
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-left ml-5">
@@ -366,104 +327,73 @@ export default function BudgetPage() {
         <div className="space-y-0">
           {/* Question 1 */}
           <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
+            <button className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200">
               <div className="flex items-center space-x-4">
                 <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg">+</span>
+                  <span className="text-black font-bold text-lg group-hover:text-purple-700 transition-colors">
+                    +
+                  </span>
                 </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
-                  How does automatic expense tracking work?
+                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700  hover:bg-purple-50 rounded-lg px-3 py-2 -mx-2 transition-all duration-200">
+                 What is Pocket?
                 </span>
               </div>
             </button>
           </div>
-
           {/* Question 2 */}
           <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
+            <button className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200">
               <div className="flex items-center space-x-4">
                 <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg">+</span>
+                  <span className="text-black font-bold text-lg group-hover:text-purple-700">+</span>
                 </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
-                  Can I create multiple budgets for different categories?
+                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors  hover:bg-purple-50 ">
+                  What is a Settlement Account?
                 </span>
               </div>
             </button>
           </div>
-
           {/* Question 3 */}
           <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
+            <button className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200">
               <div className="flex items-center space-x-4">
                 <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg">+</span>
+                  <span className="text-black font-bold text-lg group-hover:text-purple-700">+</span>
                 </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
-                  How secure is my financial data?
+                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors hover:bg-purple-50">
+                  Can a Naira accoutn be added as settlement for a Dollar VBA?
                 </span>
               </div>
             </button>
           </div>
-
           {/* Question 4 */}
           <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
+            <button className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200">
               <div className="flex items-center space-x-4">
                 <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg">+</span>
+                  <span className="text-black font-bold text-lg group-hover:text-purple-700">+</span>
                 </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
-                  Can I set savings goals alongside my budget?
+                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 hover:bg-purple-50 transition-colors">
+                  Can Naira be added into a Dollar Pocket?
                 </span>
               </div>
             </button>
           </div>
-
           {/* Question 5 */}
           <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
+            <button className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200">
               <div className="flex items-center space-x-4">
                 <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg">+</span>
+                  <span className="text-black font-bold text-lg group-hover:text-purple-700">+</span>
                 </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
-                  What happens if I exceed my budget limits?
-                </span>
-              </div>
-            </button>
-          </div>
-
-          {/* Question 6 */}
-          <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
-              <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg">+</span>
-                </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
-                  Can I export my budget reports?
-                </span>
-              </div>
-            </button>
-          </div>
-
-          {/* Question 7 */}
-          <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group hover:bg-purple-50 rounded-lg px-4 py-3 transition-all duration-200">
-              <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg">+</span>
-                </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
-                  Is there a mobile app for budget tracking?
+                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors hover:bg-purple-50">
+                  Can one Pocket be connected to two VBAs?
                 </span>
               </div>
             </button>
           </div>
         </div>
       </section>
-
       {/* Section 6 - Contact Form */}
       <ContactFormSection />
     </div>

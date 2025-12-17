@@ -3,7 +3,6 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-// Update the import at the top of your main file
 import { testimonials } from "../components/testimonials";
 import FeaturesSection from "../components/FeaturesSection";
 import ContactFormSection from "../components/ContactFormSection";
@@ -23,6 +22,15 @@ const DUMMY_SECTION_4_ICON_3 = "/icons/planet.svg";
 
 const TEXT_COLOR = "text-gray-700";
 const PURPLE_COLOR = "text-purple-400";
+
+// Path mapping for pill buttons (EXCLUDING HorizontalMarquee items)
+const BUTTON_PATHS: Record<string, string> = {
+  "Start Saving": "/savings",
+  "Explore Features": "/loans",
+  "Learn About Security": "/security",
+  Budget: "/budget",
+  Payment: "/payments",
+};
 
 // --- Dynamic Components (Section 1) ---
 
@@ -155,15 +163,15 @@ const VerticalTextCarousel = () => {
     );
   }
 
-  // Desktop: keep original stacked absolute layout (unchanged UX), slight nudge for alignment
-  const desktopHeight = 85;
+  // Desktop: keep original stacked absolute layout but make it compact
+  const desktopHeight = 78;
   return (
     <div
-      className="inline-block overflow-hidden align-bottom  relative"
+      className="inline-block overflow-hidden align-baseline relative -ml-3"
       style={{
         height: `${desktopHeight}px`,
-        width: "300px",
-        paddingTop: "8px",
+        width: "320px",
+        paddingTop: "0px",
       }}
     >
       <motion.div
@@ -174,7 +182,7 @@ const VerticalTextCarousel = () => {
         {TEXTS.map((text, i) => (
           <div
             key={i}
-            className="absolute inset-x-0 font-semibold px-3 text-4xl sm:text-5xl lg:text-6xl leading-none flex items-center"
+            className="absolute left-0 right-0 font-semibold px-3 text-4xl sm:text-5xl lg:text-6xl leading-none flex items-center"
             style={{
               top: `${i * desktopHeight}px`,
               height: `${desktopHeight}px`,
@@ -217,7 +225,7 @@ const PillIcon = () => (
   <img
     src={DUMMY_BUTTON_ICON}
     alt="CTA Arrow"
-    className="w-4 h-4 mr-2 object-contain"
+    className="w-5 h-5 mr-2 object-contain"
     onError={(e) => {
       e.currentTarget.onerror = null;
       e.currentTarget.src = "https://placehold.co/16x16/7C3AED/FFFFFF?text=>>";
@@ -225,15 +233,20 @@ const PillIcon = () => (
   />
 );
 
-const PillButtonWithIcon = ({ text }: { text: string }) => (
-  <Link
-    href="#"
-    className="inline-flex items-center text-purple-700 text-xs border border-purple-100 bg-purple-100 px-5 py-2 rounded-full hover:bg-purple-200 transition-colors"
-  >
-    <PillIcon />
-    {text}
-  </Link>
-);
+const PillButtonWithIcon = ({ text }: { text: string }) => {
+  // Get the path from mapping, fallback to "/" if not found
+  const path = BUTTON_PATHS[text] || "/";
+
+  return (
+    <Link
+      href={path}
+      className="inline-flex items-center text-purple-700 text-sm border border-purple-100 bg-purple-100 px-5 py-2 rounded-full hover:bg-purple-200 transition-colors"
+    >
+      <PillIcon />
+      {text}
+    </Link>
+  );
+};
 
 // --- Section 2: Feature Cards ---
 interface FeatureCardProps {
@@ -253,12 +266,12 @@ const FeatureCard = ({
 
   return (
     <div
-      className="relative flex flex-col p-3 sm:p-5 pr-0 sm:pr-0 bg-white transition-shadow duration-300 rounded-xl h-full min-h-[360px] border border-gray-200 overflow-hidden"
+      className="relative flex flex-col p-3 sm:p-5 bg-white transition-shadow duration-300 rounded-xl h-full min-h-[360px] border border-gray-200 overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div
-        className="absolute bottom-2 right-4 z-10"
+        className="absolute bottom-0 right-0 z-10" 
         initial={{ x: "120%", opacity: 0 }}
         animate={{ x: isHovered ? "0%" : "120%", opacity: isHovered ? 1 : 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
@@ -275,7 +288,6 @@ const FeatureCard = ({
           }}
         />
       </motion.div>
-
       <div className="flex flex-col grow text-left relative z-20">
         <h3 className="text-xl font-semibold text-gray-900 mb-0 mt-0">
           {title}
@@ -283,7 +295,7 @@ const FeatureCard = ({
         <p className="text-sm text-gray-600 mb-0 max-w-[85%] mt-3 leading-snug">
           {description}
         </p>
-        <div className="mt-auto mr-10">{ctaContent}</div>
+        <div className="mt-auto mr-4">{ctaContent}</div>
       </div>
     </div>
   );
@@ -291,8 +303,10 @@ const FeatureCard = ({
 
 const PaymentFeatureCard = () => {
   return (
-    <div className="relative flex flex-col p-3 sm:p-5 pr-0 sm:pr-0 bg-white transition-shadow duration-300 rounded-xl h-full min-h-[360px] border border-gray-200">
-      <div className="absolute bottom-2 right-4 z-0 opacity-70">
+    <div className="relative flex flex-col p-3 sm:p-5 bg-white transition-shadow duration-300 rounded-xl h-full min-h-[360px] border border-gray-200 overflow-hidden">
+      {/* Removed pr-0 sm:pr-0 */}
+      <div className="absolute bottom-0 right-0 z-0 opacity-70">
+        {/* Changed from bottom-2 right-4 to bottom-0 right-0 */}
         <img
           src={DUMMY_CARD_2_IMAGE}
           alt="Payment icon"
@@ -304,7 +318,6 @@ const PaymentFeatureCard = () => {
           }}
         />
       </div>
-
       <div className="flex flex-col grow text-left relative z-20">
         <h3 className="text-xl font-semibold text-gray-900 mb-0 mt-0">
           Fast Payment anytime, anywhere
@@ -312,51 +325,44 @@ const PaymentFeatureCard = () => {
         <p className="text-sm text-gray-600 mb-0 max-w-[85%] mt-3 leading-snug">
           Simplify how you pay-fast, secure and effortless transactions
         </p>
-        <div className="mt-auto">
+        <div className="mt-auto mr-4">
+          {" "}
+          {/* Changed from no margin to mr-4 */}
           <PillButtonWithIcon text="Payment" />
         </div>
       </div>
     </div>
   );
 };
-
 // --- Section 3 Components ---
 const SectionThreePartOne = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center gap-8 mb-16 md:ml-8 lg:ml-12">
+    <div className="flex flex-col md:flex-row items-center gap-8  md:ml-8 lg:ml-12">
       {/* 1a: Left Content */}
       <div className="w-full md:w-1/2">
         <div className="flex justify-between items-start mb-4">
-          <p className="text-sm mb-5 font-semibold text-black">
+          <p className="text-xs font-semibold mb-5  text-gray-700 border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
             • Newly Added Product •
           </p>
         </div>
-
         <div className="flex justify-end mb-4">
-          <span className="text-xs text-purple-700 bg-purple-100 px-3 py-1 items-end rounded-full">
+          <span className="text-sm text-purple-600 font-semibold bg-purple-300 px-3 py-2  items-end rounded-full">
             For Salary Earners
           </span>
         </div>
-
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
           Get Quick Loan
         </h2>
-
-        <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-          We offer loans from ₦30,000 to ₦5,000,000, specially tailored to
-          Federal and State and Local Government employees whose salaries are
-          processed through the remita
+        <p className="text-lg text-gray-800 mb-6 leading-relaxed ">
+          We offer loans from ₦30,000 to ₦5,000,000, specially <br />
+          tailored to Federal, State and Local Government <br />
+          employees whose salaries are processed through the <br />
+          Remita or IPPIS platforms. We offer 6% per month interest <br />
+          on Loan
         </p>
 
-        <Link
-          href="/loans"
-          className="inline-flex items-center text-purple-700 text-xs border border-purple-100 bg-purple-100 px-5 py-2 rounded-full hover:bg-purple-200 transition-colors"
-        >
-          <PillIcon />
-          Explore Features
-        </Link>
+        <PillButtonWithIcon text="Explore Features" />
       </div>
-
       {/* 1b: Right Image */}
       <div className="w-full md:w-1/2 flex justify-center">
         <img
@@ -373,7 +379,6 @@ const SectionThreePartOne = () => {
     </div>
   );
 };
-
 const SectionThreePartTwo = () => {
   return (
     <div className="flex flex-col md:flex-row items-center gap-8 md:-ml-8 lg:-ml-12">
@@ -390,21 +395,20 @@ const SectionThreePartTwo = () => {
           }}
         />
       </div>
-
       {/* 2b: Right Content */}
       <div className="w-full md:w-1/2">
-        <p className="text-sm font-semibold text-purple-600 mb-2">
-          • Security First •
+        <p className="text-xs font-semibold mb-15  text-gray-700 border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
+          • Newly Added Product •
         </p>
 
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-          Bank-level security for all your transactions
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+          Let's Grow Together through Investment
         </h2>
 
-        <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-          Your financial data is protected with enterprise-grade encryption and
-          multi-factor authentication. Rest easy knowing your money and personal
-          information are safe with our advanced security measures.
+        <p className="text-lg text-gray-800 mb-6 leading-relaxed">
+          Together we drive meaningful investment partnerships <br />
+          that foster innovation, create lasting values and <br />
+          empower smarter wealth growth
         </p>
 
         <PillButtonWithIcon text="Learn About Security" />
@@ -438,7 +442,7 @@ const FeatureIconCard = ({
               "https://placehold.co/64x64/7C3AED/FFFFFF?text=ICON";
           }}
         />
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
         <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
       </div>
     </div>
@@ -464,7 +468,6 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
       <p className="text-gray-700 leading-relaxed mb-6 grow">
         "{testimonial.message}"
       </p>
-
       {/* User Info */}
       <div className="flex items-center space-x-4 mt-auto">
         <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
@@ -495,25 +498,22 @@ const SectionFive = () => {
       setIsReversing((prev) => !prev);
       setKey((prev) => prev + 1); // Force re-render
     }, 15000); // Reverse direction every 15 seconds
-
     return () => clearInterval(interval);
   }, []);
-
   return (
     // Section is full-bleed; header constrained inside
     <section className="w-full bg-white py-8 md:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - constrained */}
         <div className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 leading-tight">
+          <h2 className="text-2xl sm:text-2xl font-semibold text-gray-700 leading-tight">
             Hear from the people who trust and
           </h2>
-          <p className="text-2xl sm:text-3xl font-semibold text-gray-900 leading-tight mt-0">
+          <p className="text-2xl sm:text-2xl font-semibold text-gray-700 leading-tight mt-0">
             grow with myStash
           </p>
         </div>
       </div>
-
       {/* Full-bleed Testimonials Carousel */}
       <div className="w-full overflow-hidden">
         <div className="relative">
@@ -539,7 +539,6 @@ const SectionFive = () => {
               </div>
             ))}
           </motion.div>
-
           {/* Gradient overlays for smooth edges */}
           <div className="absolute inset-y-0 left-0 w-20 bg-linear-to-r from-white to-transparent z-10 pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 w-20 bg-linear-to-l from-white to-transparent z-10 pointer-events-none"></div>
@@ -555,35 +554,34 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       {/* Section 1: Hero Section */}
       <section className="relative w-full min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div className="max-w-7xl mx-auto  sm:px-6 lg:px-4 py-12 md:py-20">
           <div className="flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2 order-2 md:order-1 text-center md:text-left z-10">
+            <div className="w-full md:w-1/2 order-2 md:order-1 -ml-8 text-center md:text-left z-10">
               <HorizontalMarquee />
               {/* Mobile stacked heading: visible only on small screens */}
               <div className="md:hidden text-center mb-4">
                 <h1 className="text-3xl font-extrabold text-gray-900 leading-tight">
-                  <div>Smarter finance</div>
+                  <div>Smart Finance</div>
                   <div>for smarter</div>
                 </h1>
-                <div className="mt-2 flex justify-center">
+                <div className=" mt-2 flex justify-center">
                   <VerticalTextCarousel />
                 </div>
               </div>
-
-              {/* Desktop heading (unchanged) */}
+              {/* Desktop heading  */}
               <div className="hidden md:block">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 mb-4">
                   <span className="block whitespace-nowrap">
-                    Smarter finance for a
+                    Smart Finance for a
                   </span>
-                  <span className="block font-semibold whitespace-nowrap">
+                  <span className="block font-semibold whitespace-nowrap flex items-center gap-3">
                     smarter <VerticalTextCarousel />
                   </span>
                 </h1>
               </div>
-              <p className="mt-4 text-xl text-gray-600 max-w-lg mx-auto md:mx-0">
+              <p className="mt-4 text-xl text-gray-600  mx-auto md:mx-0 ">
                 A financial tool that makes your money work for you. Save
-                effortlessly, grow your wealth intelligently, and make you spend
+                effortlessly, grow your wealth intelligently, and make you spend <br />
                 with confidence.
               </p>
               <div className="mt-8 flex justify-center md:justify-start space-x-4">
@@ -592,10 +590,8 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-
         {/* Updated Image Section - Wider and Closer to Left */}
         <div className="absolute top-0 right-0 w-3/5 h-full order-1 md:order-2 flex items-center justify-start pl-20">
-          {" "}
           {/* Changed from w-1/2 to w-3/5 and pl-8 to pl-4 */}
           <div className="w-full h-full max-w-none rounded-l-xl flex items-center justify-center overflow-hidden">
             <img
@@ -606,48 +602,44 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* Section 2: Features Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-12 md:pb-20 bg-white">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-sm font-semibold text-purple-600 mb-2">
-            • Our Products •
-          </p>
-          <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-4">
-            Designed to help you{" "}
-            <span className="text-gray-300">save smarter, </span> spend
-            efficiently,{" "}
-            <span className="text-gray-300">plan strategically,</span> and give
-            loans— all through secure, innovative tools.
-          </h2>
-          <p className="text-lg text-gray-600">
-            Select the product that fits your needs and apply today.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          <FeatureCard
-            imagePath={DUMMY_CARD_1_IMAGE}
-            title="Activate your Smart Savings"
-            description="Auto save monthly income. Drive more sales and start earning your planned monthly."
-            ctaContent={<PillButtonWithIcon text="Start Saving" />}
-          />
-          <PaymentFeatureCard />
-          <FeatureCard
-            imagePath={DUMMY_CARD_3_IMAGE}
-            title="Budget Smarter, Spend Better"
-            description="View monthly expenses. Get detailed insights and reach your money goals faster."
-            ctaContent={<PillButtonWithIcon text="Budget" />}
-          />
-        </div>
-      </section>
-
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-12 md:pb-10 bg-white">
+  <div className="text-center max-w-3xl mx-auto mb-12">
+    <p className="text-sm font-semibold text-black mb-2 border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
+      • Our Products •
+    </p>
+    <h2 className="text-sm sm:text-2xl font-bold text-gray-700 mb-4 text-center">
+      Designed to help you{" "}
+      <span className="text-gray-300">save smarter,</span> spend efficiently,{" "}
+      <span className="text-gray-300">plan</span><br />
+      strategically, and give loans — all through secure, innovative<br />
+      tools and trusted financial partnerships.
+    </h2>
+    <p className="text-lg text-gray-600">
+      Select the product that fits your needs and apply today.
+    </p>
+  </div>
+  <div className="grid md:grid-cols-3 gap-8">
+    <FeatureCard
+      imagePath={DUMMY_CARD_1_IMAGE}
+      title="Activate your Smart Savings"
+      description="Set automatic savings in USD or NGN directly, from your income or daily spending."
+      ctaContent={<PillButtonWithIcon text="Start Saving" />}
+    />
+    <PaymentFeatureCard />
+    <FeatureCard
+      imagePath={DUMMY_CARD_3_IMAGE}
+      title="Budget Smarter, Spend Better"
+      description="Automatically save in ISD or NGN, plan, budget and grow your money efficiently."
+      ctaContent={<PillButtonWithIcon text="Budget" />}
+    />
+  </div>
+</section>
       {/* Section 3: Additional Features */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 bg-white">
         <SectionThreePartOne />
         <SectionThreePartTwo />
       </section>
-
       {/* Section 4: Icon Features */}
       <FeaturesSection
         title="With myStash you get"
