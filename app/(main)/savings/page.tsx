@@ -8,7 +8,7 @@ import FeaturesSection from "../../components/FeaturesSection";
 import ContactFormSection from "../../components/ContactFormSection";
 
 // Dummy Image Path for Savings Page
-const DUMMY_SAVINGS_HERO_IMAGE = "/images/savingshero.svg";
+const DUMMY_SAVINGS_HERO_IMAGE = "/images/savingsorgheroimg.svg";
 
 // --- Section 1: Hero Section ---
 export default function SavingsPage() {
@@ -18,17 +18,17 @@ export default function SavingsPage() {
       <section className="relative w-full min-h-[100vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-25 ">
           <div className="flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2 order-2 md:order-1 -ml-15 text-center md:text-left z-10">
+            <div className="w-full md:w-1/2 order-2 md:order-1 -ml-15 mt-10 text-center md:text-left z-10">
               {/* Simple Pill Header (no marquee) */}
               <div className="inline-flex items-center justify-center mb-8 md:justify-start">
-                <span className="text-sm font-semibold text-purple-400 bg-purple-100 border border-gray-200 px-2 py-1 rounded-full">
-                  • Savings •
+                <span className="text-sm font-medium text-purple-400 bg-purple-100 border border-gray-200 px-2 py-1 rounded-full">
+                  •  Savings  •
                 </span>
               </div>
 
               {/* Simple Header Text (no vertical carousel) */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 mb-4">
-                <span className="block whitespace-nowrap">A Smarter way to Grow</span>
+              <h1 className="text-4xl sm:text-5xl lg:text-5xl font-semibold text-gray-900 mb-4">
+                <span className="block whitespace-nowrap mb-1">A Smarter way to Grow</span>
                 <span className="block font-semibold">Your Savings</span>
               </h1>
 
@@ -51,7 +51,7 @@ export default function SavingsPage() {
             <img
               src={DUMMY_SAVINGS_HERO_IMAGE}
               alt="Savings Hero Visual"
-              className="w-full h-full object-contain scale-90"
+              className="w-full h-full object-contain scale-88 mb-10"
             />
           </div>
         </div>
@@ -59,10 +59,10 @@ export default function SavingsPage() {
 
       {/* We'll add Sections 2-5 here later */}
       {/* Section 2: Savings Plans */}
-      <section className="py-16 bg-white">
+      <section className="py-8 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           {/* Centered Header (2 lines) */}
-          <div className="text-center mb-6">
+          <div className="text-center mb-2">
             <h2 className="text-3xl font-semibold text-gray-900 leading-tight">
               Stash your money, grow your goals. Watch your savings
             </h2>
@@ -76,7 +76,7 @@ export default function SavingsPage() {
             <p className="text-lg text-gray-600 leading-relaxed">
              Experience seamless automated savings, quick manual top-ups, and
             </p>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-lg text-gray-600 leading-relaxed -mt-1">
               attractive interest rates.
             </p>
           </div>
@@ -84,23 +84,23 @@ export default function SavingsPage() {
           {/* Three Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Card 1 */}
-            <div className="bg-white border border-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-none rounded-br-none shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white border border-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-none rounded-br-none  transition-shadow">
               <div className="pt-4 text-center">
                 {/* Mini Header */}
-                <h3 className="text-2xl font-semibold text-purple-500 mb-2 mt-8">
+                <h3 className="text-2xl font-semibold text-purple-500 mb-2 mt-11">
                   Lifestyle savings 
                 </h3>
 
                 {/* 2-line Subtext */}
-                <p className="text-gray-600 mt-5 leading-relaxed text-sm">
+                <p className="text-gray-600 mt-2 leading-relaxed text-sm">
                  From small daily goals to big dreams, save smarter
                 </p>
-                <p className="text-gray-600 leading-relaxed text-sm">
+                <p className="text-gray-600 leading-relaxed text-sm -mt-1">
                  and reach them faster.
                 </p>
 
                 {/* Image at bottom */}
-                <div className="mt-4 flex justify-center">
+                <div className="mt-5 flex justify-center">
                   <img
                     src="/images/savingscard1.svg"
                     alt="Daily Savings"
@@ -111,23 +111,23 @@ export default function SavingsPage() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white border border-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-none rounded-br-none shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white border border-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-none rounded-br-none  transition-shadow">
               <div className="pt-4 text-center">
                 {/* Mini Header */}
-                <h3 className="text-2xl font-semibold text-purple-500 mb-2 mt-8">
+                <h3 className="text-2xl font-semibold text-purple-500 mb-2 mt-11">
                   Regular Savings
                 </h3>
 
                 {/* 2-line Subtext */}
-                <p className="text-gray-600 mt-5 leading-relaxed text-sm">
+                <p className="text-gray-600 mt-2 leading-relaxed text-sm">
                   Seamless automated savings, quick manual top-
                 </p>
-                <p className="text-gray-600 leading-relaxed text-sm">
+                <p className="text-gray-600 leading-relaxed text-sm -mt-1">
                   ups, and rewarding interest rates.
                 </p>
 
                 {/* Image at bottom */}
-                <div className="mt-4 flex justify-center">
+                <div className="mt-5 flex justify-center">
                   <img
                     src="/images/savingscard2.svg"
                     alt="Goal Savings"
@@ -138,22 +138,22 @@ export default function SavingsPage() {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white border border-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-none rounded-br-none shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white border border-gray-200 rounded-tl-2xl rounded-tr-2xl rounded-bl-none rounded-br-none  transition-shadow">
               <div className="pt-4 text-center">
                 {/* Mini Header */}
-                <h3 className="text-2xl font-semibold text-purple-500 mb-2 mt-8">
+                <h3 className="text-2xl font-semibold text-purple-500 mb-2 mt-11">
                   Save-check Plan
                 </h3>
 
                 {/* 2-line Subtext */}
-                <p className="text-gray-600 mt-5 leading-relaxed text-sm">
+                <p className="text-gray-600 mt-2 leading-relaxed text-sm">
                   Save directly from your paycheck. You don't have
                 </p>
-                <p className="text-gray-600 leading-relaxed text-sm">
+                <p className="text-gray-600 leading-relaxed text-sm -mt-1">
                   to wait until your salary hits your bank account
                 </p>
                 {/* Image at bottom */}
-                <div className="mt-4 flex justify-center">
+                <div className="mt-5 flex justify-center">
                   <img
                     src="/images/savingscard3.svg"
                     alt="Fixed Savings"
@@ -201,7 +201,7 @@ export default function SavingsPage() {
         <img
           src="/images/savingslast.svg"
           alt="Savings Growth"
-          className="w-full h-[400px] object-cover rounded-lg"
+          className="w-full h-[400px] object-cover "
         />
       </div>
 
@@ -210,8 +210,8 @@ export default function SavingsPage() {
         {/* Pill Header with dot inside */}
         <div className="mb-6">
           <span className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 tracking-wide bg-purple-200 border border-purple-200 rounded-full px-4 py-2">
-            <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-           Why you should save with us
+           
+          • Why you should save with us
           </span>
         </div>
 
@@ -225,13 +225,13 @@ export default function SavingsPage() {
         </h2>
 
         {/* Button with same icon as Section 1 */}
-        <button className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200">
+        <button className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 px-3 rounded-4xl flex items-center justify-center transition-colors duration-200">
           <img
             src="/icons/Frame6.svg"
             alt="arrow"
-            className="w-6 h-6 mr-2"
+            className="w-8 h-8 mr-2"
           />
-          Start Saving Now
+          Start Saving 
         </button>
       </div>
     </div>

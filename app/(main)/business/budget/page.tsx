@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import FeaturesSection from "@/app/components/FeaturesSection";
@@ -17,19 +17,19 @@ const DownloadButton = () => {
   return (
     <Link
       href="/download"
-      className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200"
+      className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 px-2 rounded-4xl flex items-center justify-center transition-colors duration-200"
     >
       <img
         src="/icons/Frame5.svg"
         alt="Download app icon"
-        className="w-6 h-6 mr-12"
+        className="w-7 h-7 mr-17"
         onError={(e) => {
           e.currentTarget.onerror = null;
           e.currentTarget.src =
             "https://placehold.co/20x20/FFFFFF/7C3AED?text=→";
         }}
       />
-      <span className="mr-12">Download app</span>
+      <span className="mr-19">Download app</span>
     </Link>
   );
 };
@@ -43,12 +43,12 @@ const SectionOne = () => {
         className="absolute inset-0 w-full h-full z-0"
         style={{
           backgroundImage: `url(${DUMMY_HERO_BACKGROUND})`,
-          backgroundSize: "cover",
+          backgroundSize: "contain",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="absolute inset-0 bg-white/30"></div>
+        <div className=""></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,22 +56,22 @@ const SectionOne = () => {
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] sm:min-h-[70vh]">
           {/* Pill Header (dot before and after the text) */}
           <div className="text-center mb-6 sm:mb-8">
-            <p className="text-sm font-semibold text-purple-400 mb-2 border border-gray-50 rounded-full px-4 py-1 inline-block bg-purple-100">
+            <p className="text-sm font-medium text-purple-400 mb-2 border border-gray-50 rounded-full px-4 py-1 inline-block bg-purple-100">
               • Budget •
             </p>
           </div>
 
           {/* Two Line Header Text */}
-          <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 leading-tight">
+          <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-6">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-[54px] font-bold text-gray-900 leading-tight">
               Smarter way for your
             </h1>
-            <div className="relative inline-block mt-1 sm:mt-2">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 leading-tight">
+            <div className="relative inline-block -mt-2">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-[54px] font-bold text-gray-900 leading-tight">
                 <span>Business to </span>
                 <span className="relative inline-block text-purple-600">
                   spend
-                  <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1 bg-purple-400 rounded-full"></span>
+                  <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1.5 bg-purple-400 rounded-full"></span>
                 </span>
                 <span> starts here</span>
               </h1>
@@ -80,7 +80,7 @@ const SectionOne = () => {
 
           {/* Two Line Sub Text */}
           <div className="text-center max-w-2xl mx-auto mb-4 sm:mb-6">
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-1 sm:mb-1 whitespace-nowrap">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600  whitespace-nowrap">
               Saving money isn't always easy, we get it. But with myStash, it's simpler,
             </p>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 whitespace-nowrap">
@@ -119,7 +119,7 @@ const SectionOne = () => {
 // ============ SECTION 2: BUDGET PROCESS ============
 const SectionTwo = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-10 mb-5 bg-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header and Subtext */}
         <div className="text-center mb-16">
@@ -149,8 +149,8 @@ const SectionTwo = () => {
               </div>
               {/* Center - Number */}
               <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
-                <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                  <span className="text-purple-600 font-bold">1</span>
+                <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full -mt-2 flex items-center justify-center">
+                  <span className="text-gray-800 font-bold">1</span>
                 </div>
               </div>
               {/* Right - Text: More space from center line */}
@@ -189,7 +189,7 @@ const SectionTwo = () => {
               {/* Center - Number */}
               <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                 <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                  <span className="text-purple-600 font-bold">2</span>
+                  <span className="text-gray-800 font-bold">2</span>
                 </div>
               </div>
               {/* Right - Image: Keep spacing */}
@@ -215,7 +215,7 @@ const SectionTwo = () => {
               {/* Center - Number */}
               <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                 <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                  <span className="text-purple-600 font-bold">3</span>
+                  <span className="text-gray-800 font-bold">3</span>
                 </div>
               </div>
               {/* Right - Text */}
@@ -260,7 +260,7 @@ const SectionTwo = () => {
               {/* Center - Number */}
               <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                 <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                  <span className="text-purple-600 font-bold">4</span>
+                  <span className="text-gray-800 font-bold">4</span>
                 </div>
               </div>
               {/* Right - Image: Keep spacing */}
@@ -287,7 +287,7 @@ const SectionTwo = () => {
               {/* Center - Number */}
               <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                 <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                  <span className="text-purple-600 font-bold">5</span>
+                  <span className="text-gray-800 font-bold">5</span>
                 </div>
               </div>
 
@@ -346,37 +346,154 @@ const SectionThree = () => {
 
 // ============ SECTION 4: BUSINESS BUDGET FAQ (5 Questions) ============
 const SectionFour = () => {
+  // FAQ states
+  const [isOpen1, setIsOpen1] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [isOpen3, setIsOpen3] = useState(false);
+  const [isOpen4, setIsOpen4] = useState(false);
+  const [isOpen5, setIsOpen5] = useState(false);
+
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 xl:py-12 bg-white">
-      <div className="mb-8 sm:mb-12 lg:mb-16">
-        {/* Mini Header - Responsive left alignment */}
-        <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 text-left sm:ml-5">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-10 mb-5 bg-white ">
+      <div className="mb-16">
+        {/* Mini Header - Left Aligned */}
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-left ml-5">
           Frequently Asked Questions
         </h2>
       </div>
 
-      {/* FAQ Items - 5 Questions with responsive padding */}
+      {/* FAQ Items */}
       <div className="space-y-0">
-        {[
-          "What is Pocket?",
-          "What is a settlement account?",
-          "Can a Naira account be added as settlement for a Dollar VBA?",
-          "Can Naira be added into Dollar Pocket?",
-          "Can one Pocket be connected to two VBAs"
-        ].map((question, index) => (
-          <div key={index} className="border-b border-gray-100 py-4 sm:py-6">
-            <button className="flex items-center justify-between w-full text-left group rounded-lg px-3 sm:px-4 py-2 sm:py-3 transition-all duration-200">
-              <div className="flex items-center space-x-3 sm:space-x-4">
-                <div className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-base sm:text-lg group-hover:text-purple-700 transition-colors">+</span>
-                </div>
-                <span className="text-sm sm:text-base lg:text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
-                  {question}
+        {/* Question 1 */}
+        <div className="border-b border-gray-100 py-6">
+          <button 
+            className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
+            onClick={() => setIsOpen1(!isOpen1)}
+          >
+            <div className="flex items-center space-x-4">
+              <div className="w-6 h-6 flex items-center justify-center shrink-0">
+                <span className="text-black font-bold text-lg transition-colors">
+                  {isOpen1 ? '−' : '+'}
                 </span>
               </div>
-            </button>
+              <span className="text-lg font-medium text-gray-900   h rounded-lg px-3 py-2 -mx-2 transition-all duration-200">
+                What is Pocket?
+              </span>
+            </div>
+          </button>
+          {/* Answer with slide animation */}
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen1 ? 'max-h-96' : 'max-h-0'}`}>
+            <div className="px-4 pb-6 pt-2 ml-10">
+              <p className="text-lg text-gray-700">
+                A Pocket is a dedicated section within your myStash account where you can allocate specific amounts of money for different spending categories like transportation, groceries, entertainment, etc.
+              </p>
+            </div>
           </div>
-        ))}
+        </div>
+        
+        {/* Question 2 */}
+        <div className="border-b border-gray-100 py-6">
+          <button 
+            className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
+            onClick={() => setIsOpen2(!isOpen2)}
+          >
+            <div className="flex items-center space-x-4">
+              <div className="w-6 h-6 flex items-center justify-center shrink-0">
+                <span className="text-black font-bold text-lg  transition-colors">
+                  {isOpen2 ? '−' : '+'}
+                </span>
+              </div>
+              <span className="text-lg font-medium text-gray-900 transition-colors ">
+                What is a settlement account?
+              </span>
+            </div>
+          </button>
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen2 ? 'max-h-96' : 'max-h-0'}`}>
+            <div className="px-4 pb-6 pt-2 ml-10">
+              <p className="text-lg text-gray-700">
+                A Settlement Account is where unallocated funds from your Virtual Bank Account (VBA) are automatically transferred. It's like a default holding account for money that hasn't been assigned to specific pockets.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        {/* Question 3 */}
+        <div className="border-b border-gray-100 py-6">
+          <button 
+            className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
+            onClick={() => setIsOpen3(!isOpen3)}
+          >
+            <div className="flex items-center space-x-4">
+              <div className="w-6 h-6 flex items-center justify-center shrink-0">
+                <span className="text-black font-bold text-lg transition-colors">
+                  {isOpen3 ? '−' : '+'}
+                </span>
+              </div>
+              <span className="text-lg font-medium text-gray-900 transition-colors">
+                Can a Naira account be added as settlement for a Dollar VBA?
+              </span>
+            </div>
+          </button>
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen3 ? 'max-h-96' : 'max-h-0'}`}>
+            <div className="px-4 pb-6 pt-2 ml-10">
+              <p className="text-lg text-gray-700">
+                No, a Naira account cannot be used as a settlement account for a Dollar Virtual Bank Account (VBA). Settlement accounts must be in the same currency as the VBA to ensure proper currency conversion and transaction processing.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        {/* Question 4 */}
+        <div className="border-b border-gray-100 py-6">
+          <button 
+            className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
+            onClick={() => setIsOpen4(!isOpen4)}
+          >
+            <div className="flex items-center space-x-4">
+              <div className="w-6 h-6 flex items-center justify-center shrink-0">
+                <span className="text-black font-bold text-lg transition-colors">
+                  {isOpen4 ? '−' : '+'}
+                </span>
+              </div>
+              <span className="text-lg font-medium text-gray-900 transition-colors">
+                Can Naira be added into a Dollar Pocket?
+              </span>
+            </div>
+          </button>
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen4 ? 'max-h-96' : 'max-h-0'}`}>
+            <div className="px-4 pb-6 pt-2 ml-10">
+              <p className="text-lg text-gray-700">
+                No, Naira cannot be directly added to a Dollar Pocket. Each pocket is currency-specific. You would need to convert Naira to Dollars first, then add the Dollars to your Dollar Pocket.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        {/* Question 5 */}
+        <div className="border-b border-gray-100 py-6">
+          <button 
+            className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
+            onClick={() => setIsOpen5(!isOpen5)}
+          >
+            <div className="flex items-center space-x-4">
+              <div className="w-6 h-6 flex items-center justify-center shrink-0">
+                <span className="text-black font-bold text-lg  transition-colors">
+                  {isOpen5 ? '−' : '+'}
+                </span>
+              </div>
+              <span className="text-lg font-medium text-gray-900 transition-colors">
+                Can one Pocket be connected to two VBAs?
+              </span>
+            </div>
+          </button>
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen5 ? 'max-h-96' : 'max-h-0'}`}>
+            <div className="px-4 pb-6 pt-2 ml-10">
+              <p className="text-lg text-gray-700">
+                No, each Pocket can only be connected to one Virtual Bank Account (VBA). This ensures clear fund tracking and prevents confusion in budget allocation across multiple accounts.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -393,7 +510,7 @@ const SectionFive = () => {
             <img
               src="/images/businessstack3.svg"
               alt="Business Budget Benefits"
-              className="w-full h-auto rounded-lg"
+              className="w-full h-auto "
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src =
@@ -403,9 +520,9 @@ const SectionFive = () => {
           </div>
 
           {/* Right Div - Content */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start text-center lg:text-left order-1 lg:order-2 mb-8 lg:mb-0 lg:ml-4">
+          <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start text-center -mt-5 lg:text-left order-1 lg:order-2 mb-8 lg:mb-0 lg:ml-4">
            <div className="inline-flex items-center justify-center mb-2 md:justify-start">
-              <span className="text-sm font-semibold text-purple-500 bg-purple-200 border border-gray-200 px-4 py-2 mt-10 rounded-full">
+              <span className="text-sm font-medium text-purple-500 bg-purple-200 border border-gray-200 px-4 py-2 mt-10 rounded-full">
                 •  Budgeting made crystal clear
               </span>
             </div>
@@ -420,20 +537,20 @@ const SectionFive = () => {
 
             {/* Budget button styled like 'Start Savings' CTA */}
             <Link
-              href="/business/budget"
-              className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-2.5 sm:py-3 px-6 sm:px-8 rounded-full sm:rounded-4xl flex items-center justify-center transition-colors duration-200"
+              href="/download"
+              className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2.5 sm:py-2 px-4 sm:px-2 rounded-full sm:rounded-4xl flex items-center justify-center transition-colors duration-200"
             >
               <img
                 src={DUMMY_FRAME6_ICON}
                 alt="arrow"
-                className="w-4 h-4 sm:w-5 sm:h-5 mr-2"
+                className="w-6 h-6 sm:w-6 sm:h-6 mr-2"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src =
                     "https://placehold.co/20x20/FFFFFF/7C3AED?text=→";
                 }}
               />
-              <span className="text-sm sm:text-base">Budget</span>
+              <span className="text-sm sm:text-base mr-2">Download app</span>
             </Link>
           </div>
         </div>

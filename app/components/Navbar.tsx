@@ -170,7 +170,7 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
   }
 
   return (
-    <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-82 md:w-130 bg-white shadow-2xl rounded-xl border border-gray-100 p-4 z-40">
+    <div className="w-[450px] bg-white shadow-2xl rounded-xl border border-gray-100 p-4 z-40">
       <ul className="space-y-2">
         {items.map((item) => (
           <li key={item.title}>
@@ -201,7 +201,7 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
   );
 };
 
-// 3. Dropdown Link Wrapper (Desktop) - IMPROVED HOVER BEHAVIOR
+// 3. Dropdown Link Wrapper (Desktop) - LEFT-ALIGNED DROPDOWNS
 const DropdownLink = ({ text, hasPlus = false, items }: { text: string; hasPlus?: boolean; items: DropdownItem[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMouseInDropdown, setIsMouseInDropdown] = useState(false);
@@ -254,7 +254,7 @@ const DropdownLink = ({ text, hasPlus = false, items }: { text: string; hasPlus?
       </div>
       {isOpen && (
         <div 
-          className="absolute top-full left-1/2 -translate-x-1/2 w-full pt-2 z-40"
+          className="absolute top-full left-0 pt-2 z-40"
           onMouseEnter={handleMouseEnterDropdown}
           onMouseLeave={handleMouseLeaveDropdown}
         >
@@ -317,25 +317,25 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow-md">
+    <nav className="sticky top-0 z-50 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+        <div className="flex justify-between items-center h-20">
+          {/* Logo - INCREASED SIZE */}
           <div className="shrink-0">
             <Link href="/" className="flex items-center">
               <img 
                 src={DUMMY_LOGO_PATH} 
                 alt="Site Logo" 
-                className="w-45 h-18 object-contain" 
+                className="w-60 h-36 object-contain" 
               />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-6 items-center ">
+          <div className="hidden md:flex space-x-6 items-center">
             <DropdownLink text="Personal" hasPlus items={PERSONAL_DROPDOWN_ITEMS} /> 
             <DropdownLink text="Business" hasPlus items={BUSINESS_DROPDOWN_ITEMS} />
-            <DropdownLink text="Company" hasPlus items={COMPANY_DROPDOWN_ITEMS} /> {/* Changed from NavLink to DropdownLink */}
+            <DropdownLink text="Company" hasPlus items={COMPANY_DROPDOWN_ITEMS} />
           </div>
 
           {/* Desktop Buttons */}
@@ -354,12 +354,12 @@ export default function Navbar() {
 
         {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+          <div className="md:hidden absolute top-20 left-0 right-0 bg-white">
             <div className="px-4 py-6 space-y-4">
               {/* Mobile Navigation Links */}
               <MobileDropdownLink text="Personal" hasPlus items={PERSONAL_DROPDOWN_ITEMS} />
               <MobileDropdownLink text="Business" hasPlus items={BUSINESS_DROPDOWN_ITEMS} />
-              <MobileDropdownLink text="Company" hasPlus items={COMPANY_DROPDOWN_ITEMS} /> {/* Changed from NavLink to MobileDropdownLink */}
+              <MobileDropdownLink text="Company" hasPlus items={COMPANY_DROPDOWN_ITEMS} />
               
               {/* Mobile Buttons */}
               <div className="pt-4 space-y-3 border-t border-gray-100 md:hidden">

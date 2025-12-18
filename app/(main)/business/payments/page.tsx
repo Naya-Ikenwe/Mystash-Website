@@ -16,19 +16,19 @@ const DownloadButton = () => {
   return (
     <Link
       href="/download"
-      className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200"
+      className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 px-2 rounded-4xl flex items-center justify-center -mt-3 transition-colors duration-200"
     >
       <img
         src="/icons/Frame5.svg"
         alt="Download app icon"
-        className="w-6 h-6 mr-12"
+        className="w-7 h-7 mr-17"
         onError={(e) => {
           e.currentTarget.onerror = null;
           e.currentTarget.src =
             "https://placehold.co/20x20/FFFFFF/7C3AED?text=→";
         }}
       />
-      <span className="mr-12">Download app</span>
+      <span className="mr-19">Download app</span>
     </Link>
   );
 };
@@ -42,43 +42,43 @@ const SectionOne = () => {
         className="absolute inset-0 w-full h-full z-0"
         style={{
           backgroundImage: `url(${DUMMY_HERO_BACKGROUND})`,
-          backgroundSize: "cover",
+          backgroundSize: "contain",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
         {/* Optional overlay for better text readability */}
-        <div className="absolute inset-0 bg-white/30"></div>
+        <div className=""></div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Content - Centered */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] sm:min-h-[70vh]">
           {/* Pill Header (dot before and after the text) */}
-          <div className="text-center mb-6 sm:mb-8">
+          <div className="text-center mb-6 sm:mb-4">
             <p className="text-sm font-semibold text-purple-400 mb-2 border border-gray-50 rounded-full px-4 py-1 inline-block bg-purple-100">
-              • Business Payments •
+              • Payment •
             </p>
           </div>
 
           {/* Two Line Header Text */}
           <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-[54px] font-semibold text-gray-900 leading-tight">
               Business transactions made
             </h1>
-            <div className="relative inline-block mt-1 sm:mt-2">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 leading-tight">
+            <div className="relative inline-block -mt-2">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-[54px] font-semibold text-gray-900 leading-tight">
                 <span>beyond borders with </span>
                 <span className="relative inline-block text-purple-600">
                   ease
-                  <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1 bg-purple-400 rounded-full"></span>
+                  <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1.5 bg-purple-400 rounded-full"></span>
                 </span>
               </h1>
             </div>
           </div>
 
           {/* Two Line Sub Text */}
-          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-1 sm:mb-2">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 -mt-2">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 ">
               No borders. No limits. Just seamless, secure and instant
             </p>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600">
@@ -92,7 +92,7 @@ const SectionOne = () => {
           </div>
 
           {/* Image under the button */}
-          <div className="w-full max-w-3xl sm:max-w-4xl lg:max-w-5xl mx-auto mt-6 sm:mt-8">
+          <div className="w-full max-w-3xl sm:max-w-4xl lg:max-w-5xl mx-auto mt-6 sm:mt-6">
             <img
               src={DUMMY_SECTION1_IMAGE}
               alt="Business Payment Dashboard"
@@ -117,10 +117,10 @@ const SectionOne = () => {
 // ============ SECTION 2: PAYMENT METHODS ============
 const SectionTwo = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-4 mb-5 bg-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Centered Header (single line) */}
-        <div className="text-center mb-2">
+        <div className="text-center ">
           <h2 className="text-3xl font-bold text-gray-900 leading-tight">
             Transact without borders
           </h2>
@@ -129,7 +129,7 @@ const SectionTwo = () => {
         {/* Centered Subtext (single line) */}
         <div className="text-center mb-12">
           <p className="text-base text-gray-600 leading-relaxed">
-            Global payments made simple, swift and secure
+            Global Business payments made simple, swift and secure
           </p>
         </div>
 
@@ -141,16 +141,16 @@ const SectionTwo = () => {
               {/* Recentered text content */}
               <div className="grow flex flex-col justify-center">
                 {/* Mini Header */}
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  Personal Payments
+                <h3 className="text-[24px] font-semibold text-purple-500 mb-3 mt-2 ">
+                  International Transfers
                 </h3>
 
                 {/* 2-line Subtext */}
-                <p className="text-gray-600 mt-8 leading-relaxed">
-                  Send money to friends and family
+                <p className="text-gray-600 text-sm  leading-relaxed">
+                 Initiate and settle foreign remittances in USD and
                 </p>
-                <p className="text-gray-600 leading-relaxed">
-                  instantly and securely
+                <p className="text-gray-600 text-sm leading-relaxed -mt-1">
+                  GBP, available in multiple countries,
                 </p>
               </div>
 
@@ -168,7 +168,7 @@ const SectionTwo = () => {
                   <img
                     src="/images/paymentimg1.svg"
                     alt="Personal Payment 2"
-                    className="h-100 w-auto object-contain relative -right-20 "
+                    className="h-100 w-auto object-contain relative -right-20 -mt-2 "
                   />
                 </div>
               </div>
@@ -181,19 +181,19 @@ const SectionTwo = () => {
               {/* Recentered text content */}
               <div className="grow flex flex-col justify-center">
                 {/* Mini Header */}
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-[24px] font-semibold text-purple-500 mb-3 mt-8">
                   Business Payments
                 </h3>
 
                 {/* 3-line Subtext */}
-                <p className="text-gray-600 mt-8 leading-relaxed">
-                  Streamline your business transactions
+                <p className="text-gray-600 text-sm  leading-relaxed">
+                  Get a virtual USD debit card for subscriptions,
                 </p>
-                <p className="text-gray-600 leading-relaxed">
-                  with bulk payments and automated
+                <p className="text-gray-600 leading-relaxed text-sm -mt-1">
+                  shopping, school fees, and business transactions
                 </p>
-                <p className="text-gray-600 leading-relaxed">
-                  processing solutions
+                <p className="text-gray-600 leading-relaxed text-sm -mt-1">
+                  worldwide
                 </p>
               </div>
 
@@ -264,7 +264,7 @@ const SectionFour = () => {
             <img
               src="/images/businessstack2.svg"
               alt="Business Payment Benefits"
-              className="w-full h-auto rounded-lg"
+              className="w-full h-auto "
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src =
@@ -274,36 +274,36 @@ const SectionFour = () => {
           </div>
 
           {/* Right Div - Content */}
-          <div className="lg:w-1/2 flex flex-col justify-center ml-4 items-start">
-            <div className="inline-flex items-center justify-center mb-2 md:justify-start">
-              <span className="text-sm font-semibold text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
+          <div className="lg:w-1/2 flex flex-col justify-center ml-4 -mt-8 items-start">
+            <div className="inline-flex items-center justify-center mb-4  md:justify-start">
+              <span className="text-sm font-medium text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
                 • Payment clarity at every step
               </span>
             </div>
             {/* Three-line Header (no pill header) */}
             <h2 className="text-3xl font-bold text-gray-900 mb-6 leading-tight">
-              Simplify Your Business
+             Effortless global business
               <br />
-              Financial Transactions
+              payments, anytime, anywhere
               <br />
-              Today
+              that's the myStash way.
             </h2>
 
             {/* Download app button (routes to /download) */}
             <Link
-              href="/download"
-              className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200"
+              href="/business/payments"
+              className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 px-2 rounded-4xl flex items-center justify-center transition-colors duration-200"
             >
               <img
                 src="/icons/Frame5.svg"
                 alt="Download app icon"
-                className="w-6 h-6 mr-4"
+                className="w-7 h-7 mr-4"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src = "https://placehold.co/20x20/FFFFFF/7C3AED?text=→";
                 }}
               />
-              <span>Download app</span>
+              <span className="mr-3">Payment</span>
             </Link>
           </div>
         </div>

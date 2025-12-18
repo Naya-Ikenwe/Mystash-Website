@@ -40,7 +40,7 @@ const ContactFormSection = () => {
           <div className="text-center max-w-4xl mx-auto mb-16">
             {/* Pill Header */}
             <div className="inline-flex items-center justify-center mb-6">
-              <span className="text-sm font-semibold text-black border border-gray-200 px-5 py-2 rounded-full">
+              <span className="text-sm font-medium text-black border border-gray-200 px-5 py-2 rounded-full">
                 • Get In Touch •
               </span>
             </div>
@@ -133,7 +133,7 @@ const ContactFormSection = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder="I am interested in your loan offerings"
+                    placeholder="I am interested in your Product"
                     className="w-full bg-purple-100 border border-purple-100 rounded-lg pl-4 pr-10 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
                   />
                 </div>
@@ -155,8 +155,8 @@ const ContactFormSection = () => {
                     type="checkbox"
                     className="w-4 h-4 text-purple-600 bg-purple-50 border-purple-300 rounded focus:ring-purple-500 focus:ring-2"
                   />
-                  <span className="text-gray-600 text-sm">
-                    I accept the{" "}
+                  <span className="text-gray-600 font-semibold text-sm">
+                    I agree to the{" "}
                     <a
                       href="#"
                       className="text-purple-600 hover:text-purple-700 underline"
@@ -178,19 +178,19 @@ const ContactFormSection = () => {
               <div className="text-center pt-6">
                 <button
                   type="submit"
-                  className="inline-flex items-center pr-15 justify-center bg-purple-100 text-purple-500 px-8 py-3 rounded-full hover:bg-purple-400 hover:text-white transition-colors font-medium text-base"
+                  className="inline-flex items-center pr-15 justify-center bg-purple-100 font-semibold text-purple-500 px-8 py-3 rounded-full hover:bg-purple-400 hover:text-white transition-colors font-medium text-base"
                 >
                   <img
                     src={DUMMY_SUBMIT_ICON}
                     alt="Send"
-                    className="w-5 h-5 mr-10 object-contain"
+                    className="w-6 h-6 mr-15 object-contain"
                     onError={(e) => {
                       e.currentTarget.onerror = null;
                       e.currentTarget.src =
                         "https://placehold.co/20x20/FFFFFF/7C3AED?text=➡";
                     }}
                   />
-                  Submit enquiry
+                 <p className="mr-10">Submit enquiry</p> 
                 </button>
               </div>
             </form>

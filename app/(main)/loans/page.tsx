@@ -75,10 +75,10 @@ export default function LoansPage() {
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* Two-line Header Text */}
-          <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            <div>Smart Loans for</div>
-            <div>Your Financial Growth</div>
-          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <span className="block">Smart Loans for</span>
+            <span className="block">Your Financial Growth</span>
+          </h1>
 
           {/* Two-line Sub Text */}
           <div className="text-xl sm:text-2xl text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto">

@@ -21,7 +21,7 @@ const NavButtons = ({
   mobile = false,
   onButtonClick
 }: NavButtonsProps) => {
-  const buttonClasses = 'flex items-center space-x-2 px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 border-transparent';
+  const buttonClasses = 'flex items-center space-x-2 px-4 py-2 text-base font-medium rounded-full transition-colors duration-200 border-transparent';
 
   const ContactButton = () => (
     <Link 
@@ -32,7 +32,7 @@ const NavButtons = ({
       <img
         src={contactIcon}
         alt="Contact Us icon"
-        className="w-6 h-6"
+        className="w-7 h-7"
         onError={(e) => {
           e.currentTarget.onerror = null;
           e.currentTarget.src = "https://placehold.co/16x16/7C3AED/FFFFFF?text=C";
@@ -51,7 +51,7 @@ const NavButtons = ({
       <img
         src={downloadIcon}
         alt="Download app icon"
-        className="w-6 h-6"
+        className="w-7 h-7"
         onError={(e) => {
           e.currentTarget.onerror = null;
           e.currentTarget.src = "https://placehold.co/16x16/FFFFFF/7C3AED?text=D";

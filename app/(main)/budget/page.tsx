@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import NavButtons from "../../components/NavButtons";
 import FeaturesSection from "../../components/FeaturesSection";
 import ContactFormSection from "../../components/ContactFormSection";
@@ -12,6 +12,13 @@ const DUMMY_BUDGET_HERO_IMAGE = "/images/budgethero.svg";
 
 // --- Section 1: Hero Section ---
 export default function BudgetPage() {
+  // FAQ states
+  const [isOpen1, setIsOpen1] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [isOpen3, setIsOpen3] = useState(false);
+  const [isOpen4, setIsOpen4] = useState(false);
+  const [isOpen5, setIsOpen5] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Section 1: Hero Section */}
@@ -20,14 +27,14 @@ export default function BudgetPage() {
           <div className="flex flex-col md:flex-row items-center">
             <div className="w-full md:w-1/2 order-2 md:order-1 text-center md:text-left z-10  ">
               {/* Simple Pill Header */}
-              <div className="inline-flex items-center justify-center mb-8 md:justify-start">
-                <span className="text-sm font-semibold text-purple-500 bg-purple-100 border border-gray-200 px-6 py-2 mt-10 rounded-full">
-                  • Smart Budgeting •
+              <div className="inline-flex items-center justify-center mb-3 md:justify-start">
+                <span className="text-sm font-medium text-purple-500 bg-purple-100 border border-gray-200 px-6 py-1 mt-10 rounded-full">
+                  • Budget •
                 </span>
               </div>
               {/* Simple Header Text */}
-              <h1 className="text-4xl sm:text-4xl lg:text-6xl font-semibold text-gray-900 mb-4 mt-5">
-                <span className="block">Smarter spending</span>
+              <h1 className="text-4xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 mt-5">
+                <span className="block mb-2">Smarter spending</span>
                 <span className="block font-semibold">starts with you</span>
               </h1>
               <p className="mt-4 text-xl text-gray-600 max-w-lg mx-auto md:mx-0">
@@ -47,13 +54,13 @@ export default function BudgetPage() {
             <img
               src={DUMMY_BUDGET_HERO_IMAGE}
               alt="Budget Hero Visual"
-              className="w-full h-full object-contain scale-95 mr-20"
+              className="w-full h-full object-contain scale-95 mr-30"
             />
           </div>
         </div>
       </section>
       {/* Section 2: Budget Process */}
-      <section className="py-16 bg-white">
+      <section className="py-8 mb-5 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           {/* Header and Subtext */}
           <div className="text-center mb-16">
@@ -84,8 +91,8 @@ export default function BudgetPage() {
                 </div>
                 {/* Center - Number */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
-                  <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                    <span className="text-purple-600 font-bold">1</span>
+                  <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full -mt-2 flex items-center justify-center">
+                    <span className="text-gray-600 font-bold">1</span>
                   </div>
                 </div>
                 {/* Right - Text: More space from center line */}
@@ -125,7 +132,7 @@ export default function BudgetPage() {
                 {/* Center - Number */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                    <span className="text-purple-600 font-bold">2</span>
+                    <span className="text-gray-600 font-bold">2</span>
                   </div>
                 </div>
                 {/* Right - Image: Keep spacing */}
@@ -151,7 +158,7 @@ export default function BudgetPage() {
                 {/* Center - Number */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                    <span className="text-purple-600 font-bold">3</span>
+                    <span className="text-gray-600 font-bold">3</span>
                   </div>
                 </div>
                 {/* Right - Text */}
@@ -196,7 +203,7 @@ export default function BudgetPage() {
                 {/* Center - Number */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                    <span className="text-purple-600 font-bold">4</span>
+                    <span className="text-gray-600 font-bold">4</span>
                   </div>
                 </div>
                 {/* Right - Image: Keep spacing */}
@@ -223,7 +230,7 @@ export default function BudgetPage() {
                 {/* Center - Number */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                    <span className="text-purple-600 font-bold">5</span>
+                    <span className="text-gray-600 font-bold">5</span>
                   </div>
                 </div>
 
@@ -282,14 +289,14 @@ export default function BudgetPage() {
               <img
                 src="/images/budgetlast.svg"
                 alt="Budget Benefits"
-                className="w-full h-auto rounded-lg"
+                className="w-full h-auto "
               />
             </div>
             {/* Right Div - Content */}
             <div className="lg:w-1/2 flex flex-col justify-center ml-4 items-start">
               {/* Three-line Header (no pill header) */}
-              <span className=" mb-5 text-sm font-semibold text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
-                • Budgeting made crydtal clear
+              <span className=" mb-5 text-sm font-medium text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
+                •  Budgeting made crystal clear
               </span>
               <h2 className="text-3xl font-bold text-gray-900 mb-6 leading-tight">
                 Create better budgets everyday,
@@ -301,12 +308,12 @@ export default function BudgetPage() {
               {/* Button with same icon as Section 1 */}
               <Link
                 href="/download"
-                className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200"
+                className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-2 px-2 rounded-4xl flex items-center justify-center transition-colors duration-200"
               >
                 <img
                   src="/icons/Frame5.svg"
                   alt="download"
-                  className="w-6 h-6 mr-2"
+                  className="w-7 h-7 mr-2"
                 />
                 Download App
               </Link>
@@ -314,86 +321,150 @@ export default function BudgetPage() {
           </div>
         </div>
       </section>
-      {/* Section 5: Budget FAQ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24 bg-white border-t border-gray-200">
-        <div className="mb-16">
-          {/* Mini Header - Left Aligned */}
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-left ml-5">
-            Frequently Asked Questions
-          </h2>
-        </div>
 
-        {/* FAQ Items */}
-        <div className="space-y-0">
-          {/* Question 1 */}
-          <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200">
-              <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg group-hover:text-purple-700 transition-colors">
-                    +
-                  </span>
-                </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700  hover:bg-purple-50 rounded-lg px-3 py-2 -mx-2 transition-all duration-200">
-                 What is Pocket?
-                </span>
-              </div>
-            </button>
+     {/* Section 5: Budget FAQ */}
+<section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-12 mt-15 bg-white ">
+  <div className="mb-8">
+    {/* Mini Header - Left Aligned */}
+    <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-left ml-5">
+      Frequently Asked Questions
+    </h2>
+  </div>
+
+  {/* FAQ Items */}
+  <div className="space-y-0">
+    {/* Question 1 */}
+    <div className="border-b border-gray-100 py-6">
+      <button 
+        className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
+        onClick={() => setIsOpen1(!isOpen1)}
+      >
+        <div className="flex items-center space-x-4">
+          <div className="w-6 h-6 flex items-center justify-center shrink-0">
+            <span className="text-black font-bold text-lg  transition-colors">
+              {isOpen1 ? '−' : '+'}
+            </span>
           </div>
-          {/* Question 2 */}
-          <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200">
-              <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg group-hover:text-purple-700">+</span>
-                </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors  hover:bg-purple-50 ">
-                  What is a Settlement Account?
-                </span>
-              </div>
-            </button>
-          </div>
-          {/* Question 3 */}
-          <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200">
-              <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg group-hover:text-purple-700">+</span>
-                </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors hover:bg-purple-50">
-                  Can a Naira accoutn be added as settlement for a Dollar VBA?
-                </span>
-              </div>
-            </button>
-          </div>
-          {/* Question 4 */}
-          <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200">
-              <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg group-hover:text-purple-700">+</span>
-                </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 hover:bg-purple-50 transition-colors">
-                  Can Naira be added into a Dollar Pocket?
-                </span>
-              </div>
-            </button>
-          </div>
-          {/* Question 5 */}
-          <div className="border-b border-gray-100 py-6">
-            <button className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200">
-              <div className="flex items-center space-x-4">
-                <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                  <span className="text-black font-bold text-lg group-hover:text-purple-700">+</span>
-                </div>
-                <span className="text-lg font-medium text-gray-900 group-hover:text-purple-700 transition-colors hover:bg-purple-50">
-                  Can one Pocket be connected to two VBAs?
-                </span>
-              </div>
-            </button>
-          </div>
+          <span className="text-xl font-medium text-gray-900   rounded-lg px-3 py-2 -mx-2 transition-all duration-200">
+            What is Pocket?
+          </span>
         </div>
-      </section>
+      </button>
+      {/* Answer with slide animation */}
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen1 ? 'max-h-96' : 'max-h-0'}`}>
+        <div className="px-4 pb-6 pt-2 ml-10">
+          <p className="text-lg text-gray-700">
+            A Pocket is a dedicated section within your myStash account where you can allocate specific amounts of money for different spending categories like transportation, groceries, entertainment, etc.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    {/* Question 2 */}
+    <div className="border-b border-gray-100 py-6">
+      <button 
+        className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
+        onClick={() => setIsOpen2(!isOpen2)}
+      >
+        <div className="flex items-center space-x-4">
+          <div className="w-6 h-6 flex items-center justify-center shrink-0">
+            <span className="text-black font-bold text-lg  transition-colors">
+              {isOpen2 ? '−' : '+'}
+            </span>
+          </div>
+          <span className="text-xl font-medium text-gray-900  transition-colors   ">
+            What is a Settlement Account?
+          </span>
+        </div>
+      </button>
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen2 ? 'max-h-96' : 'max-h-0'}`}>
+        <div className="px-4 pb-6 pt-2 ml-10">
+          <p className="text-lg text-gray-700">
+            A Settlement Account is where unallocated funds from your Virtual Bank Account (VBA) are automatically transferred. It's like a default holding account for money that hasn't been assigned to specific pockets.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    {/* Question 3 */}
+    <div className="border-b border-gray-100 py-6">
+      <button 
+        className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
+        onClick={() => setIsOpen3(!isOpen3)}
+      >
+        <div className="flex items-center space-x-4">
+          <div className="w-6 h-6 flex items-center justify-center shrink-0">
+            <span className="text-black font-bold text-lg  transition-colors">
+              {isOpen3 ? '−' : '+'}
+            </span>
+          </div>
+          <span className="text-xl font-medium text-gray-900  transition-colors ">
+            Can a Naira account be added as settlement for a Dollar VBA?
+          </span>
+        </div>
+      </button>
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen3 ? 'max-h-96' : 'max-h-0'}`}>
+        <div className="px-4 pb-6 pt-2 ml-10">
+          <p className="text-lg text-gray-700">
+            No, a Naira account cannot be used as a settlement account for a Dollar Virtual Bank Account (VBA). Settlement accounts must be in the same currency as the VBA to ensure proper currency conversion and transaction processing.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    {/* Question 4 */}
+    <div className="border-b border-gray-100 py-6">
+      <button 
+        className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
+        onClick={() => setIsOpen4(!isOpen4)}
+      >
+        <div className="flex items-center space-x-4">
+          <div className="w-6 h-6 flex items-center justify-center shrink-0">
+            <span className="text-black font-bold text-lg  transition-colors">
+              {isOpen4 ? '−' : '+'}
+            </span>
+          </div>
+          <span className="text-xl font-medium text-gray-900   transition-colors">
+            Can Naira be added into a Dollar Pocket?
+          </span>
+        </div>
+      </button>
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen4 ? 'max-h-96' : 'max-h-0'}`}>
+        <div className="px-4 pb-6 pt-2 ml-10">
+          <p className="text-lg text-gray-700">
+            No, Naira cannot be directly added to a Dollar Pocket. Each pocket is currency-specific. You would need to convert Naira to Dollars first, then add the Dollars to your Dollar Pocket.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    {/* Question 5 */}
+    <div className="border-b border-gray-100 py-6">
+      <button 
+        className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
+        onClick={() => setIsOpen5(!isOpen5)}
+      >
+        <div className="flex items-center space-x-4">
+          <div className="w-6 h-6 flex items-center justify-center shrink-0">
+            <span className="text-black font-bold text-lg  transition-colors">
+              {isOpen5 ? '−' : '+'}
+            </span>
+          </div>
+          <span className="text-xl font-medium text-gray-900  transition-colors ">
+            Can one Pocket be connected to two VBAs?
+          </span>
+        </div>
+      </button>
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen5 ? 'max-h-96' : 'max-h-0'}`}>
+        <div className="px-4 pb-6 pt-2 ml-10">
+          <p className="text-lg text-gray-700">
+            No, each Pocket can only be connected to one Virtual Bank Account (VBA). This ensures clear fund tracking and prevents confusion in budget allocation across multiple accounts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
       {/* Section 6 - Contact Form */}
       <ContactFormSection />
     </div>

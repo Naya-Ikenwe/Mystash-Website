@@ -2,7 +2,7 @@
 import localFont from "next/font/local";
 import "../globals.css";
 import Navbar from "../components/Navbar";
-import AppDownloadSection from "../components/AppDownloadSection";
+import ConditionalAppDownloadSection from "../components/ConditionalAppDownloadSection";// Updated import
 import FooterSection from "../components/FooterSection";
 
 // Load Euclid locally (existing)
@@ -24,7 +24,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${freeset.className} ${freizeit.variable}`}>
         <Navbar />
         <main className="main-scope">{children}</main>
-        <AppDownloadSection />
+        {/* Replace AppDownloadSection with ConditionalAppDownloadSection */}
+        <ConditionalAppDownloadSection />
         <FooterSection />
       </body>
     </html>

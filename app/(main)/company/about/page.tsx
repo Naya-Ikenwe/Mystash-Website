@@ -59,7 +59,7 @@ export default function AboutPage() {
                 that helps young adults to monitor,
               </p>
               <p className="whitespace-nowrap">
-                manage, and generate weakth in an autonomous and painless way
+                manage, and generate weakth in an autonomous and painless way.
               </p>
             </div>
             
@@ -114,7 +114,7 @@ export default function AboutPage() {
               <div className="w-full px-4 lg:px-0">
                 {/* Pill Header with dots - CENTERED */}
                 <div className="flex justify-center mb-6">
-                  <span className="text-sm font-semibold text-black bg-white border border-gray-200 px-6 py-2 rounded-full">
+                  <span className="text-sm font-medium text-black bg-white border border-gray-200 px-6 py-2 rounded-full">
                     • About us •
                   </span>
                 </div>
@@ -257,7 +257,7 @@ export default function AboutPage() {
       <section className="py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
           {/* Header and Subtexts */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 -mt-5">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
               Our Team
             </h2>

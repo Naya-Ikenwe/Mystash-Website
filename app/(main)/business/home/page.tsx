@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import FeaturesSection from "@/app/components/FeaturesSection";
 import ContactFormSection from "@/app/components/ContactFormSection";
+import AppDownloadSection from "@/app/components/AppDownloadSection";
 
 // ============ DUMMY IMAGE PATHS (EXACT SAME AS REFERENCE) ============
 const DUMMY_CORNER_TOP_LEFT = "/images/businessheroimg1.svg";
@@ -123,14 +124,14 @@ const DownloadButton = () => {
   return (
     <Link 
     href="/download" 
-    className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200"
+    className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 px-2 rounded-4xl flex items-center justify-center transition-colors duration-200"
   >
     <img
       src="/icons/Frame5.svg"
       alt="Download app icon"
-      className="w-6 h-6 mr-12"
+      className="w-7 h-7 mr-12"
     />
-    <span className="mr-12">Download app</span>
+    <span className="mr-16">Download app</span>
   </Link>
   );
 };
@@ -167,7 +168,7 @@ const PillIcon = () => (
   <img
     src={DUMMY_BUTTON_ICON_SECTION2}
     alt="CTA Arrow"
-    className="w-4 h-4 mr-2 object-contain"
+    className="w-6 h-6 mr-2 object-contain"
     onError={(e) => {
       e.currentTarget.onerror = null;
       e.currentTarget.src = "https://placehold.co/16x16/7C3AED/FFFFFF?text=>>";
@@ -183,7 +184,7 @@ const PillButtonWithIcon = ({ text }: { text: string }) => {
   return (
     <Link
       href={path}
-      className="inline-flex items-center text-purple-700 text-sm border border-purple-100 bg-purple-100 px-5 py-2 rounded-full hover:bg-purple-200 transition-colors"
+      className="inline-flex items-center text-purple-700 text-sm border border-purple-100 bg-purple-100 px-4 py-2 rounded-full hover:bg-purple-200 transition-colors"
     >
       <PillIcon />
       {text}
@@ -335,7 +336,7 @@ const SlidingCard = ({
               <img
                 src={imagePath}
                 alt={pillText}
-                className="w-full h-[350px] object-cover rounded-lg"
+                className="w-full h-[350px] object-cover "
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src = "https://placehold.co/600x400/7C3AED/FFFFFF?text=Business";
@@ -348,7 +349,7 @@ const SlidingCard = ({
               {/* Pill */}
               <div className="mb-6">
                 <span className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 bg-purple-200 border border-purple-200 rounded-full px-4 py-2">
-                  <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
+                  
                   {pillText}
                 </span>
               </div>
@@ -363,12 +364,12 @@ const SlidingCard = ({
               {/* Button - Updated to use Link with proper path */}
               <Link
                 href={buttonPath}
-                className="inline-flex items-center bg-purple-600 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-full transition-colors"
+                className="inline-flex items-center bg-purple-600 hover:bg-purple-900 text-white font-medium py-2 px-2 rounded-full transition-colors"
               >
                 <img
                   src={DUMMY_BUTTON_ICON_SECTION2}
                   alt="arrow"
-                  className="w-6 h-6 mr-2"
+                  className="w-7 h-7 mr-2"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src = "https://placehold.co/20x20/FFFFFF/7C3AED?text=→";
@@ -389,13 +390,13 @@ const SlidingStackContainer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={containerRef} className="relative py-20">
+    <section ref={containerRef} className="relative py-10">
       <div className="sticky top-0">
         <div>
           <SlidingCard
             index={0}
             imagePath={DUMMY_BUSINESS_STACKED_1}
-            pillText="Why you should save with us"
+            pillText="• Why you should save with us"
             titleLines={["You sit back, relax and watch", "your business savings Grow with", "myStash effortlessly."]}
             buttonText="Start Saving"
           />
@@ -403,7 +404,7 @@ const SlidingStackContainer = () => {
           <SlidingCard
             index={1}
             imagePath={DUMMY_BUSINESS_STACKED_2}
-            pillText="Payment clarity at every step"
+            pillText="• Payment clarity at every step"
             titleLines={["Effortless global business", "payments, anytime, anywhere", "that's the myStash way."]}
             buttonText="Payments"
           />
@@ -411,7 +412,7 @@ const SlidingStackContainer = () => {
           <SlidingCard
             index={2}
             imagePath={DUMMY_BUSINESS_STACKED_3}
-            pillText="Budgeting made crystal clear"
+            pillText="• Budgeting made crystal clear"
             titleLines={["Create better business budgets", "every day so you can plan smarter", "and satisfy your customers."]}
             buttonText="Budget"
           />
@@ -557,22 +558,22 @@ export default function BusinessPage() {
             {/* Three Line Header */}
             <div className="relative z-20">
               {/* Line 1 */}
-              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold text-gray-900 mb-1">
                 Effortless and intelligent
               </h1>
 
               {/* Line 2 */}
-              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold text-gray-900 mb-1">
                 Finance management for your
               </h1>
 
               {/* Line 3 - Purple with Underline */}
               <div className="relative inline-block">
-                <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-purple-600 mb-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold text-purple-600 mb-4">
                   Business
                 </h1>
                 {/* Underline */}
-                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-4/4 h-1 bg-purple-400 rounded-full mb-2"></div>
+                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-4/4 h-1.5 bg-purple-400 rounded-full mb-2"></div>
               </div>
             </div>
           </div>
@@ -595,14 +596,14 @@ export default function BusinessPage() {
       {/* ============ SECTION 2: FEATURES GRID (EXACT SAME AS REFERENCE) ============ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-12 md:pb-20 bg-white">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-sm font-semibold text-black mb-2 border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
+          <p className="text-sm font-medium text-black mb-2 border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
             • Our Products •
           </p>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
             Designed to help your business{" "}
-            <span className="text-gray-300">save smarter, </span> spend
+            <span className="text-gray-400">save smarter, </span> spend <br />
             efficiently,{" "}
-            <span className="text-gray-300">plan strategically.</span> 
+            <span className="text-gray-400">plan strategically.</span> 
           </h2>
           <p className="text-base text-gray-600">
             Select the product that fits your needs and apply today.
@@ -657,6 +658,7 @@ export default function BusinessPage() {
       {/* ============ SECTION 5: TESTIMONIALS CAROUSEL ============ */}
       <SectionFive />
       <ContactFormSection />
+      <AppDownloadSection showHeaderAndLogos={true} />
     </div>
   );
 }

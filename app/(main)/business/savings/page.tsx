@@ -26,14 +26,14 @@ const DownloadButton = () => {
   return (
     <Link
       href="/download"
-      className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200"
+      className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-2 px-2 rounded-4xl flex items-center justify-center transition-colors duration-200"
     >
       <img
         src="/icons/Frame5.svg"
         alt="Download app icon"
-        className="w-6 h-6 mr-12"
+        className="w-7 h-7 mr-17"
       />
-      <span className="mr-12">Download app</span>
+      <span className="mr-19">Download app</span>
     </Link>
   );
 };
@@ -47,13 +47,13 @@ const SectionOne = () => {
         className="absolute inset-0 w-full h-full z-0"
         style={{
           backgroundImage: `url(${DUMMY_HERO_BACKGROUND})`,
-          backgroundSize: "cover",
+          backgroundSize: "contain",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
         {/* Optional overlay for better text readability */}
-        <div className="absolute inset-0 bg-white/30"></div>
+        <div className=""></div>
       </div>
 
       <div className="relative z-10 py-12 sm:py-16 lg:py-20">
@@ -61,36 +61,36 @@ const SectionOne = () => {
           {/* Main Content - Centered */}
           <div className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] sm:min-h-[70vh]">
             {/* Pill Header (dot before and after the text) */}
-            <div className="text-center mb-6 sm:mb-8">
-              <p className="text-sm font-semibold text-purple-400 mb-2 border border-gray-50 rounded-full px-4 py-1 inline-block bg-purple-100">
+            <div className="text-center mb-6 sm:mb-4">
+              <p className="text-sm font-medium text-purple-400 mb-2 border border-gray-50 rounded-full px-4 py-1 inline-block bg-purple-100">
                 • Savings •
               </p>
             </div>
 
             {/* Two Line Header Text */}
-            <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-8">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 leading-tight">
+            <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-6">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-[54px] font-bold text-gray-900 leading-tight">
                 A Smarter way to Grow Your
               </h1>
-              <div className="mt-1 sm:mt-2">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold leading-tight">
+              <div className=" -mt-1">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-[54px] font-bold leading-tight">
                   <span className="text-gray-900">Business </span>
                   <span className="relative inline-block text-purple-600">
                     Savings
                     {/* Underline only under "Savings" */}
-                    <div className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1 bg-purple-400 rounded-full"></div>
+                    <div className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1.5 bg-purple-400 rounded-full"></div>
                   </span>
                 </h1>
               </div>
             </div>
 
             {/* Two Line Sub Text */}
-            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-              <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-1 sm:mb-2">
-                Grow your business capital with intelligent savings tools
+            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-5">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600  ">
+               Saving money isn't always easy, we get it. But with myStash, it's simpler,
               </p>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-600">
-                designed to maximize returns and ensure financial stability.
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 whitespace-nowrap">
+                smarter, and built just for you. All it takes is a quick download to get started.
               </p>
             </div>
 
@@ -126,26 +126,22 @@ const SectionOne = () => {
 // ============ SECTION 2: SAVINGS PLANS (2 Cards) ============
 const SectionTwo = () => {
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-white">
+    <section className="py-12 sm:py-16 lg:py-5 bg-white mb-5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Centered Header (2 lines) */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 leading-tight">
-            Choose Your Business
+        <div className="text-center mb-6 sm:mb-12 lg:mb-1">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-3xl font-medium text-gray-900 leading-tight">
+            Why save with myStash?
           </h2>
-          <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 leading-tight">
-            Savings Strategy
-          </h2>
+          
         </div>
 
         {/* Centered Subtext (2 lines) */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-600 leading-relaxed">
-            Flexible savings solutions designed to optimize
+        <div className="text-center mb-8 sm:mb-12 lg:mb-10">
+          <p className="text-sm sm:text-base lg:text-lg xl:text-base text-gray-600 leading-relaxed">
+            Built to help you save better, not harder
           </p>
-          <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-600 leading-relaxed">
-            your business cash flow and growth potential
-          </p>
+         
         </div>
 
         {/* Two Cards Grid */}
@@ -308,12 +304,12 @@ const SectionFour = () => {
             {/* Updated Button with Link and icon */}
             <Link
               href={buttonPath}
-              className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-2.5 sm:py-3 px-6 sm:px-8 rounded-full sm:rounded-4xl flex items-center justify-center transition-colors duration-200"
+              className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2.5 sm:py-2 px-6 sm:px-2 rounded-full sm:rounded-4xl flex items-center justify-center transition-colors duration-200"
             >
               <img
                 src={DUMMY_FRAME6_ICON}
                 alt="arrow"
-                className="w-4 h-4 sm:w-5 sm:h-5 mr-2"
+                className="w-6 h-6 sm:w-7 sm:h-7 mr-2"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src =

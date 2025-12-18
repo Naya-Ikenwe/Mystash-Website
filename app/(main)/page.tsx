@@ -225,7 +225,7 @@ const PillIcon = () => (
   <img
     src={DUMMY_BUTTON_ICON}
     alt="CTA Arrow"
-    className="w-5 h-5 mr-2 object-contain"
+    className="w-6 h-6 mr-3 object-contain"
     onError={(e) => {
       e.currentTarget.onerror = null;
       e.currentTarget.src = "https://placehold.co/16x16/7C3AED/FFFFFF?text=>>";
@@ -240,7 +240,7 @@ const PillButtonWithIcon = ({ text }: { text: string }) => {
   return (
     <Link
       href={path}
-      className="inline-flex items-center text-purple-700 text-sm border border-purple-100 bg-purple-100 px-5 py-2 rounded-full hover:bg-purple-200 transition-colors"
+      className="inline-flex items-center text-purple-700 text-base border border-purple-100 bg-purple-100 px-3 py-2 rounded-full hover:bg-purple-200 transition-colors"
     >
       <PillIcon />
       {text}
@@ -266,12 +266,12 @@ const FeatureCard = ({
 
   return (
     <div
-      className="relative flex flex-col p-3 sm:p-5 bg-white transition-shadow duration-300 rounded-xl h-full min-h-[360px] border border-gray-200 overflow-hidden"
+      className="relative flex flex-col p-4 sm:p-6 bg-white transition-shadow duration-300 rounded-xl h-full min-h-[360px] border border-gray-200 overflow-hidden w-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div
-        className="absolute bottom-0 right-0 z-10" 
+        className="absolute bottom-0 right-0 z-10"
         initial={{ x: "120%", opacity: 0 }}
         animate={{ x: isHovered ? "0%" : "120%", opacity: isHovered ? 1 : 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
@@ -288,14 +288,14 @@ const FeatureCard = ({
           }}
         />
       </motion.div>
-      <div className="flex flex-col grow text-left relative z-20">
+      <div className="flex flex-col grow text-left relative z-20 pr-4">
         <h3 className="text-xl font-semibold text-gray-900 mb-0 mt-0">
           {title}
         </h3>
-        <p className="text-sm text-gray-600 mb-0 max-w-[85%] mt-3 leading-snug">
+        <p className="text-sm text-gray-600 mb-0 max-w-[80%] mt-3 leading-snug">
           {description}
         </p>
-        <div className="mt-auto mr-4">{ctaContent}</div>
+        <div className="mt-auto">{ctaContent}</div>
       </div>
     </div>
   );
@@ -303,10 +303,8 @@ const FeatureCard = ({
 
 const PaymentFeatureCard = () => {
   return (
-    <div className="relative flex flex-col p-3 sm:p-5 bg-white transition-shadow duration-300 rounded-xl h-full min-h-[360px] border border-gray-200 overflow-hidden">
-      {/* Removed pr-0 sm:pr-0 */}
+    <div className="relative flex flex-col p-4 sm:p-6 bg-white transition-shadow duration-300 rounded-xl h-full min-h-[360px] border border-gray-200 overflow-hidden w-full">
       <div className="absolute bottom-0 right-0 z-0 opacity-70">
-        {/* Changed from bottom-2 right-4 to bottom-0 right-0 */}
         <img
           src={DUMMY_CARD_2_IMAGE}
           alt="Payment icon"
@@ -318,22 +316,21 @@ const PaymentFeatureCard = () => {
           }}
         />
       </div>
-      <div className="flex flex-col grow text-left relative z-20">
+      <div className="flex flex-col grow text-left relative z-20 pr-4">
         <h3 className="text-xl font-semibold text-gray-900 mb-0 mt-0">
           Fast Payment anytime, anywhere
         </h3>
-        <p className="text-sm text-gray-600 mb-0 max-w-[85%] mt-3 leading-snug">
+        <p className="text-sm text-gray-600 mb-0 max-w-[80%] mt-3 leading-snug">
           Simplify how you pay-fast, secure and effortless transactions
         </p>
-        <div className="mt-auto mr-4">
-          {" "}
-          {/* Changed from no margin to mr-4 */}
+        <div className="mt-auto">
           <PillButtonWithIcon text="Payment" />
         </div>
       </div>
     </div>
   );
 };
+
 // --- Section 3 Components ---
 const SectionThreePartOne = () => {
   return (
@@ -341,7 +338,7 @@ const SectionThreePartOne = () => {
       {/* 1a: Left Content */}
       <div className="w-full md:w-1/2">
         <div className="flex justify-between items-start mb-4">
-          <p className="text-xs font-semibold mb-5  text-gray-700 border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
+          <p className="text-xs font-medium mb-5  text-black border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
             • Newly Added Product •
           </p>
         </div>
@@ -350,7 +347,7 @@ const SectionThreePartOne = () => {
             For Salary Earners
           </span>
         </div>
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+        <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">
           Get Quick Loan
         </h2>
         <p className="text-lg text-gray-800 mb-6 leading-relaxed ">
@@ -361,7 +358,7 @@ const SectionThreePartOne = () => {
           on Loan
         </p>
 
-        <PillButtonWithIcon text="Explore Features" />
+        <PillButtonWithIcon text="Learn More" />
       </div>
       {/* 1b: Right Image */}
       <div className="w-full md:w-1/2 flex justify-center">
@@ -379,6 +376,7 @@ const SectionThreePartOne = () => {
     </div>
   );
 };
+
 const SectionThreePartTwo = () => {
   return (
     <div className="flex flex-col md:flex-row items-center gap-8 md:-ml-8 lg:-ml-12">
@@ -397,7 +395,7 @@ const SectionThreePartTwo = () => {
       </div>
       {/* 2b: Right Content */}
       <div className="w-full md:w-1/2">
-        <p className="text-xs font-semibold mb-15  text-gray-700 border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
+        <p className="text-xs font-medium mb-15  text-black border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
           • Newly Added Product •
         </p>
 
@@ -411,7 +409,7 @@ const SectionThreePartTwo = () => {
           empower smarter wealth growth
         </p>
 
-        <PillButtonWithIcon text="Learn About Security" />
+        <PillButtonWithIcon text="Learn More" />
       </div>
     </div>
   );
@@ -463,7 +461,7 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
   const firstLetter = testimonial.name.charAt(0).toUpperCase();
 
   return (
-    <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200 shadow-sm hover:shadow-lg transition-shadow min-h-[280px] flex flex-col">
+    <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200 shadow-[0_8px_16px_0_rgba(0,0,0,0.1),0_0_30px_0_rgba(0,0,0,0.06)_inset] hover:shadow-[0_12px_24px_0_rgba(0,0,0,0.15),0_0_30px_0_rgba(0,0,0,0.08)_inset] transition-all duration-300 min-h-[240px] flex flex-col relative mb-2">
       {/* Message */}
       <p className="text-gray-700 leading-relaxed mb-6 grow">
         "{testimonial.message}"
@@ -489,7 +487,7 @@ const SectionFive = () => {
   const [isReversing, setIsReversing] = useState(false);
 
   // Calculate total width needed for all testimonials (card width + gap)
-  const cardWidth = 384; // w-96 = 384px
+  const cardWidth = 320; // reduced width so cards are a bit shorter/tighter
   const gap = 24; // gap-6 = 24px
   const totalWidth = (cardWidth + gap) * testimonials.length;
 
@@ -502,7 +500,7 @@ const SectionFive = () => {
   }, []);
   return (
     // Section is full-bleed; header constrained inside
-    <section className="w-full bg-white py-8 md:py-12">
+    <section className="w-full bg-white py-8 md:py-3">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - constrained */}
         <div className="text-center mb-12">
@@ -590,56 +588,67 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        {/* Updated Image Section - Wider and Closer to Left */}
-        <div className="absolute top-0 right-0 w-3/5 h-full order-1 md:order-2 flex items-center justify-start pl-20">
-          {/* Changed from w-1/2 to w-3/5 and pl-8 to pl-4 */}
-          <div className="w-full h-full max-w-none rounded-l-xl flex items-center justify-center overflow-hidden">
+        {/* Updated Image Section - move slightly more right and increase width */}
+        <div className="absolute top-0 right-0 w-2/3 h-full order-1 md:order-2 flex items-center justify-end pr-24">
+          <div className="w-full h-full max-w-none rounded-l-xl flex items-center justify-end overflow-hidden">
             <img
               src={DUMMY_HERO_IMAGE}
               alt="Hero Visual"
-              className="w-full h-full object-contain  scale-100" // scale-110 makes it larger
+              className="w-[95%] h-[95%] object-contain scale-105 -mr-50 mt-10"
             />
           </div>
         </div>
       </section>
-      {/* Section 2: Features Grid */}
+      {/* Section 2: Features Grid - UPDATED */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-12 md:pb-10 bg-white">
-  <div className="text-center max-w-3xl mx-auto mb-12">
-    <p className="text-sm font-semibold text-black mb-2 border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
-      • Our Products •
-    </p>
-    <h2 className="text-sm sm:text-2xl font-bold text-gray-700 mb-4 text-center">
-      Designed to help you{" "}
-      <span className="text-gray-300">save smarter,</span> spend efficiently,{" "}
-      <span className="text-gray-300">plan</span><br />
-      strategically, and give loans — all through secure, innovative<br />
-      tools and trusted financial partnerships.
-    </h2>
-    <p className="text-lg text-gray-600">
-      Select the product that fits your needs and apply today.
-    </p>
-  </div>
-  <div className="grid md:grid-cols-3 gap-8">
-    <FeatureCard
-      imagePath={DUMMY_CARD_1_IMAGE}
-      title="Activate your Smart Savings"
-      description="Set automatic savings in USD or NGN directly, from your income or daily spending."
-      ctaContent={<PillButtonWithIcon text="Start Saving" />}
-    />
-    <PaymentFeatureCard />
-    <FeatureCard
-      imagePath={DUMMY_CARD_3_IMAGE}
-      title="Budget Smarter, Spend Better"
-      description="Automatically save in ISD or NGN, plan, budget and grow your money efficiently."
-      ctaContent={<PillButtonWithIcon text="Budget" />}
-    />
-  </div>
-</section>
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <p className="text-sm font-medium text-black mb-2 border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
+            • Our Product •
+          </p>
+          <h2 className="text-sm sm:text-2xl font-bold text-gray-800 mb-4 text-center">
+            Designed to help you{" "}
+            <span className="text-gray-400">save smarter,</span> spend efficiently,{" "}
+            <span className="text-gray-400">plan</span><br />
+            <span className="text-gray-400">strategically,</span> and give loans — all through secure, innovative<br />
+            tools and trusted financial partnerships.
+          </h2>
+          <p className="text-lg text-gray-600">
+            Select the product that fits your needs and apply today.
+          </p>
+        </div>
+        
+        {/* Updated grid with increased column width */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-1">
+            <FeatureCard
+              imagePath={DUMMY_CARD_1_IMAGE}
+              title="Activate your Smart Savings"
+              description="Set automatic savings in USD or NGN directly, from your income or daily spending."
+              ctaContent={<PillButtonWithIcon text="Start Saving" />}
+            />
+          </div>
+          
+          <div className="lg:col-span-1">
+            <PaymentFeatureCard />
+          </div>
+          
+          <div className="lg:col-span-1">
+            <FeatureCard
+              imagePath={DUMMY_CARD_3_IMAGE}
+              title="Budget Smarter, Spend Better"
+              description="Automatically save in ISD or NGN, plan, budget and grow your money efficiently."
+              ctaContent={<PillButtonWithIcon text="Budget" />}
+            />
+          </div>
+        </div>
+      </section>
+      
       {/* Section 3: Additional Features */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 bg-white">
         <SectionThreePartOne />
         <SectionThreePartTwo />
       </section>
+      
       {/* Section 4: Icon Features */}
       <FeaturesSection
         title="With myStash you get"

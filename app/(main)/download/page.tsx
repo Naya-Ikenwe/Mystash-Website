@@ -11,7 +11,7 @@ export default function DownloadPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2 mt-5">
               Get started
             </h2>
             <h2 className="text-3xl font-bold text-gray-900 ">
@@ -41,7 +41,7 @@ export default function DownloadPage() {
 
                 <div className="absolute left-1/2 -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                    <span className="text-purple-600 font-bold">1</span>
+                    <span className="text-gray-800 font-bold">1</span>
                   </div>
                 </div>
 
@@ -81,7 +81,7 @@ export default function DownloadPage() {
 
                 <div className="absolute left-1/2 -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                    <span className="text-purple-600 font-bold">2</span>
+                    <span className="text-gray-800 font-bold">2</span>
                   </div>
                 </div>
 
@@ -114,7 +114,7 @@ export default function DownloadPage() {
 
                 <div className="absolute left-1/2 -translate-x-1/2 mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
-                    <span className="text-purple-600 font-bold">3</span>
+                    <span className="text-gray-800 font-bold">3</span>
                   </div>
                 </div>
 

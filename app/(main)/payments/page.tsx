@@ -8,19 +8,19 @@ import FeaturesSection from "../../components/FeaturesSection";
 import ContactFormSection from "../../components/ContactFormSection";
 
 // Dummy Image Path for Payments Page
-const DUMMY_PAYMENTS_HERO_IMAGE = "/images/paymentcards.svg";
+const DUMMY_PAYMENTS_HERO_IMAGE = "/images/realpaymentcards.svg";
 
 const DownloadButton = () => (
   <Link 
     href="/download" 
-    className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200"
+    className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-2 px-2 rounded-4xl flex items-center justify-center transition-colors duration-200"
   >
     <img
       src="/icons/Frame5.svg"
       alt="Download app icon"
-      className="w-6 h-6 mr-4"
+      className="w-7 h-7 mr-4"
     />
-    <span>Download app</span>
+    <span className="mr-2">Download app</span>
   </Link>
 );
 
@@ -35,15 +35,15 @@ export default function PaymentsPage() {
             <div className="w-full md:w-1/2 order-2 md:order-1 mt-10 text-center md:text-left z-10 md:-ml-8">
               {/* Simple Pill Header */}
               <div className="inline-flex items-center justify-center mb-8 md:justify-start">
-                <span className="text-sm font-semibold text-purple-500 bg-purple-100 border border-gray-200 px-6 py-2 rounded-full">
+                <span className="text-sm font-medium text-purple-500 bg-purple-100 border border-gray-200 px-6 py-1 rounded-full">
                   • Payments •
                 </span>
               </div>
 
               {/* Simple Header Text */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 mb-4">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 mb-6">
                 <span className="block">Transaction made</span>
-                <span className="block font-semibold">beyond Borders</span>
+                <span className="block font-semibold ">beyond Borders</span>
               </h1>
 
               <p className="mt-4 text-xl text-gray-600 max-w-lg mx-auto md:mx-0">
@@ -64,7 +64,7 @@ export default function PaymentsPage() {
             <img
               src={DUMMY_PAYMENTS_HERO_IMAGE}
               alt="Payments Hero Visual"
-              className="w-full h-full object-contain scale-115 ml-20"
+              className="w-full h-full object-contain scale-100 mr-25 mb-5"
             />
           </div>
         </div>
@@ -72,7 +72,7 @@ export default function PaymentsPage() {
 
       {/* We'll add Sections 2-5 here later */}
       {/* Section 2: Payment Methods */}
-      <section className="py-16 bg-white">
+      <section className="mb-12 -mt-5 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           {/* Centered Header (single line) */}
           <div className="text-center mb-2">
@@ -212,14 +212,14 @@ export default function PaymentsPage() {
               <img
                 src="/images/paymentlast.svg"
                 alt="Payment Benefits"
-                className="w-full h-auto rounded-lg"
+                className="w-full h-auto "
               />
             </div>
 
             {/* Right Div - Content */}
             <div className="lg:w-1/2 flex flex-col justify-center ml-4 -mt-15 items-start">
              <div className="inline-flex items-center justify-center mb-2 md:justify-start">
-                <span className="text-sm font-semibold text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
+                <span className="text-sm font-medium text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
                   • Payment clarity at every step 
                 </span>
               </div>

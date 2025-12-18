@@ -36,36 +36,40 @@ export default function InvestmentsPage() {
     <div className="min-h-screen ">
       {/* Section 1 - Hero Section */}
       <section
-        className="h-[90vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        className="h-[90vh] flex items-center justify-center bg-cover bg-center bg-no-repeat "
         style={{
           backgroundImage: "url('/images/investmentbackground.svg')",
         }}
       >
-        <div className="text-center max-w-4xl mx-auto px-4 -mt-40">
-          <div className="inline-flex items-center justify-center mb-4 md:justify-start">
-            <span className="text-sm font-semibold text-purple-500 bg-purple-100 border border-gray-200 px-6 py-2 mt-10 rounded-full">
+        <div className="text-center max-w-4xl mx-auto px-4 -mt-45 pr-20">
+          <div className="inline-flex items-center justify-center mb-4 md:justify-start ">
+            <span className="text-sm font-medium text-purple-500 bg-purple-100 border border-gray-200 px-6 py-2 mt-10 rounded-full">
               • Investment •
             </span>
           </div>
-          <h1 className="text-6xl font-semibold text-black mb-2  leading-tight">
+          <h1 className="text-6xl font-semibold text-black mb-6 leading-[1]">
             Grow your Wealth with
             <br />
             ease and purpose
           </h1>
-          <p className="text-xl text-black mb-8 leading-relaxed">
+          <p className="text-xl text-black mb-8 leading-[1.5">
             Effortlessly grow and diversify your portfolio, no idle funds, just
             <br />
             progress with smarter and automated investing
           </p>
-          <button className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-3 px-8 rounded-4xl flex items-center justify-center mx-auto transition-colors duration-200">
-            <img src="/icons/Frame6.svg" alt="arrow" className="w-6 h-6 mr-20" />
+          <button className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2  rounded-4xl flex items-center justify-center mx-auto transition-colors duration-200">
+            <img
+              src="/icons/Frame6.svg"
+              alt="arrow"
+              className="w-8 h-8 mr-20 ml-2"
+            />
             <p className="mr-20"> Start Investing</p>
           </button>
         </div>
       </section>
 
       {/* Section 2 - Features Section */}
-      <div className="bg-white pb-3 ">
+      <div className="bg-white pb-3 pt-7">
         <FeaturesSection
           title="Here's Why Investing With us Just Feels Right"
           description="We've made it easier for anyone to get started."
@@ -82,7 +86,7 @@ export default function InvestmentsPage() {
               <img
                 src="/images/leftinv.svg"
                 alt="Investment Growth"
-                className="w-full h-auto rounded-lg"
+                className="w-full h-auto "
               />
             </div>
 
@@ -91,13 +95,13 @@ export default function InvestmentsPage() {
               {/* Pill Header with dot inside */}
               <div className="mb-6">
                 <span className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 tracking-wide bg-purple-200 border border-purple-200 rounded-full px-4 py-2">
-                  <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                  Why you should invest with us
+                 
+                  • Why you should invest with us
                 </span>
               </div>
 
               {/* Three-line Header */}
-              <h2 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 leading-tight">
                 Get up to 20% ROI in just 12
                 <br />
                 months, with flexible interest
@@ -106,13 +110,13 @@ export default function InvestmentsPage() {
               </h2>
 
               {/* Button with same icon as Section 1 */}
-              <button className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-3 px-8 rounded-4xl flex items-center justify-center transition-colors duration-200">
+              <button className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2  rounded-4xl flex items-center justify-center transition-colors duration-200">
                 <img
                   src="/icons/Frame6.svg"
                   alt="arrow"
-                  className="w-6 h-6 mr-2"
+                  className="w-8 h-8 mr-4 ml-2"
                 />
-                Start Investing
+               <p className="mr-4">Start Investing</p> 
               </button>
             </div>
           </div>
@@ -134,7 +138,7 @@ export default function InvestmentsPage() {
         amountPlaceholder="Minimum ₦1,000,000.00 naira"
         tenureQuestion="Investment duration?"
         tenurePlaceholder="Select duration"
-        calculateButtonText="Calculate Returns"
+        calculateButtonText="Calculate ROI"
         calculateButtonIcon="/icons/Frame6.svg"
         resultBoxTitle="Interest"
         // Optional callbacks
