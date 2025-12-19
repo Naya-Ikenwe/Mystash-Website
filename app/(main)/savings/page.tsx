@@ -15,7 +15,7 @@ export default function SavingsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Section 1: Hero Section */}
-      <section className="relative w-full min-h-[100vh]">
+      <section className="relative w-full min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-25 ">
           <div className="flex flex-col md:flex-row items-center">
             <div className="w-full md:w-1/2 order-2 md:order-1 -ml-15 mt-10 text-center md:text-left z-10">

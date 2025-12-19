@@ -100,19 +100,19 @@ const BUSINESS_DROPDOWN_ITEMS: DropdownItem[] = [
 // Company dropdown items (new - 3 items as requested)
 const COMPANY_DROPDOWN_ITEMS: DropdownItem[] = [
   { 
-    iconPath: DUMMY_COMPANY_ICON_1, 
+    iconPath: DUMMY_BUSINESS_ICON_1, 
     title: 'About Us', 
     subtitle: 'Learn more about our mission',
     href: '/company/about' 
   },
   { 
-    iconPath: DUMMY_COMPANY_ICON_2, 
+    iconPath: DUMMY_BUSINESS_ICON_2, 
     title: 'Blog', 
     subtitle: 'Latest news and insights', 
     href: '/company/blog'
   },
   { 
-    iconPath: DUMMY_COMPANY_ICON_3, 
+    iconPath: DUMMY_BUSINESS_ICON_3, 
     title: 'FAQ', 
     subtitle: 'Frequently asked questions',
     href: '/company/faq' 

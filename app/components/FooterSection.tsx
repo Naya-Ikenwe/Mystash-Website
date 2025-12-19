@@ -5,7 +5,7 @@ import React from "react";
 
 const FooterSection = () => {
   const DUMMY_LOGO = "/logo/mystashlogo.svg";
-  const DUMMY_LOCATION_ICON = "/icons/location.svg";
+  const DUMMY_LOCATION_ICON = "/icons/loanflag.svg";
   const DUMMY_LOCATION_ICON_2 = "/icons/u.slogo.svg";
   const DUMMY_SOCIAL_ICON_1 = "/icons/instagram.svg";
   const DUMMY_SOCIAL_ICON_2 = "/icons/linkedin.svg";

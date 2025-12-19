@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 // Define the form data type
 interface FormData {
@@ -30,25 +31,25 @@ interface FormData {
 
 // Dummy icon paths
 const DUMMY_BACK_ICON = "/icons/formback.svg";
-const DUMMY_PHONE_ICON = "/icons/phone-icon.svg";
+const DUMMY_PHONE_ICON = "/icons/loanflag.svg";
 
 // File Upload Component with Webcam Support
 interface FileUploadProps {
   title: string;
-  description: string;
   value: File | null;
   onChange: (file: File | null) => void;
   accept?: string;
   allowWebcam?: boolean;
+  showPreview?: boolean; // New prop to control preview visibility
 }
 
 const FileUploadArea = ({
   title,
-  description,
   value,
   onChange,
   accept = "image/*",
   allowWebcam = true,
+  showPreview = true, // Default to showing preview
 }: FileUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -301,11 +302,7 @@ const FileUploadArea = ({
   };
 
   return (
-    <div className="space-y-4">
-      <div>
-        <h3 className="text-lg font-medium text-gray-700 mb-1">{title}</h3>
-        <p className="text-sm text-gray-500">{description}</p>
-      </div>
+    <div className="space-y-6">
       <input
         type="file"
         ref={fileInputRef}
@@ -429,62 +426,64 @@ const FileUploadArea = ({
       {/* Upload Area */}
       {value ? (
         <div className="space-y-4">
-          {/* File Preview Container - Dashed Box */}
-          <div className="border-2 border-dashed border-green-300 rounded-lg p-6 bg-green-50">
-            {/* File Preview */}
-            <div className="flex items-center justify-center mb-4">
-              {value.type.startsWith("image/") ? (
-                <div className="relative">
-                  <img
-                    src={URL.createObjectURL(value)}
-                    alt="Preview"
-                    className="w-32 h-32 object-cover rounded-lg border border-gray-300"
-                  />
-                </div>
-              ) : (
-                <div className="w-32 h-32 bg-gray-100 rounded-lg border border-gray-300 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-3xl mb-2">
-                      {value.type === "application/pdf"
-                        ? "📄"
-                        : value.name.toLowerCase().endsWith(".doc") ||
-                          value.name.toLowerCase().endsWith(".docx")
-                        ? "📝"
-                        : value.name.toLowerCase().endsWith(".xls") ||
-                          value.name.toLowerCase().endsWith(".xlsx")
-                        ? "📊"
-                        : "📎"}
-                    </div>
-                    <div
-                      className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        value.type === "application/pdf"
-                          ? "bg-red-100 text-red-700"
+          {/* Only show preview box if showPreview is true */}
+          {showPreview && (
+            <div className="border-2 border-dashed border-green-300 rounded-lg p-6 bg-green-50">
+              {/* File Preview */}
+              <div className="flex items-center justify-center mb-4">
+                {value.type.startsWith("image/") ? (
+                  <div className="relative">
+                    <img
+                      src={URL.createObjectURL(value)}
+                      alt="Preview"
+                      className="w-32 h-32 object-cover rounded-lg border border-gray-300"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-32 h-32 bg-gray-100 rounded-lg border border-gray-300 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-3xl mb-2">
+                        {value.type === "application/pdf"
+                          ? "📄"
                           : value.name.toLowerCase().endsWith(".doc") ||
                             value.name.toLowerCase().endsWith(".docx")
-                          ? "bg-blue-100 text-blue-700"
+                          ? "📝"
                           : value.name.toLowerCase().endsWith(".xls") ||
                             value.name.toLowerCase().endsWith(".xlsx")
-                          ? "bg-green-100 text-green-700"
-                          : "bg-gray-100 text-gray-700"
-                      }`}
-                    >
-                      {value.type === "application/pdf"
-                        ? "PDF"
-                        : value.name.toLowerCase().endsWith(".doc") ||
-                          value.name.toLowerCase().endsWith(".docx")
-                        ? "Word"
-                        : value.name.toLowerCase().endsWith(".xls") ||
-                          value.name.toLowerCase().endsWith(".xlsx")
-                        ? "Excel"
-                        : "File"}
+                          ? "📊"
+                          : "📎"}
+                      </div>
+                      <div
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          value.type === "application/pdf"
+                            ? "bg-red-100 text-red-700"
+                            : value.name.toLowerCase().endsWith(".doc") ||
+                              value.name.toLowerCase().endsWith(".docx")
+                            ? "bg-blue-100 text-blue-700"
+                            : value.name.toLowerCase().endsWith(".xls") ||
+                              value.name.toLowerCase().endsWith(".xlsx")
+                            ? "bg-green-100 text-green-700"
+                            : "bg-gray-100 text-gray-700"
+                        }`}
+                      >
+                        {value.type === "application/pdf"
+                          ? "PDF"
+                          : value.name.toLowerCase().endsWith(".doc") ||
+                            value.name.toLowerCase().endsWith(".docx")
+                          ? "Word"
+                          : value.name.toLowerCase().endsWith(".xls") ||
+                            value.name.toLowerCase().endsWith(".xlsx")
+                          ? "Excel"
+                          : "File"}
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* File Summary - SEPARATE BOX BELOW */}
+          {/* File Summary - ALWAYS SHOWN */}
           <div className="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
             <div className="flex items-center justify-between">
               {/* Left side - File info with Completed pill next to it */}
@@ -495,7 +494,7 @@ const FileUploadArea = ({
                       {value.name}
                     </p>
                     {/* Completed pill moved here, next to file name */}
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 flex-shrink-0">
+                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 shrink-0">
                       <div className="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
                       Completed
                     </span>
@@ -509,7 +508,7 @@ const FileUploadArea = ({
               {/* Right side - Delete button */}
               <button
                 onClick={handleDelete}
-                className="ml-4 p-2 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg transition-colors flex items-center justify-center flex-shrink-0"
+                className="ml-4 p-2 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg transition-colors flex items-center justify-center shrink-0"
                 title="Delete file"
               >
                 <svg
@@ -553,7 +552,7 @@ const FileUploadArea = ({
                   Click to upload or drag and drop
                 </p>
                 <p className="text-sm text-gray-500">
-                  PNG, JPG, PDF, DOC, XLS up to 10MB
+                  You can upload jpeg,png, or pdf files
                 </p>
               </div>
             </div>
@@ -604,7 +603,7 @@ const FileUploadArea = ({
   );
 };
 
-// Success Modal Component
+// Better approach using React state
 const SuccessModal = ({
   isOpen,
   onClose,
@@ -612,7 +611,11 @@ const SuccessModal = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
+  const [imgError, setImgError] = useState(false);
+  
   if (!isOpen) return null;
+
+  const SUCCESS_ICON = "/icons/successmodalicon.svg";
 
   return (
     <>
@@ -624,38 +627,49 @@ const SuccessModal = ({
 
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
         <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-auto p-10 text-center pointer-events-auto">
+          {/* Icon container */}
           <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-8">
-            <svg
-              className="w-10 h-10 text-purple-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
+            {imgError ? (
+              // Fallback SVG when image fails to load
+              <svg
+                className="w-10 h-10 text-purple-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            ) : (
+              // Try to load the image first
+              <img
+                src={SUCCESS_ICON}
+                alt="Success"
+                className="w-10 h-10"
+                onError={() => setImgError(true)}
               />
-            </svg>
+            )}
           </div>
 
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Application Submitted!
+            Loan Application Successful!
           </h2>
 
           <p className="text-gray-600 mb-8 text-lg">
-            Your loan application has been successfully submitted. We will
-            review your application and get back to you within 24 hours.
+            Please check your email for confirmation or spam folder
           </p>
 
-          <p className="text-sm text-gray-500 mb-8">
-            For enquiries, contact us at{" "}
+          <p className="text-base text-gray-500 mb-8"> {/* Changed from text-sm to text-base */}
+            For enquiries, or assistance; please call{" "}
             <a
               href="mailto:support@mystash.com"
-              className="text-purple-600 hover:text-purple-700 font-medium"
+              className="text-gray-800 font-bold" //{/* Added font-bold */}
             >
-              support@mystash.com
+              +2348131462292
             </a>
           </p>
 
@@ -714,18 +728,15 @@ function LoanDetailsContent() {
   const steps = [
     {
       number: 1,
-      title: "Personal Information",
-      description: "Basic details about yourself",
+      text: "Personal Details",
     },
     {
       number: 2,
-      title: "Upload Documents",
-      description: "Upload required documents",
+      text: "KYC Documents",
     },
     {
       number: 3,
-      title: "Bank & Agreement",
-      description: "Finalize your loan application",
+      text: "Bank Details",
     },
   ];
 
@@ -797,70 +808,86 @@ function LoanDetailsContent() {
     }
   };
 
+  const getStepStatus = (stepNumber: number) => {
+    if (stepNumber === currentStep) return "current";
+    if (stepNumber < currentStep) return "completed";
+    return "upcoming";
+  };
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white pt-6"> {/* Added 25px padding-top */}
       <SuccessModal
         isOpen={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}
       />
 
-      {/* Page-specific full-width background so the logo has the full header on this page */}
-      <div className="fixed top-0 left-0 right-0 z-0 bg-white h-24 pointer-events-none" />
+      {/* Main Content */}
+      <div className="flex min-h-screen">
+        {/* Left Sidebar - 50% width */}
+        <div className="w-1/2 bg-white pl-16 pr-8 py-8">
+          <div className="max-w-lg">
+            {/* MyStash Logo */}
+            <div className="mb-10">
+              <Link href="/">
+                <img
+                  src="/logo/mystashlogo.svg"
+                  alt="MyStash Home"
+                  className="h-10 w-auto"
+                />
+              </Link>
+            </div>
 
-      {/* Main Content - Removed logo from header since it's in layout */}
-      <div className="flex min-h-[calc(100vh-120px)] pt-16">
-        {/* Left Sidebar */}
-        <div className="w-1/3 bg-gray-50 pl-16 pr-8 py-8">
-          <div className="max-w-sm">
-            <h1 className="text-4xl font-bold text-gray-900 mb-3">
-              Complete Your Application
+            <h1 className="text-4xl font-bold text-gray-900 mb-2 mt-25">
+              We've Got a Payday Loan for <span className="text-purple-600">You!</span> 
             </h1>
-            <p className="text-gray-600 mb-10 text-lg">
-              Follow these simple steps to finalize your loan request
+            <p className="text-2xl text-gray-600 mb-12">
+              Apply now- Loan approved in 5 minutes
             </p>
 
-            <div className="space-y-10">
-              {steps.map((step, index) => (
-                <div key={step.number} className="flex items-center space-x-6">
-                  <div className="flex flex-col items-center relative">
-                    <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold transition-all duration-300 ${
-                        currentStep === step.number
-                          ? "bg-purple-600 text-white shadow-lg shadow-purple-500/50"
-                          : currentStep > step.number
-                          ? "bg-purple-500 text-white shadow-lg shadow-purple-500/30"
-                          : "bg-white border border-gray-300 text-gray-400"
-                      }`}
-                    >
-                      {step.number}
+            {/* Steps with reduced spacing and smaller circles */}
+            <div className="space-y-8"> {/* Reduced from space-y-10 to space-y-8 */}
+              {steps.map((step, index) => {
+                const status = getStepStatus(step.number);
+                
+                return (
+                  <div key={step.number} className="flex items-center space-x-6">
+                    <div className="flex flex-col items-center relative">
+                      <div
+                        className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-semibold transition-all duration-300 ${
+                          status === "current"
+                            ? "bg-gray-200 text-gray-700 border-2 border-gray-300"
+                            : status === "completed"
+                            ? "bg-gray-300 text-gray-700 border-2 border-gray-400" // Changed to gray for completed steps
+                            : "bg-white border-2 border-gray-300 text-gray-400"
+                        }`}
+                      >
+                        {step.number}
+                      </div>
+                      {index < steps.length - 1 && (
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0.5 h-12 bg-gray-300"></div> //{/* Reduced height from h-16 to h-12 */}
+                      )}
                     </div>
-                    {index < steps.length - 1 && (
-                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0.5 h-14 bg-gray-300"></div>
-                    )}
-                  </div>
 
-                  <div className="flex-1 pt-1">
-                    <h3
-                      className={`font-semibold text-2xl ${
-                        currentStep === step.number
-                          ? "text-gray-900"
-                          : "text-gray-600"
-                      }`}
-                    >
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-500 text-base mt-1 leading-tight">
-                      {step.description}
-                    </p>
+                    <div className="flex-1 pt-1">
+                      <h3
+                        className={`font-medium text-xl ${
+                          status === "current"
+                            ? "text-gray-900"
+                            : "text-gray-600"
+                        }`}
+                      >
+                        {step.text}
+                      </h3>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
 
-        {/* Right Content */}
-        <div className="flex-1 p-8">
+        {/* Right Content - 50% width with extra 5px padding-top */}
+        <div className="w-1/2 bg-gray-50 p-8 pt-18"> {/* Added pt-13 for extra 5px above right card section */}
           <div className="max-w-2xl mx-auto">
             {/* Step 1: Personal Information */}
             {currentStep === 1 && (
@@ -868,12 +895,12 @@ function LoanDetailsContent() {
                 <div className="flex items-center justify-between mb-10">
                   <button
                     onClick={handleBack}
-                    className=""
+                    className="p-3"
                   >
                     <img
                       src={DUMMY_BACK_ICON}
                       alt="Back"
-                      className="w-20 h-20"
+                      className="w-20 h-20" // Already 20px × 20px
                       onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.src =
@@ -883,33 +910,33 @@ function LoanDetailsContent() {
                   </button>
 
                   <div className="text-center flex-1">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-3">
-                      {steps[0].title}
+                    <h2 className="text-4xl font-bold text-purple-500 mb-2">
+                      Personal Details
                     </h2>
-                    <p className="text-gray-600 text-lg">
-                      {steps[0].description}
+                    <p className="text-lg text-gray-600">
+                      "Fill in your request- cash is on the way"
                     </p>
                   </div>
 
-                  <div className="w-6"></div>
+                  <div className="w-10"></div>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-8">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-lg font-medium text-gray-900 mb-2">
                       Employment Type
                     </label>
                     <input
                       type="text"
                       value={formData.employmentType}
                       readOnly
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-gray-50 text-gray-700"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-gray-50 text-gray-700 text-lg"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-lg font-medium text-gray-900 mb-2">
                         First Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -920,12 +947,12 @@ function LoanDetailsContent() {
                           handleInputChange("firstName", e.target.value)
                         }
                         maxLength={50}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-lg font-medium text-gray-900 mb-2">
                         Last Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -936,14 +963,14 @@ function LoanDetailsContent() {
                           handleInputChange("lastName", e.target.value)
                         }
                         maxLength={50}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                         required
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-lg font-medium text-gray-900 mb-2">
                       Email <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -954,13 +981,13 @@ function LoanDetailsContent() {
                         handleInputChange("email", e.target.value)
                       }
                       maxLength={100}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-lg font-medium text-gray-900 mb-2">
                       Place of Work <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -971,14 +998,14 @@ function LoanDetailsContent() {
                         handleInputChange("placeOfWork", e.target.value)
                       }
                       maxLength={100}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                       required
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-lg font-medium text-gray-900 mb-2">
                         BVN <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -995,13 +1022,13 @@ function LoanDetailsContent() {
                         maxLength={11}
                         pattern="[0-9]{11}"
                         inputMode="numeric"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                         required
                       />
-                      <p className="text-xs text-gray-500 mt-1">11 digits required</p>
+                      <p className="text-sm text-gray-500 mt-1">11 digits required</p>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-lg font-medium text-gray-900 mb-2">
                         NIN <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -1018,16 +1045,16 @@ function LoanDetailsContent() {
                         maxLength={11}
                         pattern="[0-9]{11}"
                         inputMode="numeric"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                         required
                       />
-                      <p className="text-xs text-gray-500 mt-1">11 digits required</p>
+                      <p className="text-sm text-gray-500 mt-1">11 digits required</p>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-lg font-medium text-gray-900 mb-2">
                         Phone Number <span className="text-red-500">*</span>
                       </label>
                       <div className="relative">
@@ -1035,7 +1062,7 @@ function LoanDetailsContent() {
                           <img
                             src={DUMMY_PHONE_ICON}
                             alt="Phone"
-                            className="w-5 h-5 text-gray-400"
+                            className="w-9 h-9 -ml-1 text-gray-400"
                             onError={(e) => {
                               e.currentTarget.onerror = null;
                               e.currentTarget.src =
@@ -1043,7 +1070,7 @@ function LoanDetailsContent() {
                             }}
                           />
                         </div>
-                        <div className="absolute inset-y-0 left-8 w-px bg-gray-300"></div>
+                        <div className="absolute inset-y-0 left-10 w-px bg-gray-300"></div>
                         <input
                           type="tel"
                           placeholder="08012345678"
@@ -1058,14 +1085,14 @@ function LoanDetailsContent() {
                           maxLength={11}
                           pattern="[0-9]{11}"
                           inputMode="numeric"
-                          className="w-full border border-gray-300 rounded-lg pl-12 pr-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                          className="w-full border border-gray-300 rounded-lg pl-14 pr-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                           required
                         />
                       </div>
-                      <p className="text-xs text-gray-500 mt-1">11 digits required</p>
+                      <p className="text-sm text-gray-500 mt-1">11 digits required</p>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-lg font-medium text-gray-900 mb-2">
                         IPPIS <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -1076,7 +1103,7 @@ function LoanDetailsContent() {
                           handleInputChange("ippis", e.target.value)
                         }
                         maxLength={20}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                         required
                       />
                     </div>
@@ -1084,24 +1111,41 @@ function LoanDetailsContent() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-lg font-medium text-gray-900 mb-2">
                         Gender
                       </label>
-                      <select
-                        value={formData.gender}
-                        onChange={(e) =>
-                          handleInputChange("gender", e.target.value)
-                        }
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                      >
-                        <option value="">Select gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                      </select>
+                      <div className="relative">
+                        <select
+                          value={formData.gender}
+                          onChange={(e) =>
+                            handleInputChange("gender", e.target.value)
+                          }
+                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg"
+                        >
+                          <option value="">Select gender</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="other">Other</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                          <svg
+                            className="w-5 h-5 text-gray-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </div>
+                      </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-lg font-medium text-gray-900 mb-2">
                         Date of Birth
                       </label>
                       <input
@@ -1111,7 +1155,7 @@ function LoanDetailsContent() {
                           handleInputChange("dateOfBirth", e.target.value)
                         }
                         max={new Date().toISOString().split('T')[0]}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                       />
                     </div>
                   </div>
@@ -1121,7 +1165,7 @@ function LoanDetailsContent() {
                   <button
                     onClick={handleContinue}
                     disabled={!isStep1Complete()}
-                    className={`px-8 py-3 rounded-lg font-semibold ${
+                    className={`px-8 py-4 rounded-lg font-semibold text-lg ${
                       isStep1Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -1139,12 +1183,12 @@ function LoanDetailsContent() {
                 <div className="flex items-center justify-between mb-10">
                   <button
                     onClick={handleBack}
-                    className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="p-3"
                   >
                     <img
                       src={DUMMY_BACK_ICON}
                       alt="Back"
-                      className="w-6 h-6"
+                      className="w-20 h-20" // Changed from w-10 h-10 to w-20 h-20
                       onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.src =
@@ -1154,44 +1198,58 @@ function LoanDetailsContent() {
                   </button>
 
                   <div className="text-center flex-1">
-                    <h2 className="text-4xl font-bold text-gray-900 mb-3">
-                      {steps[1].title}
+                    <h2 className="text-4xl font-bold text-purple-600 mb-2">
+                      KYC Document
                     </h2>
-                    <p className="text-gray-600 text-xl">
-                      {steps[1].description}
+                    <p className="text-lg text-gray-600">
+                      You are already halfway completed
                     </p>
                   </div>
 
-                  <div className="w-6"></div>
+                  <div className="w-10"></div>
                 </div>
 
-                <div className="space-y-8">
-                  {/* Selfie Photo - Allow webcam */}
-                  <FileUploadArea
-                    title="Selfie Photo"
-                    description="Take a clear selfie showing your face"
-                    value={formData.selfieImage}
-                    onChange={(file) => handleFileUpload("selfieImage", file)}
-                    accept="image/*"
-                    allowWebcam={true}
-                  />
+                <div className="space-y-10">
+                  {/* Selfie Photo - Allow webcam WITH preview */}
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-xl font-medium text-gray-900 mb-2">
+                        Upload a face image
+                      </h3>
+                    </div>
+                    <FileUploadArea
+                      title="Selfie Photo"
+                      value={formData.selfieImage}
+                      onChange={(file) => handleFileUpload("selfieImage", file)}
+                      accept="image/*"
+                      allowWebcam={true}
+                      showPreview={true} // Show preview for selfie
+                    />
+                  </div>
 
-                  {/* ID Card - Disable webcam */}
-                  <FileUploadArea
-                    title="ID Card"
-                    description="Upload a clear photo of your government issued ID"
-                    value={formData.idCardImage}
-                    onChange={(file) => handleFileUpload("idCardImage", file)}
-                    accept="image/*,.pdf,.doc,.docx,.xls,.xlsx"
-                    allowWebcam={false}
-                  />
+                  {/* ID Card - Disable webcam WITHOUT preview */}
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-xl font-medium text-gray-900 mb-2">
+                        Upload your staff ID or Employment Letter
+                      </h3>
+                    </div>
+                    <FileUploadArea
+                      title="ID Card"
+                      value={formData.idCardImage}
+                      onChange={(file) => handleFileUpload("idCardImage", file)}
+                      accept="image/*,.pdf,.doc,.docx,.xls,.xlsx"
+                      allowWebcam={false}
+                      showPreview={false} // NO preview for ID card
+                    />
+                  </div>
                 </div>
 
                 <div className="flex justify-end mt-8">
                   <button
                     onClick={handleContinue}
                     disabled={!isStep2Complete()}
-                    className={`px-8 py-3 rounded-lg font-semibold text-lg ${
+                    className={`px-8 py-4 rounded-lg font-semibold text-lg ${
                       isStep2Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -1209,12 +1267,12 @@ function LoanDetailsContent() {
                 <div className="flex items-center justify-between mb-10">
                   <button
                     onClick={handleBack}
-                    className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="p-3"
                   >
                     <img
                       src={DUMMY_BACK_ICON}
                       alt="Back"
-                      className="w-6 h-6"
+                      className="w-20 h-20" // Changed from w-10 h-10 to w-20 h-20
                       onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.src =
@@ -1224,20 +1282,20 @@ function LoanDetailsContent() {
                   </button>
 
                   <div className="text-center flex-1">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-3">
-                      {steps[2].title}
+                    <h2 className="text-4xl font-bold text-purple-600 mb-3">
+                      Bank Details
                     </h2>
-                    <p className="text-gray-600 text-lg">
-                      {steps[2].description}
+                    <p className="text-lg text-gray-600">
+                      Help us process faster- add your salary account details.
                     </p>
                   </div>
 
-                  <div className="w-6"></div>
+                  <div className="w-10"></div>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-8">
                   <div>
-                    <label className="block text-base font-medium text-gray-700 mb-2">
+                    <label className="block text-lg font-medium text-gray-900 mb-2">
                       Select Bank Name <span className="text-red-500">*</span>
                     </label>
                     <select
@@ -1245,7 +1303,7 @@ function LoanDetailsContent() {
                       onChange={(e) =>
                         handleInputChange("bankName", e.target.value)
                       }
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                       required
                     >
                       <option value="">Select your bank</option>
@@ -1260,7 +1318,7 @@ function LoanDetailsContent() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-base font-medium text-gray-700 mb-2">
+                      <label className="block text-lg font-medium text-gray-900 mb-2">
                         Salary Account Number{" "}
                         <span className="text-red-500">*</span>
                       </label>
@@ -1278,13 +1336,13 @@ function LoanDetailsContent() {
                         maxLength={10}
                         pattern="[0-9]{10}"
                         inputMode="numeric"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                         required
                       />
-                      <p className="text-xs text-gray-500 mt-1">10 digits required</p>
+                      <p className="text-sm text-gray-500 mt-1">10 digits required</p>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-lg font-medium text-gray-900 mb-2">
                         Referral Code
                       </label>
                       <input
@@ -1295,13 +1353,13 @@ function LoanDetailsContent() {
                           handleInputChange("referralCode", e.target.value)
                         }
                         maxLength={20}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-lg font-medium text-gray-900 mb-2">
                       How did you hear about us?{" "}
                       <span className="text-red-500">*</span>
                     </label>
@@ -1310,7 +1368,7 @@ function LoanDetailsContent() {
                       onChange={(e) =>
                         handleInputChange("hearAboutUs", e.target.value)
                       }
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
                       required
                     >
                       <option value="">Select an option</option>
@@ -1325,7 +1383,7 @@ function LoanDetailsContent() {
                   </div>
 
                   <div className="bg-gray-50 rounded-lg p-6 mt-6">
-                    <p className="text-sm text-gray-600 leading-relaxed">
+                    <p className="text-base text-gray-600 leading-relaxed">
                       By clicking "SUBMIT", I consent to myStash obtaining information from
                       relevant third parties as may be neccessary, on my employment details,
                       salary payment, loans, and other related data, to decide on my loan
@@ -1347,12 +1405,12 @@ function LoanDetailsContent() {
                       onChange={(e) =>
                         handleInputChange("agreeToTerms", e.target.checked)
                       }
-                      className="mt-1 w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                      className="mt-1 w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
                       required
                     />
                     <label
                       htmlFor="agreeToTerms"
-                      className="text-sm text-gray-700"
+                      className="text-base text-gray-700"
                     >
                       I agree to receive updates, offers and markerting communication frm myStash{" "}
                       <span className="text-red-500">*</span>
@@ -1364,7 +1422,7 @@ function LoanDetailsContent() {
                   <button
                     onClick={handleContinue}
                     disabled={!isStep3Complete()}
-                    className={`px-8 py-3 rounded-lg font-semibold ${
+                    className={`px-8 py-4 rounded-lg font-semibold text-lg ${
                       isStep3Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"

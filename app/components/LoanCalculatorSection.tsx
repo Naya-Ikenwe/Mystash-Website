@@ -5,6 +5,9 @@ import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 
 interface LoanCalculatorSectionProps {
+  // Optional id for section targeting
+  id?: string;
+
   // Mode to distinguish between loan and investment
   mode?: "loan" | "investment";
 
@@ -26,12 +29,23 @@ interface LoanCalculatorSectionProps {
   calculateButtonIcon?: string;
   resultBoxTitle?: string;
 
+  // Loan amount limits (only for loan mode)
+  minLoanAmount?: number;
+  maxLoanAmount?: number;
+  
+  // Investment amount limits (only for investment mode)
+  minInvestmentAmount?: number;
+  maxInvestmentAmount?: number;
+
   // Optional callback functions
   onCalculate?: (amount: number, tenure: number, result: number) => void;
   onGetStarted?: () => void;
 }
 
 const LoanCalculatorSection = ({
+  // Optional id
+  id,
+
   // Mode with default
   mode = "loan",
 
@@ -42,7 +56,7 @@ const LoanCalculatorSection = ({
   description = "Calculate your monthly payments and find the right loan option for your financial situation.",
   buttonText = "Get Started Now",
   buttonHref = "#",
-  buttonIcon = "/icons/calculator-icon.svg",
+  buttonIcon = "/icons/Frame6.svg",
 
   // Calculator Section Defaults
   amountQuestion = "How much do you need?",
@@ -50,8 +64,16 @@ const LoanCalculatorSection = ({
   tenureQuestion = "For how long?",
   tenurePlaceholder = "Select loan tenure",
   calculateButtonText = "Calculate Repayment",
-  calculateButtonIcon = "/icons/calculate-icon.svg",
+  calculateButtonIcon = "/icons/Frame6.svg",
   resultBoxTitle = "Monthly Payment",
+
+  // Loan amount limits with defaults (only used in loan mode)
+  minLoanAmount = 30000,
+  maxLoanAmount = 5000000,
+  
+  // Investment amount limits (only used in investment mode - set to 0 for no limits)
+  minInvestmentAmount = 0,
+  maxInvestmentAmount = 0,
 
   // Callbacks
   onCalculate,
@@ -62,7 +84,12 @@ const LoanCalculatorSection = ({
   const [calculatedResult, setCalculatedResult] = useState<number | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [hoveredOption, setHoveredOption] = useState<string | null>(null);
+  const [amountError, setAmountError] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Get the appropriate limits based on mode
+  const getMinAmount = () => mode === "loan" ? minLoanAmount : minInvestmentAmount;
+  const getMaxAmount = () => mode === "loan" ? maxLoanAmount : maxInvestmentAmount;
 
   // Format amount with commas
   const formatAmount = (value: string) => {
@@ -70,14 +97,53 @@ const LoanCalculatorSection = ({
     return digits.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
+  // Parse amount from formatted string
+  const parseAmount = (formattedValue: string) => {
+    return parseInt(formattedValue.replace(/,/g, "")) || 0;
+  };
+
+  // Validate amount based on mode
+  const validateAmount = (value: string) => {
+    const amount = parseAmount(value);
+    const minAmount = getMinAmount();
+    const maxAmount = getMaxAmount();
+    
+    if (amount === 0) {
+      setAmountError("Please enter an amount");
+      return false;
+    }
+    
+    // Only apply minimum limit if it's set (non-zero)
+    if (minAmount > 0 && amount < minAmount) {
+      setAmountError(`Minimum amount is ₦${minAmount.toLocaleString()}`);
+      return false;
+    }
+    
+    // Only apply maximum limit if it's set (non-zero)
+    if (maxAmount > 0 && amount > maxAmount) {
+      setAmountError(`Maximum amount is ₦${maxAmount.toLocaleString()}`);
+      return false;
+    }
+    
+    setAmountError(null);
+    return true;
+  };
+
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formattedValue = formatAmount(e.target.value);
     setLoanAmount(formattedValue);
+    
+    // Validate as user types (but don't show error until they finish typing or try to calculate)
+    if (formattedValue) {
+      validateAmount(formattedValue);
+    } else {
+      setAmountError(null);
+    }
   };
 
   // Calculate based on mode
   const calculateResult = () => {
-    const amount = parseInt(loanAmount.replace(/,/g, "")) || 0;
+    const amount = parseAmount(loanAmount);
     const tenure = parseInt(loanTenure) || 0;
 
     if (amount === 0 || tenure === 0) return null;
@@ -96,10 +162,32 @@ const LoanCalculatorSection = ({
   };
 
   const handleCalculate = () => {
-    const amount = parseInt(loanAmount.replace(/,/g, "")) || 0;
+    // Clear any previous error
+    setAmountError(null);
+    
+    const amount = parseAmount(loanAmount);
     const tenure = parseInt(loanTenure) || 0;
+    
+    // Validate inputs
+    let isValid = true;
+    
+    if (!loanAmount) {
+      setAmountError("Please enter an amount");
+      isValid = false;
+    } else if (!validateAmount(loanAmount)) {
+      isValid = false;
+    }
+    
+    if (!loanTenure) {
+      // You could add tenure error handling here if needed
+      isValid = false;
+    }
+    
+    if (!isValid) {
+      return;
+    }
+    
     const result = calculateResult();
-
     setCalculatedResult(result);
 
     if (onCalculate && result !== null) {
@@ -140,8 +228,40 @@ const LoanCalculatorSection = ({
     };
   }, []);
 
+  // Add min and max attributes to input field for better UX
+  const handleAmountBlur = () => {
+    if (loanAmount) {
+      validateAmount(loanAmount);
+    }
+  };
+
+  // Generate placeholder text based on mode
+  const getAmountPlaceholder = () => {
+    const minAmount = getMinAmount();
+    const maxAmount = getMaxAmount();
+    
+    if (mode === "loan" && minAmount > 0 && maxAmount > 0) {
+      return `Enter loan amount (₦${minAmount.toLocaleString()} - ₦${maxAmount.toLocaleString()})`;
+    }
+    return amountPlaceholder;
+  };
+
+  // Generate range display text for loan mode only
+  const getRangeDisplay = () => {
+    const minAmount = getMinAmount();
+    const maxAmount = getMaxAmount();
+    
+    if (mode === "loan" && minAmount > 0 && maxAmount > 0) {
+      return `(₦${minAmount.toLocaleString()} - ₦${maxAmount.toLocaleString()})`;
+    }
+    return "";
+  };
+
   return (
-    <section className="w-full bg-white border-t border-gray-200 py-20 md:py-15">
+    <section 
+      className="w-full bg-white  py-20 md:py-15"
+      id={id} // Add the id prop here
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           {/* Left: Content - Vertically Centered */}
@@ -196,7 +316,7 @@ const LoanCalculatorSection = ({
                 {amountQuestion}
               </h3>
 
-              {/* Input Field */}
+              {/* Input Field with Error Handling */}
               <div className="mb-6">
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -204,12 +324,33 @@ const LoanCalculatorSection = ({
                   </div>
                   <input
                     type="text"
-                    placeholder={amountPlaceholder}
+                    placeholder={getAmountPlaceholder()}
                     value={loanAmount}
                     onChange={handleAmountChange}
-                    className="w-full bg-purple-50 border border-purple-100 rounded-lg pl-8 pr-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+                    onBlur={handleAmountBlur}
+                    className={`w-full bg-purple-50 border rounded-lg pl-8 pr-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors ${
+                      amountError ? 'border-red-300' : 'border-purple-100'
+                    }`}
+                    aria-describedby={amountError ? "amount-error" : undefined}
                   />
                 </div>
+                
+                {/* Error Message */}
+                {amountError && (
+                  <div id="amount-error" className="mt-2 text-sm text-red-600 flex items-center">
+                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                    {amountError}
+                  </div>
+                )}
+                
+                {/* Amount Range Info - Show only for loan mode with valid range */}
+                {mode === "loan" && !amountError && loanAmount && (
+                  <div className="mt-2 text-sm text-gray-500">
+                    Entered: ₦{parseAmount(loanAmount).toLocaleString()} {getRangeDisplay()}
+                  </div>
+                )}
               </div>
               
               {/* Mini Header Question - INCREASED TEXT SIZE */}
@@ -276,8 +417,9 @@ const LoanCalculatorSection = ({
 
               {/* Button - Lighter Purple Shade */}
               <button
-                className="w-full flex items-center bg-purple-100 text-purple-700 py-3 rounded-full hover:bg-purple-200 transition-colors duration-200 font-medium text-base mb-8"
+                className="w-full flex items-center bg-purple-100 text-purple-700 py-3 rounded-full hover:bg-purple-200 transition-colors duration-200 font-medium text-base mb-8 disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={handleCalculate}
+                disabled={!loanAmount || !loanTenure || !!amountError}
               >
                 <img
                   src={calculateButtonIcon}

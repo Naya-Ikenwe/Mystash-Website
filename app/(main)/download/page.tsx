@@ -39,7 +39,7 @@ export default function DownloadPage() {
                   </div>
                 </div>
 
-                <div className="absolute left-1/2 -translate-x-1/2 mt-2">
+                <div className="absolute left-1/2 -translate-x-1/2 -mt-2">
                   <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center">
                     <span className="text-gray-800 font-bold">1</span>
                   </div>

@@ -47,7 +47,7 @@ export default function InvestmentsPage() {
               • Investment •
             </span>
           </div>
-          <h1 className="text-6xl font-semibold text-black mb-6 leading-[1]">
+          <h1 className="text-6xl font-semibold text-black mb-6 leading-none">
             Grow your Wealth with
             <br />
             ease and purpose
