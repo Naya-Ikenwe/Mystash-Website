@@ -32,7 +32,7 @@ export default function PaymentsPage() {
       <section className="relative w-full min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
           <div className="flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2 order-2 md:order-1 mt-10 text-center md:text-left z-10 md:-ml-8">
+            <div className="w-full md:w-1/2 order-2 md:order-1 mt-10 text-center md:text-left z-10 md:-ml-13">
               {/* Simple Pill Header */}
               <div className="inline-flex items-center justify-center mb-8 md:justify-start">
                 <span className="text-sm font-medium text-purple-500 bg-purple-100 border border-gray-200 px-6 py-1 rounded-full">
@@ -41,7 +41,7 @@ export default function PaymentsPage() {
               </div>
 
               {/* Simple Header Text */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 mb-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-5xl font-semibold text-gray-900 mb-6">
                 <span className="block">Transaction made</span>
                 <span className="block font-semibold ">beyond Borders</span>
               </h1>

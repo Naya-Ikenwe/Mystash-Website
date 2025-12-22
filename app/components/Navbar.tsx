@@ -317,11 +317,11 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white">
+    <nav className="sticky top-0 z-50 bg-[#fafafa]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo - INCREASED SIZE */}
-          <div className="shrink-0">
+          <div className="shrink-0 -ml-9">
             <Link href="/" className="flex items-center">
               <img 
                 src={DUMMY_LOGO_PATH} 
@@ -354,7 +354,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-20 left-0 right-0 bg-white">
+          <div className="md:hidden absolute top-20 left-0 right-0 bg-[#fafafa]">
             <div className="px-4 py-6 space-y-4">
               {/* Mobile Navigation Links */}
               <MobileDropdownLink text="Personal" hasPlus items={PERSONAL_DROPDOWN_ITEMS} />

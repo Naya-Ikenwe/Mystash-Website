@@ -32,6 +32,7 @@ interface FormData {
 // Dummy icon paths
 const DUMMY_BACK_ICON = "/icons/formback.svg";
 const DUMMY_PHONE_ICON = "/icons/loanflag.svg";
+const DUMMY_DROPDOWN_ICON = "/icons/loandetailsdown.svg"; // Add this for dropdown icon
 
 // File Upload Component with Webcam Support
 interface FileUploadProps {
@@ -426,8 +427,8 @@ const FileUploadArea = ({
       {/* Upload Area */}
       {value ? (
         <div className="space-y-4">
-          {/* Only show preview box if showPreview is true */}
-          {showPreview && (
+          {/* For selfie (showPreview=true): Show green preview box */}
+          {showPreview ? (
             <div className="border-2 border-dashed border-green-300 rounded-lg p-6 bg-green-50">
               {/* File Preview */}
               <div className="flex items-center justify-center mb-4">
@@ -481,9 +482,79 @@ const FileUploadArea = ({
                 )}
               </div>
             </div>
+          ) : (
+            // For ID card (showPreview=false): Show regular dashed box with upload text
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-purple-400 transition-colors bg-gray-50">
+              <div className="flex flex-col items-center space-y-4">
+                <div className="flex items-center justify-center space-x-3">
+                  {/* Upload icon SVG */}
+                  <svg
+                    className="w-8 h-8 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    />
+                  </svg>
+                  <div className="text-left">
+                    <p className="text-base text-gray-700 font-medium">
+                      Click to upload or drag and drop
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      You can upload jpeg,png, or pdf files
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex space-x-3">
+                  <button
+                    type="button"
+                    onClick={handleBrowseFiles}
+                    className="px-4 py-2 bg-purple-600 text-white rounded-lg text-base font-medium hover:bg-purple-700 transition-colors"
+                  >
+                    Browse Files
+                  </button>
+                  
+                  {/* Conditionally show camera button */}
+                  {allowWebcam && (
+                    <button
+                      type="button"
+                      onClick={handleCameraClick}
+                      className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-700 rounded-lg text-base font-medium hover:bg-purple-200 transition-colors"
+                    >
+                      <svg
+                        className="w-4 h-4 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                      {isMobile ? "Take Photo" : "Open Webcam"}
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
           )}
 
-          {/* File Summary - ALWAYS SHOWN */}
+          {/* File Summary - ALWAYS SHOW BELOW the dashed box */}
           <div className="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
             <div className="flex items-center justify-between">
               {/* Left side - File info with Completed pill next to it */}
@@ -529,7 +600,7 @@ const FileUploadArea = ({
           </div>
         </div>
       ) : (
-        // Empty Upload Area
+        // Empty Upload Area (when no file is uploaded)
         <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-purple-400 transition-colors bg-gray-50">
           <div className="flex flex-col items-center space-y-4">
             <div className="flex items-center justify-center space-x-3">
@@ -857,14 +928,14 @@ function LoanDetailsContent() {
                           status === "current"
                             ? "bg-gray-200 text-gray-700 border-2 border-gray-300"
                             : status === "completed"
-                            ? "bg-gray-300 text-gray-700 border-2 border-gray-400" // Changed to gray for completed steps
+                            ? "bg-purple-300 text-gray-700 border-2 border-purple-400"
                             : "bg-white border-2 border-gray-300 text-gray-400"
                         }`}
                       >
                         {step.number}
                       </div>
                       {index < steps.length - 1 && (
-                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0.5 h-12 bg-gray-300"></div> //{/* Reduced height from h-16 to h-12 */}
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0.5 h-12 bg-purple-300"></div> //{/* Reduced height from h-16 to h-12 */}
                       )}
                     </div>
 
@@ -887,7 +958,7 @@ function LoanDetailsContent() {
         </div>
 
         {/* Right Content - 50% width with extra 5px padding-top */}
-        <div className="w-1/2 bg-gray-50 p-8 pt-18"> {/* Added pt-13 for extra 5px above right card section */}
+        <div className="w-1/2 p-8 pt-18"> {/* Removed bg-gray-50 */}
           <div className="max-w-2xl mx-auto">
             {/* Step 1: Personal Information */}
             {currentStep === 1 && (
@@ -930,7 +1001,7 @@ function LoanDetailsContent() {
                       type="text"
                       value={formData.employmentType}
                       readOnly
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-gray-50 text-gray-700 text-lg"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 text-lg" // Removed bg-gray-50
                     />
                   </div>
 
@@ -1127,20 +1198,17 @@ function LoanDetailsContent() {
                           <option value="female">Female</option>
                           <option value="other">Other</option>
                         </select>
-                        <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
-                          <svg
+                        <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                          <img
+                            src={DUMMY_DROPDOWN_ICON}
+                            alt="Dropdown"
                             className="w-5 h-5 text-gray-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 9l-7 7-7-7"
-                            />
-                          </svg>
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src =
+                                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E";
+                            }}
+                          />
                         </div>
                       </div>
                     </div>
@@ -1161,11 +1229,12 @@ function LoanDetailsContent() {
                   </div>
                 </div>
 
-                <div className="flex justify-end mt-8">
+                {/* Centered Continue Button - 383px × 50px */}
+                <div className="flex justify-center mt-8">
                   <button
                     onClick={handleContinue}
                     disabled={!isStep1Complete()}
-                    className={`px-8 py-4 rounded-lg font-semibold text-lg ${
+                    className={`w-[383px] h-[50px] rounded-lg font-semibold text-lg ${
                       isStep1Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -1188,7 +1257,7 @@ function LoanDetailsContent() {
                     <img
                       src={DUMMY_BACK_ICON}
                       alt="Back"
-                      className="w-20 h-20" // Changed from w-10 h-10 to w-20 h-20
+                      className="w-20 h-20"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.src =
@@ -1240,16 +1309,17 @@ function LoanDetailsContent() {
                       onChange={(file) => handleFileUpload("idCardImage", file)}
                       accept="image/*,.pdf,.doc,.docx,.xls,.xlsx"
                       allowWebcam={false}
-                      showPreview={false} // NO preview for ID card
+                      showPreview={false} // NO preview for ID card - dashed box remains
                     />
                   </div>
                 </div>
 
-                <div className="flex justify-end mt-8">
+                {/* Centered Continue Button - 383px × 50px */}
+                <div className="flex justify-center mt-8">
                   <button
                     onClick={handleContinue}
                     disabled={!isStep2Complete()}
-                    className={`px-8 py-4 rounded-lg font-semibold text-lg ${
+                    className={`w-[383px] h-[50px] rounded-lg font-semibold text-lg ${
                       isStep2Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -1272,7 +1342,7 @@ function LoanDetailsContent() {
                     <img
                       src={DUMMY_BACK_ICON}
                       alt="Back"
-                      className="w-20 h-20" // Changed from w-10 h-10 to w-20 h-20
+                      className="w-20 h-20"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.src =
@@ -1298,22 +1368,36 @@ function LoanDetailsContent() {
                     <label className="block text-lg font-medium text-gray-900 mb-2">
                       Select Bank Name <span className="text-red-500">*</span>
                     </label>
-                    <select
-                      value={formData.bankName}
-                      onChange={(e) =>
-                        handleInputChange("bankName", e.target.value)
-                      }
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
-                      required
-                    >
-                      <option value="">Select your bank</option>
-                      <option value="access">Access Bank</option>
-                      <option value="zenith">Zenith Bank</option>
-                      <option value="gtb">GTBank</option>
-                      <option value="firstbank">First Bank</option>
-                      <option value="uba">UBA</option>
-                      <option value="fidelity">Fidelity Bank</option>
-                    </select>
+                    <div className="relative">
+                      <select
+                        value={formData.bankName}
+                        onChange={(e) =>
+                          handleInputChange("bankName", e.target.value)
+                        }
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg"
+                        required
+                      >
+                        <option value="">Select your bank</option>
+                        <option value="access">Access Bank</option>
+                        <option value="zenith">Zenith Bank</option>
+                        <option value="gtb">GTBank</option>
+                        <option value="firstbank">First Bank</option>
+                        <option value="uba">UBA</option>
+                        <option value="fidelity">Fidelity Bank</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                        <img
+                          src={DUMMY_DROPDOWN_ICON}
+                          alt="Dropdown"
+                          className="w-5 h-5 text-gray-400"
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src =
+                              "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E";
+                          }}
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
@@ -1363,26 +1447,40 @@ function LoanDetailsContent() {
                       How did you hear about us?{" "}
                       <span className="text-red-500">*</span>
                     </label>
-                    <select
-                      value={formData.hearAboutUs}
-                      onChange={(e) =>
-                        handleInputChange("hearAboutUs", e.target.value)
-                      }
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
-                      required
-                    >
-                      <option value="">Select an option</option>
-                      <option value="google">Google</option>
-                      <option value="imstagram">Instagram</option>
-                      <option value="facebook">Facebook</option>
-                      <option value="twitter">Twitter</option>
-                      <option value="email_letter">Email letter</option>
-                      <option value="referrak">Referral</option>
-                      <option value="others">Others</option>
-                    </select>
+                    <div className="relative">
+                      <select
+                        value={formData.hearAboutUs}
+                        onChange={(e) =>
+                          handleInputChange("hearAboutUs", e.target.value)
+                        }
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg"
+                        required
+                      >
+                        <option value="">Select an option</option>
+                        <option value="google">Google</option>
+                        <option value="imstagram">Instagram</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="twitter">Twitter</option>
+                        <option value="email_letter">Email letter</option>
+                        <option value="referrak">Referral</option>
+                        <option value="others">Others</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                        <img
+                          src={DUMMY_DROPDOWN_ICON}
+                          alt="Dropdown"
+                          className="w-5 h-5 text-gray-400"
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src =
+                              "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E";
+                          }}
+                        />
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="bg-gray-50 rounded-lg p-6 mt-6">
+                  <div className="rounded-lg p-6 mt-6 border border-gray-200"> {/* Removed bg-gray-50 */}
                     <p className="text-base text-gray-600 leading-relaxed">
                       By clicking "SUBMIT", I consent to myStash obtaining information from
                       relevant third parties as may be neccessary, on my employment details,
@@ -1418,11 +1516,12 @@ function LoanDetailsContent() {
                   </div>
                 </div>
 
-                <div className="flex justify-end mt-8">
+                {/* Centered Submit Button - 383px × 50px */}
+                <div className="flex justify-center mt-8">
                   <button
                     onClick={handleContinue}
                     disabled={!isStep3Complete()}
-                    className={`px-8 py-4 rounded-lg font-semibold text-lg ${
+                    className={`w-[383px] h-[50px] rounded-lg font-semibold text-lg ${
                       isStep3Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"

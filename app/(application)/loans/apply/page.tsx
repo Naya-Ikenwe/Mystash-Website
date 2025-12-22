@@ -19,6 +19,9 @@ export default function LoanApplyPage() {
 
   const router = useRouter();
 
+  // Dummy back icon path
+  const DUMMY_BACK_ICON = "/icons/loanapplymodal.svg";
+
   // Loan amount limits
   const MIN_LOAN_AMOUNT = 30000;
   const MAX_LOAN_AMOUNT = 5000000;
@@ -48,14 +51,14 @@ export default function LoanApplyPage() {
 
     if (amount < MIN_LOAN_AMOUNT) {
       setAmountError(
-        `Minimum loan amount is ₦${MIN_LOAN_AMOUNT.toLocaleString()}`
+        `Minimum loan amount is ${MIN_LOAN_AMOUNT.toLocaleString()}`
       );
       return false;
     }
 
     if (amount > MAX_LOAN_AMOUNT) {
       setAmountError(
-        `Maximum loan amount is ₦${MAX_LOAN_AMOUNT.toLocaleString()}`
+        `Maximum loan amount is ${MAX_LOAN_AMOUNT.toLocaleString()}`
       );
       return false;
     }
@@ -183,28 +186,8 @@ export default function LoanApplyPage() {
                 </Link>
               </div>
 
-              {/* Breadcrumb Navigation - Increased text size */}
-              <div className="mb-5">
-                <button
-                  onClick={handleBack}
-                  className="inline-flex items-center text-lg text-gray-600 hover:text-purple-600 transition-colors group"
-                >
-                  <svg
-                    className="w-6 h-6 mr-2 group-hover:-translate-x- transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                  <span className="font-medium text-lg">Back to Loans</span>
-                </button>
-              </div>
+              {/* Back button without text */}
+             
 
               {/* Heading - Increased text size */}
               <div className="mb-8">
@@ -292,19 +275,16 @@ export default function LoanApplyPage() {
                   <label className="block text-xl font-medium text-gray-900 mb-3">
                     Loan Amount
                     <span className="text-lg text-gray-500 font-normal ml-2">
-                      (₦{MIN_LOAN_AMOUNT.toLocaleString()} - ₦
+                      ({MIN_LOAN_AMOUNT.toLocaleString()} -{" "}
                       {MAX_LOAN_AMOUNT.toLocaleString()})
                     </span>
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <span className="text-gray-500 text-xl">₦</span>
-                    </div>
                     <input
                       type="text"
                       value={loanAmount}
                       onChange={handleAmountChange}
-                      placeholder={`Input loan amount`}
+                      placeholder="Input loan amount"
                       maxLength={15}
                       pattern="[0-9,]*"
                       inputMode="numeric"
@@ -318,7 +298,7 @@ export default function LoanApplyPage() {
                           e.preventDefault();
                         }
                       }}
-                      className={`w-full bg-white border rounded-lg pl-14 pr-5 py-4 text-gray-700 text-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
+                      className={`w-full bg-white border rounded-lg px-5 py-4 text-gray-700 text-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
                         amountError ? "border-red-300" : "border-gray-300"
                       }`}
                       required
@@ -410,8 +390,8 @@ export default function LoanApplyPage() {
                   </div>
                 </div>
 
-                {/* Disclaimer - Increased text size */}
-                <div className="bg-gray-50 rounded-lg p-5 mt-6">
+                {/* Disclaimer - Removed background color */}
+                <div className="rounded-lg p-5 mt-6 border border-gray-200">
                   <p className="text-base text-gray-600 leading-relaxed">
                     By clicking "APPLY NOW", I consent to myStash obtaining
                     information from relevant third parties as may be necessary,
@@ -460,21 +440,18 @@ export default function LoanApplyPage() {
             <div className="relative pt-12 px-10">
               <button
                 onClick={() => setShowModal(false)}
-                className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center cursor-pointer hover:bg-purple-200 transition-colors absolute left-10 top-12"
+                className="w-15 h-15 rounded-full flex items-center justify-center cursor-pointer hover:bg-purple-200 bg-purple-100 transition-colors absolute left-10 top-12"
               >
-                <svg
-                  className="w-6 h-6 text-purple-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
+                <img
+                  src={DUMMY_BACK_ICON}
+                  alt="Back"
+                  className="w-25 h-25 px-2 py-2 text-purple-600"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src =
+                      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 19l-7-7 7-7'%3E%3C/path%3E%3C/svg%3E";
+                  }}
+                />
               </button>
 
               <div className="text-center pt-14 pb-10">
@@ -496,7 +473,7 @@ export default function LoanApplyPage() {
                     Loan Amount
                   </h3>
                   <p className="text-xl font-medium ml-5 text-gray-900">
-                    ₦{loanAmount}
+                    {loanAmount}
                   </p>
                 </div>
 
@@ -514,7 +491,7 @@ export default function LoanApplyPage() {
                     Repayment Amount
                   </h3>
                   <p className="text-xl font-medium ml-5 text-gray-900">
-                    ₦{calculateRepayableAmount()}
+                    {calculateRepayableAmount()}
                   </p>
                 </div>
 

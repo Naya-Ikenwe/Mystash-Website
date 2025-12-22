@@ -178,12 +178,12 @@ const ContactFormSection = () => {
               <div className="text-center pt-6">
                 <button
                   type="submit"
-                  className="inline-flex items-center pr-15 justify-center bg-purple-100 font-semibold text-purple-500 px-8 py-3 rounded-full hover:bg-purple-400 hover:text-white transition-colors font-medium text-base"
+                  className="inline-flex items-center pr-15 justify-center bg-purple-100 font-semibold text-purple-500 px-2 py-3 rounded-full hover:bg-purple-400 hover:text-white transition-colors font-medium text-base"
                 >
                   <img
                     src={DUMMY_SUBMIT_ICON}
                     alt="Send"
-                    className="w-6 h-6 mr-15 object-contain"
+                    className="w-7 h-7 mr-17 object-contain"
                     onError={(e) => {
                       e.currentTarget.onerror = null;
                       e.currentTarget.src =
@@ -193,7 +193,7 @@ const ContactFormSection = () => {
                  <p className="mr-10">Submit enquiry</p> 
                 </button>
               </div>
-            </form>
+            </form>n
           </div>
         </div>
       </div>
