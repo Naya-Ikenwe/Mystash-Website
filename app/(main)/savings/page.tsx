@@ -27,12 +27,12 @@ export default function SavingsPage() {
               </div>
 
               {/* Simple Header Text (no vertical carousel) */}
-              <h1 className="text-4xl sm:text-5xl lg:text-5xl font-semibold text-gray-900 mb-4">
+              <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-semibold text-gray-900 mb-4">
                 <span className="block whitespace-nowrap mb-1">A Smarter way to Grow</span>
                 <span className="block font-semibold">Your Savings</span>
               </h1>
 
-              <p className="mt-4 text-xl text-gray-600 max-w-lg mx-auto md:mx-0">
+              <p className="mt-4 text-[22px] text-gray-600 max-w-xl mx-auto md:mx-0">
                 Saving money isn't always easy, we get it. But with <br />
                 myStash, it's simpler, smarter, and built just for you <br />
                 All it takes is a quick download to get started.
@@ -51,7 +51,7 @@ export default function SavingsPage() {
             <img
               src={DUMMY_SAVINGS_HERO_IMAGE}
               alt="Savings Hero Visual"
-              className="w-full h-full object-contain scale-88 mb-10"
+              className="w-full h-full object-contain scale-88 mb-10 -ml-15"
             />
           </div>
         </div>

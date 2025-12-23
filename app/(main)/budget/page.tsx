@@ -33,11 +33,11 @@ export default function BudgetPage() {
                 </span>
               </div>
               {/* Simple Header Text */}
-              <h1 className="text-4xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 mt-5">
+              <h1 className="text-4xl sm:text-4xl lg:text-[56px] font-semibold text-gray-900 mb-4 mt-5">
                 <span className="block mb-2">Smarter spending</span>
                 <span className="block font-semibold">starts with you</span>
               </h1>
-              <p className="mt-4 text-xl text-gray-600 max-w-lg mx-auto md:mx-0">
+              <p className="mt-4 text-[22px] text-gray-600 max-w-xl mx-auto md:mx-0">
                 Transform the way you spend with intelligent <br />
                 features that simplify budgeting, enhance <br />
                 clarity, and give total control. <br />
@@ -54,7 +54,7 @@ export default function BudgetPage() {
             <img
               src={DUMMY_BUDGET_HERO_IMAGE}
               alt="Budget Hero Visual"
-              className="w-full h-full object-contain scale-95 mr-30"
+              className="w-full h-full object-contain scale-96 mr-30"
             />
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function BudgetPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-1">
               Using Budget is effortless
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-base text-gray-600">
               Enjoy an easier, smarter Budgeting experience
             </p>
           </div>
@@ -97,7 +97,7 @@ export default function BudgetPage() {
                 </div>
                 {/* Right - Text: More space from center line */}
                 <div className="w-1/2 pl-12 ml-17">
-                  <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2 ">
+                  <h3 className="text-[22px] font-semibold text-purple-500 mb-4 mt-2 ">
                     Create Your Virtual Account
                   </h3>
                   <p className="text-gray-800 leading-relaxed text-sm">
@@ -115,7 +115,7 @@ export default function BudgetPage() {
                 <div className="w-1/2 flex justify-end">
                   <div className="pr-12 text-left">
                     {/* CHANGED: Container with padding, text-left for alignment */}
-                    <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2">
+                    <h3 className="text-[22px] font-semibold text-purple-500 mb-4 mt-2">
                       Create Pockets
                     </h3>
                     <p className="text-gray-800 leading-relaxed text-sm">
@@ -163,7 +163,7 @@ export default function BudgetPage() {
                 </div>
                 {/* Right - Text */}
                 <div className="w-1/2 pl-12 ml-17">
-                  <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2">
+                  <h3 className="text-[22px] font-semibold text-purple-500 mb-4 mt-2">
                     Add Settlement Account
                   </h3>
                   <p className="text-gray-800 leading-relaxed text-sm">
@@ -182,7 +182,7 @@ export default function BudgetPage() {
                 <div className="w-1/2 flex justify-end">
                   <div className="pr-7 text-left">
                     {/* CHANGED: Container with padding, text-left for alignment */}
-                    <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2 ">
+                    <h3 className="text-[22px] font-semibold text-purple-500 mb-4 mt-2 ">
                       Deposit Fund
                     </h3>
                     <p className="text-gray-800 leading-relaxed text-sm">
@@ -236,7 +236,7 @@ export default function BudgetPage() {
 
                 {/* Right - Text: More space from center line */}
                 <div className="w-1/2 pl-20">
-                  <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2">
+                  <h3 className="text-[22px] font-semibold text-purple-500 mb-4 mt-2">
                     Spend from Pocket
                   </h3>
                   <p className="text-gray-800 leading-relaxed text-sm">
@@ -295,7 +295,7 @@ export default function BudgetPage() {
             {/* Right Div - Content */}
             <div className="lg:w-1/2 flex flex-col justify-center ml-4 items-start">
               {/* Three-line Header (no pill header) */}
-              <span className=" mb-5 text-sm font-medium text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
+              <span className=" mb-5 text-sm font-[580] text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
                 •  Budgeting made crystal clear
               </span>
               <h2 className="text-3xl font-bold text-gray-900 mb-6 leading-tight">
@@ -334,7 +334,7 @@ export default function BudgetPage() {
   {/* FAQ Items */}
   <div className="space-y-0">
     {/* Question 1 */}
-    <div className="border-b border-gray-100 py-6">
+    <div className="border-b border-gray-200 py-6">
       <button 
         className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
         onClick={() => setIsOpen1(!isOpen1)}
@@ -361,7 +361,7 @@ export default function BudgetPage() {
     </div>
     
     {/* Question 2 */}
-    <div className="border-b border-gray-100 py-6">
+    <div className="border-b border-gray-200 py-6">
       <button 
         className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
         onClick={() => setIsOpen2(!isOpen2)}
@@ -387,7 +387,7 @@ export default function BudgetPage() {
     </div>
     
     {/* Question 3 */}
-    <div className="border-b border-gray-100 py-6">
+    <div className="border-b border-gray-200 py-6">
       <button 
         className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
         onClick={() => setIsOpen3(!isOpen3)}
@@ -413,7 +413,7 @@ export default function BudgetPage() {
     </div>
     
     {/* Question 4 */}
-    <div className="border-b border-gray-100 py-6">
+    <div className="border-b border-gray-200 py-6">
       <button 
         className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
         onClick={() => setIsOpen4(!isOpen4)}
@@ -439,7 +439,7 @@ export default function BudgetPage() {
     </div>
     
     {/* Question 5 */}
-    <div className="border-b border-gray-100 py-6">
+    <div className="border-b border-gray-200 py-6">
       <button 
         className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
         onClick={() => setIsOpen5(!isOpen5)}

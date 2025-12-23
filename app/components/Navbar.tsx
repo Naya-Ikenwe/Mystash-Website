@@ -20,9 +20,9 @@ const DUMMY_BUSINESS_ICON_3 = '/icons/navdropdown1.svg';
 const DUMMY_BUSINESS_ICON_4 = '/icons/navdropdown3.svg';
 
 // Company dropdown icons (new)
-const DUMMY_COMPANY_ICON_1 = '/icons/company/about.svg'; // For About Us
-const DUMMY_COMPANY_ICON_2 = '/icons/company/blog.svg';   // For Blog
-const DUMMY_COMPANY_ICON_3 = '/icons/company/faq.svg';    // For FAQ
+const DUMMY_COMPANY_ICON_1 = '/icons/company1.svg'; // For About Us
+const DUMMY_COMPANY_ICON_2 = '/icons/company2.svg';   // For Blog
+const DUMMY_COMPANY_ICON_3 = '/icons/company3.svg';    // For FAQ
 
 // --- DATA STRUCTURES for the 5-Item Dropdown Menu ---
 interface DropdownItem {
@@ -100,19 +100,19 @@ const BUSINESS_DROPDOWN_ITEMS: DropdownItem[] = [
 // Company dropdown items (new - 3 items as requested)
 const COMPANY_DROPDOWN_ITEMS: DropdownItem[] = [
   { 
-    iconPath: DUMMY_BUSINESS_ICON_1, 
+    iconPath: DUMMY_COMPANY_ICON_1, 
     title: 'About Us', 
     subtitle: 'Learn more about our mission',
     href: '/company/about' 
   },
   { 
-    iconPath: DUMMY_BUSINESS_ICON_2, 
+    iconPath: DUMMY_COMPANY_ICON_2, 
     title: 'Blog', 
     subtitle: 'Latest news and insights', 
     href: '/company/blog'
   },
   { 
-    iconPath: DUMMY_BUSINESS_ICON_3, 
+    iconPath: DUMMY_COMPANY_ICON_3, 
     title: 'FAQ', 
     subtitle: 'Frequently asked questions',
     href: '/company/faq' 
@@ -339,7 +339,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Buttons */}
-          <div className="hidden md:flex items-center space-x-3">
+          <div className="hidden md:flex items-center space-x-3 -mr-16">
             <NavButtons />
           </div>
 

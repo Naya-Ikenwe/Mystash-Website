@@ -12,7 +12,7 @@ const DUMMY_SECTION1_IMAGE = "/images/businessbudgethero.svg";
 const DUMMY_HERO_BACKGROUND = "/images/businessherobg.svg";
 const DUMMY_FRAME6_ICON = "/icons/Frame6.svg";
 
-// Download Button Component (use same style as business payments hero)
+// Download Button Component 
 const DownloadButton = () => {
   return (
     <Link
@@ -22,14 +22,14 @@ const DownloadButton = () => {
       <img
         src="/icons/Frame5.svg"
         alt="Download app icon"
-        className="w-7 h-7 mr-17"
+        className="w-7 h-7 mr-21"
         onError={(e) => {
           e.currentTarget.onerror = null;
           e.currentTarget.src =
             "https://placehold.co/20x20/FFFFFF/7C3AED?text=→";
         }}
       />
-      <span className="mr-19">Download app</span>
+      <span className="mr-25">Download app</span>
     </Link>
   );
 };
@@ -39,23 +39,23 @@ const SectionOne = () => {
   return (
     <section className="relative w-full min-h-screen bg-white overflow-hidden py-12 sm:py-16 lg:py-20">
       {/* Background Image - Full width and height (from business payments hero) */}
-      <div
+     {/* <div
         className="absolute inset-0 w-full h-full z-0"
         style={{
           backgroundImage: `url(${DUMMY_HERO_BACKGROUND})`,
-          backgroundSize: "contain",
+          backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
         <div className=""></div>
-      </div>
+      </div> */}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Content - Centered */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] sm:min-h-[70vh]">
           {/* Pill Header (dot before and after the text) */}
-          <div className="text-center mb-6 sm:mb-8">
+          <div className="text-center mb-6 sm:mb-6">
             <p className="text-sm font-medium text-purple-400 mb-2 border border-gray-50 rounded-full px-4 py-1 inline-block bg-purple-100">
               • Budget •
             </p>
@@ -71,7 +71,7 @@ const SectionOne = () => {
                 <span>Business to </span>
                 <span className="relative inline-block text-purple-600">
                   spend
-                  <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1.5 bg-purple-400 rounded-full"></span>
+                  <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1.5 bg-purple-600 rounded-full"></span>
                 </span>
                 <span> starts here</span>
               </h1>
@@ -98,7 +98,7 @@ const SectionOne = () => {
             <img
               src={DUMMY_SECTION1_IMAGE}
               alt="Business Budget Dashboard"
-              className="w-full h-auto object-contain rounded-lg sm:rounded-xl lg:rounded-2xl shadow-md sm:shadow-lg"
+              className="w-full h-full object-cover rounded-lg sm:rounded-xl lg:rounded-5xl"
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src =
@@ -154,8 +154,8 @@ const SectionTwo = () => {
                 </div>
               </div>
               {/* Right - Text: More space from center line */}
-              <div className="w-1/2 pl-12 ml-17">
-                <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2 ">
+              <div className="w-1/2 pl-12 ml-17 mt-5">
+                <h3 className="text-2xl font-semibold text-purple-500 mb-4 mt-2 ">
                   Create Your Virtual Account
                 </h3>
                 <p className="text-gray-800 leading-relaxed text-sm">
@@ -172,7 +172,7 @@ const SectionTwo = () => {
               {/* Left - Text: Move the entire container RIGHT */}
               <div className="w-1/2 flex justify-end">
                 <div className="pr-12 text-left">
-                  <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2">
+                  <h3 className="text-2xl font-semibold text-purple-500 mb-4 mt-2">
                     Create Pockets
                   </h3>
                   <p className="text-gray-800 leading-relaxed text-sm">
@@ -220,7 +220,7 @@ const SectionTwo = () => {
               </div>
               {/* Right - Text */}
               <div className="w-1/2 pl-12 ml-17">
-                <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2">
+                <h3 className="text-2xl font-semibold text-purple-500 mb-4 mt-2">
                   Add Settlement Account
                 </h3>
                 <p className="text-gray-800 leading-relaxed text-sm">
@@ -239,7 +239,7 @@ const SectionTwo = () => {
               <div className="w-1/2 flex justify-end">
                 <div className="pr-7 text-left">
                   {/* CHANGED: Container with padding, text-left for alignment */}
-                  <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2 ">
+                  <h3 className="text-2xl font-semibold text-purple-500 mb-4 mt-2 ">
                     Deposit Fund
                   </h3>
                   <p className="text-gray-800 leading-relaxed text-sm">
@@ -293,7 +293,7 @@ const SectionTwo = () => {
 
               {/* Right - Text: More space from center line */}
               <div className="w-1/2 pl-20">
-                <h3 className="text-xl font-semibold text-purple-500 mb-4 mt-2">
+                <h3 className="text-2xl font-semibold text-purple-500 mb-4 mt-2">
                   Spend from Pocket
                 </h3>
                 <p className="text-gray-800 leading-relaxed text-sm">
@@ -363,9 +363,9 @@ const SectionFour = () => {
       </div>
 
       {/* FAQ Items */}
-      <div className="space-y-0">
+      <div className="space-y-0 -mt-8">
         {/* Question 1 */}
-        <div className="border-b border-gray-100 py-6">
+        <div className="border-b border-gray-200 py-6">
           <button 
             className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
             onClick={() => setIsOpen1(!isOpen1)}
@@ -392,7 +392,7 @@ const SectionFour = () => {
         </div>
         
         {/* Question 2 */}
-        <div className="border-b border-gray-100 py-6">
+        <div className="border-b border-gray-200 py-6">
           <button 
             className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
             onClick={() => setIsOpen2(!isOpen2)}
@@ -418,7 +418,7 @@ const SectionFour = () => {
         </div>
         
         {/* Question 3 */}
-        <div className="border-b border-gray-100 py-6">
+        <div className="border-b border-gray-200 py-6">
           <button 
             className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
             onClick={() => setIsOpen3(!isOpen3)}
@@ -444,7 +444,7 @@ const SectionFour = () => {
         </div>
         
         {/* Question 4 */}
-        <div className="border-b border-gray-100 py-6">
+        <div className="border-b border-gray-200 py-6">
           <button 
             className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
             onClick={() => setIsOpen4(!isOpen4)}
@@ -470,7 +470,7 @@ const SectionFour = () => {
         </div>
         
         {/* Question 5 */}
-        <div className="border-b border-gray-100 py-6">
+        <div className="border-b border-gray-200 py-6">
           <button 
             className="flex items-center justify-between w-full text-left group  rounded-lg px-4 py-3 transition-all duration-200"
             onClick={() => setIsOpen5(!isOpen5)}

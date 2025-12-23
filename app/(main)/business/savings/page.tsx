@@ -31,9 +31,9 @@ const DownloadButton = () => {
       <img
         src="/icons/Frame5.svg"
         alt="Download app icon"
-        className="w-7 h-7 mr-17"
+        className="w-7 h-7 mr-21"
       />
-      <span className="mr-19">Download app</span>
+      <span className="mr-25">Download app</span>
     </Link>
   );
 };
@@ -43,18 +43,18 @@ const SectionOne = () => {
   return (
     <section className="relative w-full min-h-screen bg-white overflow-hidden">
       {/* Background Image - Full width and height */}
-      <div
+      {/* <div
         className="absolute inset-0 w-full h-full z-0"
         style={{
           backgroundImage: `url(${DUMMY_HERO_BACKGROUND})`,
-          backgroundSize: "contain",
+          backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
-      >
+      > */}
         {/* Optional overlay for better text readability */}
-        <div className=""></div>
-      </div>
+        {/* <div className=""></div>
+      </div> */}
 
       <div className="relative z-10 py-12 sm:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,7 +78,7 @@ const SectionOne = () => {
                   <span className="relative inline-block text-purple-600">
                     Savings
                     {/* Underline only under "Savings" */}
-                    <div className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1.5 bg-purple-400 rounded-full"></div>
+                    <div className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1.5 bg-purple-600 rounded-full"></div>
                   </span>
                 </h1>
               </div>
@@ -95,22 +95,22 @@ const SectionOne = () => {
             </div>
 
             {/* Download Button */}
-            <div className="mb-12 sm:mb-16">
+            <div className="mb-12 sm:mb-6">
               <DownloadButton />
             </div>
 
             {/* Image under the button */}
             <div className="w-full max-w-3xl sm:max-w-4xl lg:max-w-5xl mx-auto mt-6 sm:mt-8">
-              <img
-                src={DUMMY_SECTION1_IMAGE}
-                alt="Business Savings Dashboard"
-                className="w-full h-auto object-contain rounded-lg sm:rounded-xl lg:rounded-2xl shadow-md sm:shadow-lg"
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src =
-                    "https://placehold.co/1200x600/7C3AED/FFFFFF?text=Business+Savings+Dashboard";
-                }}
-              />
+             <img
+              src={DUMMY_SECTION1_IMAGE}
+              alt="Business Savings Dashboard"
+              className="w-full h-full object-cover rounded-lg sm:rounded-xl lg:rounded-5xl "
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src =
+                  "https://placehold.co/1200x600/7C3AED/FFFFFF?text=Business+Payment+Dashboard";
+              }}
+            />
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@ const SectionTwo = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Centered Header (2 lines) */}
         <div className="text-center mb-6 sm:mb-12 lg:mb-1">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-3xl font-medium text-gray-900 leading-tight">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-[27px] font-semibold text-gray-900 leading-tight">
             Why save with myStash?
           </h2>
           
@@ -147,7 +147,7 @@ const SectionTwo = () => {
         {/* Two Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Card 1 */}
-          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-2xl rounded-tr-2xl flex flex-col h-[573px] w-8/9 mx-auto relative overflow-visible">
+          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-4xl rounded-tr-4xl flex flex-col h-[573px] w-8/9 mx-auto relative overflow-visible">
             <div className="pt-4 text-center flex flex-col grow px-6">
               {/* Recentered text content */}
               <div className="grow flex flex-col justify-center">
@@ -186,7 +186,7 @@ const SectionTwo = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-2xl rounded-tr-2xl flex flex-col h-[573px] w-8/9 mx-auto relative overflow-visible">
+          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-4xl rounded-tr-4xl flex flex-col h-[573px] w-8/9 mx-auto relative overflow-visible">
             <div className="pt-4 text-center flex flex-col grow px-6">
               {/* Recentered text content */}
               <div className="grow flex flex-col justify-center">
@@ -286,9 +286,8 @@ const SectionFour = () => {
           <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start text-center lg:text-left order-1 lg:order-2 mb-8 lg:mb-0">
             {/* Pill Header with dot inside */}
             <div className="mb-4 sm:mb-6">
-              <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-purple-600 tracking-wide bg-purple-200 border border-purple-200 rounded-full px-3 sm:px-4 py-1.5 sm:py-2">
-                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-purple-600 rounded-full"></div>
-                Why you should save with us
+              <span className="inline-flex items-center gap-2 text-xs sm:text-[13px] font-medium text-purple-600 tracking-wide bg-purple-200 border border-purple-200 rounded-full px-3 sm:px-4 py-1.5 sm:py-2">
+               • Why you should save with us
               </span>
             </div>
 

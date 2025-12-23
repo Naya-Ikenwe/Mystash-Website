@@ -52,7 +52,7 @@ const FeaturesSection = ({
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
           {title}
         </h2>
-        <p className="text-lg text-gray-800">{description}</p>
+        <p className="text-lg text-gray-900">{description}</p>
       </div>
 
       {/* Decorative Lines and Circles Container */}

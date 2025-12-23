@@ -254,7 +254,7 @@ export default function LoansPage() {
                       }}
                     />
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1 mt-3">
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">
                       Loan Application
                     </h3>
@@ -279,7 +279,7 @@ export default function LoansPage() {
                     />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2 mt-3">
                      Document Review
                     </h3>
                     <p className="text-gray-600 leading-relaxed text-lg whitespace-nowrap">
@@ -297,7 +297,7 @@ export default function LoansPage() {
                     <img
                       src="/icons/loanicons3.svg" // Update with your actual icon
                       alt="Funds icon"
-                      className="w-14 h-14 object-contain"
+                      className="w-13 h-13 object-contain"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.src =
@@ -306,7 +306,7 @@ export default function LoansPage() {
                     />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2 mt-3">
                       Loan Disbursement
                     </h3>
                     <p className="text-gray-600 leading-relaxed text-lg">
@@ -346,7 +346,7 @@ export default function LoansPage() {
         {/* FAQ Items */}
         <div className="space-y-0 -mt-10">
           {/* Question 1 */}
-          <div className="border-b border-gray-100 py-6">
+          <div className="border-b border-gray-200 py-6">
             <button 
               className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
               onClick={() => setIsOpen1(!isOpen1)}
@@ -375,7 +375,7 @@ export default function LoansPage() {
           </div>
 
           {/* Question 2 */}
-          <div className="border-b border-gray-100 py-6">
+          <div className="border-b border-gray-200 py-6">
             <button 
               className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
               onClick={() => setIsOpen2(!isOpen2)}
@@ -401,7 +401,7 @@ export default function LoansPage() {
           </div>
 
           {/* Question 3 */}
-          <div className="border-b border-gray-100 py-6">
+          <div className="border-b border-gray-300 py-6">
             <button 
               className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
               onClick={() => setIsOpen3(!isOpen3)}
@@ -428,7 +428,7 @@ export default function LoansPage() {
           </div>
 
           {/* Question 4 */}
-          <div className="border-b border-gray-100 py-6">
+          <div className="border-b border-gray-200 py-6">
             <button 
               className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
               onClick={() => setIsOpen4(!isOpen4)}
@@ -454,7 +454,7 @@ export default function LoansPage() {
           </div>
 
           {/* Question 5 */}
-          <div className="border-b border-gray-100 py-6">
+          <div className="border-b border-gray-200 py-6">
             <button 
               className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
               onClick={() => setIsOpen5(!isOpen5)}
@@ -481,7 +481,7 @@ export default function LoansPage() {
           </div>
 
           {/* Question 6 */}
-          <div className="border-b border-gray-100 py-6">
+          <div className="border-b border-gray-200 py-6">
             <button 
               className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
               onClick={() => setIsOpen6(!isOpen6)}
@@ -507,7 +507,7 @@ export default function LoansPage() {
           </div>
 
           {/* Question 7 */}
-          <div className="border-b border-gray-100 py-6">
+          <div className="border-b border-gray-200 py-6">
             <button 
               className="flex items-center justify-between w-full text-left group rounded-lg px-4 py-3 transition-all duration-200"
               onClick={() => setIsOpen7(!isOpen7)}

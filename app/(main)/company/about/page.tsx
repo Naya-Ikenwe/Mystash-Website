@@ -346,10 +346,10 @@ export default function AboutPage() {
             </div>
             
             {/* Horizontal Purple Line Divider for mobile */}
-            <div className="lg:hidden w-full h-0.5 bg-purple-600 my-8"></div>
+            <div className="lg:hidden w-full h-0.5 bg-purple-600 my-8 "></div>
 
             {/* Right Section */}
-            <div className="lg:w-1/2 lg:pl-12 mt-12 lg:mt-0 px-4 lg:px-0">
+            <div className="lg:w-1/2 lg:pl-12 mt-12 lg:mt-0 px-4 lg:px-0 -mr-8">
               <div className="flex flex-col lg:ml-12 items-start">
                 <div className="mb-4">
                   <img
@@ -398,7 +398,7 @@ export default function AboutPage() {
           </div>
 
           {/* Purple Button with White Text */}
-          <button className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 md:px-8 rounded-full transition-colors duration-200 text-sm md:text-base">
+          <button className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 md:px-3 rounded-full transition-colors duration-200 text-sm md:text-base">
            Explore Job Openings
           </button>
         </div>

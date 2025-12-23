@@ -32,7 +32,7 @@ export default function PaymentsPage() {
       <section className="relative w-full min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
           <div className="flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2 order-2 md:order-1 mt-10 text-center md:text-left z-10 md:-ml-13">
+            <div className="w-full md:w-1/2 order-2 md:order-1 mt-18 text-center md:text-left z-10 md:-ml-13">
               {/* Simple Pill Header */}
               <div className="inline-flex items-center justify-center mb-8 md:justify-start">
                 <span className="text-sm font-medium text-purple-500 bg-purple-100 border border-gray-200 px-6 py-1 rounded-full">
@@ -41,12 +41,12 @@ export default function PaymentsPage() {
               </div>
 
               {/* Simple Header Text */}
-              <h1 className="text-4xl sm:text-5xl lg:text-5xl font-semibold text-gray-900 mb-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-semibold text-gray-900 mb-6">
                 <span className="block">Transaction made</span>
                 <span className="block font-semibold ">beyond Borders</span>
               </h1>
 
-              <p className="mt-4 text-xl text-gray-600 max-w-lg mx-auto md:mx-0">
+              <p className="mt-4 text-[22px] text-gray-600 max-w-xl mx-auto md:mx-0">
                 No borders. No limits. Just seasmless, secure, and instant
                 transactions worldwide on myStash app
               </p>
@@ -55,7 +55,7 @@ export default function PaymentsPage() {
                 <NavButtons />
               </div>
             </div>
-          </div>
+          </div>{DUMMY_PAYMENTS_HERO_IMAGE}
         </div>
 
         {/* Hero Image Section */}
@@ -64,7 +64,7 @@ export default function PaymentsPage() {
             <img
               src={DUMMY_PAYMENTS_HERO_IMAGE}
               alt="Payments Hero Visual"
-              className="w-full h-full object-contain scale-100 mr-25 mb-5"
+              className="w-full h-full object-contain scale-100 -ml-30 -mt-15"
             />
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function PaymentsPage() {
           {/* Two Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Card 1 - Reduced width */}
-            <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-2xl rounded-tr-2xl flex flex-col h-[570px] w-4/5 mx-auto relative overflow-visible">
+            <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-4xl rounded-tr-4xl flex flex-col h-[570px] w-4/5 mx-auto relative overflow-visible">
               <div className="pt-4 text-center flex flex-col grow px-6">
                 {/* Recentered text content */}
                 <div className="grow flex flex-col justify-center">
@@ -132,7 +132,7 @@ export default function PaymentsPage() {
             </div>
 
             {/* Card 2 - Reduced width */}
-            <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-2xl rounded-tr-2xl flex flex-col h-[570px] w-4/5 mx-auto relative overflow-visible">
+            <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-4xl rounded-tr-4xl flex flex-col h-[570px] w-4/5 mx-auto relative overflow-visible">
               <div className="pt-4 text-center flex flex-col grow px-6">
                 {/* Recentered text content */}
                 <div className="grow flex flex-col justify-center">
@@ -219,7 +219,7 @@ export default function PaymentsPage() {
             {/* Right Div - Content */}
             <div className="lg:w-1/2 flex flex-col justify-center ml-4 -mt-15 items-start">
              <div className="inline-flex items-center justify-center mb-2 md:justify-start">
-                <span className="text-sm font-medium text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
+                <span className="text-sm font-semibold text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
                   • Payment clarity at every step 
                 </span>
               </div>

@@ -32,7 +32,7 @@ interface FormData {
 // Dummy icon paths
 const DUMMY_BACK_ICON = "/icons/formback.svg";
 const DUMMY_PHONE_ICON = "/icons/loanflag.svg";
-const DUMMY_DROPDOWN_ICON = "/icons/loandetailsdown.svg"; // Add this for dropdown icon
+const DUMMY_DROPDOWN_ICON = "/icons/Vector.svg"; // Add this for dropdown icon
 
 // File Upload Component with Webcam Support
 interface FileUploadProps {
@@ -50,7 +50,7 @@ const FileUploadArea = ({
   onChange,
   accept = "image/*",
   allowWebcam = true,
-  showPreview = true, // Default to showing preview
+  showPreview = true,
 }: FileUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -483,8 +483,8 @@ const FileUploadArea = ({
               </div>
             </div>
           ) : (
-            // For ID card (showPreview=false): Show regular dashed box with upload text
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-purple-400 transition-colors bg-gray-50">
+            // For ID card (showPreview=false): Show regular dashed box WITHOUT browse button
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-gray-50">
               <div className="flex flex-col items-center space-y-4">
                 <div className="flex items-center justify-center space-x-3">
                   {/* Upload icon SVG */}
@@ -511,45 +511,7 @@ const FileUploadArea = ({
                   </div>
                 </div>
 
-                <div className="flex space-x-3">
-                  <button
-                    type="button"
-                    onClick={handleBrowseFiles}
-                    className="px-4 py-2 bg-purple-600 text-white rounded-lg text-base font-medium hover:bg-purple-700 transition-colors"
-                  >
-                    Browse Files
-                  </button>
-                  
-                  {/* Conditionally show camera button */}
-                  {allowWebcam && (
-                    <button
-                      type="button"
-                      onClick={handleCameraClick}
-                      className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-700 rounded-lg text-base font-medium hover:bg-purple-200 transition-colors"
-                    >
-                      <svg
-                        className="w-4 h-4 mr-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
-                      {isMobile ? "Take Photo" : "Open Webcam"}
-                    </button>
-                  )}
-                </div>
+                {/* No browse button when file is uploaded for ID card */}
               </div>
             </div>
           )}
@@ -686,7 +648,7 @@ const SuccessModal = ({
   
   if (!isOpen) return null;
 
-  const SUCCESS_ICON = "/icons/successmodalicon.svg";
+  const SUCCESS_ICON = "/icons/originsuccess.svg";
 
   return (
     <>
@@ -720,7 +682,7 @@ const SuccessModal = ({
               <img
                 src={SUCCESS_ICON}
                 alt="Success"
-                className="w-10 h-10"
+                className="w-22 h-22"
                 onError={() => setImgError(true)}
               />
             )}
@@ -730,11 +692,11 @@ const SuccessModal = ({
             Loan Application Successful!
           </h2>
 
-          <p className="text-gray-600 mb-8 text-lg">
+          <p className="text-gray-600  text-lg">
             Please check your email for confirmation or spam folder
           </p>
 
-          <p className="text-base text-gray-500 mb-8"> {/* Changed from text-sm to text-base */}
+          <p className="text-base text-gray-500 mb-12"> {/* Changed from text-sm to text-base */}
             For enquiries, or assistance; please call{" "}
             <a
               href="mailto:support@mystash.com"
@@ -962,7 +924,7 @@ function LoanDetailsContent() {
           <div className="max-w-2xl mx-auto">
             {/* Step 1: Personal Information */}
             {currentStep === 1 && (
-              <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-8">
+              <div className="bg-white border border-gray-200 rounded-3xl shadow-sm p-8">
                 <div className="flex items-center justify-between mb-10">
                   <button
                     onClick={handleBack}
@@ -1202,7 +1164,7 @@ function LoanDetailsContent() {
                           <img
                             src={DUMMY_DROPDOWN_ICON}
                             alt="Dropdown"
-                            className="w-5 h-5 text-gray-400"
+                            className="w-3 h-3 mr-5 text-gray-400"
                             onError={(e) => {
                               e.currentTarget.onerror = null;
                               e.currentTarget.src =
@@ -1248,7 +1210,7 @@ function LoanDetailsContent() {
 
             {/* Step 2: Upload Documents */}
             {currentStep === 2 && (
-              <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-8">
+              <div className="bg-white border border-gray-200 rounded-3xl shadow-sm p-8">
                 <div className="flex items-center justify-between mb-10">
                   <button
                     onClick={handleBack}
@@ -1314,7 +1276,7 @@ function LoanDetailsContent() {
                   </div>
                 </div>
 
-                {/* Centered Continue Button - 383px × 50px */}
+                {/* Centered Continue Button - 383px × 50px with "Upload" text */}
                 <div className="flex justify-center mt-8">
                   <button
                     onClick={handleContinue}
@@ -1325,7 +1287,7 @@ function LoanDetailsContent() {
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
                     }`}
                   >
-                    Continue
+                    Upload
                   </button>
                 </div>
               </div>
@@ -1333,7 +1295,7 @@ function LoanDetailsContent() {
 
             {/* Step 3: Bank & Agreement */}
             {currentStep === 3 && (
-              <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-8">
+              <div className="bg-white border border-gray-200 rounded-3xl shadow-sm p-8">
                 <div className="flex items-center justify-between mb-10">
                   <button
                     onClick={handleBack}
@@ -1389,7 +1351,7 @@ function LoanDetailsContent() {
                         <img
                           src={DUMMY_DROPDOWN_ICON}
                           alt="Dropdown"
-                          className="w-5 h-5 text-gray-400"
+                          className="w-3 h-3 mr-5 text-gray-400"
                           onError={(e) => {
                             e.currentTarget.onerror = null;
                             e.currentTarget.src =
@@ -1469,7 +1431,7 @@ function LoanDetailsContent() {
                         <img
                           src={DUMMY_DROPDOWN_ICON}
                           alt="Dropdown"
-                          className="w-5 h-5 text-gray-400"
+                          className="w-3 h-3 mr-5 text-gray-400"
                           onError={(e) => {
                             e.currentTarget.onerror = null;
                             e.currentTarget.src =
@@ -1480,7 +1442,7 @@ function LoanDetailsContent() {
                     </div>
                   </div>
 
-                  <div className="rounded-lg p-6 mt-6 border border-gray-200"> {/* Removed bg-gray-50 */}
+                  <div className="rounded-lg p-6 mt-6"> {/* Removed border and background color */}
                     <p className="text-base text-gray-600 leading-relaxed">
                       By clicking "SUBMIT", I consent to myStash obtaining information from
                       relevant third parties as may be neccessary, on my employment details,
@@ -1495,7 +1457,7 @@ function LoanDetailsContent() {
                     </p>
                   </div>
 
-                  <div className="flex items-start space-x-3">
+                  <div className="flex items-start space-x-3 -mt-8">
                     <input
                       type="checkbox"
                       id="agreeToTerms"
@@ -1517,17 +1479,17 @@ function LoanDetailsContent() {
                 </div>
 
                 {/* Centered Submit Button - 383px × 50px */}
-                <div className="flex justify-center mt-8">
+                <div className="flex justify-center mt-8 ">
                   <button
                     onClick={handleContinue}
                     disabled={!isStep3Complete()}
-                    className={`w-[383px] h-[50px] rounded-lg font-semibold text-lg ${
+                    className={`w-[383px] h-[50px] rounded-lg font-semibold text-2xl ${
                       isStep3Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
                     }`}
                   >
-                    Submit Application
+                    Submit 
                   </button>
                 </div>
               </div>

@@ -18,7 +18,7 @@ const ContactFormSection = () => {
       <img
         src={DUMMY_SECTION6_TOP_LEFT}
         alt="decorative top left"
-        className="hidden sm:block absolute -top-8 -left-2 w-80 h-auto opacity-70 pointer-events-none z-0"
+        className="hidden sm:block absolute -top-8 ml-5 w-120 h-auto opacity-70 pointer-events-none z-0"
         onError={(e) => {
           e.currentTarget.onerror = null;
           e.currentTarget.src = "https://placehold.co/160x160/EEE/7C3AED?text=+";
@@ -178,12 +178,12 @@ const ContactFormSection = () => {
               <div className="text-center pt-6">
                 <button
                   type="submit"
-                  className="inline-flex items-center pr-15 justify-center bg-purple-100 font-semibold text-purple-500 px-2 py-3 rounded-full hover:bg-purple-400 hover:text-white transition-colors font-medium text-base"
+                  className="inline-flex items-center pr-15 justify-center bg-purple-100 font-semibold text-purple-500 px-2 py-2 rounded-full hover:bg-purple-400 hover:text-white transition-colors  text-base"
                 >
                   <img
                     src={DUMMY_SUBMIT_ICON}
                     alt="Send"
-                    className="w-7 h-7 mr-17 object-contain"
+                    className="w-8 h-8 mr-17 object-contain"
                     onError={(e) => {
                       e.currentTarget.onerror = null;
                       e.currentTarget.src =

@@ -6,7 +6,7 @@ import React from "react";
 const FooterSection = () => {
   const DUMMY_LOGO = "/logo/mystashlogo.svg";
   const DUMMY_LOCATION_ICON = "/icons/loanflag.svg";
-  const DUMMY_LOCATION_ICON_2 = "/icons/u.slogo.svg";
+  const DUMMY_LOCATION_ICON_2 = "/icons/footerUs.svg";
   const DUMMY_SOCIAL_ICON_1 = "/icons/instagram.svg";
   const DUMMY_SOCIAL_ICON_2 = "/icons/linkedin.svg";
   const DUMMY_SOCIAL_ICON_3 = "/icons/facebook.svg";
@@ -31,11 +31,11 @@ const FooterSection = () => {
   };
 
   return (
-    <section className="w-full bg-white -mt-5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <section className="w-full bg-white -mt-10 pb-25">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-8 ">
         <div className="flex flex-col lg:flex-row justify-between">
           {/* Left Section */}
-          <div className="lg:w-2/5 mb-8 lg:mb-0">
+          <div className="lg:w-2/5 mb-8">
             {/* Logo */}
             <div className="mb-6">
               <img
@@ -47,10 +47,10 @@ const FooterSection = () => {
             </div>
 
             {/* Three-line Sentence */}
-            <div className="text-gray-600 mb-8">
-              <p className="mb-1">Transforming financial experiences</p>
-              <p className="mb-1">through innovative technology and</p>
-              <p>customer-centric solutions.</p>
+            <div className="text-gray-600 mb-8 -mt-3 text-sm">
+              <p className="whitespace-nowrap">© In Nigeria, myStash is duly registered and regulated</p>
+              <p className="whitespace-nowrap">as a cooperative society under the Lagos state Ministry</p>
+              <p>of Commerce, Industry and Cooperatives.</p>
             </div>
 
             {/* Four Social Icons with Spacing */}
@@ -84,7 +84,7 @@ const FooterSection = () => {
               <h4 className="font-semibold text-gray-400 mb-4">Products</h4>
               <div className="space-y-2 text-sm">
                 <Link
-                  href="#"
+                  href="/company/about"
                   className="block text-gray-800 hover:text-purple-700 transition-colors"
                 >
                   About Us
@@ -111,45 +111,45 @@ const FooterSection = () => {
             </div>
 
             {/* Column 2 */}
-            <div>
+            <div className="-ml-10">
               <h4 className="font-semibold text-gray-400 mb-4">Company</h4>
               <div className="space-y-2 text-sm text-gray-800">
                 <Link
-                  href="#"
+                  href="payments"
                   className="block text-gray-600 hover:text-purple-700 transition-colors"
                 >
                   Payment
                 </Link>
                 <Link
-                  href="#"
+                  href="savings"
                   className="block  hover:text-purple-700 transition-colors"
                 >
                   Savings
                 </Link>
                 <Link
-                  href="#"
+                  href="budget"
                   className="block  hover:text-purple-700 transition-colors"
                 >
                   Budget
                 </Link>
                 <Link
-                  href="#"
+                  href="/loans"
                   className="block  hover:text-purple-700 transition-colors"
                 >
                   Loans
                 </Link>
                 <Link
-                  href="#"
+                  href="investments"
                   className="block  hover:text-purple-700 transition-colors"
                 >
-                  Partner Funds
+                  Investments
                 </Link>
               </div>
             </div>
 
             {/* Column 3 */}
-            <div>
-              <h4 className="font-semibold text-gray-400 mb-4">Support</h4>
+            <div className="-ml-22">
+              <h4 className="font-semibold text-gray-400 mb-4 ">Support</h4>
               <div className="space-y-2">
                 <Link
                   href="#"
@@ -167,7 +167,7 @@ const FooterSection = () => {
             </div>
 
             {/* Column 4 - Addresses */}
-            <div>
+            <div className="-ml-21">
               <h4 className="font-semibold text-gray-400 mb-4">Contact</h4>
               <div className="space-y-4">
                 {/* Nigeria Address */}
@@ -175,10 +175,10 @@ const FooterSection = () => {
                   <img
                     src={DUMMY_LOCATION_ICON}
                     alt="Location"
-                    className="w-4 h-4 mt-1 object-contain shrink-0"
+                    className="w-6 h-6  object-contain shrink-0"
                     onError={handleSmallImageError}
                   />
-                  <div className="text-gray-600 text-xs">
+                  <div className="text-gray-800 text-[12px]">
                     <p className="font-medium">NG</p>
                     <p>Lagos Office; Pentagon Plaza, 2nd floor</p>
                     <p>23, Opebi-Rd, Ikeja, Lagos, Nigeria</p>
@@ -190,10 +190,10 @@ const FooterSection = () => {
                   <img
                     src={DUMMY_LOCATION_ICON_2}
                     alt="Location"
-                    className="w-6 h-6 mt-1 object-contain shrink-0"
+                    className="w-6 h-6  object-contain shrink-0"
                     onError={handleSmallImageError}
                   />
-                  <div className="text-gray-600 text-xs">
+                  <div className="text-gray-800 text-[12px]">
                     <p className="font-medium">USA</p>
                     <p>4255 Limestone Rd STE 200C, 200C,</p>
                     <p>Wilmington, DE 19808</p>
@@ -205,11 +205,11 @@ const FooterSection = () => {
         </div>
 
         {/* Bottom Copyright Bar */}
-        <div className="mt-12 pt-6 text-center">
+        {/* <div className="mt-12 pt-6 text-center">
           <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} myStash. All rights reserved.
           </p>
-        </div>
+        </div> */}
       </div>
     </section>
   );

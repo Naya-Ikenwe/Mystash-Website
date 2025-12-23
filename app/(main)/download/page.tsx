@@ -46,7 +46,7 @@ export default function DownloadPage() {
                 </div>
 
                 <div className="w-1/2 pl-25">
-                  <h3 className="text-2xl font-semibold text-purple-500 mb-4 mt-2">
+                  <h3 className="text-2xl font-semibold text-purple-500 mb-4 -mt-2">
                     Download the app
                   </h3>
                   <p className="text-gray-800 leading-relaxed">
@@ -85,11 +85,11 @@ export default function DownloadPage() {
                   </div>
                 </div>
 
-                <div className="w-1/2 pl-25">
+                <div className="w-1/2 pl-25 ">
                   <img
                     src="/images/downloadimg2.svg"
                     alt="Step 2"
-                    className="w-80 h-auto rounded-lg "
+                    className="w-80 h-auto rounded-lg -mt-12 "
                   />
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default function DownloadPage() {
                   <img
                     src="/images/downloadimg3.svg"
                     alt="Step 3"
-                    className="w-80 h-auto rounded-lg"
+                    className="w-80 h-auto rounded-lg -mt-4"
                   />
                 </div>
               </div>

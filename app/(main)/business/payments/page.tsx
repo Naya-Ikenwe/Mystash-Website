@@ -21,14 +21,14 @@ const DownloadButton = () => {
       <img
         src="/icons/Frame5.svg"
         alt="Download app icon"
-        className="w-7 h-7 mr-17"
+        className="w-7 h-7 mr-21"
         onError={(e) => {
           e.currentTarget.onerror = null;
           e.currentTarget.src =
             "https://placehold.co/20x20/FFFFFF/7C3AED?text=→";
         }}
       />
-      <span className="mr-19">Download app</span>
+      <span className="mr-25">Download app</span>
     </Link>
   );
 };
@@ -38,18 +38,19 @@ const SectionOne = () => {
   return (
     <section className="relative w-full min-h-screen bg-white overflow-hidden py-12 sm:py-16 lg:py-20">
       {/* Background Image - Full width and height */}
-      <div
+      {/* <div
         className="absolute inset-0 w-full h-full z-0"
         style={{
           backgroundImage: `url(${DUMMY_HERO_BACKGROUND})`,
-          backgroundSize: "contain",
+          backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
-      >
+      > */}
         {/* Optional overlay for better text readability */}
-        <div className=""></div>
-      </div>
+        {/* <div className=""></div>
+      </div> */}
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Content - Centered */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] sm:min-h-[70vh]">
@@ -70,14 +71,14 @@ const SectionOne = () => {
                 <span>beyond borders with </span>
                 <span className="relative inline-block text-purple-600">
                   ease
-                  <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1.5 bg-purple-400 rounded-full"></span>
+                  <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-0.5 sm:h-1.5 bg-purple-600 rounded-full"></span>
                 </span>
               </h1>
             </div>
           </div>
 
           {/* Two Line Sub Text */}
-          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 -mt-2">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 -mt-2">
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 ">
               No borders. No limits. Just seamless, secure and instant
             </p>
@@ -87,7 +88,7 @@ const SectionOne = () => {
           </div>
 
           {/* Download Button */}
-          <div className="mb-12 sm:mb-16">
+          <div className="mb-5 sm:mb-6">
             <DownloadButton />
           </div>
 
@@ -96,7 +97,7 @@ const SectionOne = () => {
             <img
               src={DUMMY_SECTION1_IMAGE}
               alt="Business Payment Dashboard"
-              className="w-full h-auto object-contain rounded-lg sm:rounded-xl lg:rounded-2xl shadow-md sm:shadow-lg"
+              className="w-full h-full object-cover rounded-lg sm:rounded-xl lg:rounded-5xl "
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src =
@@ -136,7 +137,7 @@ const SectionTwo = () => {
         {/* Two Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Card 1 - Reduced width */}
-          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-2xl rounded-tr-2xl flex flex-col h-[575px] w-4/5 mx-auto relative overflow-visible">
+          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-4xl rounded-tr-4xl flex flex-col h-[575px] w-4/5 mx-auto relative overflow-visible">
             <div className="pt-4 text-center flex flex-col grow px-6">
               {/* Recentered text content */}
               <div className="grow flex flex-col justify-center">
@@ -176,13 +177,13 @@ const SectionTwo = () => {
           </div>
 
           {/* Card 2 - Reduced width */}
-          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-2xl rounded-tr-2xl flex flex-col h-[570px] w-4/5 mx-auto relative overflow-visible">
+          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-4xl rounded-tr-4xl flex flex-col h-[570px] w-4/5 mx-auto relative overflow-visible">
             <div className="pt-4 text-center flex flex-col grow px-6">
               {/* Recentered text content */}
               <div className="grow flex flex-col justify-center">
                 {/* Mini Header */}
                 <h3 className="text-[24px] font-semibold text-purple-500 mb-3 mt-8">
-                  Business Payments
+                  USD Debit Cards
                 </h3>
 
                 {/* 3-line Subtext */}
@@ -276,7 +277,7 @@ const SectionFour = () => {
           {/* Right Div - Content */}
           <div className="lg:w-1/2 flex flex-col justify-center ml-4 -mt-8 items-start">
             <div className="inline-flex items-center justify-center mb-4  md:justify-start">
-              <span className="text-sm font-medium text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
+              <span className="text-sm font-[580] text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
                 • Payment clarity at every step
               </span>
             </div>
@@ -295,7 +296,7 @@ const SectionFour = () => {
               className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 px-2 rounded-4xl flex items-center justify-center transition-colors duration-200"
             >
               <img
-                src="/icons/Frame5.svg"
+                src="/icons/Frame6.svg"
                 alt="Download app icon"
                 className="w-7 h-7 mr-4"
                 onError={(e) => {

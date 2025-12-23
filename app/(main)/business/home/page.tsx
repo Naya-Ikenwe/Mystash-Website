@@ -129,9 +129,9 @@ const DownloadButton = () => {
     <img
       src="/icons/Frame5.svg"
       alt="Download app icon"
-      className="w-7 h-7 mr-12"
+      className="w-7 h-7 mr-17"
     />
-    <span className="mr-16">Download app</span>
+    <span className="mr-19">Download app</span>
   </Link>
   );
 };
@@ -210,7 +210,7 @@ const FeatureCard = ({
 
   return (
     <div
-      className="relative flex flex-col p-3 sm:p-5 pr-0 sm:pr-0 bg-white transition-shadow duration-300 rounded-xl h-full min-h-[360px] border border-gray-200 overflow-hidden"
+      className="relative flex flex-col p-3 sm:p-5 pr-0 sm:pr-0 bg-white transition-shadow duration-300 rounded-3xl h-full min-h-[360px] border border-gray-200 overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -328,7 +328,7 @@ const SlidingCard = ({
       }}
       className="w-full"
     >
-      <div className="bg-purple-100 rounded-2xl ">
+      <div className="bg-purple-100 rounded-2xl mb-2 ">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Left Image */}
@@ -348,7 +348,7 @@ const SlidingCard = ({
             <div className="lg:w-1/2">
               {/* Pill */}
               <div className="mb-6">
-                <span className="inline-flex items-center gap-2 text-sm font-medium text-purple-600 bg-purple-200 border border-purple-200 rounded-full px-4 py-2">
+                <span className="inline-flex items-center gap-2 text-sm font-[580] text-purple-600 bg-purple-200 border border-purple-200 rounded-full px-4 py-2">
                   
                   {pillText}
                 </span>
@@ -428,27 +428,41 @@ const SlidingStackContainer = () => {
 const TestimonialCard = ({ testimonial }: { testimonial: typeof businessTestimonials[0] }) => {
   const firstLetter = testimonial.name.charAt(0).toUpperCase();
 
-  return (
-    <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200 shadow-sm hover:shadow-lg transition-shadow min-h-[280px] flex flex-col">
-      {/* Message */}
-      <p className="text-gray-700 leading-relaxed mb-6 grow">
-        "{testimonial.message}"
-      </p>
-
-      {/* User Info */}
-      <div className="flex items-center space-x-4 mt-auto">
-        <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
-          <span className="text-white font-semibold text-lg">
+   return (
+  <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-300  transition-all duration-300 min-h-60 flex flex-col relative mb-2">
+    {/* Message */}
+    <p className="text-gray-700 leading-relaxed mb-6 grow text-sm">
+      "{testimonial.message}"
+    </p>
+    
+    {/* User Info - FIXED LAYOUT */}
+    <div className="mt-auto">
+      {/* Purple initial and name on same line */}
+      <div className="flex items-center space-x-3">
+        {/* Initial - Made smaller */}
+        <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center shrink-0">
+          <span className="text-white font-medium text-base">
             {firstLetter}
           </span>
         </div>
+        
+        {/* Name beside the initial */}
         <div>
-          <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-          <p className="text-gray-500 text-sm">{testimonial.location}</p>
+          <h4 className="font-semibold text-gray-900 text-sm mt-3 -ml-1">
+            {testimonial.name}
+          </h4>
         </div>
       </div>
+      
+      {/* Location - starts aligned with purple circle */}
+      <div className="mt-1 "> {/* ml-13 = w-10 (initial) + space-x-3 */}
+        <p className="text-gray-500 text-sm">
+          {testimonial.location}
+        </p>
+      </div>
     </div>
-  );
+  </div>
+);
 };
 
 // Section Five Component (Testimonials Carousel)
@@ -526,7 +540,7 @@ export default function BusinessPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* ============ SECTION 1: HERO SECTION ============ */}
-      <section className="relative w-full min-h-screen bg-white overflow-hidden">
+      <section className="relative w-full min-h-screen bg-white -mb-10 overflow-hidden">
         {/* Background Image - Full width and height */}
         <div 
           className="absolute inset-0 w-full h-full z-0"
@@ -559,26 +573,26 @@ export default function BusinessPage() {
             <div className="relative z-20">
               {/* Line 1 */}
               <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold text-gray-900 mb-1">
-                Effortless and intelligent
+                Effortless and Intelligent
               </h1>
 
               {/* Line 2 */}
               <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold text-gray-900 mb-1">
-                Finance management for your
+                Finance Management for Your
               </h1>
 
               {/* Line 3 - Purple with Underline */}
               <div className="relative inline-block">
-                <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold text-purple-600 mb-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-[54px] font-bold text-purple-600 mb-2">
                   Business
                 </h1>
                 {/* Underline */}
-                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-4/4 h-1.5 bg-purple-400 rounded-full mb-2"></div>
+                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-4/4 h-1.5 bg-purple-600 rounded-full "></div>
               </div>
             </div>
           </div>
           {/* Two Line Sentence */}
-          <div className="relative z-20 text-center max-w-2xl mx-auto mt-8 mb-10">
+          <div className="relative z-20 text-center max-w-2xl mx-auto mt-6 mb-10">
             <p className="text-lg sm:text-xl text-gray-600 mb-1 whitespace-nowrap">
              A smart financial tool designed for businesses to optimize cash flow, grow
             </p>

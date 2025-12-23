@@ -229,7 +229,7 @@ export default function LoanApplyPage() {
                       <img
                         src="/icons/loancalculatorarrow.svg"
                         alt="Dropdown arrow"
-                        className={`w-6 h-6 text-gray-400 transition-transform duration-200 ${
+                        className={`w-5 h-5 mr-10 text-gray-400 transition-transform duration-200 ${
                           isEmploymentOpen ? "transform rotate-180" : ""
                         }`}
                         onError={(e) => {
@@ -351,7 +351,7 @@ export default function LoanApplyPage() {
                       <img
                         src="/icons/loancalculatorarrow.svg"
                         alt="Dropdown arrow"
-                        className={`w-6 h-6 text-gray-400 transition-transform duration-200 ${
+                        className={`w-5 h-5 mr-10 text-gray-400 transition-transform duration-200 ${
                           isTenureOpen ? "transform rotate-180" : ""
                         }`}
                         onError={(e) => {
@@ -391,7 +391,7 @@ export default function LoanApplyPage() {
                 </div>
 
                 {/* Disclaimer - Removed background color */}
-                <div className="rounded-lg p-5 mt-6 border border-gray-200">
+                <div className="rounded-lg p-5 mt-6 ">
                   <p className="text-base text-gray-600 leading-relaxed">
                     By clicking "APPLY NOW", I consent to myStash obtaining
                     information from relevant third parties as may be necessary,
@@ -445,7 +445,7 @@ export default function LoanApplyPage() {
                 <img
                   src={DUMMY_BACK_ICON}
                   alt="Back"
-                  className="w-25 h-25 px-2 py-2 text-purple-600"
+                  className="w-20 h-20 px-2 py-2 text-purple-600"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src =
@@ -472,8 +472,8 @@ export default function LoanApplyPage() {
                   <h3 className="text-lg font-medium ml-5  text-gray-500 mb-2">
                     Loan Amount
                   </h3>
-                  <p className="text-xl font-medium ml-5 text-gray-900">
-                    {loanAmount}
+                  <p className="text-xl font-semibold ml-5 text-gray-800">
+                    ₦{loanAmount}
                   </p>
                 </div>
 
@@ -481,7 +481,7 @@ export default function LoanApplyPage() {
                   <h3 className="text-lg font-medium text-gray-500 mb-2 ">
                     Loan Tenor
                   </h3>
-                  <p className="text-xl font-medium text-gray-900">
+                  <p className="text-xl font-semibold text-gray-800">
                     {loanTenure} Months
                   </p>
                 </div>
@@ -490,7 +490,7 @@ export default function LoanApplyPage() {
                   <h3 className="text-lg font-medium ml-5 text-gray-500 mb-2">
                     Repayment Amount
                   </h3>
-                  <p className="text-xl font-medium ml-5 text-gray-900">
+                  <p className="text-xl font-semibold ml-5 text-gray-800">
                     {calculateRepayableAmount()}
                   </p>
                 </div>
@@ -499,7 +499,7 @@ export default function LoanApplyPage() {
                   <h3 className="text-lg font-medium text-gray-500 mb-2">
                     Interest Rate
                   </h3>
-                  <p className="text-xl font-medium text-gray-900">
+                  <p className="text-xl font-semibold text-gray-800">
                     6% per month
                   </p>
                 </div>

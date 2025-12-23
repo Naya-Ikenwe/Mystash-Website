@@ -36,23 +36,23 @@ export default function InvestmentsPage() {
     <div className="min-h-screen ">
       {/* Section 1 - Hero Section */}
       <section
-        className="h-[90vh] flex items-center justify-center bg-cover bg-center bg-no-repeat "
+        className="h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat "
         style={{
           backgroundImage: "url('/images/investmentbackground.svg')",
         }}
       >
-        <div className="text-center max-w-4xl mx-auto px-4 -mt-45 pr-20">
+        <div className="text-center max-w-4xl mx-auto px-4 -mt-60 pr-20">
           <div className="inline-flex items-center justify-center mb-4 md:justify-start ">
             <span className="text-sm font-medium text-purple-500 bg-purple-100 border border-gray-200 px-6 py-2 mt-10 rounded-full">
               • Investment •
             </span>
           </div>
-          <h1 className="text-6xl font-semibold text-black mb-6 leading-none">
+          <h1 className="text-6xl font-semibold text-black mb-10 leading-none">
             Grow your Wealth with
             <br />
             ease and purpose
           </h1>
-          <p className="text-xl text-black mb-8 leading-[1.5">
+          <p className="text-xl text-black mb-8  leading-[1.5">
             Effortlessly grow and diversify your portfolio, no idle funds, just
             <br />
             progress with smarter and automated investing
@@ -63,7 +63,7 @@ export default function InvestmentsPage() {
               alt="arrow"
               className="w-8 h-8 mr-20 ml-2"
             />
-            <p className="mr-20"> Start Investing</p>
+            <p className="mr-24"> Start Investing</p>
           </button>
         </div>
       </section>
@@ -135,7 +135,7 @@ export default function InvestmentsPage() {
         buttonIcon="/icons/Frame6.svg"
         // Calculator Section - Investment themed
         amountQuestion="Investment amount"
-        amountPlaceholder="Minimum ₦1,000,000.00 naira"
+        amountPlaceholder="Minimum 1,000,000.00 naira"
         tenureQuestion="Investment duration?"
         tenurePlaceholder="Select duration"
         calculateButtonText="Calculate ROI"

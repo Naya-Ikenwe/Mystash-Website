@@ -41,7 +41,7 @@ const HorizontalMarquee = () => {
     "• Savings",
     "• Budget",
     "• Loans",
-    "• Partnership",
+    "• Investments",
   ];
   const SCROLL_ITEMS = [...TEXTS, ...TEXTS];
 
@@ -225,7 +225,7 @@ const PillIcon = () => (
   <img
     src={DUMMY_BUTTON_ICON}
     alt="CTA Arrow"
-    className="w-6 h-6 mr-3 object-contain"
+    className="w-7 h-7 mr-3 object-contain"
     onError={(e) => {
       e.currentTarget.onerror = null;
       e.currentTarget.src = "https://placehold.co/16x16/7C3AED/FFFFFF?text=>>";
@@ -240,7 +240,7 @@ const PillButtonWithIcon = ({ text }: { text: string }) => {
   return (
     <Link
       href={path}
-      className="inline-flex items-center text-purple-700 text-base border border-purple-100 bg-purple-100 px-3 py-2 rounded-full hover:bg-purple-200 transition-colors"
+      className="inline-flex items-center text-purple-700 -ml-3 text-base border border-purple-100 bg-purple-100 px-3 py-2 rounded-full hover:bg-purple-200 transition-colors"
     >
       <PillIcon />
       {text}
@@ -266,7 +266,7 @@ const FeatureCard = ({
 
   return (
     <div
-      className="relative flex flex-col p-4 sm:p-6 bg-white transition-shadow duration-300 rounded-xl h-full min-h-[360px] border border-gray-200 overflow-hidden w-full"
+      className="relative flex flex-col p-4 sm:p-6 bg-white transition-shadow duration-300 rounded-3xl h-full min-h-[360px] border border-gray-200 overflow-hidden w-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -338,19 +338,19 @@ const SectionThreePartOne = () => {
       {/* 1a: Left Content */}
       <div className="w-full md:w-1/2">
         <div className="flex justify-between items-start mb-4">
-          <p className="text-xs font-medium mb-5  text-black border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
+          <p className="text-[13px] font-medium mb-5  text-black border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
             • Newly Added Product •
           </p>
         </div>
         <div className="flex justify-end mb-4">
-          <span className="text-sm text-purple-600 font-semibold bg-purple-300 px-3 py-2  items-end rounded-full">
+          <span className="text-[15px] text-purple-600 font-medium bg-purple-300 px-3 py-2  items-end rounded-full">
             For Salary Earners
           </span>
         </div>
         <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">
           Get Quick Loan
         </h2>
-        <p className="text-lg text-gray-800 mb-6 leading-relaxed ">
+        <p className="text-lg text-gray-800 mb-2 leading-relaxed ">
           We offer loans from ₦30,000 to ₦5,000,000, specially <br />
           tailored to Federal, State and Local Government <br />
           employees whose salaries are processed through the <br />
@@ -395,7 +395,7 @@ const SectionThreePartTwo = () => {
       </div>
       {/* 2b: Right Content */}
       <div className="w-full md:w-1/2">
-        <p className="text-xs font-medium mb-15  text-black border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
+        <p className="text-[13px] font-medium mb-15  text-black border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
           • Newly Added Product •
         </p>
 
@@ -403,7 +403,7 @@ const SectionThreePartTwo = () => {
           Let's Grow Together through Investment
         </h2>
 
-        <p className="text-lg text-gray-800 mb-6 leading-relaxed">
+        <p className="text-lg text-gray-800 mb-2 leading-relaxed">
           Together we drive meaningful investment partnerships <br />
           that foster innovation, create lasting values and <br />
           empower smarter wealth growth
@@ -461,25 +461,40 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
   const firstLetter = testimonial.name.charAt(0).toUpperCase();
 
   return (
-    <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200 shadow-[0_8px_16px_0_rgba(0,0,0,0.1),0_0_30px_0_rgba(0,0,0,0.06)_inset] hover:shadow-[0_12px_24px_0_rgba(0,0,0,0.15),0_0_30px_0_rgba(0,0,0,0.08)_inset] transition-all duration-300 min-h-[240px] flex flex-col relative mb-2">
-      {/* Message */}
-      <p className="text-gray-700 leading-relaxed mb-6 grow">
-        "{testimonial.message}"
-      </p>
-      {/* User Info */}
-      <div className="flex items-center space-x-4 mt-auto">
-        <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
-          <span className="text-white font-semibold text-lg">
+  <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200 shadow-[0_7px_10px_0_rgba(0,0,0,0.1),0_0_30px_0_rgba(0,0,0,0.06)_inset] hover:shadow-[0_12px_24px_0_rgba(0,0,0,0.15),0_0_30px_0_rgba(0,0,0,0.08)_inset] transition-all duration-300 min-h-60 flex flex-col relative mb-2">
+    {/* Message */}
+    <p className="text-gray-700 leading-relaxed mb-6 grow text-sm">
+      "{testimonial.message}"
+    </p>
+    
+    {/* User Info - FIXED LAYOUT */}
+    <div className="mt-auto">
+      {/* Purple initial and name on same line */}
+      <div className="flex items-center space-x-3">
+        {/* Initial - Made smaller */}
+        <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center shrink-0">
+          <span className="text-white font-medium text-base">
             {firstLetter}
           </span>
         </div>
+        
+        {/* Name beside the initial */}
         <div>
-          <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-          <p className="text-gray-500 text-sm">{testimonial.location}</p>
+          <h4 className="font-semibold text-gray-900 text-sm mt-3 -ml-1">
+            {testimonial.name}
+          </h4>
         </div>
       </div>
+      
+      {/* Location - starts aligned with purple circle */}
+      <div className="mt-1 "> {/* ml-13 = w-10 (initial) + space-x-3 */}
+        <p className="text-gray-500 text-sm">
+          {testimonial.location}
+        </p>
+      </div>
     </div>
-  );
+  </div>
+);
 };
 
 const SectionFive = () => {
@@ -554,7 +569,7 @@ export default function HomePage() {
       <section className="relative w-full min-h-screen">
         <div className="max-w-7xl mx-auto  sm:px-6 lg:px-4 py-12 md:py-20">
           <div className="flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2 order-2 md:order-1 -ml-8 text-center md:text-left z-10">
+            <div className="w-full md:w-1/2 order-2 md:order-1 -ml-8 mt-10 text-center md:text-left z-10">
               <HorizontalMarquee />
               {/* Mobile stacked heading: visible only on small screens */}
               <div className="md:hidden text-center mb-4">
@@ -572,16 +587,25 @@ export default function HomePage() {
                   <span className="block whitespace-nowrap">
                     Smart Finance for a
                   </span>
-                  <span className="block font-semibold whitespace-nowrap flex items-center gap-3">
+                  <span className=" font-semibold whitespace-nowrap flex items-center gap-3">
                     smarter <VerticalTextCarousel />
                   </span>
                 </h1>
               </div>
-              <p className="mt-4 text-xl text-gray-600  mx-auto md:mx-0 ">
-                A financial tool that makes your money work for you. Save
-                effortlessly, grow your wealth intelligently, and make you spend <br />
-                with confidence.
-              </p>
+              <div className="mt-4 text-gray-600 max-w-2xl mx-auto md:mx-0">
+                <div className="flex flex-col space-y-1">
+                  <span className="text-base sm:text-lg md:text-xl lg:text-[22px]">
+                    A financial tool that makes your money work for you. Save
+                  </span>
+                  <span className="text-base sm:text-lg md:text-xl lg:text-[22px] whitespace-nowrap">
+                    effortlessly, grow your wealth intelligently, and make you
+                    spend
+                  </span>
+                  <span className="text-base sm:text-lg md:text-xl lg:text-[22px]">
+                    with confidence.
+                  </span>
+                </div>
+              </div>
               <div className="mt-8 flex justify-center md:justify-start space-x-4">
                 <NavButtons />
               </div>
@@ -594,7 +618,7 @@ export default function HomePage() {
             <img
               src={DUMMY_HERO_IMAGE}
               alt="Hero Visual"
-              className="w-[95%] h-[95%] object-contain scale-105 -mr-50 mt-10"
+              className="w-[95%] h-[90%] object-contain scale-105 -mr-40 mt-8"
             />
           </div>
         </div>
@@ -607,16 +631,19 @@ export default function HomePage() {
           </p>
           <h2 className="text-sm sm:text-2xl font-bold text-gray-800 mb-4 text-center">
             Designed to help you{" "}
-            <span className="text-gray-400">save smarter,</span> spend efficiently,{" "}
-            <span className="text-gray-400">plan</span><br />
-            <span className="text-gray-400">strategically,</span> and give loans — all through secure, innovative<br />
+            <span className="text-gray-400">save smarter,</span> spend
+            efficiently, <span className="text-gray-400">plan</span>
+            <br />
+            <span className="text-gray-400">strategically,</span> and give loans
+            — all through secure, innovative
+            <br />
             tools and trusted financial partnerships.
           </h2>
           <p className="text-lg text-gray-600">
             Select the product that fits your needs and apply today.
           </p>
         </div>
-        
+
         {/* Updated grid with increased column width */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
@@ -627,11 +654,11 @@ export default function HomePage() {
               ctaContent={<PillButtonWithIcon text="Start Saving" />}
             />
           </div>
-          
+
           <div className="lg:col-span-1">
             <PaymentFeatureCard />
           </div>
-          
+
           <div className="lg:col-span-1">
             <FeatureCard
               imagePath={DUMMY_CARD_3_IMAGE}
@@ -642,13 +669,13 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      
+
       {/* Section 3: Additional Features */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 bg-white">
         <SectionThreePartOne />
         <SectionThreePartTwo />
       </section>
-      
+
       {/* Section 4: Icon Features */}
       <FeaturesSection
         title="With myStash you get"

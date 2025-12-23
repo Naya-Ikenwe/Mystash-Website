@@ -241,7 +241,7 @@ const LoanCalculatorSection = ({
     const maxAmount = getMaxAmount();
     
     if (mode === "loan" && minAmount > 0 && maxAmount > 0) {
-      return `Enter loan amount (₦${minAmount.toLocaleString()} - ₦${maxAmount.toLocaleString()})`;
+      return `Enter loan amount (${minAmount.toLocaleString()} - ${maxAmount.toLocaleString()})`;
     }
     return amountPlaceholder;
   };
@@ -320,7 +320,7 @@ const LoanCalculatorSection = ({
               <div className="mb-6">
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500">₦</span>
+                    <span className="text-gray-500"></span>
                   </div>
                   <input
                     type="text"
@@ -328,7 +328,7 @@ const LoanCalculatorSection = ({
                     value={loanAmount}
                     onChange={handleAmountChange}
                     onBlur={handleAmountBlur}
-                    className={`w-full bg-purple-50 border rounded-lg pl-8 pr-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors ${
+                    className={`w-full bg-purple-50 border rounded-lg pl-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors ${
                       amountError ? 'border-red-300' : 'border-purple-100'
                     }`}
                     aria-describedby={amountError ? "amount-error" : undefined}
@@ -417,14 +417,14 @@ const LoanCalculatorSection = ({
 
               {/* Button - Lighter Purple Shade */}
               <button
-                className="w-full flex items-center bg-purple-100 text-purple-700 py-3 rounded-full hover:bg-purple-200 transition-colors duration-200 font-medium text-base mb-8 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex items-center bg-purple-200 text-purple-800  py-3 rounded-full hover:bg-purple-200 transition-colors duration-200 font-semibold text-base mb-8 disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={handleCalculate}
                 disabled={!loanAmount || !loanTenure || !!amountError}
               >
                 <img
                   src={calculateButtonIcon}
                   alt="Calculate icon"
-                  className="w-9 h-9 mr-25 ml-2 object-contain"
+                  className="w-10 h-10 mr-25 ml-2 object-contain"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src =
