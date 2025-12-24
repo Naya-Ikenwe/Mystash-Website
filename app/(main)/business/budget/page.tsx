@@ -9,7 +9,7 @@ import ContactFormSection from "@/app/components/ContactFormSection";
 // DUMMY IMAGE PATHS
 const DUMMY_BUTTON_ICON = "/icons/download-icon.svg";
 const DUMMY_SECTION1_IMAGE = "/images/businessbudgethero.svg";
-const DUMMY_HERO_BACKGROUND = "/images/businessherobg.svg";
+const DUMMY_HERO_BACKGROUND = "/images/businessframe.svg";
 const DUMMY_FRAME6_ICON = "/icons/Frame6.svg";
 
 // Download Button Component 
@@ -39,7 +39,7 @@ const SectionOne = () => {
   return (
     <section className="relative w-full min-h-screen bg-white overflow-hidden py-12 sm:py-16 lg:py-20">
       {/* Background Image - Full width and height (from business payments hero) */}
-     {/* <div
+     <div
         className="absolute inset-0 w-full h-full z-0"
         style={{
           backgroundImage: `url(${DUMMY_HERO_BACKGROUND})`,
@@ -49,7 +49,7 @@ const SectionOne = () => {
         }}
       >
         <div className=""></div>
-      </div> */}
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Content - Centered */}

@@ -33,6 +33,7 @@ interface FormData {
 const DUMMY_BACK_ICON = "/icons/formback.svg";
 const DUMMY_PHONE_ICON = "/icons/loanflag.svg";
 const DUMMY_DROPDOWN_ICON = "/icons/Vector.svg"; // Add this for dropdown icon
+const CLOSE_ICON = "/icons/closebutton.svg"; // DUMMY PATH for close button
 
 // File Upload Component with Webcam Support
 interface FileUploadProps {
@@ -322,7 +323,7 @@ const FileUploadArea = ({
             </h3>
             <button
               onClick={closeWebcam}
-              className="text-white text-xl bg-red-600 w-8 h-8 rounded-full flex items-center justify-center"
+              className="text-white text-xl bg-red-600 w-6 h-6 rounded-full flex items-center justify-center" // Reduced from w-8 h-8 to w-6 h-6
             >
               ✕
             </button>
@@ -648,7 +649,7 @@ const SuccessModal = ({
   
   if (!isOpen) return null;
 
-  const SUCCESS_ICON = "/icons/originsuccess.svg";
+  const SUCCESS_ICON = "/icons/greensuccess.svg";
 
   return (
     <>
@@ -659,9 +660,25 @@ const SuccessModal = ({
       />
 
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
-        <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-auto p-10 text-center pointer-events-auto">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-auto p-10 text-center pointer-events-auto relative">
+          {/* X button at top right using icon */}
+          <button
+            onClick={onClose}
+            className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 w-8 h-8 mr-7 flex items-center justify-center transition-colors"
+          >
+            <img
+              src={CLOSE_ICON}
+              alt="Close"
+              className="w-4 h-4"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12'%3E%3C/path%3E%3C/svg%3E";
+              }}
+            />
+          </button>
+
           {/* Icon container */}
-          <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-8">
+          <div className="w-28 h-28 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-8 mt-15">
             {imgError ? (
               // Fallback SVG when image fails to load
               <svg
@@ -682,7 +699,7 @@ const SuccessModal = ({
               <img
                 src={SUCCESS_ICON}
                 alt="Success"
-                className="w-22 h-22"
+                className="w-28 h-28"
                 onError={() => setImgError(true)}
               />
             )}
@@ -696,7 +713,7 @@ const SuccessModal = ({
             Please check your email for confirmation or spam folder
           </p>
 
-          <p className="text-base text-gray-500 mb-12"> {/* Changed from text-sm to text-base */}
+          <p className="text-base text-gray-500 mb-20"> {/* Changed from text-sm to text-base */}
             For enquiries, or assistance; please call{" "}
             <a
               href="mailto:support@mystash.com"
@@ -705,13 +722,6 @@ const SuccessModal = ({
               +2348131462292
             </a>
           </p>
-
-          <button
-            onClick={onClose}
-            className="w-full bg-purple-600 text-white font-semibold py-4 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-200 text-lg"
-          >
-            Close
-          </button>
         </div>
       </div>
     </>
@@ -963,7 +973,7 @@ function LoanDetailsContent() {
                       type="text"
                       value={formData.employmentType}
                       readOnly
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 text-lg" // Removed bg-gray-50
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 text-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" // Added uniform focus style
                     />
                   </div>
 
@@ -980,7 +990,7 @@ function LoanDetailsContent() {
                           handleInputChange("firstName", e.target.value)
                         }
                         maxLength={50}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
                         required
                       />
                     </div>
@@ -996,7 +1006,7 @@ function LoanDetailsContent() {
                           handleInputChange("lastName", e.target.value)
                         }
                         maxLength={50}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
                         required
                       />
                     </div>
@@ -1014,7 +1024,7 @@ function LoanDetailsContent() {
                         handleInputChange("email", e.target.value)
                       }
                       maxLength={100}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
                       required
                     />
                   </div>
@@ -1031,7 +1041,7 @@ function LoanDetailsContent() {
                         handleInputChange("placeOfWork", e.target.value)
                       }
                       maxLength={100}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
                       required
                     />
                   </div>
@@ -1055,7 +1065,7 @@ function LoanDetailsContent() {
                         maxLength={11}
                         pattern="[0-9]{11}"
                         inputMode="numeric"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
                         required
                       />
                       <p className="text-sm text-gray-500 mt-1">11 digits required</p>
@@ -1078,7 +1088,7 @@ function LoanDetailsContent() {
                         maxLength={11}
                         pattern="[0-9]{11}"
                         inputMode="numeric"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
                         required
                       />
                       <p className="text-sm text-gray-500 mt-1">11 digits required</p>
@@ -1103,26 +1113,30 @@ function LoanDetailsContent() {
                             }}
                           />
                         </div>
-                        <div className="absolute inset-y-0 left-10 w-px bg-gray-300"></div>
+                        <div className="absolute inset-y-0 left-12 w-px bg-gray-300"></div> {/* Increased from left-10 to left-12 */}
                         <input
                           type="tel"
-                          placeholder="08012345678"
-                          value={formData.phoneNumber}
+                          value={formData.phoneNumber ? `+234 ${formData.phoneNumber.substring(1)}` : "+234 "}
                           onChange={(e) => {
-                            // Allow only numbers
-                            const value = e.target.value.replace(/\D/g, '');
+                            // Remove "+234 " prefix and any non-digits
+                            let value = e.target.value.replace("+234 ", "").replace(/\D/g, '');
+                            
+                            // Ensure it starts with 0 if not empty
+                            if (value.length > 0 && !value.startsWith('0')) {
+                              value = '0' + value;
+                            }
+                            
+                            // Limit to 11 digits total
                             if (value.length <= 11) {
                               handleInputChange("phoneNumber", value);
                             }
                           }}
-                          maxLength={11}
-                          pattern="[0-9]{11}"
-                          inputMode="numeric"
-                          className="w-full border border-gray-300 rounded-lg pl-14 pr-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
+                          maxLength={17} // "+234 " + 11 digits = 16 characters
+                          className="w-full border border-gray-300 rounded-lg pl-16 pr-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
                           required
                         />
                       </div>
-                      <p className="text-sm text-gray-500 mt-1">11 digits required</p>
+                      <p className="text-sm text-gray-500 mt-1">Enter your phone number after +234</p>
                     </div>
                     <div>
                       <label className="block text-lg font-medium text-gray-900 mb-2">
@@ -1136,7 +1150,7 @@ function LoanDetailsContent() {
                           handleInputChange("ippis", e.target.value)
                         }
                         maxLength={20}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
                         required
                       />
                     </div>
@@ -1153,7 +1167,7 @@ function LoanDetailsContent() {
                           onChange={(e) =>
                             handleInputChange("gender", e.target.value)
                           }
-                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg"
+                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg" // Added uniform focus style
                         >
                           <option value="">Select gender</option>
                           <option value="male">Male</option>
@@ -1185,7 +1199,7 @@ function LoanDetailsContent() {
                           handleInputChange("dateOfBirth", e.target.value)
                         }
                         max={new Date().toISOString().split('T')[0]}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
                       />
                     </div>
                   </div>
@@ -1336,7 +1350,7 @@ function LoanDetailsContent() {
                         onChange={(e) =>
                           handleInputChange("bankName", e.target.value)
                         }
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg" // Added uniform focus style
                         required
                       >
                         <option value="">Select your bank</option>
@@ -1382,7 +1396,7 @@ function LoanDetailsContent() {
                         maxLength={10}
                         pattern="[0-9]{10}"
                         inputMode="numeric"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
                         required
                       />
                       <p className="text-sm text-gray-500 mt-1">10 digits required</p>
@@ -1399,7 +1413,7 @@ function LoanDetailsContent() {
                           handleInputChange("referralCode", e.target.value)
                         }
                         maxLength={20}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
                       />
                     </div>
                   </div>
@@ -1415,7 +1429,7 @@ function LoanDetailsContent() {
                         onChange={(e) =>
                           handleInputChange("hearAboutUs", e.target.value)
                         }
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg" // Added uniform focus style
                         required
                       >
                         <option value="">Select an option</option>
@@ -1442,7 +1456,8 @@ function LoanDetailsContent() {
                     </div>
                   </div>
 
-                  <div className="rounded-lg p-6 mt-6"> {/* Removed border and background color */}
+                  {/* Terms and Conditions Text - Aligned with input boxes */}
+                  <div className="mt-6"> {/* Removed extra padding */}
                     <p className="text-base text-gray-600 leading-relaxed">
                       By clicking "SUBMIT", I consent to myStash obtaining information from
                       relevant third parties as may be neccessary, on my employment details,
@@ -1457,7 +1472,7 @@ function LoanDetailsContent() {
                     </p>
                   </div>
 
-                  <div className="flex items-start space-x-3 -mt-8">
+                  <div className="flex items-start space-x-3">
                     <input
                       type="checkbox"
                       id="agreeToTerms"
@@ -1465,7 +1480,7 @@ function LoanDetailsContent() {
                       onChange={(e) =>
                         handleInputChange("agreeToTerms", e.target.checked)
                       }
-                      className="mt-1 w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                      className="mt-1 w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-2 focus:ring-purple-500" // Uniform purple focus
                       required
                     />
                     <label
@@ -1483,7 +1498,7 @@ function LoanDetailsContent() {
                   <button
                     onClick={handleContinue}
                     disabled={!isStep3Complete()}
-                    className={`w-[383px] h-[50px] rounded-lg font-semibold text-2xl ${
+                    className={`w-[320px] h-[50px] rounded-lg font-semibold text-2xl ${
                       isStep3Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"

@@ -124,7 +124,7 @@ const COMPANY_DROPDOWN_ITEMS: DropdownItem[] = [
 // 1. Regular Nav Link with PILL HOVER Effect
 const NavLink = ({ text, hasPlus = false, mobile = false, onClick, href = "#" }: { text: string; hasPlus?: boolean; mobile?: boolean; onClick?: () => void; href?: string }) => {
   const baseClasses = mobile 
-    ? "block text-gray-700 font-medium text-base p-3 transition-colors duration-150 hover:text-purple-700 hover:bg-purple-100 rounded-lg cursor-pointer"
+    ? "block text-gray-700 font-medium text-base p-3 transition-colors duration-150 hover:text-purple-700 rounded-lg cursor-pointer"
     : "text-gray-700 font-medium text-sm p-2 transition-colors duration-150 hover:text-purple-700 hover:bg-purple-100 rounded-full cursor-pointer";
 
   return (
@@ -148,7 +148,7 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
           <Link 
             key={item.title}
             href={item.href}
-            className="flex items-center space-x-3 p-3 rounded-lg transition-colors duration-150 hover:bg-gray-50 cursor-pointer"
+            className="flex items-center space-x-3 p-3 rounded-lg transition-colors duration-150 cursor-pointer"
             onClick={onItemClick}
           >
             <img src={item.iconPath} alt="" className="w-5 h-5 shrink-0" />
@@ -176,7 +176,7 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
           <li key={item.title}>
             <Link 
               href={item.href}
-              className="block p-3 rounded-lg transition-colors duration-150 hover:bg-gray-50 cursor-pointer"
+              className="block p-3 rounded-lg transition-colors duration-150 cursor-pointer"
               onClick={onItemClick}
             >
               <div className="flex items-center space-x-3">

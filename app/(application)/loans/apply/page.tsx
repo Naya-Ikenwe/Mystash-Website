@@ -20,7 +20,7 @@ export default function LoanApplyPage() {
   const router = useRouter();
 
   // Dummy back icon path
-  const DUMMY_BACK_ICON = "/icons/loanapplymodal.svg";
+  const DUMMY_BACK_ICON = "/icons/finalicon.svg";
 
   // Loan amount limits
   const MIN_LOAN_AMOUNT = 30000;
@@ -185,9 +185,6 @@ export default function LoanApplyPage() {
                   />
                 </Link>
               </div>
-
-              {/* Back button without text */}
-             
 
               {/* Heading - Increased text size */}
               <div className="mb-8">
@@ -390,8 +387,8 @@ export default function LoanApplyPage() {
                   </div>
                 </div>
 
-                {/* Disclaimer - Removed background color */}
-                <div className="rounded-lg p-5 mt-6 ">
+                {/* Disclaimer - Removed background color and aligned with inputs */}
+                <div className="rounded-lg p-0 mt-6">
                   <p className="text-base text-gray-600 leading-relaxed">
                     By clicking "APPLY NOW", I consent to myStash obtaining
                     information from relevant third parties as may be necessary,
@@ -413,11 +410,11 @@ export default function LoanApplyPage() {
                   </p>
                 </div>
 
-                {/* Submit Button - Increased text size */}
+                {/* Submit Button - Reduced size */}
                 <button
                   type="submit"
                   disabled={!isFormValid}
-                  className={`w-full font-semibold text-xl py-5 px-6 rounded-lg transition-colors duration-200 mt-7 ${
+                  className={`w-full font-semibold text-lg py-4 px-6 rounded-lg transition-colors duration-200 mt-7 ${
                     isFormValid
                       ? "bg-purple-600 text-white hover:bg-purple-700 cursor-pointer"
                       : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -440,12 +437,12 @@ export default function LoanApplyPage() {
             <div className="relative pt-12 px-10">
               <button
                 onClick={() => setShowModal(false)}
-                className="w-15 h-15 rounded-full flex items-center justify-center cursor-pointer hover:bg-purple-200 bg-purple-100 transition-colors absolute left-10 top-12"
+                className=" rounded-full flex items-center justify-center cursor-pointer  transition-colors absolute left-10 top-12"
               >
                 <img
                   src={DUMMY_BACK_ICON}
                   alt="Back"
-                  className="w-20 h-20 px-2 py-2 text-purple-600"
+                  className="w-13 h-13  text-purple-600"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src =

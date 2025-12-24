@@ -33,7 +33,7 @@ export default function BudgetPage() {
                 </span>
               </div>
               {/* Simple Header Text */}
-              <h1 className="text-4xl sm:text-4xl lg:text-[56px] font-semibold text-gray-900 mb-4 mt-5">
+              <h1 className="text-4xl sm:text-4xl lg:text-[56px] font-semibold text-gray-900 mb-4 mt-5 tracking-wide">
                 <span className="block mb-2">Smarter spending</span>
                 <span className="block font-semibold">starts with you</span>
               </h1>

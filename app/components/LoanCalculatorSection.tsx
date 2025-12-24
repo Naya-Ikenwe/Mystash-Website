@@ -91,6 +91,23 @@ const LoanCalculatorSection = ({
   const getMinAmount = () => mode === "loan" ? minLoanAmount : minInvestmentAmount;
   const getMaxAmount = () => mode === "loan" ? maxLoanAmount : maxInvestmentAmount;
 
+  // Get tenure options based on mode
+  const getTenureOptions = () => {
+    if (mode === "loan") {
+      return [
+        { value: "3", label: "3 months" },
+        { value: "6", label: "6 months" },
+        { value: "12", label: "12 months" },
+      ];
+    } else {
+      // Investment mode: only 6 and 12 months
+      return [
+        { value: "6", label: "6 months" },
+        { value: "12", label: "12 months" },
+      ];
+    }
+  };
+
   // Format amount with commas
   const formatAmount = (value: string) => {
     const digits = value.replace(/\D/g, "");
@@ -201,12 +218,6 @@ const LoanCalculatorSection = ({
     }
   };
 
-  const tenureOptions = [
-    { value: "3", label: "3 months" },
-    { value: "6", label: "6 months" },
-    { value: "12", label: "12 months" },
-  ];
-
   const handleSelectOption = (value: string) => {
     setLoanTenure(value);
     setIsDropdownOpen(false);
@@ -256,6 +267,8 @@ const LoanCalculatorSection = ({
     }
     return "";
   };
+
+  const tenureOptions = getTenureOptions();
 
   return (
     <section 

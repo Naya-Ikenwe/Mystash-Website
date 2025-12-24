@@ -11,8 +11,8 @@ import ContactFormSection from "../../components/ContactFormSection";
 const DUMMY_PAYMENTS_HERO_IMAGE = "/images/realpaymentcards.svg";
 
 const DownloadButton = () => (
-  <Link 
-    href="/download" 
+  <Link
+    href="/download"
     className="bg-purple-500 hover:bg-purple-900 text-white font-semibold py-2 px-2 rounded-4xl flex items-center justify-center transition-colors duration-200"
   >
     <img
@@ -41,9 +41,9 @@ export default function PaymentsPage() {
               </div>
 
               {/* Simple Header Text */}
-              <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-semibold text-gray-900 mb-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-semibold text-gray-900 mb-6 tracking-wide">
                 <span className="block">Transaction made</span>
-                <span className="block font-semibold ">beyond Borders</span>
+                <span className="block font-semibold">beyond Borders</span>
               </h1>
 
               <p className="mt-4 text-[22px] text-gray-600 max-w-xl mx-auto md:mx-0">
@@ -55,7 +55,8 @@ export default function PaymentsPage() {
                 <NavButtons />
               </div>
             </div>
-          </div>{DUMMY_PAYMENTS_HERO_IMAGE}
+          </div>
+          {DUMMY_PAYMENTS_HERO_IMAGE}
         </div>
 
         {/* Hero Image Section */}
@@ -102,8 +103,7 @@ export default function PaymentsPage() {
 
                   {/* 2-line Subtext */}
                   <p className="text-gray-600 mt-1 leading-relaxed text-sm">
-                   Initiate and settle foreign remittances in USD and 
-                   
+                    Initiate and settle foreign remittances in USD and
                   </p>
                   <p className="text-gray-600 leading-relaxed text-sm">
                     GBP, available in multiple countries.
@@ -218,9 +218,9 @@ export default function PaymentsPage() {
 
             {/* Right Div - Content */}
             <div className="lg:w-1/2 flex flex-col justify-center ml-4 -mt-15 items-start">
-             <div className="inline-flex items-center justify-center mb-2 md:justify-start">
+              <div className="inline-flex items-center justify-center mb-2 md:justify-start">
                 <span className="text-sm font-semibold text-purple-500 bg-purple-200 border border-gray-200 px-6 py-2 mt-10 rounded-full">
-                  • Payment clarity at every step 
+                  • Payment clarity at every step
                 </span>
               </div>
               {/* Three-line Header (no pill header) */}

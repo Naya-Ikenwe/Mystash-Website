@@ -9,7 +9,7 @@ import ContactFormSection from "../components/ContactFormSection";
 import NavButtons from "../components/NavButtons";
 
 // Dummy Image Path Constants
-const DUMMY_HERO_IMAGE = "/images/heroimage.svg";
+const DUMMY_HERO_IMAGE = "/images/newpersonalhero.svg";
 const DUMMY_CARD_1_IMAGE = "/images/card1.svg";
 const DUMMY_CARD_2_IMAGE = "/images/card2.svg";
 const DUMMY_CARD_3_IMAGE = "/images/card3.svg";
@@ -53,7 +53,7 @@ const HorizontalMarquee = () => {
 
   return (
     <div
-      className={`text-sm font-medium ${TEXT_COLOR} h-6 mb-4 relative w-44 md:w-56 mx-auto md:mx-0`}
+      className={`text-sm font-medium ${TEXT_COLOR} h-6 mb-4 relative w-20 md:w-30 mx-auto`}
     >
       <div className="overflow-hidden whitespace-nowrap w-full">
         <motion.div
@@ -72,7 +72,7 @@ const HorizontalMarquee = () => {
         >
           {SCROLL_ITEMS.map((text, i) => (
             <span key={i} className="shrink-0 mx-2">
-              <span className="inline-block px-3 py-1 bg-gray-100 rounded-full whitespace-nowrap">
+              <span className="inline-block px-3 py-1 bg-purple-100 rounded-full whitespace-nowrap">
                 {text}
               </span>
             </span>
@@ -80,8 +80,8 @@ const HorizontalMarquee = () => {
         </motion.div>
       </div>
 
-      <div className="absolute inset-y-0 w-4 left-0 bg-linear-to-r from-white to-transparent opacity-100 z-10 pointer-events-none"></div>
-      <div className="absolute inset-y-0 w-4 right-0 bg-linear-to-l from-white to-transparent opacity-100 z-10 pointer-events-none"></div>
+      {/* <div className="absolute inset-y-0 w-4 left-0 bg-linear-to-r from-white to-transparent opacity-100 z-10 pointer-events-none"></div>
+      <div className="absolute inset-y-0 w-4 right-0 bg-linear-to-l from-white to-transparent opacity-100 z-10 pointer-events-none"></div> */}
     </div>
   );
 };
@@ -148,7 +148,7 @@ const VerticalTextCarousel = () => {
             <div
               key={i}
               ref={i === 0 ? itemRef : null}
-              className="block font-semibold text-2xl leading-tight  items-center"
+              className="block font-semibold text-2xl leading-tight items-center"
               style={{ padding: "6px 0" }}
             >
               <span
@@ -167,7 +167,7 @@ const VerticalTextCarousel = () => {
   const desktopHeight = 78;
   return (
     <div
-      className="inline-block overflow-hidden align-baseline relative -ml-3"
+      className="inline-block overflow-hidden align-baseline relative"
       style={{
         height: `${desktopHeight}px`,
         width: "320px",
@@ -182,7 +182,7 @@ const VerticalTextCarousel = () => {
         {TEXTS.map((text, i) => (
           <div
             key={i}
-            className="absolute left-0 right-0 font-semibold px-3 text-4xl sm:text-5xl lg:text-6xl leading-none flex items-center"
+            className="absolute left-0 right-0 font-semibold px-3 text-4xl sm:text-5xl lg:text-6xl leading-none flex items-center justify-center"
             style={{
               top: `${i * desktopHeight}px`,
               height: `${desktopHeight}px`,
@@ -334,23 +334,23 @@ const PaymentFeatureCard = () => {
 // --- Section 3 Components ---
 const SectionThreePartOne = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center gap-8  md:ml-8 lg:ml-12">
+    <div className="flex flex-col md:flex-row items-center gap-8 md:ml-8 lg:ml-12">
       {/* 1a: Left Content */}
       <div className="w-full md:w-1/2">
         <div className="flex justify-between items-start mb-4">
-          <p className="text-[13px] font-medium mb-5  text-black border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
+          <p className="text-[13px] font-medium mb-5 text-black border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
             • Newly Added Product •
           </p>
         </div>
         <div className="flex justify-end mb-4">
-          <span className="text-[15px] text-purple-600 font-medium bg-purple-300 px-3 py-2  items-end rounded-full">
+          <span className="text-[15px] text-purple-600 font-medium bg-purple-300 px-3 py-2 items-end rounded-full">
             For Salary Earners
           </span>
         </div>
         <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">
           Get Quick Loan
         </h2>
-        <p className="text-lg text-gray-800 mb-2 leading-relaxed ">
+        <p className="text-lg text-gray-800 mb-2 leading-relaxed">
           We offer loans from ₦30,000 to ₦5,000,000, specially <br />
           tailored to Federal, State and Local Government <br />
           employees whose salaries are processed through the <br />
@@ -365,7 +365,7 @@ const SectionThreePartOne = () => {
         <img
           src={DUMMY_SECTION_3_IMAGE_1}
           alt="Smart banking features"
-          className="w-full max-w-md  ml-15 object-contain"
+          className="w-full max-w-md ml-15 object-contain"
           onError={(e) => {
             e.currentTarget.onerror = null;
             e.currentTarget.src =
@@ -395,7 +395,7 @@ const SectionThreePartTwo = () => {
       </div>
       {/* 2b: Right Content */}
       <div className="w-full md:w-1/2">
-        <p className="text-[13px] font-medium mb-15  text-black border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
+        <p className="text-[13px] font-medium mb-15 text-black border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
           • Newly Added Product •
         </p>
 
@@ -461,40 +461,40 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
   const firstLetter = testimonial.name.charAt(0).toUpperCase();
 
   return (
-  <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200 shadow-[0_7px_10px_0_rgba(0,0,0,0.1),0_0_30px_0_rgba(0,0,0,0.06)_inset] hover:shadow-[0_12px_24px_0_rgba(0,0,0,0.15),0_0_30px_0_rgba(0,0,0,0.08)_inset] transition-all duration-300 min-h-60 flex flex-col relative mb-2">
-    {/* Message */}
-    <p className="text-gray-700 leading-relaxed mb-6 grow text-sm">
-      "{testimonial.message}"
-    </p>
-    
-    {/* User Info - FIXED LAYOUT */}
-    <div className="mt-auto">
-      {/* Purple initial and name on same line */}
-      <div className="flex items-center space-x-3">
-        {/* Initial - Made smaller */}
-        <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center shrink-0">
-          <span className="text-white font-medium text-base">
-            {firstLetter}
-          </span>
+    <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200 shadow-[0_7px_10px_0_rgba(0,0,0,0.1),0_0_30px_0_rgba(0,0,0,0.06)_inset] hover:shadow-[0_12px_24px_0_rgba(0,0,0,0.15),0_0_30px_0_rgba(0,0,0,0.08)_inset] transition-all duration-300 min-h-60 flex flex-col relative mb-2">
+      {/* Message */}
+      <p className="text-gray-700 leading-relaxed mb-6 grow text-sm">
+        "{testimonial.message}"
+      </p>
+      
+      {/* User Info - FIXED LAYOUT */}
+      <div className="mt-auto">
+        {/* Purple initial and name on same line */}
+        <div className="flex items-center space-x-3">
+          {/* Initial - Made smaller */}
+          <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center shrink-0">
+            <span className="text-white font-medium text-base">
+              {firstLetter}
+            </span>
+          </div>
+          
+          {/* Name beside the initial */}
+          <div>
+            <h4 className="font-semibold text-gray-900 text-sm mt-3 -ml-1">
+              {testimonial.name}
+            </h4>
+          </div>
         </div>
         
-        {/* Name beside the initial */}
-        <div>
-          <h4 className="font-semibold text-gray-900 text-sm mt-3 -ml-1">
-            {testimonial.name}
-          </h4>
+        {/* Location - starts aligned with purple circle */}
+        <div className="mt-1">
+          <p className="text-gray-500 text-sm">
+            {testimonial.location}
+          </p>
         </div>
       </div>
-      
-      {/* Location - starts aligned with purple circle */}
-      <div className="mt-1 "> {/* ml-13 = w-10 (initial) + space-x-3 */}
-        <p className="text-gray-500 text-sm">
-          {testimonial.location}
-        </p>
-      </div>
     </div>
-  </div>
-);
+  );
 };
 
 const SectionFive = () => {
@@ -565,64 +565,75 @@ const SectionFive = () => {
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Section 1: Hero Section */}
-      <section className="relative w-full min-h-screen">
-        <div className="max-w-7xl mx-auto  sm:px-6 lg:px-4 py-12 md:py-20">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2 order-2 md:order-1 -ml-8 mt-10 text-center md:text-left z-10">
+      {/* Section 1: Hero Section - UPDATED TO VERTICAL/CENTERED LAYOUT */}
+      <section className="relative w-full min-h-screen bg-purple-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+          <div className="flex flex-col items-center justify-center text-center">
+            {/* Pill Header - Centered */}
+            <div className="mb-3 mt-3">
               <HorizontalMarquee />
-              {/* Mobile stacked heading: visible only on small screens */}
-              <div className="md:hidden text-center mb-4">
+            </div>
+
+            {/* Two Line Header Text - Centered */}
+            <div className="max-w-4xl mx-auto mb-6">
+              {/* Mobile View */}
+              <div className="md:hidden">
                 <h1 className="text-3xl font-extrabold text-gray-900 leading-tight">
                   <div>Smart Finance</div>
                   <div>for smarter</div>
                 </h1>
-                <div className=" mt-2 flex justify-center">
+                <div className="mt-2 flex justify-center">
                   <VerticalTextCarousel />
                 </div>
               </div>
-              {/* Desktop heading  */}
+              
+              {/* Desktop View */}
               <div className="hidden md:block">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 mb-4">
-                  <span className="block whitespace-nowrap">
-                    Smart Finance for a
-                  </span>
-                  <span className=" font-semibold whitespace-nowrap flex items-center gap-3">
-                    smarter <VerticalTextCarousel />
+                <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-semibold text-gray-900 tracking-wide ">
+                  <span className="block">Smart Finance for a smarter</span>
+                  <span className="font-semibold flex items-center justify-center gap-3">
+                   Future
                   </span>
                 </h1>
               </div>
-              <div className="mt-4 text-gray-600 max-w-2xl mx-auto md:mx-0">
-                <div className="flex flex-col space-y-1">
-                  <span className="text-base sm:text-lg md:text-xl lg:text-[22px]">
-                    A financial tool that makes your money work for you. Save
-                  </span>
-                  <span className="text-base sm:text-lg md:text-xl lg:text-[22px] whitespace-nowrap">
-                    effortlessly, grow your wealth intelligently, and make you
-                    spend
-                  </span>
-                  <span className="text-base sm:text-lg md:text-xl lg:text-[22px]">
-                    with confidence.
-                  </span>
-                </div>
+            </div>
+
+            {/* Two Line Sub Text - Centered */}
+            <div className="max-w-2xl mx-auto mb-3">
+              <div className="flex flex-col ">
+                <span className="text-base sm:text-lg md:text-xl lg:text-[22px] text-gray-600 whitespace-nowrap -ml-11">
+                  A financial tool that makes your money work for you. Save effortlessly, grow
+                </span>
+                <span className="text-base sm:text-lg md:text-xl lg:text-[22px] -mr-5 text-gray-600 whitespace-nowrap">
+                 your wealth intelligently, and make you spend with confidence.
+                </span>
+                <span className="text-base sm:text-lg md:text-xl lg:text-[22px] text-gray-600">
+                  
+                </span>
               </div>
-              <div className="mt-8 flex justify-center md:justify-start space-x-4">
-                <NavButtons />
-              </div>
+            </div>
+
+            {/* Two Buttons - Centered */}
+            <div className="mb-6">
+              <NavButtons />
+            </div>
+
+            {/* Hero Image - Centered below everything */}
+            <div className="w-full max-w-3xl sm:max-w-4xl lg:max-w-5xl mx-auto mt-6 ">
+              <img
+                src={DUMMY_HERO_IMAGE}
+                alt="Hero Visual"
+                className="w-full h-full object-contain ml-13"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = "https://placehold.co/1200x600/7C3AED/FFFFFF?text=Hero+Image";
+                }}
+              />
             </div>
           </div>
         </div>
-        {/* Updated Image Section - move slightly more right and increase width */}
-        <div className="absolute top-0 right-0 w-2/3 h-full order-1 md:order-2 flex items-center justify-end pr-24">
-          <div className="w-full h-full max-w-none rounded-l-xl flex items-center justify-end overflow-hidden">
-            <img
-              src={DUMMY_HERO_IMAGE}
-              alt="Hero Visual"
-              className="w-[95%] h-[90%] object-contain scale-105 -mr-40 mt-8"
-            />
-          </div>
-        </div>
       </section>
+
       {/* Section 2: Features Grid - UPDATED */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-12 md:pb-10 bg-white">
         <div className="text-center max-w-3xl mx-auto mb-12">

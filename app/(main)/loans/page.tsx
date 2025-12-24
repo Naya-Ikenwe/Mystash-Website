@@ -123,7 +123,7 @@ export default function LoansPage() {
       {/* SECTION 2: LOAN FEATURES */}
       {/* ==================== */}
       {/* Section 2: Loan Features */}
-      <section className="relative py-20 md:py-20 bg-white overflow-hidden">
+      <section className="relative py-20 md:py-20 bg-[#fafafa] overflow-hidden">
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* Pill-shaped Header with Dot Thingies INSIDE the pill */}
           <div className="inline-flex items-center justify-center mb-3">
