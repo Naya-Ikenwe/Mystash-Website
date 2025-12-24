@@ -623,7 +623,7 @@ export default function HomePage() {
               <img
                 src={DUMMY_HERO_IMAGE}
                 alt="Hero Visual"
-                className="w-full h-full object-contain ml-13"
+                className="w-full h-full object-contain ml-3"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src = "https://placehold.co/1200x600/7C3AED/FFFFFF?text=Hero+Image";

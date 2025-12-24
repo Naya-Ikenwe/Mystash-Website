@@ -9,7 +9,7 @@ import ContactFormSection from "@/app/components/ContactFormSection";
 const DUMMY_BUTTON_ICON = "/icons/download-icon.svg";
 const DUMMY_SECTION1_IMAGE = "/images/businesssavingshero.svg";
 const DUMMY_FRAME6_ICON = "/icons/Frame6.svg";
-const DUMMY_HERO_BACKGROUND = "/images/businessframe.svg"; // Added background image path
+const DUMMY_HERO_BACKGROUND = "/images/tiles.svg"; // Added background image path
 
 // Button paths mapping
 const BUTTON_PATHS: Record<string, string> = {
@@ -95,7 +95,7 @@ const SectionOne = () => {
             </div>
 
             {/* Download Button */}
-            <div className="mb-12 sm:mb-6">
+            <div className="mb-5 sm:mb-4">
               <DownloadButton />
             </div>
 
