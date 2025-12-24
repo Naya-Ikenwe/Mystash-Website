@@ -30,7 +30,7 @@ export default function DownloadPage() {
               <div className="flex items-start">
                 {/* Left - Image: KEEP flex justify-end to push content right */}
                 <div className="w-1/2 flex justify-end">
-                  <div className="pr-22 -mt-28 text-left">
+                  <div className="pr-27 -mt-28 text-left">
                     <img
                       src="/images/downloadimg1.svg"
                       alt="Step 1"
