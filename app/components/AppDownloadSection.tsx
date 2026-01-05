@@ -8,20 +8,10 @@ interface AppDownloadSectionProps {
 }
 
 const AppDownloadSection = ({ showHeaderAndLogos = false }: AppDownloadSectionProps) => {
-  const DUMMY_LOGO_1 = "/logo/org1.svg";
-  const DUMMY_LOGO_2 = "/logo/org2.svg";
-  const DUMMY_LOGO_3 = "/logo/org3.svg";
-  const DUMMY_LOGO_4 = "/logo/org4.svg";
   const DUMMY_GOOGLE_PLAY_ICON = "/logo/google.svg";
   const DUMMY_APPLE_STORE_ICON = "/icons/apple.svg";
   const DUMMY_APP_IMAGE = "/images/iphonetop.svg";
   const DUMMY_BACKGROUND_IMAGE = "/images/purplebackground.jpg";
-
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const target = e.target as HTMLImageElement;
-    target.onerror = null;
-    target.src = "https://placehold.co/200x100/7C3AED/FFFFFF?text=Logo";
-  };
 
   const handleSmallImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement;
@@ -37,37 +27,10 @@ const AppDownloadSection = ({ showHeaderAndLogos = false }: AppDownloadSectionPr
 
   return (
     <section className="w-full bg-white">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-12">
-        {/* Centered Header and Logos, only if showHeaderAndLogos is true */}
-        {showHeaderAndLogos && (
-          <>
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-                Trusted by Leading Organizations
-              </h2>
-            </div>
-            {/* Four Logo Icons with Equal Spacing */}
-            <div className="flex justify-between items-center mb-20 px-8">
-              {[DUMMY_LOGO_1, DUMMY_LOGO_2, DUMMY_LOGO_3, DUMMY_LOGO_4].map(
-                (logo, index) => (
-                  <div key={index} className="flex-1 flex justify-center">
-                    <img
-                      src={logo}
-                      alt={`Partner logo ${index + 1}`}
-                      className="h-12 sm:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity"
-                      onError={handleImageError}
-                    />
-                  </div>
-                )
-              )}
-            </div>
-          </>
-        )}
-
         {/* Big Container with Background Image */}
         <div
-          className="rounded-2xl min-h-[400px] flex relative overflow-hidden"
+          className="rounded-2xl min-h-[400px] lg:min-h-[400px] md:min-h-[500px] flex relative overflow-hidden"
           style={{
             backgroundImage: `url(${DUMMY_BACKGROUND_IMAGE})`,
             backgroundSize: "cover",
@@ -75,44 +38,44 @@ const AppDownloadSection = ({ showHeaderAndLogos = false }: AppDownloadSectionPr
             backgroundRepeat: "no-repeat",
           }}
         >
-          {/* More pronounced purple tint */}
+          {/* Purple tint overlay */}
           <div
             className="absolute inset-0"
             style={{ backgroundColor: "rgba(162, 67, 220, 0.8)" }}
           ></div>
 
-          {/* Content */}
-          <div className="relative z-10 flex flex-col md:flex-row w-full">
-            {/* Left Div - Has its own padding */}
-            <div className="w-full md:w-1/2 flex items-center justify-center p-8 sm:p-12">
-              <div className="text-center">
-                {/* Two-line Sentence */}
-                <div className="text-white text-xl sm:text-2xl text-start lg:text-3xl font-semibold mb-8 leading-tight">
-                  <div>Join thousands already saving,</div>
-                  <div className="md:whitespace-nowrap">investing and growing with myStash</div>
+          {/* Content - Stack on mobile/tablet, side-by-side on desktop */}
+          <div className="relative z-10 flex flex-col lg:flex-row w-full">
+            {/* Left Div - Text Content */}
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-8 md:p-10 lg:p-12">
+              <div className="text-center lg:text-left w-full max-w-md">
+                {/* Headline */}
+                <div className="text-white text-xl sm:text-2xl md:text-2xl lg:text-3xl font-semibold mb-6 sm:mb-8 leading-tight">
+                  <div className="break-words">Join thousands already saving,</div>
+                  <div className="break-words lg:whitespace-nowrap">investing and growing with myStash</div>
                 </div>
 
-                {/* Two Small Transparent Buttons with subtle RGBA background */}
-                <div className="flex flex-col sm:flex-row gap-4 items-start">
+                {/* App Store Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-start justify-center lg:justify-start">
                   {/* Google Play Store Link */}
                   <Link
                     href="https://play.google.com/store/apps/details?id=com.yourapp"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border border-white text-white px-5 py-3 rounded-lg transition-colors flex items-center justify-center w-full sm:w-auto md:min-w-[130px]"
+                    className="border border-white text-white px-4 sm:px-5 py-3 rounded-lg transition-colors flex items-center justify-center w-full sm:w-auto sm:min-w-[150px] lg:min-w-[130px] hover:bg-white hover:bg-opacity-10"
                     style={{ backgroundColor: "rgba(255, 255, 255, 0.08)" }}
                   >
                     <img
                       src={DUMMY_GOOGLE_PLAY_ICON}
                       alt="Google Play"
-                      className="w-7 h-7 mr-1 object-contain"
+                      className="w-6 h-6 sm:w-7 sm:h-7 mr-2 flex-shrink-0 object-contain"
                       onError={handleSmallImageError}
                     />
                     <div className="text-left">
                       <div className="text-xs text-white text-opacity-90">
                         Get App on
                       </div>
-                      <div className="text-sm font-semibold">Google Play</div>
+                      <div className="text-sm font-semibold whitespace-nowrap">Google Play</div>
                     </div>
                   </Link>
 
@@ -121,34 +84,34 @@ const AppDownloadSection = ({ showHeaderAndLogos = false }: AppDownloadSectionPr
                     href="https://apps.apple.com/app/your-app-id"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border border-white text-white px-5 py-3 rounded-lg hover:bg-white hover:bg-opacity-10 transition-colors flex items-center justify-center w-full sm:w-auto md:min-w-[130px]"
+                    className="border border-white text-white px-4 sm:px-5 py-3 rounded-lg hover:bg-white hover:bg-opacity-10 transition-colors flex items-center justify-center w-full sm:w-auto sm:min-w-[150px] lg:min-w-[130px]"
                     style={{ backgroundColor: "rgba(255, 255, 255, 0.08)" }}
                   >
                     <img
                       src={DUMMY_APPLE_STORE_ICON}
                       alt="App Store"
-                      className="w-9 h-9 mr-1 object-contain"
+                      className="w-7 h-7 sm:w-8 sm:h-8 mr-2 flex-shrink-0 object-contain"
                       onError={handleSmallImageError}
                     />
                     <div className="text-left">
                       <div className="text-xs text-white text-opacity-90">
                         Get App on
                       </div>
-                      <div className="text-sm font-semibold">Apple Store</div>
+                      <div className="text-sm font-semibold whitespace-nowrap">Apple Store</div>
                     </div>
                   </Link>
                 </div>
               </div>
             </div>
 
-            {/* Right Div - NO PADDING, image touches bottom */}
-            <div className="w-full md:w-1/2 flex items-end justify-center">
+            {/* Right Div - App Image */}
+            <div className="w-full lg:w-1/2 flex items-end justify-center pb-0 md:pb-4 lg:pb-0">
               <img
                 src={DUMMY_APP_IMAGE}
                 alt="App Preview"
                 className="max-w-full object-contain"
                 style={{
-                  maxHeight: "320px",
+                  maxHeight: "280px",
                   width: "auto",
                 }}
                 onError={handleAppImageError}

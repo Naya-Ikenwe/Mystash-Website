@@ -79,123 +79,6 @@ const HorizontalMarquee = () => {
           ))}
         </motion.div>
       </div>
-
-      {/* <div className="absolute inset-y-0 w-4 left-0 bg-linear-to-r from-white to-transparent opacity-100 z-10 pointer-events-none"></div>
-      <div className="absolute inset-y-0 w-4 right-0 bg-linear-to-l from-white to-transparent opacity-100 z-10 pointer-events-none"></div> */}
-    </div>
-  );
-};
-
-const VerticalTextCarousel = () => {
-  const TEXTS = ["Future", "You and", "Everyone"];
-  const [index, setIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const itemRef = React.useRef<HTMLDivElement | null>(null);
-  const [measuredHeight, setMeasuredHeight] = useState<number | null>(null);
-
-  // detect mobile (Tailwind md breakpoint ~768px)
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(max-width: 767px)");
-    const handler = () => setIsMobile(mq.matches);
-    handler();
-    if (mq.addEventListener) mq.addEventListener("change", handler);
-    else mq.addListener(handler);
-    return () => {
-      if (mq.removeEventListener) mq.removeEventListener("change", handler);
-      else mq.removeListener(handler);
-    };
-  }, []);
-
-  // measure first item on mobile so the wrapper exactly fits one item
-  useEffect(() => {
-    if (!isMobile) {
-      setMeasuredHeight(null);
-      return;
-    }
-    const measure = () => {
-      if (itemRef.current) {
-        const h = Math.ceil(itemRef.current.getBoundingClientRect().height);
-        setMeasuredHeight(h || 72);
-      }
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [isMobile]);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % TEXTS.length);
-    }, 2500);
-    return () => clearInterval(intervalId);
-  }, []);
-
-  // Mobile variant: flow layout (block items) measured height used to show a single item
-  if (isMobile) {
-    const h = measuredHeight ?? 72;
-    return (
-      <div
-        className="inline-block overflow-hidden align-bottom ml-3 relative"
-        style={{ height: `${h}px`, width: "auto", paddingTop: "4px" }}
-      >
-        <motion.div
-          animate={{ y: -index * h }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
-          className="relative"
-        >
-          {TEXTS.map((text, i) => (
-            <div
-              key={i}
-              ref={i === 0 ? itemRef : null}
-              className="block font-semibold text-2xl leading-tight items-center"
-              style={{ padding: "6px 0" }}
-            >
-              <span
-                className={text === "Everyone" ? PURPLE_COLOR : "text-gray-900"}
-              >
-                {text}
-              </span>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    );
-  }
-
-  // Desktop: keep original stacked absolute layout but make it compact
-  const desktopHeight = 78;
-  return (
-    <div
-      className="inline-block overflow-hidden align-baseline relative"
-      style={{
-        height: `${desktopHeight}px`,
-        width: "320px",
-        paddingTop: "0px",
-      }}
-    >
-      <motion.div
-        animate={{ y: -index * desktopHeight }}
-        transition={{ duration: 0.7, ease: "easeInOut" }}
-        className="relative h-full"
-      >
-        {TEXTS.map((text, i) => (
-          <div
-            key={i}
-            className="absolute left-0 right-0 font-semibold px-3 text-4xl sm:text-5xl lg:text-6xl leading-none flex items-center justify-center"
-            style={{
-              top: `${i * desktopHeight}px`,
-              height: `${desktopHeight}px`,
-            }}
-          >
-            <span
-              className={text === "Everyone" ? PURPLE_COLOR : "text-gray-900"}
-            >
-              {text}
-            </span>
-          </div>
-        ))}
-      </motion.div>
     </div>
   );
 };
@@ -351,21 +234,21 @@ const SectionThreePartOne = () => {
           Get Quick Loan
         </h2>
         <p className="text-lg text-gray-800 mb-2 leading-relaxed">
-          We offer loans from ₦30,000 to ₦5,000,000, specially <br />
+          We offer loans from ₦30,000 to ₦1,000,000, specially <br />
           tailored to Federal, State and Local Government <br />
           employees whose salaries are processed through the <br />
-          Remita or IPPIS platforms. We offer 6% per month interest <br />
+          IPPIS platform. We offer 6% per month interest <br />
           on Loan
         </p>
 
         <PillButtonWithIcon text="Learn More" />
       </div>
-      {/* 1b: Right Image */}
+      {/* 1b: Right Image - REMOVED ml-15 to fix overflow */}
       <div className="w-full md:w-1/2 flex justify-center">
         <img
           src={DUMMY_SECTION_3_IMAGE_1}
           alt="Smart banking features"
-          className="w-full max-w-md ml-15 object-contain"
+          className="w-full max-w-md object-contain"
           onError={(e) => {
             e.currentTarget.onerror = null;
             e.currentTarget.src =
@@ -564,7 +447,7 @@ const SectionFive = () => {
 // --- Main Page Component ---
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Section 1: Hero Section - UPDATED TO VERTICAL/CENTERED LAYOUT */}
       <section className="relative w-full min-h-screen bg-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
@@ -582,8 +465,8 @@ export default function HomePage() {
                   <div>Smart Finance</div>
                   <div>for smarter</div>
                 </h1>
-                <div className="mt-2 flex justify-center">
-                  <VerticalTextCarousel />
+                <div className="mt-2 text-3xl font-extrabold text-gray-900">
+                  Future
                 </div>
               </div>
               
@@ -591,21 +474,19 @@ export default function HomePage() {
               <div className="hidden md:block">
                 <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-semibold text-gray-900 tracking-wide ">
                   <span className="block">Smart Finance for a smarter</span>
-                  <span className="font-semibold flex items-center justify-center gap-3">
-                   Future
-                  </span>
+                  <span className="font-semibold">Future</span>
                 </h1>
               </div>
             </div>
 
-            {/* Two Line Sub Text - Centered */}
+            {/* Two Line Sub Text - Centered - KEPT ORIGINAL DESKTOP UI */}
             <div className="max-w-2xl mx-auto mb-3">
               <div className="flex flex-col ">
                 <span className="text-base sm:text-lg md:text-xl lg:text-[22px] text-gray-600 whitespace-nowrap -ml-11">
                   A financial tool that makes your money work for you. Save effortlessly, grow
                 </span>
                 <span className="text-base sm:text-lg md:text-xl lg:text-[22px] -mr-5 text-gray-600 whitespace-nowrap">
-                 your wealth intelligently, and make you spend with confidence.
+                 your wealth intelligently, and spend with confidence.
                 </span>
                 <span className="text-base sm:text-lg md:text-xl lg:text-[22px] text-gray-600">
                   
@@ -618,12 +499,12 @@ export default function HomePage() {
               <NavButtons />
             </div>
 
-            {/* Hero Image - Centered below everything */}
-            <div className="w-full max-w-3xl sm:max-w-4xl lg:max-w-5xl mx-auto mt-6 ">
+            {/* Hero Image - Centered below everything - REMOVED ml-3 to fix alignment */}
+            <div className="w-full max-w-3xl sm:max-w-4xl lg:max-w-5xl mx-auto mt-6">
               <img
                 src={DUMMY_HERO_IMAGE}
                 alt="Hero Visual"
-                className="w-full h-full object-contain ml-3"
+                className="w-full h-full object-contain"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src = "https://placehold.co/1200x600/7C3AED/FFFFFF?text=Hero+Image";
@@ -645,7 +526,7 @@ export default function HomePage() {
             <span className="text-gray-400">save smarter,</span> spend
             efficiently, <span className="text-gray-400">plan</span>
             <br />
-            <span className="text-gray-400">strategically,</span> and give loans
+            <span className="text-gray-400">strategically,</span> and access loans
             — all through secure, innovative
             <br />
             tools and trusted financial partnerships.
@@ -674,7 +555,7 @@ export default function HomePage() {
             <FeatureCard
               imagePath={DUMMY_CARD_3_IMAGE}
               title="Budget Smarter, Spend Better"
-              description="Automatically save in ISD or NGN, plan, budget and grow your money efficiently."
+              description="Automatically save in USD or NGN, plan, budget and grow your money efficiently."
               ctaContent={<PillButtonWithIcon text="Budget" />}
             />
           </div>
@@ -718,8 +599,6 @@ export default function HomePage() {
 
       {/* Section 6: Contact Form */}
       <ContactFormSection />
-
-      {/* Sections 7 & 8 are now in the layout */}
     </div>
   );
 }

@@ -67,9 +67,9 @@ const LoanCalculatorSection = ({
   calculateButtonIcon = "/icons/Frame6.svg",
   resultBoxTitle = "Monthly Payment",
 
-  // Loan amount limits with defaults (only used in loan mode)
+  // Loan amount limits with defaults - UPDATED maxLoanAmount to 1,000,000
   minLoanAmount = 30000,
-  maxLoanAmount = 5000000,
+  maxLoanAmount = 1000000, // CHANGED FROM 5,000,000 to 1,000,000
   
   // Investment amount limits (only used in investment mode - set to 0 for no limits)
   minInvestmentAmount = 0,
@@ -158,7 +158,7 @@ const LoanCalculatorSection = ({
     }
   };
 
-  // Calculate based on mode
+  // Calculate based on mode - UPDATED FORMULA FOR LOAN CALCULATION
   const calculateResult = () => {
     const amount = parseAmount(loanAmount);
     const tenure = parseInt(loanTenure) || 0;
@@ -166,16 +166,29 @@ const LoanCalculatorSection = ({
     if (amount === 0 || tenure === 0) return null;
 
     if (mode === "loan") {
-      // Loan calculation: 6% monthly interest
-      const monthlyInterestRate = 0.06;
-      const totalInterest = amount * monthlyInterestRate * tenure;
-      return amount + totalInterest; // Total repayable amount
+      // UPDATED LOAN CALCULATION FORMULA: (loan amount * 0.06) + (loan amount / tenure)
+      const monthlyInterest = amount * 0.06; // 6% interest
+      const monthlyPrincipal = amount / tenure; // Equal principal payment
+      const monthlyPayment = monthlyInterest + monthlyPrincipal;
+      
+      return monthlyPayment; // Return the exact value with decimals
     } else {
       // Investment calculation: 2% monthly ROI
       const monthlyReturnRate = 0.02;
       const totalReturn = amount * monthlyReturnRate * tenure;
       return amount + totalReturn; // Total return amount
     }
+  };
+
+  // Format number with 2 decimal places and commas
+  const formatNumberWithDecimals = (num: number | null) => {
+    if (num === null) return "0.00";
+    
+    // Format with commas for thousands and 2 decimal places
+    return num.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
   };
 
   const handleCalculate = () => {
@@ -458,13 +471,13 @@ const LoanCalculatorSection = ({
                   </span>
                 </div>
 
-                {/* Naira Amount Display */}
+                {/* Naira Amount Display with Decimal Places */}
                 <div className="flex items-center mb-8 justify-center space-x-2">
                   <span className="text-4xl font-bold text-white">₦</span>
                   <span className="text-4xl font-bold text-white">
                     {calculatedResult !== null
-                      ? calculatedResult.toLocaleString()
-                      : "0"}
+                      ? formatNumberWithDecimals(calculatedResult)
+                      : "0.00"}
                   </span>
                 </div>
               </div>

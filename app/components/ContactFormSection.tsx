@@ -193,7 +193,7 @@ const ContactFormSection = () => {
                  <p className="mr-10">Submit enquiry</p> 
                 </button>
               </div>
-            </form>n
+            </form>
           </div>
         </div>
       </div>

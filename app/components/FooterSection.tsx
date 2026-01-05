@@ -31,8 +31,8 @@ const FooterSection = () => {
   };
 
   return (
-    <section className="w-full bg-white -mt-10 pb-25">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-8 ">
+    <section className="w-full bg-white -mt-10 pb-25 overflow-x-hidden"> {/* Added overflow-x-hidden */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-8">
         <div className="flex flex-col lg:flex-row justify-between">
           {/* Left Section */}
           <div className="lg:w-2/5 mb-8">
@@ -46,11 +46,19 @@ const FooterSection = () => {
               />
             </div>
 
-            {/* Three-line Sentence */}
-            <div className="text-gray-600 mb-8 -mt-3 text-sm">
-              <p className="whitespace-nowrap">© In Nigeria, myStash is duly registered and regulated</p>
-              <p className="whitespace-nowrap">as a cooperative society under the Lagos state Ministry</p>
-              <p>of Commerce, Industry and Cooperatives.</p>
+            {/* Three-line Sentence - Fixed for mobile */}
+            <div className="text-gray-600 mb-8 -mt-3">
+              {/* Desktop view - original with whitespace-nowrap */}
+              <div className="hidden md:block text-sm">
+                <p className="whitespace-nowrap">© In Nigeria, myStash is duly registered and regulated</p>
+                <p className="whitespace-nowrap">as a cooperative society under the Lagos state Ministry</p>
+                <p>of Commerce, Industry and Cooperatives.</p>
+              </div>
+              
+              {/* Mobile view - properly wrapped */}
+              <div className="block md:hidden text-sm leading-relaxed">
+                <p>© In Nigeria, myStash is duly registered and regulated as a cooperative society under the Lagos state Ministry of Commerce, Industry and Cooperatives.</p>
+              </div>
             </div>
 
             {/* Four Social Icons with Spacing */}
@@ -77,10 +85,10 @@ const FooterSection = () => {
             </div>
           </div>
 
-          {/* Right Section - Four Columns */}
-          <div className="lg:w-3/5 grid grid-cols-2 md:grid-cols-4 gap-2">
-            {/* Column 1 */}
-            <div>
+          {/* Right Section - Four Columns - Fixed for mobile */}
+          <div className="lg:w-3/5 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-2">
+            {/* Column 1 - Fixed negative margins for mobile */}
+            <div className="md:ml-0">
               <h4 className="font-semibold text-gray-400 mb-4">Products</h4>
               <div className="space-y-2 text-sm">
                 <Link
@@ -110,8 +118,8 @@ const FooterSection = () => {
               </div>
             </div>
 
-            {/* Column 2 */}
-            <div className="-ml-10">
+            {/* Column 2 - Fixed negative margins for mobile */}
+            <div className="md:-ml-10">
               <h4 className="font-semibold text-gray-400 mb-4">Company</h4>
               <div className="space-y-2 text-sm text-gray-800">
                 <Link
@@ -147,9 +155,9 @@ const FooterSection = () => {
               </div>
             </div>
 
-            {/* Column 3 */}
-            <div className="-ml-22">
-              <h4 className="font-semibold text-gray-400 mb-4 ">Support</h4>
+            {/* Column 3 - Fixed negative margins for mobile */}
+            <div className="md:-ml-22">
+              <h4 className="font-semibold text-gray-400 mb-4">Support</h4>
               <div className="space-y-2">
                 <Link
                   href="#"
@@ -166,8 +174,8 @@ const FooterSection = () => {
               </div>
             </div>
 
-            {/* Column 4 - Addresses */}
-            <div className="-ml-21">
+            {/* Column 4 - Addresses - Fixed negative margins for mobile */}
+            <div className="md:-ml-21 col-span-2 md:col-span-1 mt-6 md:mt-0">
               <h4 className="font-semibold text-gray-400 mb-4">Contact</h4>
               <div className="space-y-4">
                 {/* Nigeria Address */}
@@ -175,7 +183,7 @@ const FooterSection = () => {
                   <img
                     src={DUMMY_LOCATION_ICON}
                     alt="Location"
-                    className="w-6 h-6  object-contain shrink-0"
+                    className="w-6 h-6 object-contain shrink-0"
                     onError={handleSmallImageError}
                   />
                   <div className="text-gray-800 text-[12px]">
@@ -190,7 +198,7 @@ const FooterSection = () => {
                   <img
                     src={DUMMY_LOCATION_ICON_2}
                     alt="Location"
-                    className="w-6 h-6  object-contain shrink-0"
+                    className="w-6 h-6 object-contain shrink-0"
                     onError={handleSmallImageError}
                   />
                   <div className="text-gray-800 text-[12px]">
@@ -203,13 +211,6 @@ const FooterSection = () => {
             </div>
           </div>
         </div>
-
-        {/* Bottom Copyright Bar */}
-        {/* <div className="mt-12 pt-6 text-center">
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} myStash. All rights reserved.
-          </p>
-        </div> */}
       </div>
     </section>
   );

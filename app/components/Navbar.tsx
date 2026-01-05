@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavButtons from './NavButtons';
 
 // --- CONFIGURATION & DUMMY PATHS ---
@@ -170,7 +170,7 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
   }
 
   return (
-    <div className="w-[450px] bg-white shadow-2xl rounded-xl border border-gray-100 p-4 z-40">
+    <div className="w-[400px] bg-white shadow-2xl rounded-xl border border-gray-100 p-4 z-40">
       <ul className="space-y-2">
         {items.map((item) => (
           <li key={item.title}>
@@ -202,7 +202,7 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
 };
 
 // 3. Dropdown Link Wrapper (Desktop) - LEFT-ALIGNED DROPDOWNS
-const DropdownLink = ({ text, hasPlus = false, items }: { text: string; hasPlus?: boolean; items: DropdownItem[] }) => {
+const DropdownLink = ({ text, hasPlus = false, items, closeMobileMenu }: { text: string; hasPlus?: boolean; items: DropdownItem[]; closeMobileMenu?: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMouseInDropdown, setIsMouseInDropdown] = useState(false);
   
@@ -240,6 +240,9 @@ const DropdownLink = ({ text, hasPlus = false, items }: { text: string; hasPlus?
   const handleItemClick = () => {
     setIsOpen(false);
     setIsMouseInDropdown(false);
+    if (closeMobileMenu) {
+      closeMobileMenu();
+    }
   };
 
   return (
@@ -266,8 +269,13 @@ const DropdownLink = ({ text, hasPlus = false, items }: { text: string; hasPlus?
 };
 
 // 4. Mobile Dropdown Link
-const MobileDropdownLink = ({ text, hasPlus = false, items }: { text: string; hasPlus?: boolean; items: DropdownItem[] }) => {
+const MobileDropdownLink = ({ text, hasPlus = false, items, closeMobileMenu }: { text: string; hasPlus?: boolean; items: DropdownItem[]; closeMobileMenu: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleItemClick = () => {
+    setIsOpen(false);
+    closeMobileMenu();
+  };
 
   return (
     <div className="w-full">
@@ -288,22 +296,23 @@ const MobileDropdownLink = ({ text, hasPlus = false, items }: { text: string; ha
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      {isOpen && <DropdownMenu items={items} mobile onItemClick={() => setIsOpen(false)} />}
+      {isOpen && <DropdownMenu items={items} mobile onItemClick={handleItemClick} />}
     </div>
   );
 };
 
-// 5. Hamburger Menu Button
+// 5. Hamburger Menu Button - UPDATED with proper X icon
 const HamburgerButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) => (
   <button
     onClick={onClick}
-    className="p-2 rounded-md text-gray-700 hover:bg-purple-100 hover:text-purple-700 transition-colors duration-200 md:hidden"
-    aria-label="Toggle menu"
+    className="p-2 rounded-md text-gray-700 hover:bg-purple-100 hover:text-purple-700 transition-colors duration-200 md:hidden relative z-50"
+    aria-label={isOpen ? "Close menu" : "Open menu"}
   >
-    <div className="w-6 h-6 flex flex-col justify-center items-center">
-      <span className={`block h-0.5 w-6 bg-current transition-transform duration-200 ${isOpen ? 'rotate-45 translate-y-1.5' : '-translate-y-1'}`} />
-      <span className={`block h-0.5 w-6 bg-current transition-all duration-200 ${isOpen ? 'opacity-0' : 'opacity-100'}`} />
-      <span className={`block h-0.5 w-6 bg-current transition-transform duration-200 ${isOpen ? '-rotate-45 -translate-y-1.5' : 'translate-y-1'}`} />
+    <div className="w-6 h-6 flex flex-col justify-center items-center relative">
+      {/* X icon lines */}
+      <span className={`block absolute h-0.5 w-6 bg-current transition-all duration-300 ${isOpen ? 'rotate-45' : '-translate-y-1.5 rotate-0'}`} />
+      <span className={`block absolute h-0.5 w-6 bg-current transition-all duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`} />
+      <span className={`block absolute h-0.5 w-6 bg-current transition-all duration-300 ${isOpen ? '-rotate-45' : 'translate-y-1.5 rotate-0'}`} />
     </div>
   </button>
 );
@@ -316,59 +325,115 @@ export default function Navbar() {
     setIsMobileMenuOpen(false);
   };
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (isMobileMenuOpen && !target.closest('.mobile-menu-container') && !target.closest('button[aria-label*="menu"]')) {
+        closeMobileMenu();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
+
+  // Close mobile menu when clicking any link
+  const handleLinkClick = () => {
+    closeMobileMenu();
+  };
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
-    <nav className="sticky top-0 z-50 bg-[#fafafa]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo - INCREASED SIZE */}
-          <div className="shrink-0 -ml-9">
-            <Link href="/" className="flex items-center">
-              <img 
-                src={DUMMY_LOGO_PATH} 
-                alt="Site Logo" 
-                className="w-60 h-36 object-contain" 
+    <>
+      {/* Navbar - Conditional overflow control */}
+      <nav className="sticky top-0 z-50 bg-[#fafafa] overflow-x-hidden lg:overflow-x-visible">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-4">
+          <div className="flex justify-between items-center h-14 md:h-20">
+            {/* Logo - Adjusted sizes for all screens */}
+            <div className="shrink-0 md:-ml-4 lg:-ml-6">
+              <Link href="/" className="flex items-center" onClick={closeMobileMenu}>
+                <img 
+                  src={DUMMY_LOGO_PATH} 
+                  alt="Site Logo" 
+                  className="w-32 h-16 md:w-44 md:h-22 lg:w-56 lg:h-28 xl:w-60 xl:h-36 object-contain" 
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = 'https://placehold.co/160x80/7C3AED/FFFFFF?text=Logo';
+                  }}
+                />
+              </Link>
+            </div>
+
+            {/* Desktop Navigation - Adjusted spacing for all screens */}
+            <div className="hidden md:flex space-x-2 lg:space-x-4 xl:space-x-6 items-center">
+              <DropdownLink text="Personal" hasPlus items={PERSONAL_DROPDOWN_ITEMS} closeMobileMenu={closeMobileMenu} /> 
+              <DropdownLink text="Business" hasPlus items={BUSINESS_DROPDOWN_ITEMS} closeMobileMenu={closeMobileMenu} />
+              <DropdownLink text="Company" hasPlus items={COMPANY_DROPDOWN_ITEMS} closeMobileMenu={closeMobileMenu} />
+            </div>
+
+            {/* Desktop Buttons - Adjusted margins */}
+            <div className="hidden md:flex items-center space-x-2 lg:space-x-3 xl:-mr-16">
+              <NavButtons />
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <HamburgerButton 
+                isOpen={isMobileMenuOpen} 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
               />
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-6 items-center">
-            <DropdownLink text="Personal" hasPlus items={PERSONAL_DROPDOWN_ITEMS} /> 
-            <DropdownLink text="Business" hasPlus items={BUSINESS_DROPDOWN_ITEMS} />
-            <DropdownLink text="Company" hasPlus items={COMPANY_DROPDOWN_ITEMS} />
-          </div>
-
-          {/* Desktop Buttons */}
-          <div className="hidden md:flex items-center space-x-3 -mr-16">
-            <NavButtons />
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <HamburgerButton 
-              isOpen={isMobileMenuOpen} 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-            />
+            </div>
           </div>
         </div>
 
         {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-20 left-0 right-0 bg-[#fafafa]">
+          <div className="mobile-menu-container md:hidden fixed inset-0 top-14 bg-[#fafafa] z-40 overflow-y-auto">
             <div className="px-4 py-6 space-y-4">
               {/* Mobile Navigation Links */}
-              <MobileDropdownLink text="Personal" hasPlus items={PERSONAL_DROPDOWN_ITEMS} />
-              <MobileDropdownLink text="Business" hasPlus items={BUSINESS_DROPDOWN_ITEMS} />
-              <MobileDropdownLink text="Company" hasPlus items={COMPANY_DROPDOWN_ITEMS} />
+              <MobileDropdownLink 
+                text="Personal" 
+                hasPlus 
+                items={PERSONAL_DROPDOWN_ITEMS} 
+                closeMobileMenu={handleLinkClick}
+              />
+              <MobileDropdownLink 
+                text="Business" 
+                hasPlus 
+                items={BUSINESS_DROPDOWN_ITEMS} 
+                closeMobileMenu={handleLinkClick}
+              />
+              <MobileDropdownLink 
+                text="Company" 
+                hasPlus 
+                items={COMPANY_DROPDOWN_ITEMS} 
+                closeMobileMenu={handleLinkClick}
+              />
               
               {/* Mobile Buttons */}
-              <div className="pt-4 space-y-3 border-t border-gray-100 md:hidden">
-                <NavButtons mobile onButtonClick={closeMobileMenu} />
+              <div className="pt-6 space-y-4 border-t border-gray-100">
+                <NavButtons mobile onButtonClick={handleLinkClick} />
               </div>
             </div>
           </div>
         )}
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }

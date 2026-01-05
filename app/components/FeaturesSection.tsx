@@ -1,4 +1,3 @@
-// components/FeaturesSection.tsx
 "use client";
 
 import React from "react";
@@ -46,7 +45,7 @@ const FeaturesSection = ({
   features,
 }: FeaturesSectionProps) => {
   return (
-    <section className="max-w-7xl mx-auto mb-10 px-4 sm:px-6 lg:px-8 py-12 md:py-10 bg-white relative">
+    <section className="max-w-7xl mx-auto mb-10 px-4 sm:px-6 lg:px-8 py-12 md:py-10 bg-white relative overflow-x-clip">
       {/* Header Content */}
       <div className="text-center max-w-3xl mx-auto mb-10">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
@@ -67,9 +66,6 @@ const FeaturesSection = ({
         <div className="absolute top-[-25px] bottom-[-25px] left-[2%] w-px bg-gray-200 z-0 -translate-x-1"></div>
         <div className="absolute top-[-13px] bottom-[-13px] left-[34%] w-px bg-gray-200 z-0 -translate-x-1"></div>
         <div className="absolute top-[-13px] bottom-[-13px] left-[66.5%] w-px bg-gray-200 z-0 -translate-x-1"></div>
-
-        {/* Middle verticals - small top/bottom segments so they only touch circles */}
-        
         <div className="absolute top-[-25px] bottom-[-25px] left-[98.5%] w-px bg-gray-200 z-0 -translate-x-1"></div>
 
         {/* Rings - Upper Line */}
@@ -82,9 +78,9 @@ const FeaturesSection = ({
 
         {/* Rings - Lower Line */}
         <div className="absolute bottom-0 left-8 right-8 flex justify-between -mb-1 z-10">
-          <div className=" absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white -left-[18px] shadow-sm"></div>
+          <div className="absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white -left-[18px] shadow-sm"></div>
           <div className="absolute w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm left-[32.3%]"></div>
-          <div className="absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm left-[66.5%] "></div>
+          <div className="absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm left-[66.5%]"></div>
           <div className="absolute w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm left-[100.4%]"></div>
         </div>
 
