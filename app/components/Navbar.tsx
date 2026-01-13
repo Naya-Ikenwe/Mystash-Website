@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import NavButtons from './NavButtons';
 
 // --- CONFIGURATION & DUMMY PATHS ---
@@ -180,7 +180,7 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
               onClick={onItemClick}
             >
               <div className="flex items-center space-x-3">
-                <img src={item.iconPath} alt="" className="w-6 h-6 shrink-0" />
+                <img src={item.iconPath} alt="" className="w-7 h-7 shrink-0" />
                 <div className="flex grow justify-start items-center">
                   <div className="leading-snug mr-3">
                     <p className="font-semibold text-gray-800 text-sm hover:text-purple-500">{item.title}</p>
@@ -201,10 +201,11 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
   );
 };
 
-// 3. Dropdown Link Wrapper (Desktop) - LEFT-ALIGNED DROPDOWNS
-const DropdownLink = ({ text, hasPlus = false, items, closeMobileMenu }: { text: string; hasPlus?: boolean; items: DropdownItem[]; closeMobileMenu?: () => void }) => {
+// 3. Dropdown Link Wrapper (Desktop) - MODIFIED to close other dropdowns
+const DropdownLink = ({ text, hasPlus = false, items, closeOtherDropdowns, dropdownName }: { text: string; hasPlus?: boolean; items: DropdownItem[]; closeOtherDropdowns: (name: string) => void; dropdownName: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMouseInDropdown, setIsMouseInDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   
   const linkClasses = `
     text-gray-700 font-medium text-base p-2 transition-colors duration-150 
@@ -214,6 +215,7 @@ const DropdownLink = ({ text, hasPlus = false, items, closeMobileMenu }: { text:
   `;
 
   const handleMouseEnterLink = () => {
+    closeOtherDropdowns(dropdownName);
     setIsOpen(true);
   };
 
@@ -237,17 +239,10 @@ const DropdownLink = ({ text, hasPlus = false, items, closeMobileMenu }: { text:
     }, 100);
   };
 
-  const handleItemClick = () => {
-    setIsOpen(false);
-    setIsMouseInDropdown(false);
-    if (closeMobileMenu) {
-      closeMobileMenu();
-    }
-  };
-
   return (
     <div 
       className="relative"
+      ref={dropdownRef}
       onMouseEnter={handleMouseEnterLink}
       onMouseLeave={handleMouseLeaveLink}
     >
@@ -261,7 +256,7 @@ const DropdownLink = ({ text, hasPlus = false, items, closeMobileMenu }: { text:
           onMouseEnter={handleMouseEnterDropdown}
           onMouseLeave={handleMouseLeaveDropdown}
         >
-          <DropdownMenu items={items} onItemClick={handleItemClick} />
+          <DropdownMenu items={items} />
         </div>
       )}
     </div>
@@ -269,18 +264,15 @@ const DropdownLink = ({ text, hasPlus = false, items, closeMobileMenu }: { text:
 };
 
 // 4. Mobile Dropdown Link
-const MobileDropdownLink = ({ text, hasPlus = false, items, closeMobileMenu }: { text: string; hasPlus?: boolean; items: DropdownItem[]; closeMobileMenu: () => void }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const MobileDropdownLink = ({ text, hasPlus = false, items, closeMobileMenu, isOpen, onToggle }: { text: string; hasPlus?: boolean; items: DropdownItem[]; closeMobileMenu: () => void; isOpen: boolean; onToggle: () => void }) => {
   const handleItemClick = () => {
-    setIsOpen(false);
     closeMobileMenu();
   };
 
   return (
     <div className="w-full">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={onToggle}
         className="w-full text-left text-gray-700 font-medium text-base p-3 transition-colors duration-150 hover:text-purple-700 hover:bg-purple-100 rounded-lg cursor-pointer flex justify-between items-center"
       >
         <span>
@@ -305,7 +297,7 @@ const MobileDropdownLink = ({ text, hasPlus = false, items, closeMobileMenu }: {
 const HamburgerButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) => (
   <button
     onClick={onClick}
-    className="p-2 rounded-md text-gray-700 hover:bg-purple-100 hover:text-purple-700 transition-colors duration-200 md:hidden relative z-50"
+    className="p-2 rounded-md text-gray-700 hover:bg-purple-100 hover:text-purple-700 transition-colors duration-200 lg:hidden relative z-50"
     aria-label={isOpen ? "Close menu" : "Open menu"}
   >
     <div className="w-6 h-6 flex flex-col justify-center items-center relative">
@@ -320,9 +312,22 @@ const HamburgerButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => 
 // --- MAIN NAVBAR COMPONENT ---
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null);
+  const [openDesktopDropdown, setOpenDesktopDropdown] = useState<string | null>(null);
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
+    setMobileOpenDropdown(null);
+  };
+
+  // Close other desktop dropdowns when one opens
+  const closeOtherDesktopDropdowns = (dropdownName: string) => {
+    setOpenDesktopDropdown(dropdownName);
+  };
+
+  // Handle mobile dropdown toggle
+  const handleMobileDropdownToggle = (dropdownName: string) => {
+    setMobileOpenDropdown(mobileOpenDropdown === dropdownName ? null : dropdownName);
   };
 
   // Close mobile menu when clicking outside
@@ -362,16 +367,16 @@ export default function Navbar() {
   return (
     <>
       {/* Navbar - Conditional overflow control */}
-      <nav className="sticky top-0 z-50 bg-[#fafafa] overflow-x-hidden lg:overflow-x-visible">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fafafa]">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-4">
           <div className="flex justify-between items-center h-14 md:h-20">
-            {/* Logo - Adjusted sizes for all screens */}
-            <div className="shrink-0 md:-ml-4 lg:-ml-6">
+            {/* Logo - Responsive for mobile/tablet, original for desktop */}
+            <div className="shrink-0">
               <Link href="/" className="flex items-center" onClick={closeMobileMenu}>
                 <img 
                   src={DUMMY_LOGO_PATH} 
                   alt="Site Logo" 
-                  className="w-32 h-16 md:w-44 md:h-22 lg:w-56 lg:h-28 xl:w-60 xl:h-36 object-contain" 
+                  className="w-28 h-14 sm:w-36 sm:h-18 md:w-40 md:h-20 lg:w-56 lg:h-28 xl:w-60 xl:h-36 object-contain xl:-ml-10"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src = 'https://placehold.co/160x80/7C3AED/FFFFFF?text=Logo';
@@ -380,20 +385,50 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Desktop Navigation - Adjusted spacing for all screens */}
-            <div className="hidden md:flex space-x-2 lg:space-x-4 xl:space-x-6 items-center">
-              <DropdownLink text="Personal" hasPlus items={PERSONAL_DROPDOWN_ITEMS} closeMobileMenu={closeMobileMenu} /> 
-              <DropdownLink text="Business" hasPlus items={BUSINESS_DROPDOWN_ITEMS} closeMobileMenu={closeMobileMenu} />
-              <DropdownLink text="Company" hasPlus items={COMPANY_DROPDOWN_ITEMS} closeMobileMenu={closeMobileMenu} />
+            {/* Desktop Navigation - Original styling for screens above 1024px */}
+            <div className="hidden lg:flex space-x-4 xl:space-x-6 items-center">
+              <DropdownLink 
+                text="Personal" 
+                hasPlus 
+                items={PERSONAL_DROPDOWN_ITEMS} 
+                closeOtherDropdowns={closeOtherDesktopDropdowns}
+                dropdownName="personal"
+              /> 
+              <DropdownLink 
+                text="Business" 
+                hasPlus 
+                items={BUSINESS_DROPDOWN_ITEMS} 
+                closeOtherDropdowns={closeOtherDesktopDropdowns}
+                dropdownName="business"
+              />
+              <DropdownLink 
+                text="Company" 
+                hasPlus 
+                items={COMPANY_DROPDOWN_ITEMS} 
+                closeOtherDropdowns={closeOtherDesktopDropdowns}
+                dropdownName="company"
+              />
             </div>
 
-            {/* Desktop Buttons - Adjusted margins */}
-            <div className="hidden md:flex items-center space-x-2 lg:space-x-3 xl:-mr-16">
+            {/* Desktop Buttons - Original styling for screens above 1024px */}
+            <div className="hidden lg:flex items-center space-x-3 xl:-mr-16">
               <NavButtons />
             </div>
 
+            {/* Tablet Navigation (768px - 1024px) */}
+            <div className="hidden md:flex lg:hidden items-center space-x-3">
+              <div className="flex space-x-3">
+                <NavLink text="Personal" hasPlus />
+                <NavLink text="Business" hasPlus />
+                <NavLink text="Company" hasPlus />
+              </div>
+              <div className="flex items-center space-x-2">
+                <NavButtons />
+              </div>
+            </div>
+
             {/* Mobile Menu Button */}
-            <div className="md:hidden">
+            <div className="md:hidden lg:hidden">
               <HamburgerButton 
                 isOpen={isMobileMenuOpen} 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
@@ -404,7 +439,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
-          <div className="mobile-menu-container md:hidden fixed inset-0 top-14 bg-[#fafafa] z-40 overflow-y-auto">
+          <div className="mobile-menu-container lg:hidden fixed inset-0 top-14 bg-[#fafafa] z-40 overflow-y-auto">
             <div className="px-4 py-6 space-y-4">
               {/* Mobile Navigation Links */}
               <MobileDropdownLink 
@@ -412,18 +447,24 @@ export default function Navbar() {
                 hasPlus 
                 items={PERSONAL_DROPDOWN_ITEMS} 
                 closeMobileMenu={handleLinkClick}
+                isOpen={mobileOpenDropdown === 'personal'}
+                onToggle={() => handleMobileDropdownToggle('personal')}
               />
               <MobileDropdownLink 
                 text="Business" 
                 hasPlus 
                 items={BUSINESS_DROPDOWN_ITEMS} 
                 closeMobileMenu={handleLinkClick}
+                isOpen={mobileOpenDropdown === 'business'}
+                onToggle={() => handleMobileDropdownToggle('business')}
               />
               <MobileDropdownLink 
                 text="Company" 
                 hasPlus 
                 items={COMPANY_DROPDOWN_ITEMS} 
                 closeMobileMenu={handleLinkClick}
+                isOpen={mobileOpenDropdown === 'company'}
+                onToggle={() => handleMobileDropdownToggle('company')}
               />
               
               {/* Mobile Buttons */}

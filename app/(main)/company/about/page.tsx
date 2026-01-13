@@ -30,7 +30,7 @@ export default function AboutPage() {
 
         <div className="relative z-10 mx-auto px-4 text-center mb-20 w-full max-w-6xl">
           {/* Purple Centered Header */}
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-purple-600 mb-7 mt-5">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-purple-600 mb-7 mt-25">
             Our Story
           </h1>
 

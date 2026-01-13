@@ -36,34 +36,51 @@ export default function InvestmentsPage() {
     <div className="min-h-screen ">
       {/* Section 1 - Hero Section */}
       <section
-        className="h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat "
+        className="h-[60vh] md:h-[75vh] lg:h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/images/investmentbackground.svg')",
         }}
       >
-        <div className="text-center max-w-4xl mx-auto px-4 -mt-60 pr-20">
-          <div className="inline-flex items-center justify-center mb-4 md:justify-start ">
-            <span className="text-sm font-medium text-purple-500 bg-purple-100 border border-gray-200 px-6 py-2 mt-10 rounded-full">
+        <div className="text-center max-w-4xl mx-auto px-4 lg:px-8 -mt-10 md:-mt-20 lg:-mt-40 pr-4 lg:pr-20">
+          <div className="inline-flex items-center justify-center mb-3 lg:mb-4">
+            <span className="text-xs sm:text-sm lg:text-sm font-medium text-purple-500 bg-purple-100 border border-gray-200 px-3 sm:px-4 lg:px-6 py-1 sm:py-1.5 lg:py-2 mt-1 md:mt-2 lg:mt-10 rounded-full">
               • Investment •
             </span>
           </div>
-          <h1 className="text-6xl font-semibold text-black mb-10 leading-none">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-black mb-3 lg:mb-5 leading-tight lg:leading-none">
             Grow your Wealth with
             <br />
             ease and purpose
           </h1>
-          <p className="text-xl text-black mb-8  leading-[1.5">
-            Effortlessly grow and diversify your portfolio, no idle funds, just
-            <br />
-            progress with smarter and automated investing
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-black mb-4 lg:mb-8 leading-relaxed lg:leading-[1.5">
+            {/* Mobile (< 768px): Single line */}
+            <span className="block md:hidden">
+              Effortlessly grow and diversify your portfolio, no idle funds, just progress with smarter and automated investing
+            </span>
+            
+            {/* Tablet (768px only): 3 lines */}
+            <span className="hidden md:block lg:hidden">
+              Effortlessly grow and diversify your portfolio,
+              <br />
+              no idle funds, just progress with smarter
+              <br />
+              and automated investing
+            </span>
+            
+            {/* Desktop (> 1024px): Original 2 lines */}
+            <span className="hidden lg:block">
+              Effortlessly grow and diversify your portfolio, no idle funds, just
+              <br />
+              progress with smarter and automated investing
+            </span>
           </p>
-          <button className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2  rounded-4xl flex items-center justify-center mx-auto transition-colors duration-200">
+          <button className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 px-6 lg:px-0 lg:py-2 rounded-full flex items-center justify-center mx-auto transition-colors duration-200 text-sm lg:text-base">
             <img
               src="/icons/Frame6.svg"
               alt="arrow"
-              className="w-8 h-8 mr-20 ml-2"
+              className="w-6 h-6 lg:w-8 lg:h-8 mr-3 lg:mr-20 ml-2 lg:ml-2"
             />
-            <p className="mr-24"> Start Investing</p>
+            <p className="mr-3 lg:mr-24">Start Investing</p>
           </button>
         </div>
       </section>

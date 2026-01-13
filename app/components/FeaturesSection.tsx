@@ -20,7 +20,7 @@ const FeatureIconCard = ({
   description,
 }: FeatureIconCardProps) => {
   return (
-    <div className="bg-purple-100 rounded-xl p-6 sm:p-8 border border-purple-100 transition-all duration-300 md:min-w-[360px]">
+    <div className="bg-purple-100 rounded-xl p-6 sm:p-8 border border-purple-100 transition-all duration-300">
       <div className="flex flex-col items-start text-left">
         <img
           src={iconPath}
@@ -54,38 +54,11 @@ const FeaturesSection = ({
         <p className="text-lg text-gray-900">{description}</p>
       </div>
 
-      {/* Decorative Lines and Circles Container */}
-      <div className="relative">
-        {/* Upper Horizontal Line - extended to touch end circles */}
-        <div className="absolute top-0 left-2 right-2 h-px bg-gray-200 -mt-3 z-0"></div>
-
-        {/* Lower Horizontal Line - extended to touch end circles */}
-        <div className="absolute bottom-0 left-2 right-2 h-px bg-gray-200 -mb-3 z-0"></div>
-
-        {/* Vertical lines: start (intersect), between (top/bottom touch only), between (top/bottom touch only), end (intersect) */}
-        <div className="absolute top-[-25px] bottom-[-25px] left-[2%] w-px bg-gray-200 z-0 -translate-x-1"></div>
-        <div className="absolute top-[-13px] bottom-[-13px] left-[34%] w-px bg-gray-200 z-0 -translate-x-1"></div>
-        <div className="absolute top-[-13px] bottom-[-13px] left-[66.5%] w-px bg-gray-200 z-0 -translate-x-1"></div>
-        <div className="absolute top-[-25px] bottom-[-25px] left-[98.5%] w-px bg-gray-200 z-0 -translate-x-1"></div>
-
-        {/* Rings - Upper Line */}
-        <div className="absolute top-0 left-8 right-8 flex justify-between -mt-5 z-10">
-          <div className="absolute w-3 h-3 border-3 border-purple-300 rounded-full bg-white -left-[18px] shadow-sm mt-1"></div>
-          <div className="absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm left-[32.3%] mt-1"></div>
-          <div className="absolute w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm left-[66.5%] mt-1"></div>
-          <div className="absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm left-[100.4%] mt-1"></div>
-        </div>
-
-        {/* Rings - Lower Line */}
-        <div className="absolute bottom-0 left-8 right-8 flex justify-between -mb-1 z-10">
-          <div className="absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white -left-[18px] shadow-sm"></div>
-          <div className="absolute w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm left-[32.3%]"></div>
-          <div className="absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm left-[66.5%]"></div>
-          <div className="absolute w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm left-[100.4%]"></div>
-        </div>
-
-        {/* Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-8 relative z-20 px-8">
+      {/* MAIN CONTAINER - Shows different layouts based on screen size */}
+      
+      {/* 1. MOBILE VIEW (below 768px) */}
+      <div className="block md:hidden">
+        <div className="grid grid-cols-1 gap-6">
           {features.map((feature, index) => (
             <FeatureIconCard
               key={index}
@@ -94,6 +67,108 @@ const FeaturesSection = ({
               description={feature.description}
             />
           ))}
+        </div>
+      </div>
+
+      {/* 2. 768px SCREEN - Single column, uniform cards, no decorations */}
+      <div className="hidden md:block lg:hidden">
+        <div className="flex flex-col items-center gap-6">
+          {features.map((feature, index) => (
+            <div 
+              key={index} 
+              className="bg-purple-100 rounded-xl p-6 border border-purple-100 w-full max-w-md"
+            >
+              <div className="flex flex-col items-start text-left">
+                <img
+                  src={feature.iconPath}
+                  alt={feature.title + " icon"}
+                  className="w-14 h-14 mb-6 object-contain"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src =
+                      "https://placehold.co/56x56/7C3AED/FFFFFF?text=ICON";
+                  }}
+                />
+                <h3 className="text-base font-medium text-gray-900 mb-3">{feature.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 3. 1024px SCREEN - Smaller uniform cards, 3 columns, no decorations */}
+      <div className="hidden lg:block xl:hidden">
+        <div className="grid grid-cols-3 gap-4">
+          {features.map((feature, index) => (
+            <div 
+              key={index} 
+              className="bg-purple-100 rounded-xl p-5 border border-purple-100 flex flex-col h-full"
+            >
+              <div className="flex flex-col items-start text-left flex-grow">
+                <img
+                  src={feature.iconPath}
+                  alt={feature.title + " icon"}
+                  className="w-12 h-12 mb-4 object-contain"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src =
+                      "https://placehold.co/48x48/7C3AED/FFFFFF?text=ICON";
+                  }}
+                />
+                <h3 className="text-sm font-medium text-gray-900 mb-2">{feature.title}</h3>
+                <p className="text-gray-600 text-xs leading-relaxed">{feature.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 4. DESKTOP VIEW (≥1280px) - Original layout with decorations */}
+      <div className="hidden xl:block">
+        <div className="relative">
+          {/* Decorative Lines and Circles Container */}
+          <div className="relative">
+            {/* Upper Horizontal Line - extended to touch end circles */}
+            <div className="absolute top-0 left-2 right-2 h-px bg-gray-200 -mt-3 z-0"></div>
+
+            {/* Lower Horizontal Line - extended to touch end circles */}
+            <div className="absolute bottom-0 left-2 right-2 h-px bg-gray-200 -mb-3 z-0"></div>
+
+            {/* Vertical lines: start (intersect), between (top/bottom touch only), between (top/bottom touch only), end (intersect) */}
+            <div className="absolute top-[-25px] bottom-[-25px] left-[2%] w-px bg-gray-200 z-0 -translate-x-1"></div>
+            <div className="absolute top-[-13px] bottom-[-13px] left-[34%] w-px bg-gray-200 z-0 -translate-x-1"></div>
+            <div className="absolute top-[-13px] bottom-[-13px] left-[66.5%] w-px bg-gray-200 z-0 -translate-x-1"></div>
+            <div className="absolute top-[-25px] bottom-[-25px] left-[98.5%] w-px bg-gray-200 z-0 -translate-x-1"></div>
+
+            {/* Rings - Upper Line */}
+            <div className="absolute top-0 left-8 right-8 flex justify-between -mt-5 z-10">
+              <div className="absolute w-3 h-3 border-3 border-purple-300 rounded-full bg-white -left-[18px] shadow-sm mt-1"></div>
+              <div className="absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm left-[32.3%] mt-1"></div>
+              <div className="absolute w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm left-[66.5%] mt-1"></div>
+              <div className="absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm left-[100.4%] mt-1"></div>
+            </div>
+
+            {/* Rings - Lower Line */}
+            <div className="absolute bottom-0 left-8 right-8 flex justify-between -mb-1 z-10">
+              <div className="absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white -left-[18px] shadow-sm"></div>
+              <div className="absolute w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm left-[32.3%]"></div>
+              <div className="absolute w-3 h-3 border-2 border-purple-100 rounded-full bg-white shadow-sm left-[66.5%]"></div>
+              <div className="absolute w-3 h-3 border-3 border-purple-300 rounded-full bg-white shadow-sm left-[100.4%]"></div>
+            </div>
+
+            {/* Cards Grid for desktop */}
+            <div className="grid md:grid-cols-3 gap-8 relative z-20 px-8">
+              {features.map((feature, index) => (
+                <FeatureIconCard
+                  key={index}
+                  iconPath={feature.iconPath}
+                  title={feature.title}
+                  description={feature.description}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

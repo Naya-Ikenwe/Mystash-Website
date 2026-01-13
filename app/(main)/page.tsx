@@ -243,7 +243,7 @@ const SectionThreePartOne = () => {
 
         <PillButtonWithIcon text="Learn More" />
       </div>
-      {/* 1b: Right Image - REMOVED ml-15 to fix overflow */}
+      {/* 1b: Right Image */}
       <div className="w-full md:w-1/2 flex justify-center">
         <img
           src={DUMMY_SECTION_3_IMAGE_1}
@@ -448,24 +448,24 @@ const SectionFive = () => {
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
-      {/* Section 1: Hero Section - UPDATED TO VERTICAL/CENTERED LAYOUT */}
-      <section className="relative w-full min-h-screen bg-purple-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+      {/* Section 1: Hero Section */}
+      <section className="relative w-full  bg-purple-50 mt-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pt-20 pt-8">
           <div className="flex flex-col items-center justify-center text-center">
             {/* Pill Header - Centered */}
-            <div className="mb-3 mt-3">
+            <div className="mb-3 mt-10">
               <HorizontalMarquee />
             </div>
 
             {/* Two Line Header Text - Centered */}
-            <div className="max-w-4xl mx-auto mb-6">
+            <div className="max-w-4xl mx-auto mb-4 md:mb-6">
               {/* Mobile View */}
               <div className="md:hidden">
-                <h1 className="text-3xl font-extrabold text-gray-900 leading-tight">
+                <h1 className="text-3xl font-semibold text-gray-900 leading-tight">
                   <div>Smart Finance</div>
                   <div>for smarter</div>
                 </h1>
-                <div className="mt-2 text-3xl font-extrabold text-gray-900">
+                <div className="mt-2 text-3xl font-semibold text-gray-900">
                   Future
                 </div>
               </div>
@@ -479,28 +479,46 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Two Line Sub Text - Centered - KEPT ORIGINAL DESKTOP UI */}
-            <div className="max-w-2xl mx-auto mb-3">
-              <div className="flex flex-col ">
-                <span className="text-base sm:text-lg md:text-xl lg:text-[22px] text-gray-600 whitespace-nowrap -ml-11">
-                  A financial tool that makes your money work for you. Save effortlessly, grow
-                </span>
-                <span className="text-base sm:text-lg md:text-xl lg:text-[22px] -mr-5 text-gray-600 whitespace-nowrap">
-                 your wealth intelligently, and spend with confidence.
-                </span>
-                <span className="text-base sm:text-lg md:text-xl lg:text-[22px] text-gray-600">
-                  
-                </span>
+            {/* Two Line Sub Text */}
+            <div className="max-w-2xl mx-auto mb-4 md:mb-3">
+              {/* Mobile View (below 768px) */}
+              <div className="block md:hidden">
+                <p className="text-base text-gray-600 text-center leading-relaxed px-4">
+                  A financial tool that makes your money work for you. Save effortlessly, 
+                  grow your wealth intelligently, and spend with confidence.
+                </p>
+              </div>
+              
+              {/* 768px Screen */}
+              <div className="hidden md:block lg:hidden">
+                <div className="flex flex-col items-center">
+                  <p className="text-lg text-gray-600 text-center leading-relaxed max-w-xl px-4">
+                    A financial tool that makes your money work for you. Save effortlessly, 
+                    grow your wealth intelligently, and spend with confidence.
+                  </p>
+                </div>
+              </div>
+              
+              {/* 1024px and Desktop View (≥1024px) */}
+              <div className="hidden lg:block">
+                <div className="flex flex-col">
+                  <span className="text-base sm:text-lg md:text-xl lg:text-[22px] text-gray-600 whitespace-nowrap -ml-11">
+                    A financial tool that makes your money work for you. Save effortlessly, grow
+                  </span>
+                  <span className="text-base sm:text-lg md:text-xl lg:text-[22px] -mr-5 text-gray-600 whitespace-nowrap">
+                   your wealth intelligently, and spend with confidence.
+                  </span>
+                </div>
               </div>
             </div>
 
             {/* Two Buttons - Centered */}
-            <div className="mb-6">
+            <div className="mb-4 md:mb-6">
               <NavButtons />
             </div>
 
-            {/* Hero Image - Centered below everything - REMOVED ml-3 to fix alignment */}
-            <div className="w-full max-w-3xl sm:max-w-4xl lg:max-w-5xl mx-auto mt-6">
+            {/* Hero Image - Centered below everything */}
+            <div className="w-full max-w-3xl sm:max-w-4xl lg:max-w-5xl mx-auto mt-2 md:mt-6 lg:mb-15">
               <img
                 src={DUMMY_HERO_IMAGE}
                 alt="Hero Visual"
@@ -515,9 +533,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Section 2: Features Grid - UPDATED */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-12 md:pb-10 bg-white">
-        <div className="text-center max-w-3xl mx-auto mb-12">
+      {/* Section 2: Features Grid */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-8 md:pb-10 bg-white">
+        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
           <p className="text-sm font-medium text-black mb-2 border border-gray-300 rounded-full px-4 py-1 inline-block bg-transparent">
             • Our Product •
           </p>
@@ -531,41 +549,152 @@ export default function HomePage() {
             <br />
             tools and trusted financial partnerships.
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-base md:text-lg text-gray-600">
             Select the product that fits your needs and apply today.
           </p>
         </div>
 
-        {/* Updated grid with increased column width */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-1">
-            <FeatureCard
-              imagePath={DUMMY_CARD_1_IMAGE}
-              title="Activate your Smart Savings"
-              description="Set automatic savings in USD or NGN directly, from your income or daily spending."
-              ctaContent={<PillButtonWithIcon text="Start Saving" />}
-            />
-          </div>
+        {/* Desktop (≥1280px) - Original 3-column layout */}
+        <div className="hidden xl:block">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-1">
+              <FeatureCard
+                imagePath={DUMMY_CARD_1_IMAGE}
+                title="Activate your Smart Savings"
+                description="Set automatic savings in USD or NGN directly, from your income or daily spending."
+                ctaContent={<PillButtonWithIcon text="Start Saving" />}
+              />
+            </div>
 
-          <div className="lg:col-span-1">
-            <PaymentFeatureCard />
-          </div>
+            <div className="lg:col-span-1">
+              <PaymentFeatureCard />
+            </div>
 
-          <div className="lg:col-span-1">
-            <FeatureCard
-              imagePath={DUMMY_CARD_3_IMAGE}
-              title="Budget Smarter, Spend Better"
-              description="Automatically save in USD or NGN, plan, budget and grow your money efficiently."
-              ctaContent={<PillButtonWithIcon text="Budget" />}
-            />
+            <div className="lg:col-span-1">
+              <FeatureCard
+                imagePath={DUMMY_CARD_3_IMAGE}
+                title="Budget Smarter, Spend Better"
+                description="Automatically save in USD or NGN, plan, budget and grow your money efficiently."
+                ctaContent={<PillButtonWithIcon text="Budget" />}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* 768px and 1024px screens - One column stacking with narrower cards */}
+        <div className="block md:block lg:block xl:hidden">
+          <div className="flex flex-col items-center gap-6 max-w-2xl mx-auto">
+            {/* Card 1 */}
+            <div className="w-full max-w-md md:max-w-lg">
+              <FeatureCard
+                imagePath={DUMMY_CARD_1_IMAGE}
+                title="Activate your Smart Savings"
+                description="Set automatic savings in USD or NGN directly, from your income or daily spending."
+                ctaContent={<PillButtonWithIcon text="Start Saving" />}
+              />
+            </div>
+
+            {/* Card 2 */}
+            <div className="w-full max-w-md md:max-w-lg">
+              <PaymentFeatureCard />
+            </div>
+
+            {/* Card 3 */}
+            <div className="w-full max-w-md md:max-w-lg">
+              <FeatureCard
+                imagePath={DUMMY_CARD_3_IMAGE}
+                title="Budget Smarter, Spend Better"
+                description="Automatically save in USD or NGN, plan, budget and grow your money efficiently."
+                ctaContent={<PillButtonWithIcon text="Budget" />}
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Section 3: Additional Features */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 bg-white">
-        <SectionThreePartOne />
-        <SectionThreePartTwo />
+        {/* Desktop (≥1280px) - Original layout */}
+        <div className="hidden xl:block">
+          <SectionThreePartOne />
+          <div className="mt-12">
+            <SectionThreePartTwo />
+          </div>
+        </div>
+
+        {/* 768px and 1024px screens - Optimized version */}
+        <div className="block md:block lg:block xl:hidden">
+          {/* Part One - Get Quick Loan */}
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+            {/* Left Content */}
+            <div className="w-full md:w-1/2">
+              <p className="text-xs md:text-[13px] font-medium mb-3 text-black border border-gray-300 rounded-full px-3 md:px-4 py-1 inline-block bg-transparent">
+                • Newly Added Product •
+              </p>
+              <div className="flex justify-end mb-3 md:mb-4">
+                <span className="text-xs md:text-[13px] text-purple-600 font-medium bg-purple-300 px-2 md:px-3 py-1 md:py-2 rounded-full">
+                  For Salary Earners
+                </span>
+              </div>
+              <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
+                Get Quick Loan
+              </h2>
+              <p className="text-sm md:text-base text-gray-800 mb-2 leading-relaxed">
+                We offer loans from ₦30,000 to ₦1,000,000, specially tailored to Federal, State and Local Government employees whose salaries are processed through the IPPIS platform. We offer 6% per month interest on Loan
+              </p>
+              <div className="mt-4">
+                <PillButtonWithIcon text="Learn More" />
+              </div>
+            </div>
+            {/* Right Image - Smaller for 768px and 1024px */}
+            <div className="w-full md:w-1/2 flex justify-center mt-6 md:mt-0">
+              <img
+                src={DUMMY_SECTION_3_IMAGE_1}
+                alt="Smart banking features"
+                className="w-full max-w-xs md:max-w-sm object-contain"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src =
+                    "https://placehold.co/500x400/7C3AED/FFFFFF?text=Smart+Banking";
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="mt-12 md:mt-16">
+            {/* Part Two - Let's Grow Together */}
+            <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+              {/* Left Image - Smaller for 768px and 1024px */}
+              <div className="w-full md:w-1/2 flex justify-center order-2 md:order-1 mt-6 md:mt-0">
+                <img
+                  src={DUMMY_SECTION_3_IMAGE_2}
+                  alt="Secure transactions"
+                  className="w-full max-w-xs md:max-w-sm object-contain"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src =
+                      "https://placehold.co/500x400/10B981/FFFFFF?text=Secure+Transactions";
+                  }}
+                />
+              </div>
+              {/* Right Content */}
+              <div className="w-full md:w-1/2 order-1 md:order-2">
+                <p className="text-xs md:text-[13px] font-medium mb-3 text-black border border-gray-300 rounded-full px-3 md:px-4 py-1 inline-block bg-transparent">
+                  • Newly Added Product •
+                </p>
+                <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-3">
+                  Let's Grow Together through Investment
+                </h2>
+                <p className="text-sm md:text-base text-gray-800 mb-2 leading-relaxed">
+                  Together we drive meaningful investment partnerships that foster innovation, create lasting values and empower smarter wealth growth
+                </p>
+                <div className="mt-4">
+                  <PillButtonWithIcon text="Learn More" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Section 4: Icon Features */}

@@ -12,24 +12,24 @@ const DUMMY_SECTION1_IMAGE = "/images/businessbudgethero.svg";
 const DUMMY_HERO_BACKGROUND = "/images/tiles.svg";
 const DUMMY_FRAME6_ICON = "/icons/Frame6.svg";
 
-// Download Button Component 
+// Download Button Component - MOBILE FIX ONLY
 const DownloadButton = () => {
   return (
     <Link
       href="/download"
-      className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 px-2 rounded-4xl flex items-center justify-center transition-colors duration-200"
+      className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 px-4 rounded-full flex items-center justify-center transition-colors duration-200 sm:py-2 sm:px-2 sm:rounded-4xl"
     >
       <img
         src="/icons/Frame5.svg"
         alt="Download app icon"
-        className="w-7 h-7 mr-21"
+        className="w-7 h-7 mr-2 sm:mr-21"
         onError={(e) => {
           e.currentTarget.onerror = null;
           e.currentTarget.src =
             "https://placehold.co/20x20/FFFFFF/7C3AED?text=→";
         }}
       />
-      <span className="mr-25">Download app</span>
+      <span className="sm:mr-25">Download app</span>
     </Link>
   );
 };
@@ -37,9 +37,9 @@ const DownloadButton = () => {
 // ============ SECTION 1: HERO ============
 const SectionOne = () => {
   return (
-    <section className="relative w-full min-h-screen bg-white overflow-hidden py-12 sm:py-16 lg:py-20">
+    <section className="relative w-full bg-white overflow-hidden py-12 sm:py-16 lg:py-20">
       {/* Background Image - Full width and height (from business payments hero) */}
-     <div
+      <div
         className="absolute inset-0 w-full h-full z-0"
         style={{
           backgroundImage: `url(${DUMMY_HERO_BACKGROUND})`,
@@ -54,8 +54,8 @@ const SectionOne = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Content - Centered */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] sm:min-h-[70vh]">
-          {/* Pill Header (dot before and after the text) */}
-          <div className="text-center mb-6 sm:mb-6">
+          {/* Pill Header - Added space above for mobile, 768px, and 1024px */}
+          <div className="text-center mb-6 sm:mb-6 pt-4 sm:pt-6 lg:pt-8 xl:pt-0">
             <p className="text-sm font-medium text-purple-400 mb-2 border border-gray-50 rounded-full px-4 py-1 inline-block bg-purple-100">
               • Budget •
             </p>
@@ -78,12 +78,20 @@ const SectionOne = () => {
             </div>
           </div>
 
-          {/* Two Line Sub Text */}
+          {/* Two Line Sub Text - FIXED: Proper mobile wrapping while keeping desktop layout */}
           <div className="text-center max-w-2xl mx-auto mb-4 sm:mb-6">
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600  whitespace-nowrap">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 whitespace-nowrap hidden sm:block">
               Saving money isn't always easy, we get it. But with myStash, it's simpler,
             </p>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 whitespace-nowrap">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 whitespace-nowrap hidden sm:block">
+              smarter, and built just for you. All it takes is a quick download to get started.
+            </p>
+            
+            {/* Mobile version with proper wrapping */}
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed block sm:hidden px-4">
+              Saving money isn't always easy, we get it. But with myStash, it's simpler,
+            </p>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed block sm:hidden px-4">
               smarter, and built just for you. All it takes is a quick download to get started.
             </p>
           </div>
@@ -130,8 +138,114 @@ const SectionTwo = () => {
             Enjoy an easier, smarter Budgeting experience
           </p>
         </div>
-        {/* Timeline Container */}
-        <div className="relative">
+        
+        {/* MOBILE ONLY LAYOUT - Added this section */}
+        <div className="block sm:hidden">
+          <div className="space-y-12">
+            {/* Mobile Step 1 */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center mb-4">
+                <span className="text-gray-800 font-bold">1</span>
+              </div>
+              <h3 className="text-xl font-semibold text-purple-500 mb-3">
+                Create Your Virtual Account
+              </h3>
+              <div className="text-gray-800 leading-relaxed text-sm mb-4">
+                <p>Create a myStash virtual account to receive your funds into.</p>
+                <p>Your virtual account is personalized for you and your business</p>
+              </div>
+              <img
+                src="/images/budgetcard.svg"
+                alt="Step 1"
+                className="w-64 h-auto rounded-lg"
+              />
+            </div>
+            
+            {/* Mobile Step 2 */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center mb-4">
+                <span className="text-gray-800 font-bold">2</span>
+              </div>
+              <h3 className="text-xl font-semibold text-purple-500 mb-3">
+                Create Pockets
+              </h3>
+              <div className="text-gray-800 leading-relaxed text-sm mb-4">
+                <p>Create pockets for your spendings and assign a</p>
+                <p>percentage to them. This is the percentage of the total</p>
+                <p>money entering a particular myStash Virtual Account</p>
+              </div>
+              <img
+                src="/images/budgetimg2.svg"
+                alt="Step 2"
+                className="w-64 h-auto rounded-lg"
+              />
+            </div>
+            
+            {/* Mobile Step 3 */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center mb-4">
+                <span className="text-gray-800 font-bold">3</span>
+              </div>
+              <h3 className="text-xl font-semibold text-purple-500 mb-3">
+                Add Settlement Account
+              </h3>
+              <div className="text-gray-800 leading-relaxed text-sm mb-4">
+                <p>Funds that are not budgeted are conveniently settled</p>
+                <p>into your settlement account or myStash wallet</p>
+                <p>ready for future use.</p>
+              </div>
+              <img
+                src="/images/budgetimg3.svg"
+                alt="Step 3"
+                className="w-64 h-auto rounded-lg"
+              />
+            </div>
+            
+            {/* Mobile Step 4 */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center mb-4">
+                <span className="text-gray-800 font-bold">4</span>
+              </div>
+              <h3 className="text-xl font-semibold text-purple-500 mb-3">
+                Deposit Fund
+              </h3>
+              <div className="text-gray-800 leading-relaxed text-sm mb-4">
+                <p>Allocate your budget to Pockets. Once you've set your</p>
+                <p>budget percentages, move funds into your myStash</p>
+                <p>Virtual accounts, to have them divided into the</p>
+                <p>appropriate pockets</p>
+              </div>
+              <img
+                src="/images/budgetimg4.svg"
+                alt="Step 4"
+                className="w-64 h-auto rounded-lg"
+              />
+            </div>
+            
+            {/* Mobile Step 5 */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-10 h-10 bg-white border-2 border-purple-600 rounded-full flex items-center justify-center mb-4">
+                <span className="text-gray-800 font-bold">5</span>
+              </div>
+              <h3 className="text-xl font-semibold text-purple-500 mb-3">
+                Spend from Pocket
+              </h3>
+              <div className="text-gray-800 leading-relaxed text-sm mb-4">
+                <p>Spend from your designated pocket. For example,</p>
+                <p>pay for your transport from your "Transportation"</p>
+                <p>pocket.</p>
+              </div>
+              <img
+                src="/images/budgetimg5.svg"
+                alt="Step 5"
+                className="w-64 h-auto rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+        
+        {/* DESKTOP LAYOUT - Kept exactly the same */}
+        <div className="hidden sm:block relative">
           {/* Vertical Line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gray-300"></div>
           {/* Timeline Items */}
@@ -568,8 +682,7 @@ export default function BusinessBudgetPage() {
       <SectionThree />
       <SectionFour />
       <SectionFive />
-      {/* Section 6 would be ContactFormSection if needed */}
-       <ContactFormSection /> 
+      <ContactFormSection /> 
     </div>
   );
 }

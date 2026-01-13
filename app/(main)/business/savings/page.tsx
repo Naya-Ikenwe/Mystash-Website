@@ -41,7 +41,7 @@ const DownloadButton = () => {
 // ============ SECTION 1: HERO ============
 const SectionOne = () => {
   return (
-    <section className="relative w-full min-h-screen bg-white overflow-hidden">
+    <section className="relative w-full  bg-white overflow-hidden">
       {/* Background Image - Full width and height */}
       <div
         className="absolute inset-0 w-full h-full z-0"

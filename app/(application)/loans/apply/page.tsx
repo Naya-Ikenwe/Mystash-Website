@@ -1,4 +1,4 @@
-// app/(application)/loans/apply/page.tsx
+// app/(application)/loans/apply/page.tsx - UPDATED
 "use client";
 
 import Link from "next/link";
@@ -22,9 +22,9 @@ export default function LoanApplyPage() {
   // Dummy back icon path
   const DUMMY_BACK_ICON = "/icons/finalicon.svg";
 
-  // Loan amount limits
+  // Loan amount limits - UPDATED MAX to 1,000,000
   const MIN_LOAN_AMOUNT = 30000;
-  const MAX_LOAN_AMOUNT = 5000000;
+  const MAX_LOAN_AMOUNT = 1000000; // Changed from 5,000,000 to 1,000,000
 
   const isFormValid =
     employmentType && loanAmount && loanTenure && !amountError;
@@ -79,13 +79,29 @@ export default function LoanApplyPage() {
     }
   };
 
-  // Calculate repayable amount (6% monthly interest)
+  // Calculate repayable amount - UPDATED CALCULATION with 2 decimal places
   const calculateRepayableAmount = () => {
     const amount = parseInt(loanAmount.replace(/,/g, "")) || 0;
     const tenure = parseInt(loanTenure) || 0;
-    const monthlyInterestRate = 0.06;
-    const totalInterest = amount * monthlyInterestRate * tenure;
-    return (amount + totalInterest).toLocaleString();
+    
+    // NEW CALCULATION: loan amount + (loan amount * 0.06 + (loan amount/tenure))
+    if (tenure > 0) {
+      const monthlyInterest = amount * 0.06; // 6% of loan amount
+      const monthlyPrincipal = amount / tenure; // Loan amount divided by tenure
+      const monthlyRepayment = monthlyInterest + monthlyPrincipal; // Monthly payment
+      const totalRepayable = monthlyRepayment * tenure; // Total for entire tenure
+      
+      // Format to 2 decimal places
+      return totalRepayable.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+    
+    return amount.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -273,7 +289,7 @@ export default function LoanApplyPage() {
                     Loan Amount
                     <span className="text-lg text-gray-500 font-normal ml-2">
                       ({MIN_LOAN_AMOUNT.toLocaleString()} -{" "}
-                      {MAX_LOAN_AMOUNT.toLocaleString()})
+                      {MAX_LOAN_AMOUNT.toLocaleString()}) {/* Updated */}
                     </span>
                   </label>
                   <div className="relative">
@@ -488,7 +504,7 @@ export default function LoanApplyPage() {
                     Repayment Amount
                   </h3>
                   <p className="text-xl font-semibold ml-5 text-gray-800">
-                    {calculateRepayableAmount()}
+                    ₦{calculateRepayableAmount()}
                   </p>
                 </div>
 

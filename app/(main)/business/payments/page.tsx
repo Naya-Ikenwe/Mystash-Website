@@ -36,7 +36,7 @@ const DownloadButton = () => {
 // ============ SECTION 1: HERO ============
 const SectionOne = () => {
   return (
-    <section className="relative w-full min-h-screen bg-white overflow-hidden py-12 sm:py-16 lg:py-20">
+    <section className="relative w-full  bg-white overflow-hidden py-12 sm:py-16 lg:py-20">
       {/* Background Image - Full width and height */}
       <div
         className="absolute inset-0 w-full h-full z-0"
@@ -118,101 +118,97 @@ const SectionOne = () => {
 // ============ SECTION 2: PAYMENT METHODS ============
 const SectionTwo = () => {
   return (
-    <section className="py-4 mb-5 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="mb-12 mt-8 xl:mt-5 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Centered Header (single line) */}
-        <div className="text-center ">
-          <h2 className="text-3xl font-bold text-gray-900 leading-tight">
+        <div className="text-center mb-2">
+          <h2 className="text-2xl lg:text-3xl xl:text-3xl font-bold text-gray-900 leading-tight">
             Transact without borders
           </h2>
         </div>
 
         {/* Centered Subtext (single line) */}
-        <div className="text-center mb-12">
-          <p className="text-base text-gray-600 leading-relaxed">
+        <div className="text-center mb-8 lg:mb-12">
+          <p className="text-base lg:text-base xl:text-base text-gray-600 leading-relaxed">
             Global Business payments made simple, swift and secure
           </p>
         </div>
 
-        {/* Two Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Card 1 - Reduced width */}
-          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-4xl rounded-tr-4xl flex flex-col h-[575px] w-4/5 mx-auto relative overflow-visible">
-            <div className="pt-4 text-center flex flex-col grow px-6">
-              {/* Recentered text content */}
+        {/* Cards - One column for <1280px, two columns for xl+ (1280px+) */}
+        <div className="flex flex-col xl:grid xl:grid-cols-2 gap-4 xl:gap-8">
+          {/* Card 1 */}
+          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-4xl rounded-tr-4xl flex flex-col h-auto sm:h-[400px] xl:h-[570px] w-full xl:w-4/5 mx-auto relative overflow-visible">
+            <div className="pt-4 sm:pt-6 lg:pt-4 text-center flex flex-col grow px-4 sm:px-6 lg:px-6">
               <div className="grow flex flex-col justify-center">
-                {/* Mini Header */}
-                <h3 className="text-[24px] font-semibold text-purple-500 mb-3 mt-2 ">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-purple-500 mb-1 sm:mb-2 mt-2 sm:mt-4 lg:mt-4">
                   International Transfers
                 </h3>
 
-                {/* 2-line Subtext */}
-                <p className="text-gray-600 text-sm  leading-relaxed">
-                 Initiate and settle foreign remittances in USD and
-                </p>
-                <p className="text-gray-600 text-sm leading-relaxed -mt-1">
-                  GBP, available in multiple countries,
+                <div className="hidden lg:block">
+                  <p className="text-sm lg:text-sm text-gray-600 mt-1 leading-relaxed">
+                    Initiate and settle foreign remittances in USD and
+                  </p>
+                  <p className="text-sm lg:text-sm text-gray-600 leading-relaxed">
+                    GBP, available in multiple countries,
+                  </p>
+                </div>
+                <p className="lg:hidden text-sm text-gray-600 mt-1 leading-relaxed px-4">
+                  Initiate and settle foreign remittances in USD and GBP, available in multiple countries.
                 </p>
               </div>
 
-              {/* Images container - positioned at bottom */}
-              <div className="mt-auto relative">
-                {/* Two Images Side by Side */}
-                <div className="flex justify-center gap-4 items-end relative z-10">
-                  {/* Smaller image remains normal */}
+              <div className="mt-auto relative flex flex-col items-center">
+                <div className="flex flex-col sm:flex-row lg:flex-row justify-center gap-4 lg:gap-0 items-center relative z-10">
                   <img
                     src="/images/paymentmap.svg"
                     alt="Personal Payment 1"
-                    className="h-25 w-auto object-contain -mr-20"
+                    className="h-16 sm:h-20 lg:h-25 w-auto object-contain lg:-mr-20 lg:-mb-55 order-2 lg:order-1 hidden sm:block"
                   />
-                  {/* Larger image extends beyond card */}
                   <img
                     src="/images/paymentimg1.svg"
                     alt="Personal Payment 2"
-                    className="h-100 w-auto object-contain relative -right-20 -mt-2 "
+                    className="h-40 sm:h-64 lg:h-100 w-auto object-contain relative order-1 lg:order-2 lg:-right-20"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Card 2 - Reduced width */}
-          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-4xl rounded-tr-4xl flex flex-col h-[570px] w-4/5 mx-auto relative overflow-visible">
-            <div className="pt-4 text-center flex flex-col grow px-6">
-              {/* Recentered text content */}
+          {/* Card 2 - Added lg:mt-[15px] xl:mt-0 */}
+          <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-4xl rounded-tr-4xl flex flex-col h-auto sm:h-[400px] lg:h-[570px] w-full lg:w-4/5 mx-auto relative overflow-visible lg:mt-[65px] xl:mt-0">
+            <div className="pt-4 sm:pt-6 lg:pt-4 text-center flex flex-col grow px-4 sm:px-6 lg:px-6">
               <div className="grow flex flex-col justify-center">
-                {/* Mini Header */}
-                <h3 className="text-[24px] font-semibold text-purple-500 mb-3 mt-8">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-purple-500 mb-1 sm:mb-2 mt-2 sm:mt-4 lg:mt-4">
                   USD Debit Cards
                 </h3>
 
-                {/* 3-line Subtext */}
-                <p className="text-gray-600 text-sm  leading-relaxed">
-                  Get a virtual USD debit card for subscriptions,
-                </p>
-                <p className="text-gray-600 leading-relaxed text-sm -mt-1">
-                  shopping, school fees, and business transactions
-                </p>
-                <p className="text-gray-600 leading-relaxed text-sm -mt-1">
-                  worldwide
+                <div className="hidden lg:block">
+                  <p className="text-sm lg:text-sm text-gray-600 mt-1 leading-relaxed">
+                    Get a virtual USD debit card for subscriptions,
+                  </p>
+                  <p className="text-sm lg:text-sm text-gray-600 leading-relaxed">
+                    shopping, school fees, and business transactions
+                  </p>
+                  <p className="text-sm lg:text-sm text-gray-600 leading-relaxed">
+                    worldwide
+                  </p>
+                </div>
+                <p className="lg:hidden text-sm text-gray-600 mt-1 leading-relaxed px-4">
+                  Get a virtual USD debit card for subscriptions, shopping, school fees, and business transactions worldwide.
                 </p>
               </div>
 
-              {/* Images container - positioned at bottom */}
-              <div className="mt-auto relative">
-                {/* Two Images Side by Side */}
-                <div className="flex justify-center gap-4 items-end relative z-10">
-                  {/* Smaller image remains normal */}
+              <div className="mt-auto relative flex flex-col items-center">
+                <div className="flex flex-col sm:flex-row lg:flex-row justify-center gap-4 lg:gap-0 items-center relative z-10">
                   <img
                     src="/images/visa.svg"
                     alt="Business Payment 1"
-                    className="h-15 -mr-17 mb-5 w-auto object-contain"
+                    className="h-12 sm:h-14 lg:h-15 w-auto object-contain lg:-mr-17 lg:-mb-55 order-2 lg:order-1 hidden sm:block"
                   />
-                  {/* Larger image extends beyond card */}
                   <img
                     src="/images/paymentimg2.svg"
                     alt="Business Payment 2"
-                    className="h-100 w-auto object-contain relative -right-20 "
+                    className="h-40 sm:h-64 lg:h-100 w-auto object-contain relative order-1 lg:order-2 lg:-right-20"
                   />
                 </div>
               </div>
