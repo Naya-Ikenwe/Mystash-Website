@@ -482,40 +482,40 @@ export default function LoanApplyPage() {
 
             <div className="px-4 sm:px-6 md:px-8 lg:px-12 pb-6 sm:pb-8 md:pb-10 lg:pb-12">
               {/* 2x2 Grid - Responsive adjustments */}
-              <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-20">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 md:ml-8 lg:ml-10 mb-8 sm:mb-12 lg:mb-20">
                 {/* Grid items with responsive font sizes and margins */}
                 <div className="text-left">
-                  <h3 className="text-sm sm:text-base lg:text-lg font-medium text-gray-500 mb-1 sm:mb-2">
+                  <h3 className="text-sm sm:text-base lg:text-lg font-medium text-gray-500 mb-1 sm:mb-2 md:ml-5 lg:ml-5">
                     Loan Amount
                   </h3>
-                  <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800">
+                  <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800 md:ml-5 lg:ml-5">
                     ₦{loanAmount}
                   </p>
                 </div>
 
                 <div className="text-left">
-                  <h3 className="text-sm sm:text-base lg:text-lg font-medium text-gray-500 mb-1 sm:mb-2">
+                  <h3 className="text-sm sm:text-base lg:text-lg font-medium text-gray-500 mb-1 sm:mb-2 md:ml-20 lg:ml-20">
                     Loan Tenor
                   </h3>
-                  <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800">
+                  <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800 md:ml-20 lg:ml-20">
                     {loanTenure} Months
                   </p>
                 </div>
 
                 <div className="text-left">
-                  <h3 className="text-sm sm:text-base lg:text-lg font-medium text-gray-500 mb-1 sm:mb-2">
+                  <h3 className="text-sm sm:text-base lg:text-lg font-medium text-gray-500 mb-1 sm:mb-2 md:ml-5 lg:ml-5">
                     Repayment Amount
                   </h3>
-                  <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800">
+                  <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800 md:ml-5 lg:ml-5">
                     ₦{calculateRepayableAmount()}
                   </p>
                 </div>
 
                 <div className="text-left">
-                  <h3 className="text-sm sm:text-base lg:text-lg font-medium text-gray-500 mb-1 sm:mb-2">
+                  <h3 className="text-sm sm:text-base lg:text-lg font-medium text-gray-500 mb-1 sm:mb-2 md:ml-20 lg:ml-20">
                     Interest Rate
                   </h3>
-                  <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800">
+                  <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800 md:ml-20 lg:ml-20">
                     6% per month
                   </p>
                 </div>
