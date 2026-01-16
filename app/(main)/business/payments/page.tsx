@@ -54,8 +54,8 @@ const SectionOne = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Content - Centered */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] sm:min-h-[70vh]">
-          {/* Pill Header (dot before and after the text) */}
-          <div className="text-center mb-6 sm:mb-4">
+          {/* Pill Header (dot before and after the text) - Updated with margin top */}
+          <div className="text-center mb-6 sm:mb-4 mt-10 md:mt-15">
             <p className="text-sm font-semibold text-purple-400 mb-2 border border-gray-50 rounded-full px-4 py-1 inline-block bg-purple-100">
               • Payment •
             </p>

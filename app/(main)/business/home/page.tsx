@@ -603,9 +603,9 @@ export default function BusinessPage() {
         </div>
 
         {/* Main Content - Centered */}
-        <div className="relative z-10 flex flex-col items-center justify-center lg:min-h-screen px-4 sm:px-6 lg:px-8 pt-16 sm:pt-12 md:pt-20 lg:pt-12 pb-16 sm:pb-32 md:pb-48 lg:pb-32">
+        <div className="relative z-10 flex flex-col items-center justify-center lg:min-h-screen px-4 sm:px-6 lg:px-8 pt-16 sm:pt-12 md:pt-20 lg:pt-12  pb-16 sm:pb-32 md:pb-48 lg:pb-32">
           {/* Horizontal Marquee (Centered with exact width) */}
-          <div className="w-full flex justify-center mb-3 sm:mb-4 lg:mb-8">
+          <div className="w-full flex justify-center lg:mt-30 mb-3 sm:mb-4 lg:mb-8 sm:mt-10">
             <BusinessHorizontalMarquee />
           </div>
           {/* Three Line Header with relative positioning for corner icons */}

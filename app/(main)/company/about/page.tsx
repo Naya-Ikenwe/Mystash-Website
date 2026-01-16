@@ -15,7 +15,7 @@ const DUMMY_ICON_4 = "/icons/connection.svg";
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
-      {/* Section 1: Hero with Background Image */}
+      // Section 1: Hero with Background Image
       <section
         className="relative w-full min-h-[65vh] flex items-center justify-center"
         style={{
@@ -36,15 +36,15 @@ export default function AboutPage() {
 
           {/* 6-line explanation text */}
           <div className="mt-4 text-black">
-            {/* Desktop version (hidden on mobile) */}
-            <div className="hidden md:block space-y-4 text-lg md:text-xl text-center">
+            {/* Desktop version (hidden on screens ≤ 1024px) */}
+            <div className="hidden xl:block space-y-4 text-lg md:text-xl text-center">
               <p className="whitespace-nowrap">
-                In 2021, four postgraduate students began myStash with a vision to
-                help young adults build their emergency
+                In 2021, four postgraduate students began myStash with a vision
+                to help young adults build their emergency
               </p>
               <p className="whitespace-nowrap">
-                funds by making savings a painless and unconscious habit. Within a
-                span of 5 months, 10 customers and 4
+                funds by making savings a painless and unconscious habit. Within
+                a span of 5 months, 10 customers and 4
               </p>
               <p className="whitespace-nowrap">
                 founders grew to over 13 staff members abd over 5,000 users who
@@ -55,37 +55,56 @@ export default function AboutPage() {
                 collaboration, communication and customer-
               </p>
               <p className="whitespace-nowrap">
-                obsession, we strive to be the ultimate wealth management platform
-                that helps young adults to monitor,
+                obsession, we strive to be the ultimate wealth management
+                platform that helps young adults to monitor,
               </p>
               <p className="whitespace-nowrap">
                 manage, and generate weakth in an autonomous and painless way.
               </p>
             </div>
-            
-            {/* Mobile version (shown only on mobile) */}
-            <div className="md:hidden px-2 space-y-3 text-sm leading-relaxed">
+
+            {/* Tablet version (768px to 1280px) */}
+            <div className="hidden md:block xl:hidden px-4 space-y-3 text-base leading-relaxed">
               <p>
-                In 2021, four postgraduate students began myStash with a vision to
-                help young adults build their emergency funds by making savings a
-                painless and unconscious habit.
+                In 2021, four postgraduate students began myStash with a vision
+                to help young adults build their emergency funds by making
+                savings a painless and unconscious habit.
               </p>
               <p>
-                Within a span of 5 months, 10 customers and 4 founders grew to over
-                13 staff members and over 5,000 users who have saved over 12,000
-                times as they spent or earned in that short term frame.
+                Within a span of 5 months, 10 customers and 4 founders grew to
+                over 13 staff members and over 5,000 users who have saved over
+                12,000 times as they spent or earned in that short term frame.
               </p>
               <p>
                 Rooted in a culture of collaboration, communication and
-                customer-obsession, we strive to be the ultimate wealth management
-                platform that helps young adults to monitor, manage, and generate
-                wealth in an autonomous and painless way.
+                customer-obsession, we strive to be the ultimate wealth
+                management platform that helps young adults to monitor, manage,
+                and generate wealth in an autonomous and painless way.
+              </p>
+            </div>
+
+            {/* Mobile version (shown only on mobile) */}
+            <div className="md:hidden px-2 space-y-3 text-sm leading-relaxed">
+              <p>
+                In 2021, four postgraduate students began myStash with a vision
+                to help young adults build their emergency funds by making
+                savings a painless and unconscious habit.
+              </p>
+              <p>
+                Within a span of 5 months, 10 customers and 4 founders grew to
+                over 13 staff members and over 5,000 users who have saved over
+                12,000 times as they spent or earned in that short term frame.
+              </p>
+              <p>
+                Rooted in a culture of collaboration, communication and
+                customer-obsession, we strive to be the ultimate wealth
+                management platform that helps young adults to monitor, manage,
+                and generate wealth in an autonomous and painless way.
               </p>
             </div>
           </div>
         </div>
       </section>
-
       {/* Section 2: Two-column Layout */}
       <section className="py-16 bg-white overflow-hidden">
         <div className="w-full">
@@ -150,10 +169,10 @@ export default function AboutPage() {
                             Our conduct and operation reflects true
                           </p>
                           <p className="text-gray-800 text-sm md:text-base">
-                           Professionalism, ensuring we get it right
+                            Professionalism, ensuring we get it right
                           </p>
                           <p className="text-gray-800 text-sm md:text-base">
-                           from the start and consistently thereafter.
+                            from the start and consistently thereafter.
                           </p>
                         </div>
                       </div>
@@ -172,7 +191,7 @@ export default function AboutPage() {
                       </div>
                       <div className="mb-4">
                         <h3 className="text-xl font-semibold text-purple-500 mb-1">
-                         Trust
+                          Trust
                         </h3>
                         <div className="space-y-1">
                           <p className="text-gray-800 text-sm md:text-base">
@@ -234,7 +253,7 @@ export default function AboutPage() {
                         </h3>
                         <div className="space-y-1">
                           <p className="text-gray-800 text-sm md:text-base">
-                            Honesty and transparency guide our every 
+                            Honesty and transparency guide our every
                           </p>
                           <p className="text-gray-800 text-sm md:text-base">
                             interaction. We listen, we learn, we build trust,
@@ -252,7 +271,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
       {/* Section 3: Detailed Card Section */}
       <section className="py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
@@ -262,7 +280,8 @@ export default function AboutPage() {
               Our Team
             </h2>
             <p className="text-base text-black hidden md:block">
-              We are here to empower the next generation to build and secure their wealth.
+              We are here to empower the next generation to build and secure
+              their wealth.
             </p>
             <p className="text-gray-400 hidden md:block">
               Grow you Stash with myStash
@@ -270,7 +289,8 @@ export default function AboutPage() {
             {/* Mobile version */}
             <div className="md:hidden">
               <p className="text-sm text-black">
-                We are here to empower the next generation to build and secure their wealth.
+                We are here to empower the next generation to build and secure
+                their wealth.
               </p>
               <p className="text-gray-400 text-sm mt-1">
                 Grow you Stash with myStash
@@ -308,7 +328,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
       {/* Section 4: Divided Sections with Purple Line */}
       <section className="py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
@@ -324,7 +343,7 @@ export default function AboutPage() {
                   />
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                  Our Vision 
+                  Our Vision
                 </h3>
                 <div className="space-y-2 text-gray-800 text-sm md:text-base">
                   <p>
@@ -344,7 +363,7 @@ export default function AboutPage() {
             <div className="hidden lg:block relative">
               <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-purple-600"></div>
             </div>
-            
+
             {/* Horizontal Purple Line Divider for mobile */}
             <div className="lg:hidden w-full h-0.5 bg-purple-600 my-8 "></div>
 
@@ -362,8 +381,14 @@ export default function AboutPage() {
                   Our Mission
                 </h3>
                 <div className="space-y-2 text-gray-800 text-sm md:text-base">
-                  <p>To be the ultimate wealth management platform that helps young</p>
-                  <p>adult to monitor, manage and generate wealth in an autonomous</p>
+                  <p>
+                    To be the ultimate wealth management platform that helps
+                    young
+                  </p>
+                  <p>
+                    adult to monitor, manage and generate wealth in an
+                    autonomous
+                  </p>
                   <p>and painless way</p>
                 </div>
               </div>
@@ -371,7 +396,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
       {/* Section 5: Centered CTA Section */}
       <section className="py-16 bg-gray-50 overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 text-center">
@@ -383,27 +407,29 @@ export default function AboutPage() {
           {/* Two Lines of Subtext */}
           <div className="mb-8 hidden md:block">
             <p className="text-base text-gray-700 mb-2">
-              Join us as we build the ultimate wealth-management platform, empowering young adult to monitor,
+              Join us as we build the ultimate wealth-management platform,
+              empowering young adult to monitor,
             </p>
             <p className="text-base text-gray-700">
               manage and grow their wealth effortlessly
             </p>
           </div>
-          
+
           {/* Mobile version */}
           <div className="mb-8 md:hidden">
             <p className="text-sm text-gray-700 px-2">
-              Join us as we build the ultimate wealth-management platform, empowering young adult to monitor, manage and grow their wealth effortlessly
+              Join us as we build the ultimate wealth-management platform,
+              empowering young adult to monitor, manage and grow their wealth
+              effortlessly
             </p>
           </div>
 
           {/* Purple Button with White Text */}
           <button className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 md:px-3 rounded-full transition-colors duration-200 text-sm md:text-base">
-           Explore Job Openings
+            Explore Job Openings
           </button>
         </div>
       </section>
-
       <ContactFormSection />
     </div>
   );

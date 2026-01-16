@@ -54,8 +54,8 @@ const SectionOne = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Content - Centered */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] sm:min-h-[70vh]">
-          {/* Pill Header - Added space above for mobile, 768px, and 1024px */}
-          <div className="text-center mb-6 sm:mb-6 pt-4 sm:pt-6 lg:pt-8 xl:pt-0">
+          {/* Pill Header - Updated with margin top */}
+          <div className="text-center mb-6 sm:mb-6 mt-10 md:mt-15">
             <p className="text-sm font-medium text-purple-400 mb-2 border border-gray-50 rounded-full px-4 py-1 inline-block bg-purple-100">
               • Budget •
             </p>
@@ -123,7 +123,6 @@ const SectionOne = () => {
     </section>
   );
 };
-
 // ============ SECTION 2: BUDGET PROCESS ============
 const SectionTwo = () => {
   return (

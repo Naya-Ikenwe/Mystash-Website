@@ -318,12 +318,12 @@ const FileUploadArea = ({
         <div className="fixed inset-0 bg-black z-50 flex flex-col">
           {/* Header */}
           <div className="p-4 bg-black bg-opacity-80 flex justify-between items-center shrink-0">
-            <h3 className="text-lg font-semibold text-white">
+            <h3 className="text-lg font-semibold text-white lg:text-xl">
               Take a Passport Photo
             </h3>
             <button
               onClick={closeWebcam}
-              className="text-white text-xl bg-red-600 w-6 h-6 rounded-full flex items-center justify-center" // Reduced from w-8 h-8 to w-6 h-6
+              className="text-white text-xl bg-red-600 w-6 h-6 rounded-full flex items-center justify-center lg:w-8 lg:h-8"
             >
               ✕
             </button>
@@ -333,19 +333,19 @@ const FileUploadArea = ({
           <div className="flex-1 bg-black relative flex items-center justify-center overflow-hidden">
             {webcamError ? (
               <div className="text-white text-center p-8 max-w-md">
-                <div className="text-red-400 text-4xl mb-4">📷</div>
-                <h4 className="text-xl font-semibold mb-3">Camera Error</h4>
-                <p className="mb-6 text-gray-300">{webcamError}</p>
-                <div className="space-y-3">
+                <div className="text-red-400 text-4xl mb-4 lg:text-5xl">📷</div>
+                <h4 className="text-xl font-semibold mb-3 lg:text-2xl">Camera Error</h4>
+                <p className="mb-6 text-gray-300 lg:text-lg">{webcamError}</p>
+                <div className="space-y-3 lg:space-y-4">
                   <button
                     onClick={retryWebcam}
-                    className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 w-full"
+                    className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 w-full text-base lg:text-lg"
                   >
                     Try Again
                   </button>
                   <button
                     onClick={closeWebcam}
-                    className="px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 w-full"
+                    className="px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 w-full text-base lg:text-lg"
                   >
                     Cancel
                   </button>
@@ -371,9 +371,9 @@ const FileUploadArea = ({
                 {!isWebcamReady && !webcamError && (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-white text-center">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-                      <p className="text-lg">Initializing camera...</p>
-                      <p className="text-sm text-gray-400 mt-2">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4 lg:h-16 lg:w-16"></div>
+                      <p className="text-lg lg:text-xl">Initializing camera...</p>
+                      <p className="text-sm text-gray-400 mt-2 lg:text-base">
                         Please allow camera permissions if prompted
                       </p>
                     </div>
@@ -384,14 +384,14 @@ const FileUploadArea = ({
                 {isWebcamReady && (
                   <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
                     <div className="relative">
-                      <div className="w-96 h-112 border-4 border-white border-dashed rounded-lg opacity-70"></div>
+                      <div className="w-64 h-80 border-4 border-white border-dashed rounded-lg opacity-70 lg:w-96 lg:h-112"></div>
                       <div className="absolute top-1/3 left-0 right-0 h-px bg-white opacity-50"></div>
                       <div className="absolute top-2/3 left-0 right-0 h-px bg-white opacity-50"></div>
                       <div className="absolute left-1/3 top-0 bottom-0 w-px bg-white opacity-50"></div>
                       <div className="absolute right-1/3 top-0 bottom-0 w-px bg-white opacity-50"></div>
 
                       <div className="absolute -bottom-20 left-0 right-0 text-center">
-                        <p className="text-white text-lg font-semibold bg-black bg-opacity-70 px-6 py-3 rounded-lg">
+                        <p className="text-white text-sm font-semibold bg-black bg-opacity-70 px-4 py-2 rounded-lg lg:text-lg lg:px-6 lg:py-3">
                           📸 Position your face within the frame
                         </p>
                       </div>
@@ -406,18 +406,18 @@ const FileUploadArea = ({
 
           {/* Capture Button - Only show when ready */}
           {isWebcamReady && !webcamError && (
-            <div className="p-6 bg-black bg-opacity-90 flex flex-col items-center space-y-4 shrink-0 border-t border-gray-600">
+            <div className="p-4 bg-black bg-opacity-90 flex flex-col items-center space-y-3 shrink-0 border-t border-gray-600 lg:p-6 lg:space-y-4">
               <button
                 onClick={capturePhoto}
                 disabled={!isWebcamReady || !!webcamError}
-                className="w-20 h-20 rounded-full border-4 border-white bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shadow-2xl transform hover:scale-105 active:scale-95"
+                className="w-16 h-16 rounded-full border-4 border-white bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shadow-2xl transform hover:scale-105 active:scale-95 lg:w-20 lg:h-20"
               >
-                <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
-                  <div className="w-12 h-12 rounded-full bg-red-500 border-2 border-white"></div>
+                <div className="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center lg:w-16 lg:h-16">
+                  <div className="w-8 h-8 rounded-full bg-red-500 border-2 border-white lg:w-12 lg:h-12"></div>
                 </div>
               </button>
 
-              <p className="text-white text-lg font-bold text-center">
+              <p className="text-white text-base font-bold text-center lg:text-lg">
                 📷 CLICK TO CAPTURE PHOTO
               </p>
             </div>
@@ -430,7 +430,7 @@ const FileUploadArea = ({
         <div className="space-y-4">
           {/* For selfie (showPreview=true): Show green preview box */}
           {showPreview ? (
-            <div className="border-2 border-dashed border-green-300 rounded-lg p-6 bg-green-50">
+            <div className="border-2 border-dashed border-green-300 rounded-lg p-4 bg-green-50 lg:p-6">
               {/* File Preview */}
               <div className="flex items-center justify-center mb-4">
                 {value.type.startsWith("image/") ? (
@@ -438,13 +438,13 @@ const FileUploadArea = ({
                     <img
                       src={URL.createObjectURL(value)}
                       alt="Preview"
-                      className="w-32 h-32 object-cover rounded-lg border border-gray-300"
+                      className="w-24 h-24 object-cover rounded-lg border border-gray-300 lg:w-32 lg:h-32"
                     />
                   </div>
                 ) : (
-                  <div className="w-32 h-32 bg-gray-100 rounded-lg border border-gray-300 flex items-center justify-center">
+                  <div className="w-24 h-24 bg-gray-100 rounded-lg border border-gray-300 flex items-center justify-center lg:w-32 lg:h-32">
                     <div className="text-center">
-                      <div className="text-3xl mb-2">
+                      <div className="text-2xl mb-1 lg:text-3xl lg:mb-2">
                         {value.type === "application/pdf"
                           ? "📄"
                           : value.name.toLowerCase().endsWith(".doc") ||
@@ -485,12 +485,12 @@ const FileUploadArea = ({
             </div>
           ) : (
             // For ID card (showPreview=false): Show regular dashed box WITHOUT browse button
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-gray-50">
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center bg-gray-50 lg:p-8">
               <div className="flex flex-col items-center space-y-4">
                 <div className="flex items-center justify-center space-x-3">
                   {/* Upload icon SVG */}
                   <svg
-                    className="w-8 h-8 text-gray-400"
+                    className="w-6 h-6 text-gray-400 lg:w-8 lg:h-8"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -503,16 +503,14 @@ const FileUploadArea = ({
                     />
                   </svg>
                   <div className="text-left">
-                    <p className="text-base text-gray-700 font-medium">
+                    <p className="text-sm text-gray-700 font-medium lg:text-base">
                       Click to upload or drag and drop
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-xs text-gray-500 lg:text-sm">
                       You can upload jpeg,png, or pdf files
                     </p>
                   </div>
                 </div>
-
-                {/* No browse button when file is uploaded for ID card */}
               </div>
             </div>
           )}
@@ -521,19 +519,19 @@ const FileUploadArea = ({
           <div className="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
             <div className="flex items-center justify-between">
               {/* Left side - File info with Completed pill next to it */}
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-3 min-w-0">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center">
-                    <p className="text-sm font-medium text-gray-900 truncate mr-3">
+                  <div className="flex flex-col xs:flex-row xs:items-center">
+                    <p className="text-sm font-medium text-gray-900 truncate lg:text-base">
                       {value.name}
                     </p>
                     {/* Completed pill moved here, next to file name */}
-                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 shrink-0">
+                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 shrink-0 mt-1 xs:mt-0 xs:ml-3">
                       <div className="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
                       Completed
                     </span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-gray-500 mt-1 lg:text-sm">
                     {formatFileSize(value.size)} • {value.type}
                   </p>
                 </div>
@@ -542,11 +540,11 @@ const FileUploadArea = ({
               {/* Right side - Delete button */}
               <button
                 onClick={handleDelete}
-                className="ml-4 p-2 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg transition-colors flex items-center justify-center shrink-0"
+                className="ml-2 p-2 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg transition-colors flex items-center justify-center shrink-0"
                 title="Delete file"
               >
                 <svg
-                  className="w-5 h-5"
+                  className="w-4 h-4 lg:w-5 lg:h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -564,12 +562,12 @@ const FileUploadArea = ({
         </div>
       ) : (
         // Empty Upload Area (when no file is uploaded)
-        <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-purple-400 transition-colors bg-gray-50">
+        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-purple-400 transition-colors bg-gray-50 lg:p-8">
           <div className="flex flex-col items-center space-y-4">
             <div className="flex items-center justify-center space-x-3">
               {/* Upload icon SVG */}
               <svg
-                className="w-8 h-8 text-gray-400"
+                className="w-6 h-6 text-gray-400 lg:w-8 lg:h-8"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -582,20 +580,20 @@ const FileUploadArea = ({
                 />
               </svg>
               <div className="text-left">
-                <p className="text-base text-gray-700 font-medium">
+                <p className="text-sm text-gray-700 font-medium lg:text-base">
                   Click to upload or drag and drop
                 </p>
-                <p className="text-sm text-gray-500">
+                <p className="text-xs text-gray-500 lg:text-sm">
                   You can upload jpeg,png, or pdf files
                 </p>
               </div>
             </div>
 
-            <div className="flex space-x-3">
+            <div className="flex flex-col space-y-3 w-full max-w-xs mx-auto sm:flex-row sm:space-y-0 sm:space-x-3 sm:max-w-none sm:justify-center">
               <button
                 type="button"
                 onClick={handleBrowseFiles}
-                className="px-4 py-2 bg-purple-600 text-white rounded-lg text-base font-medium hover:bg-purple-700 transition-colors"
+                className="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors lg:text-base"
               >
                 Browse Files
               </button>
@@ -605,7 +603,7 @@ const FileUploadArea = ({
                 <button
                   type="button"
                   onClick={handleCameraClick}
-                  className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-700 rounded-lg text-base font-medium hover:bg-purple-200 transition-colors"
+                  className="inline-flex items-center justify-center px-4 py-2 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium hover:bg-purple-200 transition-colors lg:text-base"
                 >
                   <svg
                     className="w-4 h-4 mr-2"
@@ -660,16 +658,16 @@ const SuccessModal = ({
       />
 
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
-        <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-auto p-10 text-center pointer-events-auto relative">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-xs w-full mx-auto p-6 text-center pointer-events-auto relative sm:max-w-sm sm:p-8 lg:max-w-lg lg:p-10">
           {/* X button at top right using icon */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 w-8 h-8 mr-7 flex items-center justify-center transition-colors"
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 w-6 h-6 flex items-center justify-center transition-colors sm:top-6 sm:right-6 lg:mr-7"
           >
             <img
               src={CLOSE_ICON}
               alt="Close"
-              className="w-4 h-4"
+              className="w-3 h-3 sm:w-4 sm:h-4"
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12'%3E%3C/path%3E%3C/svg%3E";
@@ -678,11 +676,11 @@ const SuccessModal = ({
           </button>
 
           {/* Icon container */}
-          <div className="w-28 h-28 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-8 mt-15">
+          <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 mt-12 sm:w-24 sm:h-24 sm:mb-8 lg:w-28 lg:h-28 lg:mb-8 lg:mt-15">
             {imgError ? (
               // Fallback SVG when image fails to load
               <svg
-                className="w-10 h-10 text-purple-600"
+                className="w-8 h-8 text-purple-600 sm:w-10 sm:h-10"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -699,25 +697,25 @@ const SuccessModal = ({
               <img
                 src={SUCCESS_ICON}
                 alt="Success"
-                className="w-28 h-28"
+                className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28"
                 onError={() => setImgError(true)}
               />
             )}
           </div>
 
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-xl font-bold text-gray-900 mb-3 sm:text-2xl lg:text-3xl lg:mb-4">
             Loan Application Successful!
           </h2>
 
-          <p className="text-gray-600  text-lg">
+          <p className="text-gray-600 text-base sm:text-lg lg:text-lg">
             Please check your email for confirmation or spam folder
           </p>
 
-          <p className="text-base text-gray-500 mb-20"> {/* Changed from text-sm to text-base */}
+          <p className="text-sm text-gray-500 mt-16 mb-6 sm:text-base sm:mt-20 lg:text-base lg:mb-20">
             For enquiries, or assistance; please call{" "}
             <a
               href="mailto:support@mystash.com"
-              className="text-gray-800 font-bold" //{/* Added font-bold */}
+              className="text-gray-800 font-bold"
             >
               +2348131462292
             </a>
@@ -858,45 +856,45 @@ function LoanDetailsContent() {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-6"> {/* Added 25px padding-top */}
+    <div className="min-h-screen bg-white pt-6 lg:pt-6">
       <SuccessModal
         isOpen={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}
       />
 
       {/* Main Content */}
-      <div className="flex min-h-screen">
-        {/* Left Sidebar - 50% width */}
-        <div className="w-1/2 bg-white pl-16 pr-8 py-8">
-          <div className="max-w-lg">
+      <div className="flex flex-col lg:flex-row lg:min-h-screen">
+        {/* Left Sidebar - Full width on mobile, 50% on desktop */}
+        <div className="w-full bg-white px-4 py-8 sm:px-6 lg:w-1/2 lg:pl-16 lg:pr-8 lg:py-8">
+          <div className="max-w-lg mx-auto lg:mx-0">
             {/* MyStash Logo */}
-            <div className="mb-10">
+            <div className="mb-8 lg:mb-10">
               <Link href="/">
                 <img
                   src="/logo/mystashlogo.svg"
                   alt="MyStash Home"
-                  className="h-10 w-auto"
+                  className="h-8 w-auto sm:h-10 lg:h-10"
                 />
               </Link>
             </div>
 
-            <h1 className="text-4xl font-bold text-gray-900 mb-2 mt-25">
+            <h1 className="text-2xl font-bold text-gray-900 mb-2 mt-6 sm:text-3xl lg:text-4xl lg:mt-25">
               We've Got a Payday Loan for <span className="text-purple-600">You!</span> 
             </h1>
-            <p className="text-2xl text-gray-600 mb-12">
+            <p className="text-lg text-gray-600 mb-8 sm:text-xl lg:text-2xl lg:mb-12">
               Apply now- Loan approved in 5 minutes
             </p>
 
             {/* Steps with reduced spacing and smaller circles */}
-            <div className="space-y-8"> {/* Reduced from space-y-10 to space-y-8 */}
+            <div className="space-y-6 lg:space-y-8">
               {steps.map((step, index) => {
                 const status = getStepStatus(step.number);
                 
                 return (
-                  <div key={step.number} className="flex items-center space-x-6">
+                  <div key={step.number} className="flex items-center space-x-4 lg:space-x-6">
                     <div className="flex flex-col items-center relative">
                       <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-semibold transition-all duration-300 ${
+                        className={`w-8 h-8 rounded-full flex items-center justify-center text-base font-semibold transition-all duration-300 lg:w-10 lg:h-10 lg:text-lg ${
                           status === "current"
                             ? "bg-gray-200 text-gray-700 border-2 border-gray-300"
                             : status === "completed"
@@ -907,13 +905,13 @@ function LoanDetailsContent() {
                         {step.number}
                       </div>
                       {index < steps.length - 1 && (
-                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0.5 h-12 bg-purple-300"></div> //{/* Reduced height from h-16 to h-12 */}
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0.5 h-10 bg-purple-300 lg:h-12"></div>
                       )}
                     </div>
 
                     <div className="flex-1 pt-1">
                       <h3
-                        className={`font-medium text-xl ${
+                        className={`font-medium text-lg lg:text-xl ${
                           status === "current"
                             ? "text-gray-900"
                             : "text-gray-600"
@@ -929,21 +927,21 @@ function LoanDetailsContent() {
           </div>
         </div>
 
-        {/* Right Content - 50% width with extra 5px padding-top */}
-        <div className="w-1/2 p-8 pt-18"> {/* Removed bg-gray-50 */}
+        {/* Right Content - Full width on mobile, 50% on desktop */}
+        <div className="w-full p-4 sm:p-6 lg:w-1/2 lg:p-8 lg:pt-18">
           <div className="max-w-2xl mx-auto">
             {/* Step 1: Personal Information */}
             {currentStep === 1 && (
-              <div className="bg-white border border-gray-200 rounded-3xl shadow-sm p-8">
-                <div className="flex items-center justify-between mb-10">
+              <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 sm:p-8 lg:rounded-3xl">
+                <div className="flex items-center justify-between mb-8 lg:mb-10">
                   <button
                     onClick={handleBack}
-                    className="p-3"
+                    className="p-2 lg:p-3"
                   >
                     <img
                       src={DUMMY_BACK_ICON}
                       alt="Back"
-                      className="w-20 h-20" // Already 20px × 20px
+                      className="w-6 h-6 sm:w-8 sm:h-8 lg:w-20 lg:h-20"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.src =
@@ -952,34 +950,34 @@ function LoanDetailsContent() {
                     />
                   </button>
 
-                  <div className="text-center flex-1">
-                    <h2 className="text-4xl font-bold text-purple-500 mb-2">
+                  <div className="text-center flex-1 mx-2">
+                    <h2 className="text-xl font-bold text-purple-500 mb-2 sm:text-2xl lg:text-4xl">
                       Personal Details
                     </h2>
-                    <p className="text-lg text-gray-600">
+                    <p className="text-sm text-gray-600 sm:text-base lg:text-lg">
                       "Fill in your request- cash is on the way"
                     </p>
                   </div>
 
-                  <div className="w-10"></div>
+                  <div className="w-6 sm:w-8 lg:w-10"></div>
                 </div>
 
-                <div className="space-y-8">
+                <div className="space-y-6 lg:space-y-8">
                   <div>
-                    <label className="block text-lg font-medium text-gray-900 mb-2">
+                    <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                       Employment Type
                     </label>
                     <input
                       type="text"
                       value={formData.employmentType}
                       readOnly
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 text-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" // Added uniform focus style
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 text-base focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent lg:text-lg"
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="block text-lg font-medium text-gray-900 mb-2">
+                      <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                         First Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -990,12 +988,12 @@ function LoanDetailsContent() {
                           handleInputChange("firstName", e.target.value)
                         }
                         maxLength={50}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base lg:text-lg"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-lg font-medium text-gray-900 mb-2">
+                      <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                         Last Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -1006,14 +1004,14 @@ function LoanDetailsContent() {
                           handleInputChange("lastName", e.target.value)
                         }
                         maxLength={50}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base lg:text-lg"
                         required
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-lg font-medium text-gray-900 mb-2">
+                    <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                       Email <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -1024,13 +1022,13 @@ function LoanDetailsContent() {
                         handleInputChange("email", e.target.value)
                       }
                       maxLength={100}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base lg:text-lg"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-lg font-medium text-gray-900 mb-2">
+                    <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                       Place of Work <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -1041,14 +1039,14 @@ function LoanDetailsContent() {
                         handleInputChange("placeOfWork", e.target.value)
                       }
                       maxLength={100}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base lg:text-lg"
                       required
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="block text-lg font-medium text-gray-900 mb-2">
+                      <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                         BVN <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -1065,13 +1063,13 @@ function LoanDetailsContent() {
                         maxLength={11}
                         pattern="[0-9]{11}"
                         inputMode="numeric"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base lg:text-lg"
                         required
                       />
-                      <p className="text-sm text-gray-500 mt-1">11 digits required</p>
+                      <p className="text-xs text-gray-500 mt-1 lg:text-sm">11 digits required</p>
                     </div>
                     <div>
-                      <label className="block text-lg font-medium text-gray-900 mb-2">
+                      <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                         NIN <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -1088,16 +1086,16 @@ function LoanDetailsContent() {
                         maxLength={11}
                         pattern="[0-9]{11}"
                         inputMode="numeric"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base lg:text-lg"
                         required
                       />
-                      <p className="text-sm text-gray-500 mt-1">11 digits required</p>
+                      <p className="text-xs text-gray-500 mt-1 lg:text-sm">11 digits required</p>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="block text-lg font-medium text-gray-900 mb-2">
+                      <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                         Phone Number <span className="text-red-500">*</span>
                       </label>
                       <div className="relative">
@@ -1105,7 +1103,7 @@ function LoanDetailsContent() {
                           <img
                             src={DUMMY_PHONE_ICON}
                             alt="Phone"
-                            className="w-9 h-9 -ml-1 text-gray-400"
+                            className="w-6 h-6 -ml-1 text-gray-400 sm:w-7 sm:h-7 lg:w-9 lg:h-9"
                             onError={(e) => {
                               e.currentTarget.onerror = null;
                               e.currentTarget.src =
@@ -1113,7 +1111,7 @@ function LoanDetailsContent() {
                             }}
                           />
                         </div>
-                        <div className="absolute inset-y-0 left-12 w-px bg-gray-300"></div> {/* Increased from left-10 to left-12 */}
+                        <div className="absolute inset-y-0 left-10 w-px bg-gray-300 sm:left-11 lg:left-12"></div>
                         <input
                           type="tel"
                           value={formData.phoneNumber ? `+234 ${formData.phoneNumber.substring(1)}` : "+234 "}
@@ -1131,15 +1129,15 @@ function LoanDetailsContent() {
                               handleInputChange("phoneNumber", value);
                             }
                           }}
-                          maxLength={17} // "+234 " + 11 digits = 16 characters
-                          className="w-full border border-gray-300 rounded-lg pl-16 pr-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
+                          maxLength={17}
+                          className="w-full border border-gray-300 rounded-lg pl-14 pr-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base sm:pl-16 lg:pl-16 lg:text-lg"
                           required
                         />
                       </div>
-                      <p className="text-sm text-gray-500 mt-1">Enter your phone number after +234</p>
+                      <p className="text-xs text-gray-500 mt-1 lg:text-sm">Enter your phone number after +234</p>
                     </div>
                     <div>
-                      <label className="block text-lg font-medium text-gray-900 mb-2">
+                      <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                         IPPIS <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -1150,15 +1148,15 @@ function LoanDetailsContent() {
                           handleInputChange("ippis", e.target.value)
                         }
                         maxLength={20}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base lg:text-lg"
                         required
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="block text-lg font-medium text-gray-900 mb-2">
+                      <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                         Gender
                       </label>
                       <div className="relative">
@@ -1167,7 +1165,7 @@ function LoanDetailsContent() {
                           onChange={(e) =>
                             handleInputChange("gender", e.target.value)
                           }
-                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg" // Added uniform focus style
+                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-base lg:text-lg"
                         >
                           <option value="">Select gender</option>
                           <option value="male">Male</option>
@@ -1178,7 +1176,7 @@ function LoanDetailsContent() {
                           <img
                             src={DUMMY_DROPDOWN_ICON}
                             alt="Dropdown"
-                            className="w-3 h-3 mr-5 text-gray-400"
+                            className="w-2 h-2 mr-3 text-gray-400 sm:w-3 sm:h-3 sm:mr-4 lg:w-3 lg:h-3 lg:mr-5"
                             onError={(e) => {
                               e.currentTarget.onerror = null;
                               e.currentTarget.src =
@@ -1189,7 +1187,7 @@ function LoanDetailsContent() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-lg font-medium text-gray-900 mb-2">
+                      <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                         Date of Birth
                       </label>
                       <input
@@ -1199,18 +1197,18 @@ function LoanDetailsContent() {
                           handleInputChange("dateOfBirth", e.target.value)
                         }
                         max={new Date().toISOString().split('T')[0]}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base lg:text-lg"
                       />
                     </div>
                   </div>
                 </div>
 
-                {/* Centered Continue Button - 383px × 50px */}
+                {/* Centered Continue Button */}
                 <div className="flex justify-center mt-8">
                   <button
                     onClick={handleContinue}
                     disabled={!isStep1Complete()}
-                    className={`w-[383px] h-[50px] rounded-lg font-semibold text-lg ${
+                    className={`w-full max-w-xs h-12 rounded-lg font-semibold text-base sm:w-[383px] sm:h-[50px] sm:text-lg lg:w-[383px] lg:h-[50px] ${
                       isStep1Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -1224,16 +1222,16 @@ function LoanDetailsContent() {
 
             {/* Step 2: Upload Documents */}
             {currentStep === 2 && (
-              <div className="bg-white border border-gray-200 rounded-3xl shadow-sm p-8">
-                <div className="flex items-center justify-between mb-10">
+              <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 sm:p-8 lg:rounded-3xl">
+                <div className="flex items-center justify-between mb-8 lg:mb-10">
                   <button
                     onClick={handleBack}
-                    className="p-3"
+                    className="p-2 lg:p-3"
                   >
                     <img
                       src={DUMMY_BACK_ICON}
                       alt="Back"
-                      className="w-20 h-20"
+                      className="w-6 h-6 sm:w-8 sm:h-8 lg:w-20 lg:h-20"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.src =
@@ -1242,23 +1240,23 @@ function LoanDetailsContent() {
                     />
                   </button>
 
-                  <div className="text-center flex-1">
-                    <h2 className="text-4xl font-bold text-purple-600 mb-2">
+                  <div className="text-center flex-1 mx-2">
+                    <h2 className="text-xl font-bold text-purple-600 mb-2 sm:text-2xl lg:text-4xl">
                       KYC Document
                     </h2>
-                    <p className="text-lg text-gray-600">
+                    <p className="text-sm text-gray-600 sm:text-base lg:text-lg">
                       You are already halfway completed
                     </p>
                   </div>
 
-                  <div className="w-10"></div>
+                  <div className="w-6 sm:w-8 lg:w-10"></div>
                 </div>
 
-                <div className="space-y-10">
+                <div className="space-y-8 lg:space-y-10">
                   {/* Selfie Photo - Allow webcam WITH preview */}
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-xl font-medium text-gray-900 mb-2">
+                      <h3 className="text-lg font-medium text-gray-900 mb-2 lg:text-xl">
                         Upload a face image
                       </h3>
                     </div>
@@ -1268,14 +1266,14 @@ function LoanDetailsContent() {
                       onChange={(file) => handleFileUpload("selfieImage", file)}
                       accept="image/*"
                       allowWebcam={true}
-                      showPreview={true} // Show preview for selfie
+                      showPreview={true}
                     />
                   </div>
 
                   {/* ID Card - Disable webcam WITHOUT preview */}
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-xl font-medium text-gray-900 mb-2">
+                      <h3 className="text-lg font-medium text-gray-900 mb-2 lg:text-xl">
                         Upload your staff ID or Employment Letter
                       </h3>
                     </div>
@@ -1285,17 +1283,17 @@ function LoanDetailsContent() {
                       onChange={(file) => handleFileUpload("idCardImage", file)}
                       accept="image/*,.pdf,.doc,.docx,.xls,.xlsx"
                       allowWebcam={false}
-                      showPreview={false} // NO preview for ID card - dashed box remains
+                      showPreview={false}
                     />
                   </div>
                 </div>
 
-                {/* Centered Continue Button - 383px × 50px with "Upload" text */}
+                {/* Centered Continue Button */}
                 <div className="flex justify-center mt-8">
                   <button
                     onClick={handleContinue}
                     disabled={!isStep2Complete()}
-                    className={`w-[383px] h-[50px] rounded-lg font-semibold text-lg ${
+                    className={`w-full max-w-xs h-12 rounded-lg font-semibold text-base sm:w-[383px] sm:h-[50px] sm:text-lg lg:w-[383px] lg:h-[50px] ${
                       isStep2Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -1309,16 +1307,16 @@ function LoanDetailsContent() {
 
             {/* Step 3: Bank & Agreement */}
             {currentStep === 3 && (
-              <div className="bg-white border border-gray-200 rounded-3xl shadow-sm p-8">
-                <div className="flex items-center justify-between mb-10">
+              <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 sm:p-8 lg:rounded-3xl">
+                <div className="flex items-center justify-between mb-8 lg:mb-10">
                   <button
                     onClick={handleBack}
-                    className="p-3"
+                    className="p-2 lg:p-3"
                   >
                     <img
                       src={DUMMY_BACK_ICON}
                       alt="Back"
-                      className="w-20 h-20"
+                      className="w-6 h-6 sm:w-8 sm:h-8 lg:w-20 lg:h-20"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.src =
@@ -1327,21 +1325,21 @@ function LoanDetailsContent() {
                     />
                   </button>
 
-                  <div className="text-center flex-1">
-                    <h2 className="text-4xl font-bold text-purple-600 mb-3">
+                  <div className="text-center flex-1 mx-2">
+                    <h2 className="text-xl font-bold text-purple-600 mb-2 sm:text-2xl lg:text-4xl">
                       Bank Details
                     </h2>
-                    <p className="text-lg text-gray-600">
+                    <p className="text-sm text-gray-600 sm:text-base lg:text-lg">
                       Help us process faster- add your salary account details.
                     </p>
                   </div>
 
-                  <div className="w-10"></div>
+                  <div className="w-6 sm:w-8 lg:w-10"></div>
                 </div>
 
-                <div className="space-y-8">
+                <div className="space-y-6 lg:space-y-8">
                   <div>
-                    <label className="block text-lg font-medium text-gray-900 mb-2">
+                    <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                       Select Bank Name <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
@@ -1350,7 +1348,7 @@ function LoanDetailsContent() {
                         onChange={(e) =>
                           handleInputChange("bankName", e.target.value)
                         }
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg" // Added uniform focus style
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-base lg:text-lg"
                         required
                       >
                         <option value="">Select your bank</option>
@@ -1365,7 +1363,7 @@ function LoanDetailsContent() {
                         <img
                           src={DUMMY_DROPDOWN_ICON}
                           alt="Dropdown"
-                          className="w-3 h-3 mr-5 text-gray-400"
+                          className="w-2 h-2 mr-3 text-gray-400 sm:w-3 sm:h-3 sm:mr-4 lg:w-3 lg:h-3 lg:mr-5"
                           onError={(e) => {
                             e.currentTarget.onerror = null;
                             e.currentTarget.src =
@@ -1376,9 +1374,9 @@ function LoanDetailsContent() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="block text-lg font-medium text-gray-900 mb-2">
+                      <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                         Salary Account Number{" "}
                         <span className="text-red-500">*</span>
                       </label>
@@ -1396,13 +1394,13 @@ function LoanDetailsContent() {
                         maxLength={10}
                         pattern="[0-9]{10}"
                         inputMode="numeric"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base lg:text-lg"
                         required
                       />
-                      <p className="text-sm text-gray-500 mt-1">10 digits required</p>
+                      <p className="text-xs text-gray-500 mt-1 lg:text-sm">10 digits required</p>
                     </div>
                     <div>
-                      <label className="block text-lg font-medium text-gray-900 mb-2">
+                      <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                         Referral Code
                       </label>
                       <input
@@ -1413,13 +1411,13 @@ function LoanDetailsContent() {
                           handleInputChange("referralCode", e.target.value)
                         }
                         maxLength={20}
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg" // Added uniform focus style
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base lg:text-lg"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-lg font-medium text-gray-900 mb-2">
+                    <label className="block text-base font-medium text-gray-900 mb-2 lg:text-lg">
                       How did you hear about us?{" "}
                       <span className="text-red-500">*</span>
                     </label>
@@ -1429,7 +1427,7 @@ function LoanDetailsContent() {
                         onChange={(e) =>
                           handleInputChange("hearAboutUs", e.target.value)
                         }
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-lg" // Added uniform focus style
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none text-base lg:text-lg"
                         required
                       >
                         <option value="">Select an option</option>
@@ -1445,7 +1443,7 @@ function LoanDetailsContent() {
                         <img
                           src={DUMMY_DROPDOWN_ICON}
                           alt="Dropdown"
-                          className="w-3 h-3 mr-5 text-gray-400"
+                          className="w-2 h-2 mr-3 text-gray-400 sm:w-3 sm:h-3 sm:mr-4 lg:w-3 lg:h-3 lg:mr-5"
                           onError={(e) => {
                             e.currentTarget.onerror = null;
                             e.currentTarget.src =
@@ -1457,8 +1455,8 @@ function LoanDetailsContent() {
                   </div>
 
                   {/* Terms and Conditions Text - Aligned with input boxes */}
-                  <div className="mt-6"> {/* Removed extra padding */}
-                    <p className="text-base text-gray-600 leading-relaxed">
+                  <div className="mt-4 lg:mt-6">
+                    <p className="text-sm text-gray-600 leading-relaxed lg:text-base">
                       By clicking "SUBMIT", I consent to myStash obtaining information from
                       relevant third parties as may be neccessary, on my employment details,
                       salary payment, loans, and other related data, to decide on my loan
@@ -1480,12 +1478,12 @@ function LoanDetailsContent() {
                       onChange={(e) =>
                         handleInputChange("agreeToTerms", e.target.checked)
                       }
-                      className="mt-1 w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-2 focus:ring-purple-500" // Uniform purple focus
+                      className="mt-1 w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-2 focus:ring-purple-500"
                       required
                     />
                     <label
                       htmlFor="agreeToTerms"
-                      className="text-base text-gray-700"
+                      className="text-sm text-gray-700 lg:text-base"
                     >
                       I agree to receive updates, offers and markerting communication frm myStash{" "}
                       <span className="text-red-500">*</span>
@@ -1493,12 +1491,12 @@ function LoanDetailsContent() {
                   </div>
                 </div>
 
-                {/* Centered Submit Button - 383px × 50px */}
-                <div className="flex justify-center mt-8 ">
+                {/* Centered Submit Button */}
+                <div className="flex justify-center mt-8">
                   <button
                     onClick={handleContinue}
                     disabled={!isStep3Complete()}
-                    className={`w-[320px] h-[50px] rounded-lg font-semibold text-2xl ${
+                    className={`w-full max-w-xs h-12 rounded-lg font-semibold text-lg sm:w-[320px] sm:h-[50px] sm:text-xl lg:w-[320px] lg:h-[50px] lg:text-2xl ${
                       isStep3Complete()
                         ? "bg-purple-700 text-white hover:bg-purple-800"
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"

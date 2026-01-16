@@ -59,7 +59,7 @@ export default function SavingsPage() {
         <div className="hidden xl:block ">
           <div className="max-w-7xl mx-auto px-8 py-40">
             <div className="flex flex-row items-center">
-              <div className="w-1/2 -ml-15 mt-10 text-left z-10">
+              <div className="w-1/2 -ml-15 mt-5 text-left z-10">
                 {/* Simple Pill Header */}
                 <div className="inline-flex items-center justify-start mb-8">
                   <span className="text-sm font-medium text-purple-400 bg-purple-100 border border-gray-200 px-2 py-1 rounded-full">

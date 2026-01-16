@@ -29,7 +29,7 @@ export default function PaymentsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Section 1: Hero Section */}
-      <section className="relative w-full  pt-16 xl:pt-0">
+      <section className="relative w-full pt-16 xl:pt-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 xl:py-40">
           <div className="flex flex-col xl:flex-row items-center">
             {/* Left Column - Text Content */}
@@ -100,7 +100,7 @@ export default function PaymentsPage() {
           </div>
 
           {/* Cards - One column for ≤1024px, two columns for desktop (>1024px) */}
-          <div className="flex flex-col xl:grid xl:grid-cols-2 gap-6 xl:gap-8">
+          <div className="flex flex-col xl:grid xl:grid-cols-2 gap-16 md:gap-11 xl:gap-13">
             {/* Card 1 */}
             <div className="bg-white border-t border-l border-r border-gray-200 rounded-tl-4xl rounded-tr-4xl flex flex-col h-[400px] xl:h-[570px] w-full xl:w-4/5 mx-auto relative overflow-visible">
               <div className="pt-4 text-center flex flex-col grow px-4 xl:px-6">
@@ -127,7 +127,7 @@ export default function PaymentsPage() {
                     <img
                       src="/images/paymentmap.svg"
                       alt="Personal Payment 1"
-                      className="h-20 xl:h-25 w-auto object-contain xl:-mr-20 order-2 xl:order-1"
+                      className="h-20 xl:h-25 w-auto object-contain xl:-mr-20 order-2 xl:order-1 xl:mt-50"
                     />
                     <img
                       src="/images/paymentimg1.svg"
@@ -168,7 +168,7 @@ export default function PaymentsPage() {
                     <img
                       src="/images/visa.svg"
                       alt="Business Payment 1"
-                      className="h-14 xl:h-15 w-auto object-contain xl:-mr-17 xl:mb-5 order-2 xl:order-1"
+                      className="h-14 xl:h-15 w-auto object-contain xl:-mr-17 xl:mb-5 order-2 xl:order-1 xl:mt-55"
                     />
                     <img
                       src="/images/paymentimg2.svg"

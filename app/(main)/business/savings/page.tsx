@@ -61,7 +61,7 @@ const SectionOne = () => {
           {/* Main Content - Centered */}
           <div className="relative z-10 flex flex-col items-center justify-center min-h-[60vh] sm:min-h-[70vh]">
             {/* Pill Header (dot before and after the text) */}
-            <div className="text-center mb-6 sm:mb-4">
+            <div className="text-center mb-6 sm:mb-4 mt-8 sm:mt-0 md:mt-15">
               <p className="text-sm font-medium text-purple-400 mb-2 border border-gray-50 rounded-full px-4 py-1 inline-block bg-purple-100">
                 • Savings •
               </p>
@@ -84,12 +84,12 @@ const SectionOne = () => {
               </div>
             </div>
 
-            {/* Two Line Sub Text */}
-            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-5">
-              <p className="text-base sm:text-lg lg:text-xl text-gray-600  ">
-               Saving money isn't always easy, we get it. But with myStash, it's simpler,
+            {/* Two Line Sub Text - UPDATED FOR MOBILE */}
+            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-5 px-4 sm:px-0">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600">
+                Saving money isn't always easy, we get it. But with myStash, it's simpler,
               </p>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-600 whitespace-nowrap">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 sm:whitespace-nowrap">
                 smarter, and built just for you. All it takes is a quick download to get started.
               </p>
             </div>
