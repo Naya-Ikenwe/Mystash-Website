@@ -203,7 +203,7 @@ const FooterSection = () => {
                   />
                   <div className="text-gray-800 text-[12px]">
                     <p className="font-medium">USA</p>
-                    <p>2055 Limestone Rd STE 200-C,</p>
+                    <p>2055 Limestone Road STE 200-C,</p>
                     <p>Wilmington, Delaware 19808</p>
                   </div>
                 </div>
