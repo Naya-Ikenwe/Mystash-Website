@@ -1,9 +1,20 @@
 // components/ContactFormSection.tsx
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 const ContactFormSection = () => {
+  // Form state
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+    enquiry: "",
+    termsAccepted: false,
+  });
+
   // Dummy icon paths
   const DUMMY_MESSAGE_ICON = "/icons/arrowdown.svg";
   const DUMMY_PHONE_ICON = "/icons/naija.svg";
@@ -11,6 +22,33 @@ const ContactFormSection = () => {
   // Decorative images (top-left and bottom-right) for Section 6
   const DUMMY_SECTION6_TOP_LEFT = "/images/Vector.svg";
   const DUMMY_SECTION6_BOTTOM_RIGHT = "/images/Vector2.svg";
+
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!formData.termsAccepted) {
+      alert("Please agree to the Terms and Conditions and Privacy Policy.");
+      return;
+    }
+
+    // Construct mailto link with form data
+    const subject = `New Inquiry from ${formData.firstName} ${formData.lastName}`;
+    const body = `Name: ${formData.firstName} ${formData.lastName}%0D%0AEmail: ${formData.email}%0D%0APhone: ${formData.phone}%0D%0A%0D%0AMessage: ${formData.message}%0D%0A%0D%0AEnquiry: ${formData.enquiry}`;
+    const mailtoLink = `mailto:support@mystashapp.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+    // Open the mailto link
+    window.location.href = mailtoLink;
+  };
 
   return (
     <section className="w-full bg-white  py-12 md:py-15 relative overflow-hidden">
@@ -60,14 +98,18 @@ const ContactFormSection = () => {
 
           {/* Form - Increased width */}
           <div className="max-w-4xl mx-auto">
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               {/* First Row: First Name & Last Name */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* First Name */}
                 <div>
                   <input
                     type="text"
+                    name="firstName"
                     placeholder="First Name"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    required
                     className="w-full bg-purple-100 border border-purple-100 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
                   />
                 </div>
@@ -76,7 +118,11 @@ const ContactFormSection = () => {
                 <div>
                   <input
                     type="text"
+                    name="lastName"
                     placeholder="Last Name"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    required
                     className="w-full bg-purple-100 border border-purple-100 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
                   />
                 </div>
@@ -88,7 +134,11 @@ const ContactFormSection = () => {
                 <div>
                   <input
                     type="email"
+                    name="email"
                     placeholder="Your email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
                     className="w-full bg-purple-100 border border-purple-100 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
                   />
                 </div>
@@ -109,7 +159,11 @@ const ContactFormSection = () => {
                   </div>
                   <input
                     type="tel"
+                    name="phone"
                     placeholder="+234"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
                     className="w-full bg-purple-100 border border-purple-100 rounded-lg pl-10 pr-4 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
                   />
                 </div>
@@ -133,7 +187,10 @@ const ContactFormSection = () => {
                   </div>
                   <input
                     type="text"
+                    name="message"
                     placeholder="I am interested in your Product"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     className="w-full bg-purple-100 border border-purple-100 rounded-lg pl-4 pr-10 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
                   />
                 </div>
@@ -142,7 +199,10 @@ const ContactFormSection = () => {
                 <div>
                   <input
                     type="text"
+                    name="enquiry"
                     placeholder="Write briefly about your enquiry here"
+                    value={formData.enquiry}
+                    onChange={handleInputChange}
                     className="w-full bg-purple-100 border border-purple-100 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
                   />
                 </div>
@@ -153,6 +213,9 @@ const ContactFormSection = () => {
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
                     type="checkbox"
+                    name="termsAccepted"
+                    checked={formData.termsAccepted}
+                    onChange={handleInputChange}
                     className="w-4 h-4 text-purple-600 bg-purple-50 border-purple-300 rounded focus:ring-purple-500 focus:ring-2"
                   />
                   <span className="text-gray-600 font-semibold text-sm">
