@@ -1,9 +1,6 @@
 // app/layout.tsx
 import localFont from "next/font/local";
 import "../globals.css";
-import Navbar from "../components/Navbar";
-import ConditionalAppDownloadSection from "../components/ConditionalAppDownloadSection";// Updated import
-import FooterSection from "../components/FooterSection";
 
 // Load Euclid locally (existing)
 const freeset = localFont({
@@ -18,16 +15,10 @@ const freizeit = localFont({
   display: "swap",
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${freeset.className} ${freizeit.variable}`}>
-        <Navbar />
-        <main className="main-scope">{children}</main>
-        {/* Replace AppDownloadSection with ConditionalAppDownloadSection */}
-        <ConditionalAppDownloadSection />
-        <FooterSection />
-      </body>
-    </html>
+    <>
+      {children}
+    </>
   );
 }

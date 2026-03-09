@@ -41,13 +41,28 @@ const ContactFormSection = () => {
       return;
     }
 
-    // Construct mailto link with form data
-    const subject = `New Inquiry from ${formData.firstName} ${formData.lastName}`;
-    const body = `Name: ${formData.firstName} ${formData.lastName}%0D%0AEmail: ${formData.email}%0D%0APhone: ${formData.phone}%0D%0A%0D%0AMessage: ${formData.message}%0D%0A%0D%0AEnquiry: ${formData.enquiry}`;
-    const mailtoLink = `mailto:support@mystashapp.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    const subject = `Inquiry from ${formData.firstName} ${formData.lastName}`;
+    const bodyLines = [
+      `Name: ${formData.firstName} ${formData.lastName}`,
+      `Email: ${formData.email}`,
+      `Phone: ${formData.phone}`,
+      "",
+      `Interest: ${formData.message || "Not provided"}`,
+      "",
+      `Enquiry: ${formData.enquiry || "Not provided"}`,
+    ];
+    const params = new URLSearchParams({
+      subject,
+      body: bodyLines.join("\r\n"),
+    });
+    const mailtoLink = `mailto:support@mystashapp.com?${params.toString()}`;
 
-    // Open the mailto link
-    window.location.href = mailtoLink;
+    const mailtoAnchor = document.createElement("a");
+    mailtoAnchor.href = mailtoLink;
+    mailtoAnchor.style.display = "none";
+    document.body.appendChild(mailtoAnchor);
+    mailtoAnchor.click();
+    document.body.removeChild(mailtoAnchor);
   };
 
   return (

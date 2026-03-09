@@ -9,13 +9,13 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="w-full bg-gradient-to-br from-purple-600 to-purple-800 py-16 md:py-24">
+      <section className="w-full bg-gradient-to-br py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-purple-500 mb-6">
               Contact Us
             </h1>
-            <p className="text-xl text-purple-100 max-w-2xl mx-auto">
+            <p className="text-xl text-purple-400 max-w-2xl mx-auto">
               Have questions about MyStash? We'd love to hear from you. Get in touch with our team today.
             </p>
           </div>
@@ -71,7 +71,7 @@ export default function ContactPage() {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Phone</h3>
-              <p className="text-gray-600 mb-4">Available Mon-Fri, 9AM-6PM</p>
+              <p className="text-gray-600 mb-4">Available Mon-Fri, 9AM-5PM</p>
               <a
                 href={`tel:${COMPANY_PHONE}`}
                 className="text-purple-600 font-semibold hover:text-purple-700 transition-colors"
@@ -113,57 +113,6 @@ export default function ContactPage() {
 
       {/* Enquiry Form Section */}
       <ContactFormSection />
-
-      {/* FAQ Section */}
-      <section className="w-full bg-gray-50 py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
-            Frequently Asked Questions
-          </h2>
-          
-          <div className="space-y-6">
-            {/* FAQ Item 1 */}
-            <div className="bg-white rounded-lg p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                How long does it take to get a response?
-              </h3>
-              <p className="text-gray-600">
-                We typically respond to all enquiries within 24-48 hours during business days. For urgent matters, please call us directly.
-              </p>
-            </div>
-
-            {/* FAQ Item 2 */}
-            <div className="bg-white rounded-lg p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                What are your business hours?
-              </h3>
-              <p className="text-gray-600">
-                We're available Monday through Friday, 9:00 AM to 6:00 PM WAT. We're closed on weekends and public holidays.
-              </p>
-            </div>
-
-            {/* FAQ Item 3 */}
-            <div className="bg-white rounded-lg p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Can I schedule a call with your team?
-              </h3>
-              <p className="text-gray-600">
-                Absolutely! Please mention your preferred time in the enquiry form, and we'll get back to you to confirm a suitable time for both parties.
-              </p>
-            </div>
-
-            {/* FAQ Item 4 */}
-            <div className="bg-white rounded-lg p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Is my information secure?
-              </h3>
-              <p className="text-gray-600">
-                Yes, we take your privacy seriously. All information submitted through our contact form is encrypted and protected according to our Privacy Policy.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

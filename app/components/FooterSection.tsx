@@ -110,7 +110,7 @@ const FooterSection = () => {
                   Blog
                 </Link>
                 <Link
-                  href="#"
+                  href="/contact"
                   className="block text-gray-800 hover:text-purple-700 transition-colors"
                 >
                   Contact Us
