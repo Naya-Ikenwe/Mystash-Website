@@ -79,6 +79,7 @@ const LoanCalculatorSection = ({
   onCalculate,
   onGetStarted,
 }: LoanCalculatorSectionProps) => {
+  const isExternalButtonHref = /^https?:\/\//.test(buttonHref);
   const [loanAmount, setLoanAmount] = useState("");
   const [loanTenure, setLoanTenure] = useState("");
   const [calculatedResult, setCalculatedResult] = useState<number | null>(null);
@@ -321,6 +322,8 @@ const LoanCalculatorSection = ({
               {/* Button */}
               <Link
                 href={buttonHref}
+                target={isExternalButtonHref ? "_blank" : undefined}
+                rel={isExternalButtonHref ? "noopener noreferrer" : undefined}
                 className="inline-flex items-center bg-purple-500 text-white px-2 py-2 rounded-full hover:bg-purple-800 transition-colors duration-200 font-medium text-base"
                 onClick={handleGetStarted}
               >

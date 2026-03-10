@@ -30,7 +30,8 @@ interface DropdownItem {
   title: string;
   subtitle: string;
   href: string;
-  tag?: string; 
+  tag?: string;
+  disabled?: boolean;
 }
 
 // REORDERED as requested: Savings, Investments, Loan, Payment, Budget
@@ -109,13 +110,17 @@ const COMPANY_DROPDOWN_ITEMS: DropdownItem[] = [
     iconPath: DUMMY_COMPANY_ICON_2, 
     title: 'Blog', 
     subtitle: 'Latest news and insights', 
-    href: '/company/blog'
+    href: '/company/blog',
+    tag: 'Coming soon',
+    disabled: true
   },
   { 
     iconPath: DUMMY_COMPANY_ICON_3, 
     title: 'FAQ', 
     subtitle: 'Frequently asked questions',
-    href: '/company/faq' 
+    href: '/company/faq',
+    tag: 'Coming soon',
+    disabled: true
   },
 ];
 
@@ -144,27 +149,47 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
   if (mobile) {
     return (
       <div className="mt-2 ml-4 space-y-1 border-l-2 border-gray-100 pl-4">
-        {items.map((item) => (
-          <Link 
-            key={item.title}
-            href={item.href}
-            className="flex items-center space-x-3 p-3 rounded-lg transition-colors duration-150 cursor-pointer"
-            onClick={onItemClick}
-          >
-            <img src={item.iconPath} alt="" className="w-5 h-5 shrink-0" />
-            <div className="flex grow justify-start items-center">
-              <div className="leading-snug mr-3">
-                <p className="font-semibold text-gray-800 text-sm">{item.title}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{item.subtitle}</p>
+        {items.map((item) => {
+          const content = (
+            <>
+              <img src={item.iconPath} alt="" className="w-5 h-5 shrink-0" />
+              <div className="flex grow justify-start items-center">
+                <div className="leading-snug mr-3">
+                  <p className={`font-semibold text-sm ${item.disabled ? 'text-gray-500' : 'text-gray-800'}`}>{item.title}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{item.subtitle}</p>
+                </div>
+                {item.tag && (
+                  <span className="shrink-0 text-xs font-medium text-yellow-700 bg-yellow-200 px-2 py-0.5 rounded-full">
+                    {item.tag}
+                  </span>
+                )}
               </div>
-              {item.tag && (
-                <span className="shrink-0 text-xs font-medium text-yellow-700 bg-yellow-200 px-2 py-0.5 rounded-full">
-                  {item.tag}
-                </span>
-              )}
-            </div>
-          </Link>
-        ))}
+            </>
+          );
+
+          if (item.disabled) {
+            return (
+              <div
+                key={item.title}
+                className="flex items-center space-x-3 p-3 rounded-lg cursor-not-allowed opacity-70"
+                aria-disabled="true"
+              >
+                {content}
+              </div>
+            );
+          }
+
+          return (
+            <Link 
+              key={item.title}
+              href={item.href}
+              className="flex items-center space-x-3 p-3 rounded-lg transition-colors duration-150 cursor-pointer"
+              onClick={onItemClick}
+            >
+              {content}
+            </Link>
+          );
+        })}
       </div>
     );
   }
@@ -172,30 +197,45 @@ const DropdownMenu = ({ items, mobile = false, onItemClick }: { items: DropdownI
   return (
     <div className="w-[400px] bg-white shadow-2xl rounded-xl border border-gray-100 p-4 z-40">
       <ul className="space-y-2">
-        {items.map((item) => (
-          <li key={item.title}>
-            <Link 
-              href={item.href}
-              className="block p-3 rounded-lg transition-colors duration-150 cursor-pointer"
-              onClick={onItemClick}
-            >
-              <div className="flex items-center space-x-3">
-                <img src={item.iconPath} alt="" className="w-7 h-7 shrink-0" />
-                <div className="flex grow justify-start items-center">
-                  <div className="leading-snug mr-3">
-                    <p className="font-semibold text-gray-800 text-sm hover:text-purple-500">{item.title}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">{item.subtitle}</p>
-                  </div>
-                  {item.tag && (
-                    <span className="shrink-0 text-xs font-medium text-yellow-700 bg-yellow-200 px-2 py-0.5 rounded-full">
-                      {item.tag}
-                    </span>
-                  )}
+        {items.map((item) => {
+          const content = (
+            <div className="flex items-center space-x-3">
+              <img src={item.iconPath} alt="" className="w-7 h-7 shrink-0" />
+              <div className="flex grow justify-start items-center">
+                <div className="leading-snug mr-3">
+                  <p className={`font-semibold text-sm ${item.disabled ? 'text-gray-500' : 'text-gray-800 hover:text-purple-500'}`}>{item.title}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{item.subtitle}</p>
                 </div>
+                {item.tag && (
+                  <span className="shrink-0 text-xs font-medium text-yellow-700 bg-yellow-200 px-2 py-0.5 rounded-full">
+                    {item.tag}
+                  </span>
+                )}
               </div>
-            </Link>
-          </li>
-        ))}
+            </div>
+          );
+
+          return (
+            <li key={item.title}>
+              {item.disabled ? (
+                <div
+                  className="block p-3 rounded-lg cursor-not-allowed opacity-70"
+                  aria-disabled="true"
+                >
+                  {content}
+                </div>
+              ) : (
+                <Link 
+                  href={item.href}
+                  className="block p-3 rounded-lg transition-colors duration-150 cursor-pointer"
+                  onClick={onItemClick}
+                >
+                  {content}
+                </Link>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

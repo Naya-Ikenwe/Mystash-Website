@@ -4,11 +4,14 @@
 import FeaturesSection from "../../components/FeaturesSection";
 import ContactFormSection from "../../components/ContactFormSection";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const LoanCalculatorSection = dynamic(
   () => import("../../components/LoanCalculatorSection"),
   { ssr: false }
 );
+
+const INVESTMENT_START_URL = "https://investment.mystashapp.com";
 
 export default function InvestmentsPage() {
   const investmentFeatures = [
@@ -22,7 +25,7 @@ export default function InvestmentsPage() {
       iconPath: "/icons/rocket.svg",
       title: "Smart Investing",
       description:
-        "Invest Smartly with minimum of ₦1,000,000. It's simple, accessible, rewarding and designed to grow your wealth effortlessly.",
+        "Invest Smartly with minimum of ₦500,000. It's simple, accessible, rewarding and designed to grow your wealth effortlessly.",
     },
     {
       iconPath: "/icons/planet.svg",
@@ -74,14 +77,19 @@ export default function InvestmentsPage() {
               progress with smarter and automated investing
             </span>
           </p>
-          <button className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 px-6 lg:px-0 lg:py-2 rounded-full flex items-center justify-center mx-auto transition-colors duration-200 text-sm lg:text-base">
+          <Link
+            href={INVESTMENT_START_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 px-6 lg:px-0 lg:py-2 rounded-full inline-flex w-fit items-center justify-center mx-auto transition-colors duration-200 text-sm lg:text-base"
+          >
             <img
               src="/icons/Frame6.svg"
               alt="arrow"
               className="w-6 h-6 lg:w-8 lg:h-8 mr-3 lg:mr-20 ml-2 lg:ml-2"
             />
             <p className="mr-3 lg:mr-24">Start Investing</p>
-          </button>
+          </Link>
         </div>
       </section>
 
@@ -127,14 +135,19 @@ export default function InvestmentsPage() {
               </h2>
 
               {/* Button with same icon as Section 1 */}
-              <button className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2  rounded-4xl flex items-center justify-center transition-colors duration-200">
+              <Link
+                href={INVESTMENT_START_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-purple-500 hover:bg-purple-900 text-white font-medium py-2 rounded-4xl inline-flex w-fit items-center justify-center transition-colors duration-200"
+              >
                 <img
                   src="/icons/Frame6.svg"
                   alt="arrow"
                   className="w-8 h-8 mr-4 ml-2"
                 />
                <p className="mr-4">Start Investing</p> 
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -149,10 +162,11 @@ export default function InvestmentsPage() {
         titleLine2=""
         description="Sit back and watch the numbers add up-Partner Funds does the magic. because smart wealthgrowth should be effortless."
         buttonText="Start Investing"
+        buttonHref={INVESTMENT_START_URL}
         buttonIcon="/icons/Frame6.svg"
         // Calculator Section - Investment themed
         amountQuestion="Investment amount"
-        amountPlaceholder="Minimum 1,000,000.00 naira"
+        amountPlaceholder="Minimum 500,000.00 naira"
         tenureQuestion="Investment duration?"
         tenurePlaceholder="Select duration"
         calculateButtonText="Calculate ROI"
@@ -163,7 +177,7 @@ export default function InvestmentsPage() {
           console.log("Calculating investment:", { amount, tenure, result });
         }}
         onGetStarted={() => {
-          console.log("Start investing clicked");
+          console.log("Navigating to investment portal");
         }}
       />
 
