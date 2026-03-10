@@ -19,10 +19,68 @@ const freizeit = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "MyStash",
-  description: "MyStash - Personal Financial Management",
+  metadataBase: new URL("https://mystashapp.com"),
+  title: {
+    default: "MyStash | Save, Invest, Borrow and Pay Smarter",
+    template: "%s | MyStash",
+  },
+  description:
+    "MyStash helps you save, invest, access loans, manage payments, and build better financial habits with confidence.",
+  applicationName: "MyStash",
+  category: "finance",
+  keywords: [
+    "MyStash",
+    "myStash",
+    "fintech Nigeria",
+    "savings app",
+    "investment platform",
+    "loans",
+    "payments",
+    "budgeting",
+    "personal finance",
+    "wealth management",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    title: "MyStash | Save, Invest, Borrow and Pay Smarter",
+    description:
+      "Save, invest, access loans, manage payments, and build better financial habits with MyStash.",
+    url: "https://mystashapp.com",
+    siteName: "MyStash",
+    locale: "en_NG",
+    type: "website",
+    images: [
+      {
+        url: "/images/purplebackground.jpg",
+        width: 1200,
+        height: 630,
+        alt: "MyStash financial services preview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MyStash | Save, Invest, Borrow and Pay Smarter",
+    description:
+      "Save, invest, access loans, manage payments, and build better financial habits with MyStash.",
+    images: ["/images/purplebackground.jpg"],
+  },
   icons: {
     icon: "/logo/mystashlogo.svg",
+    shortcut: "/logo/mystashlogo.svg",
     apple: "/logo/mystashlogo.svg",
   },
 };
