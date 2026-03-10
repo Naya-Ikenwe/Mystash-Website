@@ -79,9 +79,9 @@ export const metadata: Metadata = {
     images: ["/images/purplebackground.jpg"],
   },
   icons: {
-    icon: "/logo/mystashlogo.svg",
-    shortcut: "/logo/mystashlogo.svg",
-    apple: "/logo/mystashlogo.svg",
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
   },
 };
 
